@@ -20,7 +20,7 @@ The root [AGENTS.md](../AGENTS.md) contains the instructions that apply to every
 | [Task routing](routing.md) | Generated task-to-skill/rule navigation |
 | [Skill registry](registry/skills.json) | Project-owned inventory, trigger boundaries, rules and knowledge references |
 | [Routing review cases](evals/routing-cases.json) | Human-readable tasks, expected guidance and unacceptable claims |
-| [Validation helper](scripts/validate_agent_resources.py) | Deterministic inventory, metadata, routing, links, formatting and contribution-record checks |
+| [Validation helper](scripts/validate_agent_resources.py) | Deterministic inventory, metadata, routing, file/section links, formatting and contribution-record checks |
 
 There are no vendored external skills. Future imports require an exact upstream revision, licence, compatibility review and a registry entry. Framework or deployment skills belong here only when the project actually adopts the relevant implementation surface.
 
@@ -28,7 +28,7 @@ The review cases are manual semantic expectations. The helper checks their refer
 
 ## Contributor recording
 
-The [contributor mapping](../docs/project/ai-team-members.md) is canonical. The [template](../docs/project/ai-usage-log-template.md) defines ten required fields, and the [log index](../docs/README.md#contribution-records) links actual contributor activity. The helper checks exact filename/account/name agreement, dated entry structure, required fields and explicit timezone; it cannot authenticate identities, prove actions or establish human acceptance. Preserve those evidence limits in every entry.
+The [contributor mapping](../docs/project/ai-team-members.md) is canonical. The [template](../docs/project/ai-usage-log-template.md) defines ten required fields, and the [log index](../docs/README.md#contribution-records) links actual contributor activity. The helper checks exact filename/account/name agreement, valid calendar dates, required fields and explicit timezone; it cannot authenticate identities, prove actions or establish human acceptance. Preserve those evidence limits in every entry.
 
 ## Validate and maintain
 
@@ -46,6 +46,8 @@ When the registry changes, regenerate the routing view, then validate:
 python .agents/scripts/validate_agent_resources.py --write-routing
 python .agents/scripts/validate_agent_resources.py
 ```
+
+Section checks cover ATX Markdown headings, including repeated-heading suffixes; fenced code is excluded. They do not validate external URLs or the truth of a linked claim.
 
 The helper checks the simple single-line frontmatter and quoted interface metadata used by the maintained skills. It is not a general YAML parser. Extend the schema check before adopting more complex metadata; do not bypass a rejected format.
 

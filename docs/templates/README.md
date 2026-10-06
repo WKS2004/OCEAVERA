@@ -1,6 +1,6 @@
 # Evidence templates
 
-Copy a form into [records](../../CONTRIBUTING.md#project-evidence-records) when its underlying work is authorised. Leave these originals blank. Use an explicit pending or not-applicable status with a reason when a field cannot be completed; do not substitute invented evidence.
+Copy a form into `docs/records/`, following the [record conventions](../../CONTRIBUTING.md#project-evidence-records) when its underlying work is authorised. Leave these originals blank. Use an explicit pending or not-applicable status with a reason when a field cannot be completed; do not substitute invented evidence.
 
 | Form | Purpose |
 | --- | --- |

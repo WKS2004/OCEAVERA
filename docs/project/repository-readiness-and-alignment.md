@@ -1,12 +1,12 @@
 # Repository readiness and alignment
 
 - **Reviewed:** 6 October 2026
-- **Phase:** shared planning foundation
+- **Phase:** finalised shared foundation; technical implementation pending
 - **Scope of review:** repository structure, documentation, agent guidance, assessment requirements, and initial proposal alignment.
 
 ## Assessment
 
-The repository is consistent with the initial proposal's marine ML direction and unresolved implementation choices. It provides a self-contained working background and evidence conventions. It is not a completed ML project or a final submission.
+The shared foundation is finalised for the requested structure, documentation, contributor recording and agent guidance. It is consistent with the initial proposal's marine ML direction and unresolved implementation choices. It provides a self-contained working background and evidence conventions. It is not a completed ML project or a final submission.
 
 No dataset, executable analysis, trained model, measured result, stakeholder engagement record, or track approval record is present. Directory READMEs and blank templates describe future work; they do not establish that work has occurred.
 
@@ -56,4 +56,23 @@ The current [resource helper](../../.agents/scripts/validate_agent_resources.py)
 
 Update this review when new evidence changes the phase or resolves a gap. Preserve unresolved items until a dated record supports the new status.
 
-The user-selected all-rights-reserved policy is recorded in [LICENSE.md](../../LICENSE.md) and decision D-020. This rights policy does not verify third-party data terms or resolve scientific readiness gaps.
+The user-selected all-rights-reserved policy is recorded in [LICENSE.md](../../LICENSE.md) and decision D-020. Contributor ownership and limited academic identification follow the user's clarification in D-023. This rights policy does not verify third-party data terms or resolve scientific readiness gaps.
+
+## Foundation finalisation
+
+The final review covers the root documents, documentation hierarchy, blank forms, directory purposes, contributor identity/record conventions and all maintained agent resources. Scientific evidence and assessed deliverables remain subject to the gates above. The user requested finalisation; that request does not establish that each document or model result has received independent human verification.
+
+| Surface | Final review |
+| --- | --- |
+| Root documents | Overview, requirements, contributor guide, agent instructions and licence agree on scope, rights and evidence limits |
+| Requirements | Thirteen unique scientific/technical requirements; eight core rubric criteria total 100 marks and five conditional bonus criteria total 10 |
+| Agent resources | Eight registered skills, ten routed rules and twelve manual routing cases; metadata and generated routing checked |
+| Documentation | Seventy maintained text files, 356 local references and 35 section links checked; UTF-8/LF formatting and JSON valid |
+| Contributor records | Four exact account/name mappings; only actual activity has a log, using the ten required fields and explicit timezone |
+| Recording structure | Scientific evidence uses dated records; contribution activity uses per-account logs; redundant directory READMEs remain absent |
+| Data boundaries | Raw, intermediate and processed directories contain markers only; twelve representative paths ignored and seven intended artefacts retained |
+| Git inventory | Seventy-four tracked files inspected; no tracked data payload, generated result, credential file or temporary maintenance artefact identified; existing history preserved |
+
+The [resource helper](../../.agents/scripts/validate_agent_resources.py) checks structure and record format. Manual routing cases have not been run as agent evaluations. No dataset feasibility, model quality, lecturer approval, stakeholder engagement or submission readiness is inferred from these checks. See the [contribution records](../README.md#contribution-records) for the dated actions and executed checks.
+
+The next stage is a separately authorised framing/approval and data-feasibility investigation. Final species, marine domain, target, validation, runtime and model choices remain open until supported by recorded evidence.

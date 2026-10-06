@@ -30,7 +30,7 @@ Store scientific, approval and detailed decision evidence in `docs/records/`. Co
 - Link completed evidence from the [decision register](docs/project/decision-register.md) or [requirements](PROJECT_REQUIREMENTS.md), and update readiness when a gap is resolved.
 - Preserve superseded evidence and its relationship to replacement records. Keep decisions, observations and contributor activity distinguishable.
 
-No acquired-data, approval, stakeholder-engagement, EDA or modelling record is currently present. The directory marker keeps the future evidence location in Git and establishes no completed work. Earlier documentation reviews remain in the [review history](docs/project/repository-review-history.md).
+The directory marker preserves the evidence location in Git and establishes no completed work. Consult [current readiness](docs/project/repository-readiness-and-alignment.md) for available scientific and approval evidence. Earlier documentation reviews remain in the [review history](docs/project/repository-review-history.md).
 
 ## Contribution and AI-usage recording
 
@@ -70,7 +70,7 @@ git diff --check
 git status --short
 ```
 
-The helper checks maintained resource formats, routing, local links, text conventions and contributor-record structure, including untracked text files. Follow the [agent guide](.agents/README.md) when changing the registry or generated routing.
+The helper checks maintained resource formats, routing, local files and section links, text conventions and contributor-record structure, including untracked text files. Follow the [agent guide](.agents/README.md) when changing the registry or generated routing.
 
 Review agreement between requirements, scope, decisions and readiness. Check for accidental data, credentials, caches, missing references and unrelated edits. For future executable work, use the agreed environment and the checks required by the active request and workflow; report unrun checks honestly.
 

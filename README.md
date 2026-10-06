@@ -14,7 +14,7 @@ The proposed biological source is OBIS, complemented by Bio-ORACLE environmental
 
 ## Current stage
 
-**Shared planning foundation.** Project context, requirements, evidence conventions and agent guidance are present. Data acquisition, analysis notebooks, ML implementation and model results are pending. The runtime has not been selected. Industry Explorer is the proposed track; approval and the stakeholder decision context remain unevidenced.
+**Finalised shared foundation.** Project context, requirements, evidence conventions and agent guidance are established for the next authorised stage. Data acquisition, analysis notebooks, ML implementation and model results are pending. The runtime has not been selected. Industry Explorer is the proposed track; approval and the stakeholder decision context remain unevidenced.
 
 The [readiness review](docs/project/repository-readiness-and-alignment.md) records current evidence and unresolved choices. The [decision register](docs/project/decision-register.md) preserves planning positions and accepted conventions.
 
@@ -53,7 +53,7 @@ python .agents/scripts/validate_agent_resources.py
 git diff --check
 ```
 
-The helper uses the standard library and checks maintained resource formats, local links, text conventions and contribution-record structure. It does not evaluate models or execute behavioural agent evaluations. See the [agent guide](.agents/README.md) for registry maintenance.
+The helper uses the standard library and checks maintained resource formats, local files and section links, text conventions and contribution-record structure. It does not evaluate models or execute behavioural agent evaluations. See the [agent guide](.agents/README.md) for registry maintenance.
 
 ML setup and execution instructions will accompany the agreed implementation environment when that stage is authorised.
 

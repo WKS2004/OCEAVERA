@@ -1,6 +1,6 @@
 # Reports and submission material
 
-**Current state:** no final report or demo. Individual work has not been started.
+**Current state:** no final report, demo or Personal Learning Journey submission is present in this repository.
 
 Future group reporting must connect framing, data decisions, method comparison, evaluation and practical recommendations. Link reproducible evidence rather than copying unsupported claims. Follow the [submission checklist](../PROJECT_REQUIREMENTS.md) and use the [recommendation](../docs/templates/recommendations-and-limitations.md) and [AI-use](../docs/project/ai-usage-log-template.md) forms as needed.
 

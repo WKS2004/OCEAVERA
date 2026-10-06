@@ -7,7 +7,9 @@ import argparse
 import json
 import re
 import sys
+from datetime import date
 from pathlib import Path
+from urllib.parse import unquote
 
 NAME = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 LINK = re.compile(r"(?<!!)\[[^\]\n]+\]\(([^)]+)\)")
@@ -169,6 +171,11 @@ def check_contributions(root: Path, errors: list[str]) -> tuple[int, int, int]:
             errors.append(f"{path.name}: missing or malformed dated entries")
             continue
         dates = [item[:10] for item in headings]
+        for value in dates:
+            try:
+                date.fromisoformat(value)
+            except ValueError:
+                errors.append(f"{path.name}: invalid calendar date in entry heading")
         if dates != sorted(dates):
             errors.append(f"{path.name}: entries are not in chronological order")
         for entry in re.split(r"^## .+$", content, flags=re.M)[1:]:
@@ -179,11 +186,39 @@ def check_contributions(root: Path, errors: list[str]) -> tuple[int, int, int]:
                 errors.append(f"{path.name}: entry fields differ from the recording template")
                 continue
             values = dict(fields)
+            if any(not value.strip() for value in values.values()):
+                errors.append(f"{path.name}: empty contribution field")
             if values.get("GitHub Username") != username or values.get("Team Member Name") != members[username]:
                 errors.append(f"{path.name}: entry identity differs from contributor mapping")
             if not re.search(r"UTC|GMT|Asia/", values.get("Date/time or time range", "")):
                 errors.append(f"{path.name}: timestamp needs an explicit timezone")
     return len(members), logs, records
+
+
+def markdown_anchors(text: str) -> set[str]:
+    """Resolve ATX heading anchors in the Markdown format maintained here."""
+    anchors = set()
+    counts = {}
+    fence = None
+    for line in text.splitlines():
+        marker = re.match(r"^ {0,3}(`{3,}|~{3,})", line)
+        if fence is not None:
+            if marker and marker[1][0] == fence[0] and len(marker[1]) >= len(fence) and not line[marker.end():].strip():
+                fence = None
+            continue
+        if marker:
+            fence = marker[1]
+            continue
+        heading = re.match(r"^ {0,3}#{1,6}\s+(.+?)\s*#*\s*$", line)
+        if not heading:
+            continue
+        label = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", heading[1])
+        label = re.sub(r"<[^>]+>", "", label)
+        slug = re.sub(r"[^\w\s-]", "", label.lower()).replace(" ", "-")
+        number = counts.get(slug, 0)
+        counts[slug] = number + 1
+        anchors.add(slug if number == 0 else f"{slug}-{number}")
+    return anchors
 
 
 def run(root: Path, write_routing: bool) -> int:
@@ -268,6 +303,8 @@ def run(root: Path, write_routing: bool) -> int:
     elif not routing.is_file() or routing.read_text(encoding="utf-8") != expected:
         errors.append("Routing view is missing or stale; regenerate it")
     count = 0
+    sections = 0
+    anchor_cache = {}
     documents = 0
     for path in root.rglob("*"):
         if not path.is_file() or SKIP.intersection(path.relative_to(root).parts):
@@ -294,18 +331,34 @@ def run(root: Path, write_routing: bool) -> int:
             continue
         if LOCAL_ABSOLUTE.search(text):
             errors.append(f"{path.relative_to(root)}: absolute local reference")
-        for target in LINK.findall(text):
-            target = target.strip().split("#", 1)[0]
-            if not target or SCHEME.match(target):
+        for raw_target in LINK.findall(text):
+            target, separator, fragment = raw_target.strip().partition("#")
+            if SCHEME.match(target) or (not target and not fragment):
                 continue
             count += 1
-            resolved = (path.parent / target).resolve()
+            resolved = (path.parent / unquote(target)).resolve() if target else path
             if not resolved.is_relative_to(root) or not resolved.exists():
                 errors.append(f"{path.relative_to(root)}: broken or outside link: {target}")
+                continue
+            if not separator or not fragment:
+                continue
+            sections += 1
+            if not resolved.is_file() or resolved.suffix != ".md":
+                errors.append(f"{path.relative_to(root)}: section link needs a Markdown file: {raw_target}")
+                continue
+            if resolved not in anchor_cache:
+                try:
+                    anchor_cache[resolved] = markdown_anchors(resolved.read_text(encoding="utf-8"))
+                except (OSError, UnicodeError):
+                    errors.append(f"{path.relative_to(root)}: unreadable section target: {target}")
+                    anchor_cache[resolved] = set()
+            if unquote(fragment) not in anchor_cache[resolved]:
+                errors.append(f"{path.relative_to(root)}: missing section: {raw_target}")
     contributors, logs, records = check_contributions(root, errors)
     if errors:
         return report(errors)
     print(f"PASS: {len(ids)} skills, {len(actual_rules)} rules, {len(cases['cases'])} routing review cases, {documents} text files and {count} local links.")
+    print(f"PASS: local Markdown section links: {sections}.")
     print(f"PASS: contributor identities: {contributors}; contribution logs: {logs}; dated entries: {records}.")
     print("Structural checks only; manual cases are not executed agent evaluations and attribution claims need evidence.")
     return 0

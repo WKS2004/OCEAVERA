@@ -9,7 +9,7 @@ These are conventions for future data work. No data have been acquired in this r
 | `data/raw/` | Original source downloads | Preserve unchanged and associate with a source manifest |
 | `data/interim/` | Intermediate transformations/extractions | Regenerate from recorded inputs and processing steps |
 | `data/processed/` | Reviewed analysis-ready tables | Document schema, row meaning, target, exclusions and dataset version |
-| [docs/records/](../../CONTRIBUTING.md#project-evidence-records) | Manifests, dictionaries and processing evidence | Track in Git without credentials or sensitive payloads |
+| `docs/records/` | Manifests, dictionaries and processing evidence | Follow [record conventions](../../CONTRIBUTING.md#project-evidence-records); track without credentials or sensitive payloads |
 | [outputs/](../../outputs/README.md) | Generated figures, maps and evaluation outputs | Track reviewed shareable artefacts deliberately; retain generating references |
 
 Data payloads are excluded from Git by default. The three data directories retain only their structural markers until acquisition is authorised. Keep metadata outside ignored payload directories. Inspect `git status` and ignore behaviour before sharing; an ignore rule does not remove an already tracked file.
