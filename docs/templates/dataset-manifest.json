@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "record_status": "template",
   "dataset_id": null,
   "created_at": null,
@@ -17,6 +17,8 @@
   "random_seeds": [],
   "row_counts_and_exclusions": [],
   "data_dictionary_record": null,
+  "dataset_format": null,
+  "format_specification_version": null,
   "payload_location": null,
   "fingerprint_algorithm": null,
   "fingerprint_value": null,

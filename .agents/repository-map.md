@@ -9,7 +9,7 @@ Use this map to find information, then inspect the actual artefact before claimi
 | Project requirements, assessment and submission checklist | [Assessment requirements](../PROJECT_REQUIREMENTS.md) |
 | Proposed and accepted decisions | [Decision register](../docs/project/decision-register.md) |
 | Current evidence and readiness gaps | [Readiness and alignment](../docs/project/repository-readiness-and-alignment.md) |
-| Acquisition, storage, provenance and responsible sharing | [Data storage and provenance](../docs/data/data-storage-and-provenance.md) |
+| Source and derived formats, model artefacts, provenance, sharing and integration boundary | [Data storage and provenance](../docs/data/data-storage-and-provenance.md) |
 | General member division and pipeline roles | [Responsibility overview and detailed member files](../docs/project/member-responsibilities.md) |
 | Shared duties, evidence and contribution handovers | [Common contribution guide](../docs/project/member-contributions/shared-responsibilities-and-evidence.md) |
 | Verified contributor identities | [Contributor mapping](../docs/project/ai-team-members.md) |

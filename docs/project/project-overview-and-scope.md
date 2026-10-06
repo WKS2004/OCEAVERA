@@ -69,6 +69,10 @@ The proposal lists these candidate feature families, subject to actual layer ava
 
 OBIStherm is a possible supporting source only if it improves the primary task. It is not part of the core OBIS/Bio-ORACLE architecture. No source coverage count, species suitability, or layer compatibility has been verified in this repository.
 
+### Storage convention
+
+Preserve each acquired source in its publisher-delivered format. Use GeoParquet for compatible derived spatial tables and Parquet for compatible non-spatial modelling tables; retain complete environmental arrays in their source format and extract only the selected location-level covariates into modelling tables. Record actual formats and versions in manifests. See [data storage and provenance](../data/data-storage-and-provenance.md) for details. COG and ONNX are optional, unfinalised future BLUEVERSE integration suggestions only; they are not OCEAVERA requirements or selected formats.
+
 The proposal's intended output is estimated species occurrence probability, potentially represented as habitat suitability. The working research question uses relative-suitability language until target and observation-process evidence supports a stronger interpretation; this qualification preserves the proposed task while making its limits explicit.
 
 ## 6. Interpretation and technical constraints

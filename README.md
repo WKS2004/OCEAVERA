@@ -18,6 +18,10 @@ The proposed biological source is OBIS, complemented by Bio-ORACLE environmental
 
 The [readiness review](docs/project/repository-readiness-and-alignment.md) records current evidence and unresolved choices. The [decision register](docs/project/decision-register.md) preserves planning positions and accepted conventions.
 
+## Data and model artefacts
+
+The working convention preserves source files as supplied, uses GeoParquet for compatible derived spatial tables and Parquet for compatible non-spatial ML tables, and keeps compact manifests/metadata in JSON. Actual resource formats, model serialization and runtime remain to be verified or selected during authorised work. The [data storage and provenance guide](docs/data/data-storage-and-provenance.md) defines the full conventions. COG and ONNX remain optional, unfinalised suggestions for a future BLUEVERSE integration; neither is an OCEAVERA requirement.
+
 ## Start here
 
 | Document | Purpose |

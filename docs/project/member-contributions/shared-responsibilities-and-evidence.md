@@ -68,7 +68,7 @@ Industry Explorer evidence is a group responsibility: named stakeholder/context 
 
 ## Handover and final submission duties
 
-Follow the [record conventions](../../../CONTRIBUTING.md#project-evidence-records) and [data governance](../../data/data-storage-and-provenance.md). A technical handover must identify actual contributing members, dataset/resource version, row/target/feature meaning, generating code/notebook, configuration/seeds, counts/checks, exclusions, limitations and unresolved issues. Link existing artefacts; do not create placeholder results or claim the recipient reviewed them without evidence.
+Follow the [record conventions](../../../CONTRIBUTING.md#project-evidence-records) and [data governance](../../data/data-storage-and-provenance.md). A technical handover must identify actual contributing members, dataset/resource version and actual file formats, row/target/feature meaning, generating code/notebook, configuration/seeds, counts/checks, exclusions, limitations and unresolved issues. Record format conversions and their reasons. For actual model artefacts, include the serialization format and environment in the metadata. Link existing artefacts; do not create placeholder results or claim the recipient reviewed them without evidence.
 
 1. Sanuda and Ushan exchange occurrence/layer compatibility evidence before final species/domain selection and integration.
 2. Sanuda and Ushan provide the biological/target and integrated-feature inputs to Adithya; agree partition design with Wanshaja before design-informing EDA and learned transformations.

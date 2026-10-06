@@ -31,9 +31,9 @@ Read the [group overview](../member-responsibilities.md) for ownership definitio
 
 ## Evidence and handover
 
-- Record exact layers/releases, units, spatial resolution, coordinate system, temporal period/statistic, surface or benthic context, marine mask, no-data conventions, terms and fingerprints using the [source form](../../templates/data-source-record.md).
+- Preserve each complete environmental source in its delivered format; record that format alongside exact layers/releases, units, spatial resolution, coordinate system, temporal period/statistic, surface or benthic context, marine mask, no-data conventions, terms and fingerprints using the [source form](../../templates/data-source-record.md). Extract only justified location-level values into derived tables; do not flatten full rasters.
 - Record regional restriction, transformations, extraction/join method, environmental cell IDs, unmatched observations and before/after counts. Justify temporal/depth compatibility with Sanuda; do not infer compatibility from geographic proximity alone.
-- Hand the versioned integrated feature table and [dataset manifest](../../templates/dataset-manifest.json) to Adithya and Wanshaja. Maintain the [dictionary](../../templates/data-dictionary.md), including variable definitions, feature lineage, row meaning and target/sample identifiers.
+- Hand the versioned integrated feature table and [dataset manifest](../../templates/dataset-manifest.json) to Adithya and Wanshaja. Use GeoParquet for compatible spatial tables and record the actual format/specification version. Maintain the [dictionary](../../templates/data-dictionary.md), including variable definitions, feature lineage, row meaning and target/sample identifiers.
 - Develop feature decisions jointly with Adithya in the [feature log](../../templates/preprocessing-and-feature-decisions.md); supply documented features and applicable transformations to all modelling work under one validation protocol.
 - Contribute environmental-data, integration and feature-method sections, decision evidence and limitations to the shared report; retain actual contribution and AI-use evidence.
 

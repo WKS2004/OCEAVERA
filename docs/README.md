@@ -14,7 +14,7 @@
 | Project | [Contributor identities](project/ai-team-members.md) | Exact account-to-name mapping for records |
 | Project | [AI-usage recording template](project/ai-usage-log-template.md) | Ten required fields and attribution discipline |
 | Project | [Repository review history](project/repository-review-history.md) | Preserved earlier unattributed maintenance reviews |
-| Data | [Storage and provenance](data/data-storage-and-provenance.md) | Acquisition, storage, spatial integration and sharing |
+| Data | [Storage and provenance](data/data-storage-and-provenance.md) | Source-preserving formats, derived tables, model artefacts, integration boundaries and sharing |
 | ML | [Workflow and evidence gates](ml/ml-workflow-and-evidence-gates.md) | Analytical sequence and shared progression |
 | Blank forms | [Evidence templates](templates/README.md) | Reusable scientific and assessment forms |
 | Contributor guidance | [CONTRIBUTING.md](../CONTRIBUTING.md) | Change workflow, evidence and activity recording, review |

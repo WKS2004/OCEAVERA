@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "record_status": "template",
   "model_id": null,
   "dataset_id": null,
@@ -19,6 +19,8 @@
   "limitations": [],
   "acceptance_status": null,
   "acceptance_evidence": null,
+  "artefact_format": null,
+  "serialization_library_and_version": null,
   "artefact_location": null,
   "fingerprint_algorithm": null,
   "fingerprint_value": null

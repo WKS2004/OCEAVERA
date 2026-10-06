@@ -31,7 +31,7 @@ Read the [group overview](../member-responsibilities.md) for ownership definitio
 
 ## Evidence and handover
 
-- Preserve occurrence provenance, contributing-dataset citations/terms, query, retrieval details and fingerprints using the [source form](../../templates/data-source-record.md). Report measured species counts, quality, geographic/temporal coverage and feasibility evidence.
+- Preserve occurrence provenance, contributing-dataset citations/terms, query, retrieval details, the publisher-delivered file format and fingerprints using the [source form](../../templates/data-source-record.md). Preserve the raw download unchanged; use GeoParquet for compatible derived spatial occurrence tables. Report measured species counts, quality, geographic/temporal coverage and feasibility evidence.
 - Record cleaning rules, counts and reasons; preserve raw inputs. Supply stable occurrence identifiers, coordinates, dates and taxonomic definitions for Ushan's integration, with biological fields in the [dictionary](../../templates/data-dictionary.md).
 - Document accessible sampling domain, label meaning, bias, seed/counts and sample origin with the [evaluation design](../../templates/validation-and-evaluation-plan.md). Coordinate environmental extraction for constructed background samples with Ushan; obtain group review before final target decisions.
 - Hand the versioned biological/target inputs to Ushan and Adithya. Supply the baseline configuration, generating code/notebook and results to Adithya and Wanshaja for comparable runs.

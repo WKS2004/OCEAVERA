@@ -9,6 +9,7 @@ Copy into a dated record. Use one row per field in the integrated dataset, inclu
 ## Dataset metadata
 
 - **Dataset name/version:**
+- **Stored file format and format-specification version:**
 - **Record date / status:**
 - **Row meaning:**
 - **Study boundary and time period:**

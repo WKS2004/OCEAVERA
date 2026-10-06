@@ -13,8 +13,8 @@ Copy a form into `docs/records/`, following the [record conventions](../../CONTR
 | [Evaluation design](validation-and-evaluation-plan.md) | Target, sampling, partitions, metrics and leakage controls |
 | [Model comparison](model-comparison.md) | Baseline and alternative results under a documented design |
 | [Recommendation](recommendations-and-limitations.md) | Evidence-based practical value, uncertainty and limitations |
-| [Dataset manifest](dataset-manifest.json) | Machine-readable dataset identity, source records, processing and fingerprint |
-| [Model metadata](model-metadata.json) | Machine-readable model/run identity, evaluation, limits and acceptance |
+| [Dataset manifest](dataset-manifest.json) | Machine-readable dataset identity, source records, actual storage format, processing and fingerprint |
+| [Model metadata](model-metadata.json) | Machine-readable model/run identity, artefact format, environment, evaluation, limits and acceptance |
 
 AI-assisted activity uses the separate [contribution recording template](../project/ai-usage-log-template.md) and [per-contributor logs](../README.md#contribution-records).
 

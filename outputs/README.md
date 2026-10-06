@@ -4,6 +4,8 @@
 
 Future reviewed outputs must identify their generating notebook/code, dataset version, run/configuration and intended interpretation. Use descriptive filenames and link relevant results from dated `docs/records/` files under the [record conventions](../CONTRIBUTING.md#project-evidence-records). Maps should communicate the study domain, scale, coordinate context, score meaning and uncertainty.
 
+Choose an output format from the actual result type and delivery need, and document it with the generating record. A COG raster is only an optional, unfinalised future BLUEVERSE integration suggestion, not a required OCEAVERA deliverable.
+
 Temporary experiments may use a local `scratch/` subdirectory, excluded by the root ignore rules. Reviewed outputs remain visible to Git for deliberate inclusion. Check size, publisher terms and ecological sensitivity before committing or sharing them; see [data storage and provenance](../docs/data/data-storage-and-provenance.md).
 
 ## Member responsibilities

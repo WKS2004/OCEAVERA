@@ -35,6 +35,7 @@ Read the [group overview](../member-responsibilities.md) for ownership definitio
 
 - Record observed distributions, missingness, outliers, correlations/multicollinearity, imbalance, spatial bias and decision implications in the [EDA log](../../templates/eda-insight-log.md), with dataset and generating-artefact references.
 - Document justified cleaning, scaling, transformations, imputation and imbalance treatment in the [preprocessing/feature log](../../templates/preprocessing-and-feature-decisions.md). Coordinate feature engineering with Ushan and biological exclusions with Sanuda.
+- Preserve the integrated dataset's recorded format. Use Parquet for compatible non-spatial modelling tables or GeoParquet where the spatial geometry remains part of the dataset; record conversions and reasons in the manifest and generating evidence.
 - Agree partitions and leakage controls with Wanshaja before design-informing EDA or learned preprocessing. Prepare versioned training/validation inputs and fit learned transformations within training folds; preserve the final held-out evaluation boundary.
 - Hand the reproducible preprocessing pipeline, feature order/types, partition identifiers and candidate configurations/results to Wanshaja. Compare intermediate candidates with Sanuda's baseline on the same protocol and dataset version.
 - Contribute EDA, preparation and intermediate-method sections, observed findings and limitations to the shared report; retain actual contribution and AI-use evidence.

@@ -1,12 +1,14 @@
 # Repository readiness and alignment
 
-- **Reviewed:** 6 October 2026
-- **Phase:** finalised shared foundation and working member contribution plan, with repository CI implemented locally; analytical technical implementation pending
+- **Reviewed:** 7 October 2026
+- **Phase:** finalised shared foundation, working member contribution plan and documented storage conventions, with repository CI implemented locally; analytical technical implementation pending
 - **Scope of review:** repository structure, documentation, agent guidance, repository automation, assessment requirements, and initial proposal alignment.
 
 ## Assessment
 
 The shared foundation is finalised for the requested structure, documentation, contributor recording and agent guidance. The initial proposal's complete division is now the finalised working member contribution plan under D-028; it records expected work, not technical completion. It is consistent with the initial proposal's marine ML direction and unresolved implementation choices. It provides a self-contained working background and evidence conventions. It is not a completed ML project or a final submission.
+
+The storage-format convention is recorded under D-032. It guides later data work but does not establish source acquisition, selected model serialization, a scientific runtime or a deployed BLUEVERSE integration. COG and ONNX remain optional, unfinalised future integration suggestions.
 
 No dataset, executable analysis, trained model, measured result, stakeholder engagement record, or track approval record is present. Directory READMEs and blank templates describe future work; they do not establish that work has occurred.
 
@@ -33,7 +35,7 @@ No dataset, executable analysis, trained model, measured result, stakeholder eng
 | Shared initial context | Track, lens rationale, task/output, workflow, open decisions | Specific stakeholder decision and approval evidence |
 | Initial member responsibilities | Finalised working allocation for all four members, all activities, shared duties and both pipeline tables in the [member plan](member-responsibilities.md) | Actual technical work, handovers and review evidence; record justified allocation changes as progress requires |
 | Core evidence framework | All seven required evidence types have a document or blank form | Completed evidence based on authorised technical work |
-| Data and reproducibility | Lifecycle, source manifest/dictionary forms, record conventions | Actual source versions, fingerprints, coverage checks, processing and execution instructions |
+| Data and reproducibility | Lifecycle, source manifest/dictionary forms, record conventions and role-based format guidance | Actual resource packaging/versions, fingerprints, coverage checks, processing and execution instructions; agreed runtime remains pending |
 | Modelling and evaluation | Baseline/three-alternative requirement; spatial and target safeguards | Target, split, metric decisions, implemented comparisons and results |
 | Final deliverables | Complete requirement checklist and destinations | Report, notebook/code, data/dictionary, logs, comparison, demo, individual learning reports |
 | Industry Explorer bonus | Five criteria mapped; limits stated | Approval, decision context, verifiable data handling, practical recommendation evidence |
@@ -45,6 +47,7 @@ No dataset, executable analysis, trained model, measured result, stakeholder eng
 3. When technical work is authorised, investigate candidate data before selecting species, boundary, and layers.
 4. Record row meaning, target/background design, validation and metric rationale before model comparison.
 5. Agree the runtime and reproducible execution conventions before implementation.
+6. Verify source packaging and tool compatibility against D-032 when authorised data work begins; record any justified format departure.
 
 These are progression conditions. The [member plan](member-responsibilities.md) establishes proposed ownership and shared participation; neither the plan nor these conditions claims that technical work has started.
 
@@ -123,3 +126,9 @@ On 6 October 2026, the user requested finalisation of the member contribution pl
 | Implementation | Data, analytical work, models, approvals and completed technical contributions remain pending evidence |
 
 The final review checked role-table agreement, identity mapping, activity counts, requirement coverage, privacy patterns, local references and formatting. The executed results and their limits are in the [contribution log](../ai-contribution/WKS2004-ai-usage.md). It establishes a consistent contribution plan, not scientific validity or assessment completion.
+
+## Data and model storage-convention review
+
+The user requested the storage analysis be reflected across the repository and clarified that COG and ONNX are optional, unfinalised future BLUEVERSE integration suggestions. D-032 and the dated [storage convention record](../records/2026-10-07-data-storage-format-conventions.md) now preserve source formats, GeoParquet for compatible spatial tables, Parquet for compatible non-spatial ML tables, JSON metadata, conditional model serialization and the integration boundary. The existing `raw/`, `interim/` and `processed/` layout remains authoritative.
+
+No data have been acquired, and the expected CSV/NetCDF examples have not been checked against actual source downloads. No model, serialization library, runtime, COG or ONNX artefact has been selected or generated. PostGIS/API handling is documented only for a future BLUEVERSE handover; the receiving interface and implementation are not verified. The manifest and model metadata templates now include actual format fields, but remain blank templates rather than evidence.
