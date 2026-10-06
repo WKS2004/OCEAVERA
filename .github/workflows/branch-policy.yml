@@ -1,0 +1,38 @@
+name: Lowercase branch policy
+
+on:
+  create:
+
+permissions:
+  contents: write
+
+jobs:
+  enforce-lowercase:
+    name: Enforce lowercase branch names
+    if: github.event.ref_type == 'branch'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Delete branch names containing uppercase letters
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const branch = String(context.payload.ref || '');
+
+            if (!branch) {
+              core.setFailed('The branch creation event did not include a branch name.');
+              return;
+            }
+
+            if (branch === branch.toLowerCase()) {
+              core.info(`Branch '${branch}' is lowercase.`);
+              return;
+            }
+
+            core.warning(`Branch '${branch}' contains uppercase letters; deleting it.`);
+            await github.rest.git.deleteRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: `heads/${branch}`
+            });
+            core.setFailed(`Deleted branch '${branch}' because branch names must be lowercase.`);

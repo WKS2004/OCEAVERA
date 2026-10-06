@@ -56,6 +56,8 @@ Feature engineering is jointly led by Ushan and Adithya; candidate training by A
 | [reports/](reports/README.md) | Future report and submission material |
 | [.agents/](.agents/README.md) | Focused rules, skills, task routing and structural validation |
 | [GitHub CI](.github/workflows/ci.yml) | Automated checks of documentation, agent resources and contribution-record structure |
+| [Development backup](.github/workflows/dev-backup.yml) | Preserves extra `dev-backup` history before synchronising it to `dev` |
+| [Branch policy](.github/workflows/branch-policy.yml) | Deletes newly created branches whose names contain uppercase letters |
 
 Scientific records belong in `docs/records/`; factual contributor activity belongs in `docs/ai-contribution/`. Their conventions are maintained in [contributor guidance](CONTRIBUTING.md#project-evidence-records) and the [AI-usage template](docs/project/ai-usage-log-template.md). Exact contributor identities are maintained in the [team mapping](docs/project/ai-team-members.md).
 

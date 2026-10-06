@@ -60,9 +60,9 @@ The user-selected all-rights-reserved policy is recorded in [LICENSE.md](../../L
 
 ## Repository automation
 
-The user's workflow request authorises repository CI under D-029. [Repository checks](../../.github/workflows/ci.yml) invokes the existing standard-library helper on pull requests, pushes to `main` and manual dispatch, using a bounded hosted runner and maintenance interpreter. The [workflow guide](github-workflows.md) records check coverage, failure handling, action-pin maintenance and prerequisites for future notebook, data, training, reproduction, packaging and integration checks.
+The user's workflow requests authorise repository automation under D-029–D-031. [Repository checks](../../.github/workflows/ci.yml) invokes the existing standard-library helper on pull requests, pushes to `main` and manual dispatch. [Development backup maintenance](../../.github/workflows/dev-backup.yml) preserves backup-only history before mirroring `dev` to `dev-backup`. [Lowercase branch policy](../../.github/workflows/branch-policy.yml) deletes newly created branch names containing uppercase letters, without imposing name or pattern specifications. The [workflow guide](github-workflows.md) records execution conditions, permissions, action pins and prerequisites for scientific checks.
 
-The workflow is implemented locally. Hosted execution and any required-check policy remain unverified until an authorised commit/push and actual GitHub run. Local structural results are recorded in the [contribution log](../ai-contribution/WKS2004-ai-usage.md). This automation does not select the ML environment, start member analysis or satisfy scientific evidence gaps.
+All three workflows are implemented locally. This checkout contains only `main`; development backup therefore remains inactive until the `dev` source branch exists. The lowercase policy has not been exercised against a live branch. GitHub-hosted execution, repository write/force-update/delete settings and any required-check policy remain unverified. Local checks are recorded in the [contribution log](../ai-contribution/WKS2004-ai-usage.md). This automation does not select the ML environment, start member analysis or satisfy scientific evidence gaps.
 
 ## Foundation finalisation
 
