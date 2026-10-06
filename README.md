@@ -1,6 +1,6 @@
 # OCEAVERA
 
-**Marine Habitat Intelligence**
+![OCEAVERA — Marine Habitat Intelligence](assets/oceavera-brand-banner.png)
 
 IT3091 Machine Learning · Group 2026-AI-45
 

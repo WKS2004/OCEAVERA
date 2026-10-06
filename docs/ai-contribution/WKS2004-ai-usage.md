@@ -183,3 +183,16 @@ GitHub account: `WKS2004`. Identity follows the [canonical mapping](../project/a
 - **Summary of what the AI Agent did:** Reviewed storage-format guidance, project scope/readiness, decision D-032, requirements, data/outputs navigation, member handovers, templates and the agent resource map for consistency. Clarified that COG and ONNX are optional, unfinalised suggestions for possible future BLUEVERSE integration only; corrected British spelling in the storage guide and existing storage activity record. Preserved the existing data layout and did not add data, runtime, dependencies, model choices or integration implementation. Left the unrelated untracked social-preview image unchanged.
 - **AI output accepted/changed/rejected:** The reviewed wording is retained in the worktree. Human acceptance remains unrecorded. No commit or publication was performed.
 - **Verification/evidence:** Python 3.12.14 structural validation passed for 8 skills, 10 rules, 12 routing review cases, 81 text files, 572 local links, 83 Markdown section links, 4 contributor identities, 1 contribution log and 14 dated entries. `git diff --check` passed. Reviewed the COG/ONNX status across the README, requirements, data/output guidance, project overview/readiness, decision register, storage guide, ML workflow, data-management rule and intake references; all describe them as optional, unfinalised future BLUEVERSE integration suggestions only. The XGBoost model I/O claim was checked against its [official guide](https://xgboost.readthedocs.io/en/stable/tutorials/saving_model.html). These documentation checks do not establish data compatibility, scientific validity, hosted workflow execution or human acceptance.
+
+## 2026-10-07 — README project banner
+
+- **Date/time or time range:** 7 October 2026, 02:00:43 Asia/Colombo (UTC+05:30); record timestamp, not a verified task-duration interval.
+- **GitHub Username:** WKS2004
+- **Team Member Name:** Wanshaja Sooriyabandara
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; repository file tools, PowerShell and bundled Python.
+- **AI Model:** GPT-6 family; exact variant unavailable in session metadata.
+- **Summary of the user's request:** Add the supplied OCEAVERA banner image to the repository README.
+- **Summary of what the AI Agent did:** Copied the supplied PNG unchanged to `assets/oceavera-brand-banner.png` and added a descriptive Markdown image reference below the README heading. No other project content or implementation was changed.
+- **AI output accepted/changed/rejected:** The requested image and README reference are retained in the worktree. Human review remains unrecorded. No commit or publication was performed.
+- **Verification/evidence:** The copied image's SHA-256 matches the supplied attachment. The README reference resolves to the repository asset. Python 3.12.14 structural validation passed for 8 skills, 10 rules, 12 routing review cases, 81 text files, 572 local links and 83 Markdown section links; `git diff --check` passed. Contributor identity matches the authenticated account recorded in earlier activity and the canonical mapping. These checks establish file/reference integrity and repository structure, not human acceptance or publication.
