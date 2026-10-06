@@ -4,7 +4,7 @@ This is the canonical requirements and assessment reference for **OCEAVERA — M
 
 ## Requirement basis and change control
 
-The [overview and scope](docs/project/project-overview-and-scope.md) preserves the working baseline from the initial group submission dated 17 September 2026. The assessment obligations below are the maintained project transcription. An initial proposal or group declaration does not establish Industry Explorer approval, stakeholder engagement or technical feasibility.
+The [overview and scope](docs/project/project-overview-and-scope.md) preserves the working baseline from the initial group submission dated 17 September 2026. The [member responsibility plan](docs/project/member-responsibilities.md) preserves the initial allocation in Sections 6.1–6.7, including both pipeline tables. The assessment obligations below are the maintained project transcription. An initial proposal or group declaration does not establish Industry Explorer approval, stakeholder engagement or technical feasibility.
 
 Use **must** for an obligation or accepted project safeguard, **should** for a practice that needs a recorded reason if omitted, and **may** for an optional extension. Keep final species, geography, source resources, targets, features, methods, metrics and environment choices in the [decision register](docs/project/decision-register.md), with supporting evidence. Record a material requirement change there and update affected scope, workflow and readiness documents together.
 
@@ -36,6 +36,10 @@ The core scope covers acquisition, integration, target construction, EDA, prepro
 
 The [ML workflow](docs/ml/ml-workflow-and-evidence-gates.md) defines progression gates. This document does not select a programming language, dependency stack, model, numerical success threshold or deadline. Those choices require evidence and recorded agreement.
 
+## Member responsibility coverage
+
+Use the [overview](docs/project/member-responsibilities.md) for the division and fifteen-row matrix, and its linked member files for identities and complete activities. Its [requirement mapping](docs/project/member-contributions/shared-responsibilities-and-evidence.md#requirement-and-evidence-coverage) covers R-01–R-13, all seven evidence types, Industry Explorer conditions and final deliverables. The working contribution plan is finalised on 6 October 2026; subsequent responsibility changes require a recorded decision. Primary ownership supports shared technical participation; no member is allocated only documentation or presentation. Record completed work and review from actual evidence, and preserve each member's responsibility for their own one-A4 learning report.
+
 ## Required evidence package
 
 Maintain all seven core evidence types: **problem-framing canvas, workflow diagram, decision log, EDA insights, preprocessing/feature decisions, model/method comparison, and recommendation with limitations**. Use [blank forms](docs/templates/README.md) for actual authorised work and follow the [record conventions](CONTRIBUTING.md#project-evidence-records).
@@ -48,6 +52,7 @@ Every completion claim must link the corresponding dated record or generating ar
 - Preserve existing work, professional British English, descriptive names, valid internal links and consistent UTF-8/LF formatting.
 - Keep data payloads out of Git by default; preserve tracked provenance metadata without credentials or sensitive details.
 - Record factual activity using the exact [contributor mapping](docs/project/ai-team-members.md). Do not fabricate allocation, contribution, approval or acceptance claims.
+- Protect [member privacy](CONTRIBUTING.md#member-privacy): exclude member-specific academic identity fields and individual academic/assessment records from public documentation, logs and artefacts. Keep individual submission content within the authorised private submission process.
 - Follow [LICENSE.md](LICENSE.md): all rights reserved, with original project ownership retained by the group contributors and third-party terms preserved. Academic affiliation grants no institutional ownership. A source being publicly accessible does not itself establish permission to redistribute it.
 - Document actual checks and their limits. Structural checks do not replace scientific evaluation, human review or assessment evidence.
 
@@ -55,7 +60,7 @@ Every completion claim must link the corresponding dated record or generating ar
 
 | Stage | Required content | Repository support and remaining work |
 | --- | --- | --- |
-| Initial group | Track; primary and optional secondary lenses with reasons; proposed task/output; workflow; core responsibility of each member | [Overview and scope](docs/project/project-overview-and-scope.md), [workflow](docs/ml/ml-workflow-and-evidence-gates.md), and [decision register](docs/project/decision-register.md) preserve shared direction. The proposal includes member responsibility areas; this shared foundation does not reproduce or assign individual allocations. |
+| Initial group | Track; primary and optional secondary lenses with reasons; proposed task/output; workflow; core responsibility of each member | [Overview and scope](docs/project/project-overview-and-scope.md), [workflow](docs/ml/ml-workflow-and-evidence-gates.md), and [decision register](docs/project/decision-register.md) preserve shared direction. The [overview and linked detailed files](docs/project/member-responsibilities.md) preserve all four proposed ownership areas, every activity, shared duties and both pipeline tables at the user's request. Allocation remains revisable and is not completed contribution evidence. |
 | Final group | Three-minute YouTube demo; final report with notebook/code; dataset and data dictionary; decision logs; model/method comparison | [Reports](reports/README.md), [notebooks](notebooks/README.md), [code](src/README.md), [data](data/README.md), and [record conventions](CONTRIBUTING.md#project-evidence-records) define destinations. Deliverables are pending. |
 | Final individual | One A4 Personal Learning Journey report supporting individual contribution assessment | Required at final submission. Individual learning reports remain pending. [Contributor activity logs](docs/README.md#contribution-records) record factual AI-assisted repository work and do not replace those reports. |
 

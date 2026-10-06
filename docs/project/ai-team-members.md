@@ -2,6 +2,8 @@
 
 This is the canonical mapping for contribution and AI-usage records. It records the four exact contributor identities supplied for the project; it does not allocate work or establish completed contributions.
 
+This mapping uses project contributor names and GitHub accounts for public attribution. Apply [member privacy](../../CONTRIBUTING.md#member-privacy); do not add academic identifiers, institutional name forms, student email addresses or individual assessment records.
+
 | GitHub Username | Team Member Name |
 | --- | --- |
 | Ushan-Srinuka | Ushan Srinuka |
@@ -15,4 +17,4 @@ Use the authenticated GitHub account and match it exactly to this table. If auth
 
 Record how identity was confirmed in the entry's verification field without retaining email addresses, authentication credentials or unrelated account data. Append only to the acting contributor's log under [AI contributions](../README.md#contribution-records).
 
-Correct this mapping only from explicit identity evidence. Do not import component ownership, member numbering or assignments from another project. The [scope](project-overview-and-scope.md) and [decision register](decision-register.md) govern technical participation.
+Correct this mapping only from explicit identity evidence. Do not import component ownership, member numbering or assignments from another project. The [responsibility overview](member-responsibilities.md) links this project's four detailed member files and common duties, preserving the initial submission's division in the finalised working plan. The [scope](project-overview-and-scope.md) and [decision register](decision-register.md) govern technical participation and authorised changes.

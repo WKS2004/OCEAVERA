@@ -31,5 +31,6 @@ Copy the following entry and replace each placeholder with factual information. 
 - State unavailable model metadata honestly. Do not guess a model from the product name.
 - Preserve previous entries. Correct factual errors transparently when requested; do not rewrite history or retrospectively attribute older unverified work.
 - Keep secrets, personal contact details, hidden reasoning and unsupported claims out of logs.
+- Follow [member privacy](../../CONTRIBUTING.md#member-privacy). Do not copy member-specific academic identifiers or assessment details from submissions, and describe privacy corrections without repeating removed values.
 - Link scientific findings to their [evidence records](../../CONTRIBUTING.md#project-evidence-records). An activity log does not establish data quality, model correctness or assessment completion.
 - Factual contribution logs support accountability; they do not replace a member's assessed Personal Learning Journey or authorise writing it on their behalf.

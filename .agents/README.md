@@ -52,3 +52,7 @@ Section checks cover ATX Markdown headings, including repeated-heading suffixes;
 The helper checks the simple single-line frontmatter and quoted interface metadata used by the maintained skills. It is not a general YAML parser. Extend the schema check before adopting more complex metadata; do not bypass a rejected format.
 
 Keep rules as constraints, skills as workflows and project documents as knowledge. Avoid duplicate fact sheets, empty support directories or adapters for tools the group has not selected. Ordinary analytical work changes project evidence; guidance changes should be justified by a requested resource change or a demonstrated workflow gap.
+
+## Member allocation guidance
+
+The [member responsibility plan](../docs/project/member-responsibilities.md) is canonical for the explicitly requested proposal allocation. Read the overview, the relevant linked member file and common guide before member-specific work or contribution reporting. The overview holds the canonical group matrix; detailed files hold full individual activities; the common guide holds shared obligations. Follow the finalised working allocation while preserving its proposal provenance, recorded change control, joint ownership and shared decisions; document actual work separately. A responsibility update does not begin technical implementation or authorise assessed individual reflections.

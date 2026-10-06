@@ -1,12 +1,12 @@
 # Repository readiness and alignment
 
 - **Reviewed:** 6 October 2026
-- **Phase:** finalised shared foundation; technical implementation pending
+- **Phase:** finalised shared foundation and working member contribution plan; technical implementation pending
 - **Scope of review:** repository structure, documentation, agent guidance, assessment requirements, and initial proposal alignment.
 
 ## Assessment
 
-The shared foundation is finalised for the requested structure, documentation, contributor recording and agent guidance. It is consistent with the initial proposal's marine ML direction and unresolved implementation choices. It provides a self-contained working background and evidence conventions. It is not a completed ML project or a final submission.
+The shared foundation is finalised for the requested structure, documentation, contributor recording and agent guidance. The initial proposal's complete division is now the finalised working member contribution plan under D-028; it records expected work, not technical completion. It is consistent with the initial proposal's marine ML direction and unresolved implementation choices. It provides a self-contained working background and evidence conventions. It is not a completed ML project or a final submission.
 
 No dataset, executable analysis, trained model, measured result, stakeholder engagement record, or track approval record is present. Directory READMEs and blank templates describe future work; they do not establish that work has occurred.
 
@@ -23,7 +23,7 @@ No dataset, executable analysis, trained model, measured result, stakeholder eng
 | Occurrence probability / suitability output | [Overview and scope](project-overview-and-scope.md) | Intent preserved; probability claim conditional on target/sampling evidence |
 | Acquisition, integration, target, EDA, features, baseline, alternatives, evaluation, interpretation | [Workflow](../ml/ml-workflow-and-evidence-gates.md) | Stages represented; implementation pending |
 | Candidate algorithms and metrics remain provisional | [Decision register](decision-register.md) | Aligned; no fixed stack or final algorithm |
-| Every member contributes technically; material decisions shared | [Overview and scope](project-overview-and-scope.md); [contributor guidance](../../CONTRIBUTING.md) | Shared participation principle retained; individual allocations not reproduced in this foundation |
+| Every member contributes technically; material decisions shared | [Overview and scope](project-overview-and-scope.md); [contributor guidance](../../CONTRIBUTING.md) | Shared participation and every proposed member activity/role preserved in the [responsibility plan](member-responsibilities.md); no completed contribution inferred |
 | AI tools assist; the group remains accountable | [AI-use conventions](ai-usage-log-template.md) | Proposal declaration acknowledged; [per-contributor activity](../README.md#contribution-records) records actual assistance and check results; human review remains pending |
 
 ## Assessment readiness
@@ -31,7 +31,7 @@ No dataset, executable analysis, trained model, measured result, stakeholder eng
 | Area | Present | Still required |
 | --- | --- | --- |
 | Shared initial context | Track, lens rationale, task/output, workflow, open decisions | Specific stakeholder decision and approval evidence |
-| Initial member responsibilities | Shared technical participation principle | Individual allocation remains outside this requested shared structure |
+| Initial member responsibilities | Finalised working allocation for all four members, all activities, shared duties and both pipeline tables in the [member plan](member-responsibilities.md) | Actual technical work, handovers and review evidence; record justified allocation changes as progress requires |
 | Core evidence framework | All seven required evidence types have a document or blank form | Completed evidence based on authorised technical work |
 | Data and reproducibility | Lifecycle, source manifest/dictionary forms, record conventions | Actual source versions, fingerprints, coverage checks, processing and execution instructions |
 | Modelling and evaluation | Baseline/three-alternative requirement; spatial and target safeguards | Target, split, metric decisions, implemented comparisons and results |
@@ -46,7 +46,7 @@ No dataset, executable analysis, trained model, measured result, stakeholder eng
 4. Record row meaning, target/background design, validation and metric rationale before model comparison.
 5. Agree the runtime and reproducible execution conventions before implementation.
 
-These are progression conditions, not member assignments or claims that work has started.
+These are progression conditions. The [member plan](member-responsibilities.md) establishes proposed ownership and shared participation; neither the plan nor these conditions claims that technical work has started.
 
 ## Maintenance review
 
@@ -59,6 +59,8 @@ Update this review when new evidence changes the phase or resolves a gap. Preser
 The user-selected all-rights-reserved policy is recorded in [LICENSE.md](../../LICENSE.md) and decision D-020. Contributor ownership and limited academic identification follow the user's clarification in D-023. This rights policy does not verify third-party data terms or resolve scientific readiness gaps.
 
 ## Foundation finalisation
+
+This section preserves the foundation review recorded before the member allocation update. Its numerical inventory is a dated review result; see the subsequent responsibility review below for the current update.
 
 The final review covers the root documents, documentation hierarchy, blank forms, directory purposes, contributor identity/record conventions and all maintained agent resources. Scientific evidence and assessed deliverables remain subject to the gates above. The user requested finalisation; that request does not establish that each document or model result has received independent human verification.
 
@@ -76,3 +78,42 @@ The final review covers the root documents, documentation hierarchy, blank forms
 The [resource helper](../../.agents/scripts/validate_agent_resources.py) checks structure and record format. Manual routing cases have not been run as agent evaluations. No dataset feasibility, model quality, lecturer approval, stakeholder engagement or submission readiness is inferred from these checks. See the [contribution records](../README.md#contribution-records) for the dated actions and executed checks.
 
 The next stage is a separately authorised framing/approval and data-feasibility investigation. Final species, marine domain, target, validation, runtime and model choices remain open until supported by recorded evidence.
+
+## Member responsibility documentation review
+
+The user explicitly requested the initial proposal's member contribution division on 6 October 2026. [D-025](decision-register.md) adopts its transcription into the [canonical plan](member-responsibilities.md), preserving proposed/revisable status and the planning-versus-completed-work distinction.
+
+The coverage review includes all four primary duties and model-building contributions; 48 member activities (11, 11, 13 and 13); nine common participation areas; thirteen shared decisions/reviews; and fifteen pipeline rows with all sixty member-role cells. Member numbering, submission identities and registration numbers were reconciled to the exact contributor mapping. Both responsibility tables were visually inspected. The final prediction duty retains the repository's evidence-dependent probability interpretation.
+
+Requirements R-01–R-13, all seven core evidence types, final group/individual submissions and five conditional bonus evidence areas are mapped to the proposed responsibilities. Handover requirements operationalise existing evidence conventions; they do not claim the proposal allocated a sole report editor, presenter, uploader or particular candidate algorithm. Root guidance, workflow, directory purposes and relevant agent guidance point to the same plan.
+
+Technical implementation, completed handovers, human review of this documentation, track approval and stakeholder engagement remain unevidenced. The allocation request does not start data acquisition or model development. Executed structural checks are recorded in the [acting contributor's log](../ai-contribution/WKS2004-ai-usage.md); manual routing expectations are not executed agent evaluations.
+
+### Responsibility recheck and detailed member files
+
+The subsequent user request asked for a coverage recheck and a general overview with separate detailed member documents. No allocation error was identified: member numbering and identities, all 48 activities, nine common participation areas, thirteen shared decisions and both responsibility tables remain consistent with the initial proposal. Joint primary ownership for feature engineering and candidate training is retained. The prediction responsibility continues to use the evidence-dependent probability qualification required by the maintained scientific safeguards.
+
+Under D-026, the [63-line overview](member-responsibilities.md) now presents the division, role meanings and canonical fifteen-row matrix, linking four detailed member files. Each member file preserves their complete activity list, primary duty, model-building contribution, evidence/handover requirements and all fifteen personal pipeline roles. The [common guide](member-contributions/shared-responsibilities-and-evidence.md) preserves shared duties, R-01–R-13 coverage, all seven evidence types, bonus conditions, handovers, final submissions and change control.
+
+The reorganised documents were compared again with the proposal after migration, including all sixty role cells and each member file's corresponding matrix column. Root guidance, indices, workflow section links and agent knowledge references were updated. Existing uncommitted work and earlier dated records were preserved. Documentation completeness does not establish performed member work, human acceptance or scientific/submission readiness.
+
+### Member privacy update
+
+Under D-027, the user's explicit privacy instruction removes academic identity fields from the four detailed member files. Earlier responsibility reviews describe the comparisons performed at that time; those sensitive fields are no longer retained in public documentation. Attribution now uses project contributor names and GitHub accounts, without reproducing the removed values. [Member privacy](../../CONTRIBUTING.md#member-privacy) also excludes individual academic/assessment records from public material and applies to future documentation, contribution logging and outputs. Responsibilities, activities and matrix roles are retained.
+
+## Member contribution finalisation
+
+On 6 October 2026, the user requested finalisation of the member contribution plan. D-028 adopts the existing division as the current working allocation. The earlier proposal-only statuses at D-025/D-026 are preserved as history; future responsibility changes still require a recorded decision. Finalisation covers the documentation and assignment of expected work, with no claim that technical tasks or group-wide human verification are complete.
+
+| Review area | Final state |
+| --- | --- |
+| Organisation | General overview and canonical matrix; four detailed member files; one common guide |
+| Member duties | All 48 activities, primary responsibilities and model-building contributions retained |
+| Pipeline roles | Fifteen overview rows and sixty member-role cells; each personal role table agrees with its overview column |
+| Shared participation | All nine participation areas and thirteen shared decisions/reviews retained, including joint primary ownership |
+| Evidence and submissions | R-01–R-13, all seven evidence types, conditional bonus evidence, handovers and group/individual submissions covered |
+| Privacy | Public project contributor names/accounts only; academic identity fields omitted and individual assessment material handled privately |
+| Change control | Current plan finalised; later changes recorded without silently reassigning duties |
+| Implementation | Data, analytical work, models, approvals and completed technical contributions remain pending evidence |
+
+The final review checked role-table agreement, identity mapping, activity counts, requirement coverage, privacy patterns, local references and formatting. The executed results and their limits are in the [contribution log](../ai-contribution/WKS2004-ai-usage.md). It establishes a consistent contribution plan, not scientific validity or assessment completion.

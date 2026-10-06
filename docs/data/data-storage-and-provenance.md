@@ -43,3 +43,7 @@ Document learned transformations and fit them within training partitions. Determ
 ## Responsible sharing
 
 Check publisher terms and attribution requirements before reuse or redistribution. Review fine-resolution species locations for ecological sensitivity before publishing maps or coordinates. Keep credentials, tokens and unrelated personal data out of project files. Record relevant permissions or anonymisation measures without exposing sensitive details.
+
+## Responsibility and data handover
+
+Follow the [complete member plan](../project/member-responsibilities.md): Sanuda owns biological preparation/target inputs, Ushan environmental preparation/spatial integration and Adithya integrated cleaning/preprocessing. Wanshaja reviews source preparation and leads evaluation with group participation. Each producing member supplies provenance, field definitions, row counts, exclusions, versions and generating references; combine biological and environmental definitions in the integrated dictionary/manifest. All four decide species/domain, sampling and final features from that evidence. The allocation does not establish acquisition or authorise payload redistribution.

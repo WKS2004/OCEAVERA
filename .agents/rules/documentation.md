@@ -8,3 +8,4 @@ Apply when changing documents, directories or local references.
 - Keep local references relative to their containing file and within the repository. Do not name absent local reference artefacts or machine-specific paths.
 - Separate templates from dated records and planned requirements from established evidence. Preserve historical findings while updating their navigation links after a rename.
 - Keep UTF-8, LF, a final newline and no trailing whitespace. Use complete, clear British English and disclose pending evidence.
+- Apply [member privacy](../../CONTRIBUTING.md#member-privacy) to public documentation and outputs. Extract responsibilities from academic submissions without copying member-specific identity fields or individual assessment records.

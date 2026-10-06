@@ -21,3 +21,7 @@ AI-assisted activity uses the separate [contribution recording template](../proj
 A form establishes a recording format. It becomes assessment evidence only when supported by the corresponding data, analysis, decision or approval record.
 
 The JSON forms deliberately contain nulls and empty collections. Copy and complete them from actual work; they are not acquired datasets, trained-model records or formal validation schemas. Use a code revision only when it identifies the generating work accurately; otherwise record the worktree state and relevant files/configuration without implying a commit exists.
+
+## Responsibility for evidence
+
+Use the [member plan's evidence mapping](../project/member-contributions/shared-responsibilities-and-evidence.md#requirement-and-evidence-coverage) for primary preparation and shared review of completed forms. Every member supplies evidence for their actual work, and all four retain responsibility for shared decisions, reproducibility and final submission. Keep these master forms blank; an assigned form or proposed owner is not a completed contribution.

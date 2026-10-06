@@ -1,6 +1,6 @@
 # ML workflow and evidence gates
 
-This is a shared analytical workflow, not a member task allocation or a fixed modelling recipe. The current phase is recorded in the [status review](../project/repository-readiness-and-alignment.md). Technical stages remain pending until requested.
+This is a shared analytical workflow, with primary ownership and shared participation defined by the [member responsibility plan](../project/member-responsibilities.md). It is not a fixed modelling recipe. The current phase is recorded in the [status review](../project/repository-readiness-and-alignment.md). Technical stages remain pending until requested.
 
 ## Workflow
 
@@ -42,11 +42,28 @@ Non-outcome quality checks can cover the acquired data. Exploratory work that in
 
 Use evidence to revisit a gate when appropriate. Gate completion is a documented judgement, not a box inferred from a directory or blank form.
 
+## Ownership and handovers
+
+| Stage | Working primary ownership | Required collaboration |
+| --- | --- | --- |
+| Framing, feasibility selection and final technical choices | All four shared | Species, domain, features, target, methods, validation and final selection remain group decisions |
+| Biological data, occurrence quality and target/background inputs | Sanuda | Ushan/Adithya support; Wanshaja review |
+| Environmental preparation and spatial integration | Ushan | Sanuda/Adithya support; Wanshaja review |
+| Integrated quality, EDA and preprocessing | Adithya | All four participate; source-specific cleaning stays with Sanuda/Ushan |
+| Feature engineering | Ushan and Adithya | Sanuda/Wanshaja participate |
+| Baseline | Sanuda primary/shared | All four participate under the agreed protocol |
+| Candidate training | Adithya and Wanshaja | Sanuda/Ushan participate; record particular candidate implementation ownership when methods are agreed |
+| Validation and evaluation | Wanshaja | All four participate; agree partitions before design-informing EDA and learned transformations |
+| Interpretation and habitat-suitability output | Wanshaja primary/shared | All four review final selection, output meaning and limitations |
+| Final evidence, report, demo and reproducible handover | All four shared | Each supplies their actual technical evidence; each prepares their own individual learning report |
+
+Follow the [handover duties](../project/member-contributions/shared-responsibilities-and-evidence.md#handover-and-final-submission-duties). Source data and integration must retain identifiers/versions for target, partition and feature lineage. Propagate a data/preprocessing change to the baseline and every comparison run. Review each gate using evidence rather than assuming a primary member's planned task is finished.
+
 ## Execution planning
 
 The proposal leaves the runtime, environment manager, dependency versions, and execution entry points undecided. When these are selected, record the rationale and add reproducible instructions alongside the implementation. Do not introduce install commands that cannot yet run a project workflow.
 
-No calendar deadline or member allocation is established here. Agree milestones against confirmed course dates and the approved scope; the Industry Explorer bonus requires manageable scope within seven weeks.
+The [complete responsibility matrix](../project/member-responsibilities.md#complete-pipeline-responsibility-matrix) establishes the finalised working member roles, subject to recorded changes. No calendar deadline is established here. Agree milestones against confirmed course dates and the approved scope; the Industry Explorer bonus requires manageable scope within seven weeks.
 
 ## Later BLUEVERSE handover
 

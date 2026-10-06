@@ -4,9 +4,15 @@ Use this guide for shared project changes, evidence collection and contribution 
 
 ## Working scope
 
-The current authorised work covers shared structure and planning. Start a technical stage only when requested and the corresponding [workflow gate](docs/ml/ml-workflow-and-evidence-gates.md) is addressed. Keep unresolved species, geography, target, features, methods and environment choices provisional until recorded evidence supports them.
+The current authorised work covers shared structure, planning and proposal-based member responsibility documentation. Start a technical stage only when requested and the corresponding [workflow gate](docs/ml/ml-workflow-and-evidence-gates.md) is addressed. Keep unresolved species, geography, target, features, methods and environment choices provisional until recorded evidence supports them.
 
-All members are expected to understand the full pipeline and contribute technically. This guide does not assign member tasks. Factual activity logs establish recorded work; they do not establish technical ownership or satisfy a member's assessed learning report.
+All members are expected to understand the full pipeline and contribute technically. Use the [responsibility overview](docs/project/member-responsibilities.md) for the group division, the linked member file for complete personal duties and the [common guide](docs/project/member-contributions/shared-responsibilities-and-evidence.md) for shared participation, evidence and handovers. Factual activity logs record performed work; they do not prove fulfilment of an allocation or satisfy a member's assessed learning report. Follow the finalised working allocation and record authorised responsibility changes in the decision register.
+
+## Member handovers and review
+
+Use the [complete allocation and handover requirements](docs/project/member-contributions/shared-responsibilities-and-evidence.md#handover-and-final-submission-duties). Primary members provide reproducible evidence and describe unresolved issues; recipients record actual support/review without automatic acceptance claims. Shared scientific choices require group evidence and recorded agreement status. Keep report/demo assembly shared unless an additional logistical role is explicitly agreed.
+
+Document each member's actual authorship, support and review in the relevant scientific record or generating artefact when evidenced. Planned responsibility is not contribution credit. AI-assisted tasks additionally use the per-account recording convention below; do not create empty logs for planned members.
 
 ## Change workflow
 
@@ -33,6 +39,14 @@ Store scientific, approval and detailed decision evidence in `docs/records/`. Co
 The directory marker preserves the evidence location in Git and establishes no completed work. Consult [current readiness](docs/project/repository-readiness-and-alignment.md) for available scientific and approval evidence. Earlier documentation reviews remain in the [review history](docs/project/repository-review-history.md).
 
 ## Contribution and AI-usage recording
+
+### Member privacy
+
+Treat every member-specific academic detail as sensitive. Exclude student or registration identifiers, names formatted for institutional records, institutional email addresses, enrolment details, grades, individual assessment feedback and personal academic records from public repository content, including member profiles, logs, templates, attachments and generated outputs. Individual learning reports and supporting academic material belong in the authorised private submission process.
+
+Use the project's [contributor names and GitHub accounts](docs/project/ai-team-members.md) for public attribution. Shared course and group metadata may identify the assignment; it must not expose a member's private academic record. When reading submission material, extract the required responsibilities and omit sensitive identity fields. Record a privacy correction without repeating the removed values, including in requests, examples or verification output.
+
+### Activity entries
 
 Use the exact account-to-name [contributor mapping](docs/project/ai-team-members.md). Resolve the acting account through authenticated GitHub evidence or the contributor's explicit statement; Git display names, email addresses and repository ownership alone are insufficient.
 

@@ -9,3 +9,5 @@ Apply to every meaningful AI-assisted repository contribution. Follow the [ident
 5. Preserve prior entries and factual evidence. Amend a record transparently when correction is requested; do not add a separate contribution event for a correction-only task or retrospectively attribute unverified history.
 
 Keep credentials, personal contact details, hidden reasoning and unsupported claims out of logs. Do not create empty logs for other contributors, import another project's activities or generate a member's assessed Personal Learning Journey. Link scientific results to their evidence records; a contribution entry is not proof of model quality or assessment completion.
+
+Follow [member privacy](../../CONTRIBUTING.md#member-privacy) in every entry. Use project contributor names/accounts for attribution; exclude academic identifiers and individual assessment records, and never repeat removed values when recording a privacy correction.

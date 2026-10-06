@@ -1,12 +1,13 @@
 # OCEAVERA agent instructions
 
-OCEAVERA is the marine habitat intelligence project proposed for IT3091. Read [PROJECT_REQUIREMENTS.md](PROJECT_REQUIREMENTS.md), the [overview and scope](docs/project/project-overview-and-scope.md) and [current readiness](docs/project/repository-readiness-and-alignment.md) before making project or completion claims. The current authorised work covers the shared foundation; begin technical stages only when requested.
+OCEAVERA is the marine habitat intelligence project proposed for IT3091. Read [PROJECT_REQUIREMENTS.md](PROJECT_REQUIREMENTS.md), the [overview and scope](docs/project/project-overview-and-scope.md) and [current readiness](docs/project/repository-readiness-and-alignment.md) before making project or completion claims. The current authorised work covers the shared foundation and the documented member responsibility plan; begin technical stages only when requested.
 
 ## Rules for every task
 
-- Inspect existing changes and preserve work outside the request. Do not allocate member work or invent contributions, approvals, findings or model results.
+- Inspect existing changes and preserve work outside the request. Use the [responsibility overview](docs/project/member-responsibilities.md), the relevant linked member file and common duties for allocated work, adopted at the user's explicit request. Change allocations only with explicit authorisation and a recorded decision; never infer completed contributions, approvals, findings or model results from planned ownership.
 - Follow [CONTRIBUTING.md](CONTRIBUTING.md). Keep requirements, scope, the [decision register](docs/project/decision-register.md) and readiness consistent; preserve superseded decisions with replacement links.
 - Preserve raw data and provenance under the [data conventions](docs/data/data-storage-and-provenance.md). Keep payloads, credentials and sensitive details out of Git by default.
+- Apply [member privacy](CONTRIBUTING.md#member-privacy) to every document, record and output. Exclude member-specific academic identifiers, institutional name forms, email addresses and assessment records; do not reproduce removed values in logs or verification output. Use project contributor names and GitHub accounts for public attribution.
 - Preserve presence-only observation limits. Missing occurrences are not confirmed absences; suitability scores require evidence before occurrence-probability claims. Load the relevant modelling guidance before constructing targets or evaluation.
 - Record actual AI-assisted work only in the verified acting contributor's log under the [AI-usage rule](.agents/rules/ai-usage.md). Distinguish retained output from human acceptance; do not retrospectively attribute unverified history or write assessed individual reflections.
 - Keep local references within this repository and use paths relative to the containing document. Do not name absent local files or machine-specific paths. Use stable publisher identifiers for actual provenance.
