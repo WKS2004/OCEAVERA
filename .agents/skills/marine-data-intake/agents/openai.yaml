@@ -1,0 +1,3 @@
+interface:
+  display_name: "Marine Data Intake"
+  short_description: "Assess and integrate marine occurrence and environment data"

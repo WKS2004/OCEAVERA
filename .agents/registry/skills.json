@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "policy": {
+    "canonicalKnowledge": "docs/README.md",
+    "rootInstructions": "AGENTS.md",
+    "baseRules": [
+      "change-safety",
+      "validation",
+      "ai-usage"
+    ],
+    "imports": "No external skills are vendored. Future imports require an exact upstream revision, licence and compatibility review."
+  },
+  "skills": [
+    {
+      "id": "repository-alignment",
+      "title": "Repository alignment",
+      "origin": "project",
+      "path": ".agents/skills/repository-alignment",
+      "selectWhen": "Repository structure, documentation naming, readiness and agent-resource review",
+      "rules": [
+        "repository-maintenance",
+        "documentation"
+      ],
+      "knowledge": [
+        "docs/project/project-overview-and-scope.md",
+        "docs/project/repository-readiness-and-alignment.md",
+        "PROJECT_REQUIREMENTS.md",
+        "LICENSE.md",
+        "CONTRIBUTING.md"
+      ]
+    },
+    {
+      "id": "industry-explorer-framing",
+      "title": "Industry Explorer framing",
+      "origin": "project",
+      "path": ".agents/skills/industry-explorer-framing",
+      "selectWhen": "Stakeholder context, decision value, lenses, scope and approval evidence",
+      "rules": [
+        "project-scope",
+        "assignment-evidence"
+      ],
+      "knowledge": [
+        "docs/project/project-overview-and-scope.md",
+        "PROJECT_REQUIREMENTS.md"
+      ]
+    },
+    {
+      "id": "marine-data-intake",
+      "title": "Marine data intake",
+      "origin": "project",
+      "path": ".agents/skills/marine-data-intake",
+      "selectWhen": "Source feasibility, species selection, acquisition, quality and spatial integration",
+      "rules": [
+        "data-management"
+      ],
+      "knowledge": [
+        "docs/data/data-storage-and-provenance.md"
+      ]
+    },
+    {
+      "id": "marine-eda-and-features",
+      "title": "Marine EDA and features",
+      "origin": "project",
+      "path": ".agents/skills/marine-eda-and-features",
+      "selectWhen": "Data exploration, cleaning, preprocessing and environmental feature decisions",
+      "rules": [
+        "data-management",
+        "eda-and-preprocessing"
+      ],
+      "knowledge": [
+        "docs/templates/eda-insight-log.md",
+        "docs/templates/preprocessing-and-feature-decisions.md"
+      ]
+    },
+    {
+      "id": "marine-background-sampling",
+      "title": "Marine background sampling",
+      "origin": "project",
+      "path": ".agents/skills/marine-background-sampling",
+      "selectWhen": "Presence/background target construction, sampling domain and observation bias",
+      "rules": [
+        "data-management",
+        "modelling-and-evaluation"
+      ],
+      "knowledge": [
+        "docs/templates/validation-and-evaluation-plan.md"
+      ]
+    },
+    {
+      "id": "marine-spatial-validation",
+      "title": "Marine spatial validation",
+      "origin": "project",
+      "path": ".agents/skills/marine-spatial-validation",
+      "selectWhen": "Spatial partitions, repeated grid cells, leakage and generalisation design",
+      "rules": [
+        "modelling-and-evaluation",
+        "eda-and-preprocessing"
+      ],
+      "knowledge": [
+        "docs/templates/validation-and-evaluation-plan.md"
+      ]
+    },
+    {
+      "id": "species-distribution-modelling",
+      "title": "Species distribution modelling",
+      "origin": "project",
+      "path": ".agents/skills/species-distribution-modelling",
+      "selectWhen": "Baseline and alternative models, comparable evaluation and suitability interpretation",
+      "rules": [
+        "modelling-and-evaluation"
+      ],
+      "knowledge": [
+        "docs/templates/model-comparison.md",
+        "docs/templates/recommendations-and-limitations.md"
+      ]
+    },
+    {
+      "id": "it3091-evidence",
+      "title": "IT3091 evidence",
+      "origin": "project",
+      "path": ".agents/skills/it3091-evidence",
+      "selectWhen": "Assessment evidence, report traceability, AI-use disclosure and submission readiness",
+      "rules": [
+        "assignment-evidence",
+        "documentation"
+      ],
+      "knowledge": [
+        "PROJECT_REQUIREMENTS.md",
+        "docs/project/ai-usage-log-template.md"
+      ]
+    }
+  ]
+}

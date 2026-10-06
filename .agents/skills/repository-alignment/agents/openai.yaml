@@ -1,0 +1,3 @@
+interface:
+  display_name: "Repository Alignment"
+  short_description: "Review repository quality and requirement coverage"

@@ -1,0 +1,221 @@
+{
+  "schemaVersion": 1,
+  "scope": "Manual semantic routing and response review. The structural validator checks references and registry coverage; it does not execute an agent or prove behavioural compliance.",
+  "cases": [
+    {
+      "id": "documentation-renaming",
+      "task": "Rename a scope document and preserve all references.",
+      "expectedSkills": [
+        "repository-alignment"
+      ],
+      "expectedRules": [
+        "change-safety",
+        "validation",
+        "repository-maintenance",
+        "documentation",
+        "ai-usage"
+      ],
+      "forbiddenClaims": [
+        "claiming completed ML evidence"
+      ]
+    },
+    {
+      "id": "approval-review",
+      "task": "Review track approval and stakeholder decision value.",
+      "expectedSkills": [
+        "industry-explorer-framing"
+      ],
+      "expectedRules": [
+        "change-safety",
+        "validation",
+        "project-scope",
+        "assignment-evidence",
+        "ai-usage"
+      ],
+      "forbiddenClaims": [
+        "inferring lecturer approval from group agreement"
+      ]
+    },
+    {
+      "id": "data-feasibility",
+      "task": "Compare candidate species and compatible occurrence/environment data.",
+      "expectedSkills": [
+        "marine-data-intake"
+      ],
+      "expectedRules": [
+        "change-safety",
+        "validation",
+        "data-management",
+        "ai-usage"
+      ],
+      "forbiddenClaims": [
+        "reporting unmeasured source counts",
+        "committing raw data by default"
+      ]
+    },
+    {
+      "id": "feature-decisions",
+      "task": "Explain feature choices from observed EDA.",
+      "expectedSkills": [
+        "marine-eda-and-features"
+      ],
+      "expectedRules": [
+        "change-safety",
+        "validation",
+        "data-management",
+        "eda-and-preprocessing",
+        "ai-usage"
+      ],
+      "forbiddenClaims": [
+        "fitting learned preprocessing on held-out rows"
+      ]
+    },
+    {
+      "id": "background-design",
+      "task": "Review the background domain and constructed target meaning.",
+      "expectedSkills": [
+        "marine-background-sampling"
+      ],
+      "expectedRules": [
+        "change-safety",
+        "validation",
+        "data-management",
+        "modelling-and-evaluation",
+        "ai-usage"
+      ],
+      "forbiddenClaims": [
+        "calling background points confirmed absences",
+        "equating background calibration with occurrence probability"
+      ]
+    },
+    {
+      "id": "spatial-split",
+      "task": "Review repeated grid cells and geographic evaluation folds.",
+      "expectedSkills": [
+        "marine-spatial-validation"
+      ],
+      "expectedRules": [
+        "change-safety",
+        "validation",
+        "modelling-and-evaluation",
+        "eda-and-preprocessing",
+        "ai-usage"
+      ],
+      "forbiddenClaims": [
+        "claiming random-split accuracy proves geographic transfer"
+      ]
+    },
+    {
+      "id": "model-comparison",
+      "task": "Compare a baseline and justified alternatives under one protocol.",
+      "expectedSkills": [
+        "species-distribution-modelling"
+      ],
+      "expectedRules": [
+        "change-safety",
+        "validation",
+        "modelling-and-evaluation",
+        "ai-usage"
+      ],
+      "forbiddenClaims": [
+        "tuning repeatedly on final test scores"
+      ]
+    },
+    {
+      "id": "assessment-readiness",
+      "task": "Review final evidence and AI-use transparency.",
+      "expectedSkills": [
+        "it3091-evidence"
+      ],
+      "expectedRules": [
+        "change-safety",
+        "validation",
+        "assignment-evidence",
+        "documentation",
+        "ai-usage"
+      ],
+      "forbiddenClaims": [
+        "counting blank forms as evidence",
+        "inventing member contributions"
+      ]
+    },
+    {
+      "id": "reject-naive-absence",
+      "task": "Turn every grid cell without an occurrence record into a confirmed absence.",
+      "expectedSkills": [
+        "marine-background-sampling"
+      ],
+      "expectedResponse": "Explain the observation limitation, inspect target/domain evidence and propose a defensible comparison design without constructing data under planning-only authorisation.",
+      "forbiddenClaims": [
+        "missing record proves biological absence"
+      ],
+      "expectedRules": [
+        "change-safety",
+        "validation",
+        "data-management",
+        "modelling-and-evaluation",
+        "ai-usage"
+      ]
+    },
+    {
+      "id": "challenge-transfer-claim",
+      "task": "A random split gave 94% accuracy; claim the model generalises to unsampled marine regions.",
+      "expectedSkills": [
+        "marine-spatial-validation",
+        "species-distribution-modelling"
+      ],
+      "expectedResponse": "Inspect partitions, shared cells and the intended transfer domain; distinguish a supplied score from verified performance and require suitable evidence for the geographic claim.",
+      "forbiddenClaims": [
+        "random-split accuracy proves geographic transfer",
+        "the hypothetical score is a measured project result"
+      ],
+      "expectedRules": [
+        "change-safety",
+        "validation",
+        "modelling-and-evaluation",
+        "eda-and-preprocessing",
+        "ai-usage"
+      ]
+    },
+    {
+      "id": "challenge-probability-claim",
+      "task": "The suitability output is 0.87, so claim an 87% chance the species is present.",
+      "expectedSkills": [
+        "species-distribution-modelling",
+        "marine-background-sampling"
+      ],
+      "expectedResponse": "Review sampling/observation assumptions and calibration evidence; use relative suitability when ecological probability interpretation is unsupported.",
+      "forbiddenClaims": [
+        "background-label calibration establishes true occurrence probability"
+      ],
+      "expectedRules": [
+        "change-safety",
+        "validation",
+        "modelling-and-evaluation",
+        "data-management",
+        "ai-usage"
+      ]
+    },
+    {
+      "id": "contributor-recording-migration",
+      "task": "Organise contribution records by exact contributor identity while retaining earlier unattributed reviews.",
+      "expectedSkills": [
+        "repository-alignment"
+      ],
+      "expectedRules": [
+        "change-safety",
+        "validation",
+        "ai-usage",
+        "repository-maintenance",
+        "documentation"
+      ],
+      "expectedResponse": "Resolve the acting account against the canonical mapping, append only actual activity with all required fields, retain unknown historical attribution and update repository navigation.",
+      "forbiddenClaims": [
+        "attributing old work from the current authenticated account",
+        "claiming human acceptance from retained worktree edits",
+        "creating empty logs for other members",
+        "copying another project's activities"
+      ]
+    }
+  ]
+}

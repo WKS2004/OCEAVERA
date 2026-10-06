@@ -1,0 +1,33 @@
+# Data payloads are local by default. Track manifests and dictionaries in docs/records/.
+/data/raw/**
+!/data/raw/.gitkeep
+/data/interim/**
+!/data/interim/.gitkeep
+/data/processed/**
+!/data/processed/.gitkeep
+
+# Python and notebook working files.
+**/__pycache__/
+*.py[cod]
+**/.ipynb_checkpoints/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+
+# Local secrets and editor state.
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+
+# Reproducible scratch outputs; reviewed outputs remain visible to Git.
+/outputs/scratch/
+*.log
+
+# Local operating-system files.
+.DS_Store
+Thumbs.db
