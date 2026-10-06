@@ -4,7 +4,7 @@ Use this guide for shared project changes, evidence collection and contribution 
 
 ## Working scope
 
-The current authorised work covers shared structure, planning and proposal-based member responsibility documentation. Start a technical stage only when requested and the corresponding [workflow gate](docs/ml/ml-workflow-and-evidence-gates.md) is addressed. Keep unresolved species, geography, target, features, methods and environment choices provisional until recorded evidence supports them.
+The current authorised work covers shared structure, planning, proposal-based member responsibility documentation and repository CI. Start an analytical technical stage only when requested and the corresponding [workflow gate](docs/ml/ml-workflow-and-evidence-gates.md) is addressed. Keep unresolved species, geography, target, features, methods and environment choices provisional until recorded evidence supports them.
 
 All members are expected to understand the full pipeline and contribute technically. Use the [responsibility overview](docs/project/member-responsibilities.md) for the group division, the linked member file for complete personal duties and the [common guide](docs/project/member-contributions/shared-responsibilities-and-evidence.md) for shared participation, evidence and handovers. Factual activity logs record performed work; they do not prove fulfilment of an allocation or satisfy a member's assessed learning report. Follow the finalised working allocation and record authorised responsibility changes in the decision register.
 
@@ -85,6 +85,8 @@ git status --short
 ```
 
 The helper checks maintained resource formats, routing, local files and section links, text conventions and contributor-record structure, including untracked text files. Follow the [agent guide](.agents/README.md) when changing the registry or generated routing.
+
+The [repository CI workflow](.github/workflows/ci.yml) runs the same helper on GitHub. Follow the [workflow guide](docs/project/github-workflows.md) for diagnostics, action-pin maintenance and separate YAML/Actions syntax review. Keep failing checks actionable; do not conceal missing implementation behind skipped jobs or success placeholders. Record actual hosted outcomes only after a run exists.
 
 Review agreement between requirements, scope, decisions and readiness. Check for accidental data, credentials, caches, missing references and unrelated edits. For future executable work, use the agreed environment and the checks required by the active request and workflow; report unrun checks honestly.
 

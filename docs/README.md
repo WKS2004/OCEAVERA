@@ -8,6 +8,7 @@
 | Project | [Overview and scope](project/project-overview-and-scope.md) | Identity, proposal commitments, scope and interpretation limits |
 | Project | [Decision register](project/decision-register.md) | Planning positions, repository conventions and unresolved choices |
 | Project | [Readiness and alignment](project/repository-readiness-and-alignment.md) | Current phase, evidence gaps and readiness |
+| Project | [GitHub workflows](project/github-workflows.md) | Current CI, local checks, failure handling and prerequisites for scientific automation |
 | Project | [Member responsibilities](project/member-responsibilities.md) | General division, pipeline matrix and navigation to detailed member duties |
 | Project | [Shared responsibilities and evidence](project/member-contributions/shared-responsibilities-and-evidence.md) | Common participation, decisions, requirements, handovers and final submissions |
 | Project | [Contributor identities](project/ai-team-members.md) | Exact account-to-name mapping for records |

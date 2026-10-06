@@ -1,6 +1,6 @@
 # OCEAVERA agent instructions
 
-OCEAVERA is the marine habitat intelligence project proposed for IT3091. Read [PROJECT_REQUIREMENTS.md](PROJECT_REQUIREMENTS.md), the [overview and scope](docs/project/project-overview-and-scope.md) and [current readiness](docs/project/repository-readiness-and-alignment.md) before making project or completion claims. The current authorised work covers the shared foundation and the documented member responsibility plan; begin technical stages only when requested.
+OCEAVERA is the marine habitat intelligence project proposed for IT3091. Read [PROJECT_REQUIREMENTS.md](PROJECT_REQUIREMENTS.md), the [overview and scope](docs/project/project-overview-and-scope.md) and [current readiness](docs/project/repository-readiness-and-alignment.md) before making project or completion claims. The current authorised work covers the shared foundation, documented member responsibility plan and repository CI; begin analytical technical stages only when requested.
 
 ## Rules for every task
 
@@ -29,3 +29,5 @@ git diff --check
 ```
 
 Review actual Git status and untracked files. Report checks and their limits, update affected project records and append the contribution entry. Structural validation does not establish human acceptance, model correctness, submission readiness or publication.
+
+For CI changes, follow the [workflow guide](docs/project/github-workflows.md). Review YAML/Actions syntax separately; the helper is not a workflow parser. Preserve minimal permissions and recorded scientific scope, and distinguish local checks from an actual hosted run.

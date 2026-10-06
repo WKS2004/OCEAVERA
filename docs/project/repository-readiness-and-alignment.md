@@ -1,8 +1,8 @@
 # Repository readiness and alignment
 
 - **Reviewed:** 6 October 2026
-- **Phase:** finalised shared foundation and working member contribution plan; technical implementation pending
-- **Scope of review:** repository structure, documentation, agent guidance, assessment requirements, and initial proposal alignment.
+- **Phase:** finalised shared foundation and working member contribution plan, with repository CI implemented locally; analytical technical implementation pending
+- **Scope of review:** repository structure, documentation, agent guidance, repository automation, assessment requirements, and initial proposal alignment.
 
 ## Assessment
 
@@ -57,6 +57,12 @@ The current [resource helper](../../.agents/scripts/validate_agent_resources.py)
 Update this review when new evidence changes the phase or resolves a gap. Preserve unresolved items until a dated record supports the new status.
 
 The user-selected all-rights-reserved policy is recorded in [LICENSE.md](../../LICENSE.md) and decision D-020. Contributor ownership and limited academic identification follow the user's clarification in D-023. This rights policy does not verify third-party data terms or resolve scientific readiness gaps.
+
+## Repository automation
+
+The user's workflow request authorises repository CI under D-029. [Repository checks](../../.github/workflows/ci.yml) invokes the existing standard-library helper on pull requests, pushes to `main` and manual dispatch, using a bounded hosted runner and maintenance interpreter. The [workflow guide](github-workflows.md) records check coverage, failure handling, action-pin maintenance and prerequisites for future notebook, data, training, reproduction, packaging and integration checks.
+
+The workflow is implemented locally. Hosted execution and any required-check policy remain unverified until an authorised commit/push and actual GitHub run. Local structural results are recorded in the [contribution log](../ai-contribution/WKS2004-ai-usage.md). This automation does not select the ML environment, start member analysis or satisfy scientific evidence gaps.
 
 ## Foundation finalisation
 

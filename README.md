@@ -55,10 +55,13 @@ Feature engineering is jointly led by Ushan and Adithya; candidate training by A
 | [outputs/](outputs/README.md) | Future generated figures, maps and evaluation artefacts |
 | [reports/](reports/README.md) | Future report and submission material |
 | [.agents/](.agents/README.md) | Focused rules, skills, task routing and structural validation |
+| [GitHub CI](.github/workflows/ci.yml) | Automated checks of documentation, agent resources and contribution-record structure |
 
 Scientific records belong in `docs/records/`; factual contributor activity belongs in `docs/ai-contribution/`. Their conventions are maintained in [contributor guidance](CONTRIBUTING.md#project-evidence-records) and the [AI-usage template](docs/project/ai-usage-log-template.md). Exact contributor identities are maintained in the [team mapping](docs/project/ai-team-members.md).
 
 ## Repository checks
+
+[Repository checks](.github/workflows/ci.yml) runs the structural helper on pull requests, pushes to `main` and manual dispatch. See [GitHub workflows](docs/project/github-workflows.md) for operation, failure handling and prerequisites for later scientific checks. The hosted maintenance interpreter does not select the ML runtime; a passing structural check does not establish scientific or submission readiness.
 
 For documentation and agent-resource changes, run the structural helper from the repository root with Python 3.10 or later:
 
