@@ -514,3 +514,57 @@
   ```text
   git diff --check
   ```
+
+## 2026-10-08 — Review branch closeout requirements
+
+- **Date/time or time range:** 2026-10-08, 22:25 Asia/Colombo (UTC+05:30); task duration not recorded
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; bundled Python 3.12.14 runtime; Git
+- **AI Model:** GPT-6; exact serving identifier unavailable
+- **Summary of the user's request:** Finalise the biological data collection branch.
+- **Summary of what the AI Agent did:** Reviewed branch status and the tracked notebook. Removed one empty trailing Code cell and executed the eight substantive Python Code cells in order using the bundled runtime, with network access and repository file writes blocked while regenerating concise notebook outputs. Compared the current user-provided notebook instruction with the checked-in `AGENTS.md` and D-045: the former requires every cell to be executable Python, while the latter require native Markdown narrative and Python Code cells. An attempted policy-wide alignment was rejected by automatic review, so the existing guidance was left unchanged pending resolution of that conflict. No data files, workflows, package manifest or Python environment were changed.
+- **AI output accepted/changed/rejected:** The empty-cell removal and refreshed outputs are retained for human review. The notebook-cell policy change was blocked; no commit or publication was made.
+- **Verification/evidence:** The notebook JSON is valid; all eight Code cells have valid Python syntax, sequential execution counts and saved outputs; 19 local links resolve; saved outputs contain no absolute machine paths; and the requested title, no-blockquote, no-reviewed-commit and no-terminal-Handover checks pass. The agent-resource helper passed with 862 local links and 121 section links, and `git diff --check` passed. The offline runner blocked network access and repository file writes except saving the notebook. No downloader, API, converter or staging CLI, test suite or hosted CI run occurred. No package installation, environment operation or dataset download occurred. At that review's close, the notebook instruction was still unclear; the user's subsequent clarification confirmed the native Markdown and Python Code convention in D-045 and the checked-in guidance. See the follow-up entry below.
+
+  Copyable whitespace-check command:
+  ```text
+  git diff --check
+  ```
+
+## 2026-10-08 — Confirm the branch notebook cell convention
+
+- **Date/time or time range:** 2026-10-08, 22:32 Asia/Colombo (UTC+05:30); task duration not recorded
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; repository file tools; bundled Python 3.12.14 runtime; Git
+- **AI Model:** GPT-6; exact serving identifier unavailable
+- **Summary of the user's request:** Clarify that branch notebooks should retain both native Markdown and Python Code cells, and ensure the related documentation reflects that convention.
+- **Summary of what the AI Agent did:** Confirmed that the current checked-in `AGENTS.md`, D-045, notebook guide, contributor guide, READMEs, readiness review, workflow guide and agent resources all require native Markdown for narrative and Python Code cells for execution. D-044 remains historical and is explicitly superseded by D-045 for cell structure. Kept the notebook's 14 Markdown and eight Code cells, retained D-045 as the current decision, and corrected the previous closeout note to record that the temporary ambiguity was resolved. No additional decision or documentation changes were needed.
+- **AI output accepted/changed/rejected:** The existing mixed-cell notebook and documentation convention are retained for review. No decision was reverted or removed, and no commit or publication was made.
+- **Verification/evidence:** The notebook has valid JSON, eight syntactically valid Code cells with sequential execution counts and saved outputs, and 19 resolved local links. The repository resource helper and `git diff --check` were rerun after this clarification. No network request, dataset download, package installation, environment operation, CLI run, test suite or hosted CI execution occurred.
+
+  Copyable whitespace-check command:
+  ```text
+  git diff --check
+  ```
+
+## 2026-10-08 — Final branch closeout verification
+
+- **Date/time or time range:** 2026-10-08, 22:36 Asia/Colombo (UTC+05:30); task duration not recorded
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; bundled Python 3.12.14 runtime; Git
+- **AI Model:** GPT-6; exact serving identifier unavailable
+- **Summary of the user's request:** Perform the final closeout of the biological data collection branch, preserving the clarified native Markdown and Python Code notebook structure.
+- **Summary of what the AI Agent did:** Rechecked the branch worktree and current notebook/documentation convention. Confirmed D-045 and active repository guidance already match the clarified mixed-cell requirement; D-044 remains historical and superseded for cell structure. Reran the notebook's eight Code cells in order with network and repository writes blocked except saving notebook outputs. No additional decision or project-document changes were needed.
+- **AI output accepted/changed/rejected:** The existing documentation and mixed-cell notebook remain in place; refreshed outputs and the removal of one empty trailing cell are retained for review. No commit or publication was made.
+- **Verification/evidence:** The notebook contains 14 Markdown and eight Code cells; all Code cells have valid syntax, sequential execution counts and saved outputs. All 19 notebook-local links resolve, no absolute machine paths appear in outputs, and the repository resource helper and `git diff --check` pass. The notebook's non-empty Markdown and Python sources match the committed versions; only execution outputs and the empty trailing cell changed. No network request, data download, package operation, environment change, CLI, test suite or hosted CI run occurred.
+
+  Copyable whitespace-check command:
+  ```text
+  git diff --check
+  ```
