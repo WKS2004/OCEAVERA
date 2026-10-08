@@ -36,7 +36,7 @@ The secondary lens does not create a second ML task in the current scope.
 ### Included
 
 - Choose one focal species, or a small number only when data and scope justify it.
-- Define a manageable marine study area; Sri Lanka is the initial preference, but no exact boundary is set.
+- Define a manageable marine study area; Sri Lanka is the initial preference, but no exact modelling boundary is set. OBIS Area 230 is finalised for biological collection under [D-034](decision-register.md). The current API JSON and CSV collection method follows [D-036](decision-register.md); it does not make Area 230 the final modelling domain or the exact EEZ polygon.
 - Assess OBIS species occurrences and candidate Bio-ORACLE environmental layers.
 - Construct a spatially integrated dataset and justify its target and background or pseudo-absence design.
 - Establish a simple baseline and compare it with at least three alternative methods.
@@ -53,11 +53,13 @@ The secondary lens does not create a second ML task in the current scope.
 
 | Element | Initial proposal | Decision still required |
 | --- | --- | --- |
-| Biological source | OBIS marine occurrence records | Focal taxon, query, record filters, temporal coverage, quality rules, sampling bias, citation, and data-use terms |
+| Biological source | OBIS marine occurrence records | Focal taxon, downstream modelling-population filters, temporal coverage, quality rules, sampling bias, citation, and data-use terms |
 | Environmental source | Bio-ORACLE marine data layers | Exact layer/version, units, resolution, time period, depth context, missingness, and matching method |
 | Unit of analysis | Marine spatial observation or location with environmental variables and occurrence or constructed target | Point or grid cell, spatial resolution, study boundary, marine mask, and repeated-record handling |
 | Target | Species occurrence or constructed presence/background label | Meaning of a positive and comparison sample; treatment of records that were not observed |
 | Output | Occurrence score or habitat-suitability representation | Intended user, geographic domain, uncertainty communication, and whether probability calibration is supportable |
+
+The initial full OBIS collection uses all records for Area 230, including absence and dropped records, before any focal-species or record-selection decision. The current API JSON and CSV acquisition is recorded in the [Area 230 source record](../records/2026-10-08-source-obis-area-230-api-csv.md). This does not decide which records form a later modelling population.
 
 The proposal lists these candidate feature families, subject to actual layer availability and compatibility:
 
@@ -71,7 +73,7 @@ OBIStherm is a possible supporting source only if it improves the primary task. 
 
 ### Storage convention
 
-Preserve each acquired source in its publisher-delivered format. Use GeoParquet for compatible derived spatial tables and Parquet for compatible non-spatial modelling tables; retain complete environmental arrays in their source format and extract only the selected location-level covariates into modelling tables. Record actual formats and versions in manifests. See [data storage and provenance](../data/data-storage-and-provenance.md) for details. COG and ONNX are optional, unfinalised future BLUEVERSE integration suggestions only; they are not OCEAVERA requirements or selected formats.
+Preserve each acquired source in its publisher-delivered format. Use GeoParquet for compatible derived spatial tables and Parquet for compatible non-spatial modelling tables; retain complete environmental arrays in their source format and extract only the selected location-level covariates into modelling tables. Record actual formats and versions in manifests. Under [D-038](../records/2026-10-08-decision-phase-specific-derived-data-paths.md), timestamps may identify raw snapshots; the OBIS raw-to-interim handoff accepts a selected source path, then each interim phase uses a stable source-specific folder and fixed path. Bio-ORACLE's folder pattern is documented only; no Bio-ORACLE code is included in this branch. See [data storage and provenance](../data/data-storage-and-provenance.md) for details. COG and ONNX are optional, unfinalised future BLUEVERSE integration suggestions only; they are not OCEAVERA requirements or selected formats.
 
 The proposal's intended output is estimated species occurrence probability, potentially represented as habitat suitability. The working research question uses relative-suitability language until target and observation-process evidence supports a stronger interpretation; this qualification preserves the proposed task while making its limits explicit.
 

@@ -49,7 +49,7 @@ Python here supports repository maintenance. The scientific runtime, ML dependen
 
 ## What the check establishes
 
-The helper fails on inconsistent skill/rule inventory, stale generated routing, invalid maintained skill metadata, unresolved local file or Markdown section links, malformed JSON, text-format violations and invalid contributor-record structure. It checks exact account/name mapping, required entry fields, dates and timezone notation. CI runs in check mode and does not regenerate routing or edit records.
+The helper fails on inconsistent skill/rule inventory, stale generated routing, invalid maintained skill metadata, unresolved local file or Markdown section links, malformed JSON, text-format violations and invalid contributor-record structure. It skips byte-preserved `data/raw/` payloads while checking tracked records and code. It checks exact account/name mapping, required entry fields, dates and timezone notation. CI runs in check mode and does not regenerate routing or edit records.
 
 These are structural checks. They do not authenticate a contributor, prove an activity, scan every possible personal-data format, validate general YAML syntax, check external URLs, execute skill evaluations, assess scientific correctness or establish human acceptance. Member privacy still requires the review in [CONTRIBUTING.md](../../CONTRIBUTING.md#member-privacy).
 

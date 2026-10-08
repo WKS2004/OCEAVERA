@@ -1,0 +1,14 @@
+# Decision D-037 — Stable paths for interim and processed data
+
+- **ID:** D-037
+- **Date:** 8 October 2026
+- **Question:** How should data paths work from raw acquisition through interim and processed stages?
+- **Context:** OBIS raw downloads use timestamps to distinguish retrieval runs. Reusing a timestamped raw path in later scripts would make those scripts depend on an exact run identifier and could accumulate derived copies on each run.
+- **Options considered:** Use timestamped paths throughout; use fixed paths for raw and derived data; or retain timestamped raw snapshots, accept a selected source path at the first raw-to-interim handoff, and use stable paths for later derived stages.
+- **Evidence and source references:** The OBIS downloader creates timestamped raw JSON run folders, and the converter can select a particular JSON run with `--json-run`. No cleaning or integration pipeline existed when this decision was first recorded. The repository defines raw, interim and processed roles in [data storage and provenance](../data/data-storage-and-provenance.md).
+- **Decision:** Preserve timestamped raw acquisition paths. At the first raw-to-interim CSV handoff, initially allow selection of an OBIS CSV path and/or a Bio-ORACLE CSV path. The initial convention used one fixed interim path per source and fixed downstream integration and processed destinations. These path locations and the implementation scope are refined by [D-038](2026-10-08-decision-phase-specific-derived-data-paths.md).
+- **Rationale:** Run-specific source selection at one boundary avoids hard-coded raw run IDs in later scripts. Stable derived paths avoid accumulating one interim or processed copy per run, while raw source snapshots and fingerprints retain traceability.
+- **Consequences and limitations:** The initial implementation supported both source CSV arguments and wrote top-level source files under `data/interim/`; it was not run on data and did not perform scientific cleaning. D-038 replaces that implementation with an OBIS-only, source-phase-folder handoff for this branch. Repeated raw downloads may still increase local storage.
+- **Status:** Superseded by D-038 for interim folder structure and source-specific implementation scope; timestamped raw paths and fixed derived paths remain in force.
+- **Affected documents and artefacts:** [D-038 phase-path refinement](2026-10-08-decision-phase-specific-derived-data-paths.md), [storage and provenance](../data/data-storage-and-provenance.md), [requirements](../../PROJECT_REQUIREMENTS.md), [project overview](../project/project-overview-and-scope.md), [readiness](../project/repository-readiness-and-alignment.md), and [decision register](../project/decision-register.md).
+- **Supersedes / superseded by, if applicable:** Superseded by [D-038](2026-10-08-decision-phase-specific-derived-data-paths.md) on 8 October 2026.

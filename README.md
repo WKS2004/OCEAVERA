@@ -14,13 +14,13 @@ The proposed biological source is OBIS, complemented by Bio-ORACLE environmental
 
 ## Current stage
 
-**Finalised shared foundation.** Project context, requirements, evidence conventions, agent guidance and the finalised member responsibility plan are established for the next authorised stage. Data acquisition, analysis notebooks, ML implementation and model results are pending. The runtime has not been selected. Industry Explorer is the proposed track; approval and the stakeholder decision context remain unevidenced.
+**OBIS data-intake path work is in place.** The shared foundation and member responsibility plan are established. The unrestricted OBIS Area 230 JSON/CSV acquisition is recorded; an OBIS-only raw-to-interim handoff accepts the selected raw CSV path and stages a byte-preserving copy in a stable source-phase folder. It performs structural validation only: scientific cleaning, Bio-ORACLE acquisition/integration, analysis notebooks, ML implementation and model results remain pending. The modelling runtime has not been selected. Industry Explorer is the proposed track; approval and the stakeholder decision context remain unevidenced.
 
 The [readiness review](docs/project/repository-readiness-and-alignment.md) records current evidence and unresolved choices. The [decision register](docs/project/decision-register.md) preserves planning positions and accepted conventions.
 
 ## Data and model artefacts
 
-The working convention preserves source files as supplied, uses GeoParquet for compatible derived spatial tables and Parquet for compatible non-spatial ML tables, and keeps compact manifests/metadata in JSON. Actual resource formats, model serialization and runtime remain to be verified or selected during authorised work. The [data storage and provenance guide](docs/data/data-storage-and-provenance.md) defines the full conventions. COG and ONNX remain optional, unfinalised suggestions for a future BLUEVERSE integration; neither is an OCEAVERA requirement.
+The working convention preserves source files as supplied, uses timestamps for raw acquisition snapshots, and places each interim transformation in a stable phase subfolder under its source. Only the OBIS raw-to-interim handoff accepts a selected run-specific CSV path in this branch; later OBIS stages use their declared fixed paths. Bio-ORACLE's matching folder layout is documented, but no Bio-ORACLE code is included in this branch. GeoParquet is used for compatible derived spatial tables and Parquet for compatible non-spatial ML tables. Actual resource formats, model serialization and runtime remain to be verified or selected during authorised work. The [data storage and provenance guide](docs/data/data-storage-and-provenance.md) defines the full conventions. COG and ONNX remain optional, unfinalised suggestions for a future BLUEVERSE integration; neither is an OCEAVERA requirement.
 
 ## Start here
 

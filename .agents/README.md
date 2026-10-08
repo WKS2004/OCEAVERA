@@ -49,7 +49,7 @@ python .agents/scripts/validate_agent_resources.py
 
 Section checks cover ATX Markdown headings, including repeated-heading suffixes; fenced code is excluded. They do not validate external URLs or the truth of a linked claim.
 
-The helper checks the simple single-line frontmatter and quoted interface metadata used by the maintained skills. It is not a general YAML parser. Extend the schema check before adopting more complex metadata; do not bypass a rejected format.
+The helper checks the simple single-line frontmatter and quoted interface metadata used by the maintained skills. It is not a general YAML parser. It skips `data/raw/` payloads because source bytes must remain unchanged; tracked provenance and code remain subject to text-format checks. Extend the schema check before adopting more complex metadata; do not bypass a rejected format.
 
 Keep rules as constraints, skills as workflows and project documents as knowledge. Avoid duplicate fact sheets, empty support directories or adapters for tools the group has not selected. Ordinary analytical work changes project evidence; guidance changes should be justified by a requested resource change or a demonstrated workflow gap.
 

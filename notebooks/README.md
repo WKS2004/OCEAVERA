@@ -1,6 +1,10 @@
 # Analysis notebooks
 
-**Current state:** no analysis notebooks. Runtime and dependencies are undecided.
+**Current state:** no analysis notebook is required for the Area 230 intake.
+The current acquisition is implemented in the two standard-library scripts in
+`src/data_collection/` and recorded under D-036. The superseded AWS
+GeoParquet feasibility notebook was removed when the user changed the intake
+method back to the API.
 
 Future notebooks should follow the [project workflow](../docs/ml/ml-workflow-and-evidence-gates.md), identify their input dataset versions and manifests, state row/target meaning, and produce outputs reproducibly in a documented environment. Keep validation boundaries explicit and remove credentials or sensitive payloads before sharing.
 

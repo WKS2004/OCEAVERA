@@ -1,0 +1,18 @@
+# OBIS source record — Chelonia mydas feasibility sample
+
+- **Resource ID / record date / status:** OBIS-SL-CMYD-FEAS-2026-10-07; 7 October 2026; exploratory 10-row API sample, not a final dataset
+- **Publisher and resource title:** Ocean Biodiversity Information System (OBIS), occurrence API v3 query response
+- **Stable publisher URL, DOI or accession:** [Occurrence API](https://api.obis.org/v3/occurrence); contributing dataset IDs are listed below
+- **Exact version, release, taxon or layer identifier:** API v3; requested scientific name Chelonia mydas; sampled rows resolve to AphiaID 137206 and OBIS taxon ID 39659 where supplied
+- **Retrieval date and method:** 7 October 2026, Asia/Colombo; HTTPS GET request to the OBIS API
+- **Query, bounding region and filters:** scientificname=Chelonia mydas, areaid=230, size=10, qcfields=true. OBIS area 230 is named “Sri Lanka” and has type obis; it is provisional and not the final study boundary. The query did not specify date/depth filters or absence/dropped options.
+- **Geographic / temporal / depth coverage:** API-reported total 183 occurrences for the query; the preserved first page contains 10 rows. Sample date-year values span 2008, 2017–2018 and 2024–2026. All 10 rows have the NO_DEPTH flag; 3 also have ON_LAND. These are sample observations, not verified coverage for all matches.
+- **Format and repository-relative payload location:** JSON response page; payload removed from local raw storage on 7 October 2026 at the user's request; no payload is currently retained.
+- **Checksum algorithm and value:** SHA-256 a0341ea3976ffe542f8fb6ecc6939aa4825003a7199be3de31685b43a7872aba, calculated at acquisition and verified against the local payload before removal.
+- **Licence / terms reference and sharing conditions:** The sampled rows carry CC BY-NC 4.0 and CC BY 4.0 licence URLs. The Dubai Turtle Rehabilitation Project sample row carries CC BY-NC 4.0; the iNaturalist Marine Subset rows expose CC BY-NC 4.0 and CC BY 4.0. Preserve per-row source rights; review terms for the complete selected query before redistribution.
+- **Required attribution / citation:** OBIS returned two contributing datasets:
+  - [Dubai Turtle Rehabilitation Project](https://obis.org/dataset/51f57261-07bc-4c26-8b1e-a63f7202c049), ID 51f57261-07bc-4c26-8b1e-a63f7202c049: Baverstock W. 2025. Dubai Turtle Rehabilitation Project. 1.0.0. Dataset published in OBIS-SEAMAP and originated from Satellite Tracking and Analysis Tool (STAT). [https://doi.org/10.82144/6750c75e](https://doi.org/10.82144/6750c75e).
+  - [iNaturalist Research-grade Observations Marine Subset](https://obis.org/dataset/eaea291a-1e1d-4382-b86f-ac3cc15b8d5a), ID eaea291a-1e1d-4382-b86f-ac3cc15b8d5a: iNaturalist contributors, iNaturalist (2026). Version 2.0. Marine Biological Association. [https://doi.org/10.17031/0bbcjx](https://doi.org/10.17031/0bbcjx).
+- **Relevant permission or sensitivity handling:** Raw coordinates were present in the original payload, which has since been removed from local storage. Location values are omitted from tracked records and have not been redistributed.
+- **Known quality or access limitations:** The first 10 API rows are not a representative sample. All 10 have OBIS marine=true; 3 are also flagged ON_LAND. Coordinate uncertainty is present on all 10 rows and ranges from 31,362 m to 173,627 m. The API-reported total is dynamic. Sampled absence and dropped values are false; the query used the API defaults for these filters.
+- **Processing artefacts and derived dataset versions:** No transformation or derived dataset. See the [dated feasibility assessment](2026-10-07-obis-sri-lanka-biological-feasibility.md).
