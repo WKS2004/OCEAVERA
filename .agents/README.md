@@ -30,6 +30,10 @@ The review cases are manual semantic expectations. The helper checks their refer
 
 The [contributor mapping](../docs/project/ai-team-members.md) is canonical. The [template](../docs/project/ai-usage-log-template.md) defines ten required fields, and the [log index](../docs/README.md#contribution-records) links actual contributor activity. The helper checks exact filename/account/name agreement, valid calendar dates, required fields and explicit timezone; it cannot authenticate identities, prove actions or establish human acceptance. Preserve those evidence limits in every entry.
 
+## Branch work notebooks
+
+When finalising a branch, create or update its branch work notebook only after the branch implementation, documentation and requested checks are complete. Use the lowercase branch name in snake case under [`notebooks/branch_work/`](../notebooks/README.md#branch-work-notebook-convention). Follow that index's required section order and link canonical source files rather than duplicating complete implementations. Start with native Markdown cells for the title, contributor table, purpose, scope and data context; then use concise Python Code cells for checks and examples. Markdown is rendered natively; execute Code cells in order and retain concise output. Input may be a saved file or an explicitly enabled public API request; keep data in memory, never write notebook-generated datasets to disk, and keep network access off by default. These notebooks describe branch-level work; they do not substitute for per-contributor AI logs, scientific records or assessed reflections. Use a contributor table headed `Registration Number`, `Member Name` and `GitHub Account`. Under D-042, registration numbers are permitted only in that table; keep them out of logs and all other repository artefacts. Use verified project names/accounts and omit institutional name forms, email addresses and other academic identifiers.
+
 ## Validate and maintain
 
 The repository helper requires Python 3.10 or later and only its standard library. Repository CI runs it on the project baseline from the root [`.python-version`](../.python-version), currently Python 3.14; using 3.10+ locally remains supported. The ML framework and scientific dependencies remain open.
@@ -37,10 +41,15 @@ The repository helper requires Python 3.10 or later and only its standard librar
 If a maintained agent tool later needs a third-party Python package, declare
 its exact version in the root [`requirements.txt`](../requirements.txt) and
 follow the [dependency update policy](../CONTRIBUTING.md#python-dependencies).
-The manifest currently has no third-party package entries.
+The manifest pins Jupyter Notebook and `ipykernel` for project notebook use;
+no ML framework or scientific package stack has been selected.
 The documented Conda environment for current Python tooling is named
 `OCEAVERA` and uses the baseline version; see the
 [root setup steps](../README.md#create-the-conda-environment).
+These are user-led setup instructions. Agents must obtain explicit user
+authorisation before creating or changing an environment or installing,
+upgrading or removing packages. No Python environment is stored in this
+repository.
 
 Run from the repository root with an available Python interpreter:
 

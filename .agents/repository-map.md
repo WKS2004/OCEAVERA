@@ -7,7 +7,7 @@ Use this map to find information, then inspect the actual artefact before claimi
 | Purpose, BLUEVERSE relationship, lenses, scope and interpretation | [Project overview and scope](../docs/project/project-overview-and-scope.md) |
 | Analytical sequence and evidence gates | [ML workflow](../docs/ml/ml-workflow-and-evidence-gates.md) |
 | Project requirements, assessment and submission checklist | [Assessment requirements](../PROJECT_REQUIREMENTS.md) |
-| Python baseline, package inventory, update/install policy and Conda setup | [`.python-version`](../.python-version); [requirements.txt](../requirements.txt); [contributor dependency policy](../CONTRIBUTING.md#python-dependencies); [OCEAVERA environment instructions](../README.md#create-the-conda-environment) |
+| Python baseline, package inventory, user approval for environment/package operations and Conda setup | [`.python-version`](../.python-version); [requirements.txt](../requirements.txt); [contributor dependency policy](../CONTRIBUTING.md#python-dependencies); [OCEAVERA environment instructions](../README.md#create-the-conda-environment) |
 | Proposed and accepted decisions | [Decision register](../docs/project/decision-register.md) |
 | Current evidence and readiness gaps | [Readiness and alignment](../docs/project/repository-readiness-and-alignment.md) |
 | Source and derived formats, model artefacts, provenance, sharing and integration boundary | [Data storage and provenance](../docs/data/data-storage-and-provenance.md) |
@@ -20,6 +20,7 @@ Use this map to find information, then inspect the actual artefact before claimi
 | Blank evidence forms | [Template index](../docs/templates/README.md) |
 | Dated scientific evidence and detailed decisions | [Record conventions](../CONTRIBUTING.md#project-evidence-records) |
 | Contribution and naming conventions | [Contributor guide](../CONTRIBUTING.md) |
+| Finalised branch implementation summaries | [Branch work notebook index and structure](../notebooks/README.md#branch-work-notebook-convention); [current biological data collection branch notebook](../notebooks/branch_work/pipeline_biological_data_collection.ipynb) |
 | Actual data, notebooks, code, generated outputs and reports | [Data](../data/README.md), [notebooks](../notebooks/README.md), [source](../src/README.md), [outputs](../outputs/README.md), [reports](../reports/README.md) |
 
 Inspect the relevant directory rather than assuming its README proves technical work exists. Consult the [routing map](routing.md) for the workflow after identifying the task.

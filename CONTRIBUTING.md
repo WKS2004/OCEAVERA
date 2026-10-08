@@ -42,7 +42,7 @@ The directory marker preserves the evidence location in Git and establishes no c
 
 ### Member privacy
 
-Treat every member-specific academic detail as sensitive. Exclude student or registration identifiers, names formatted for institutional records, institutional email addresses, enrolment details, grades, individual assessment feedback and personal academic records from public repository content, including member profiles, logs, templates, attachments and generated outputs. Individual learning reports and supporting academic material belong in the authorised private submission process.
+Treat every member-specific academic detail as sensitive. Exclude student or registration identifiers, names formatted for institutional records, institutional email addresses, enrolment details, grades, individual assessment feedback and personal academic records from public repository content, including member profiles, logs, templates, attachments and generated outputs. The sole exception is a registration number in the contributor table of a branch work notebook under [D-042](docs/records/2026-10-08-decision-branch-notebook-member-table.md); it must not be copied into any other repository artefact, including activity logs or verification output. No other academic identifier or institutional identity form is permitted by this exception. Individual learning reports and supporting academic material belong in the authorised private submission process.
 
 Use the project's [contributor names and GitHub accounts](docs/project/ai-team-members.md) for public attribution. Shared course and group metadata may identify the assignment; it must not expose a member's private academic record. When reading submission material, extract the required responsibilities and omit sensitive identity fields. Record a privacy correction without repeating the removed values, including in requests, examples or verification output.
 
@@ -72,19 +72,43 @@ Keep the root [`requirements.txt`](requirements.txt) as the single list of
 third-party Python packages needed by project code, notebooks and required
 tooling. Whenever a package is added, removed or changed, update this file and
 the relevant setup instructions in the same change. Record the selected exact
-package version (`package==version`); do not list Python standard-library
-modules or add speculative packages for unselected future work. Python 3.14 is
+package version using this requirement-line format:
+
+```text
+package==version
+```
+
+Do not list Python standard-library modules or add speculative packages for
+unselected future work. Python 3.14 is
 the project baseline in [`.python-version`](.python-version); the current
 intake scripts remain compatible with Python 3.10 or later and need no
-third-party packages. From the repository root, install listed dependencies
-with `python -m pip install -r requirements.txt`.
+third-party packages. From the repository root, users may install listed
+dependencies with:
+
+```text
+python -m pip install -r requirements.txt
+```
 
 For the current OBIS intake scripts and repository tooling, use the Conda
 environment documented in the root [README](README.md#create-the-conda-environment):
-`conda create --name OCEAVERA python=3.14 pip`, then
-`conda activate OCEAVERA`. The future ML framework and dependency stack remain
-open. The requirements file is currently comment-only, so installing it adds
-no third-party packages.
+users can create and activate it with:
+
+```text
+conda create --name OCEAVERA python=3.14 pip
+conda activate OCEAVERA
+```
+
+The future ML framework and dependency stack remain open. The manifest pins
+Jupyter Notebook and its Python kernel for notebook use; the OBIS intake scripts
+themselves continue to use the standard library. These notebook tools do not
+select the ML framework or scientific dependency stack.
+
+Environment setup commands below and elsewhere in the repository are for
+user-led setup. An agent must obtain the user's explicit authorisation in the
+current task before creating, modifying or removing a Python environment, or
+installing, upgrading or removing a package. Updating `requirements.txt` or
+documenting a command is not permission to run it. Do not retain Python
+environment directories in the repository; `.venv/` remains ignored.
 
 ## Documentation conventions
 
@@ -92,24 +116,6 @@ no third-party packages.
 - Use relative Markdown links that resolve inside the repository. Do not name absent local artefacts or machine-specific paths.
 - Attribute external facts using stable publisher URLs, DOIs or accession identifiers when needed.
 - Use UTF-8 without a byte-order mark, LF line endings, a final newline and no trailing whitespace.
+- Put complete commands and standalone source/configuration snippets in fenced code blocks so readers can copy them. Keep short identifiers, field names, paths, flags and placeholders inline when they are references rather than complete examples.
 - Keep templates blank, activity logs factual and requirements separate from completion evidence.
-
-## Review before handover
-
-For documentation and agent-resource changes, run from the repository root with an available Python 3.10+ interpreter:
-
-```text
-python .agents/scripts/validate_agent_resources.py
-git diff --check
-git status --short
-```
-
-The helper checks maintained resource formats, routing, local files and section links, text conventions and contributor-record structure, including untracked text files. Follow the [agent guide](.agents/README.md) when changing the registry or generated routing.
-
-The [repository CI workflow](.github/workflows/ci.yml) runs the same helper on GitHub. Follow the [workflow guide](docs/project/github-workflows.md) for diagnostics, action-pin maintenance and separate YAML/Actions syntax review. Keep failing checks actionable; do not conceal missing implementation behind skipped jobs or success placeholders. Record actual hosted outcomes only after a run exists.
-
-Keep the branch policy limited to lowercase validation. Do not add branch-name allowlists or branch-pattern rules; lowercase rescue branches must remain valid.
-
-Review agreement between requirements, scope, decisions and readiness. Check for accidental data, credentials, caches, missing references and unrelated edits. For future executable work, use the agreed environment and the checks required by the active request and workflow; report unrun checks honestly.
-
-State what changed, what was checked and what remains unresolved. Structural checks establish repository consistency; scientific validity and submission readiness require the evidence in [PROJECT_REQUIREMENTS.md](PROJECT_REQUIREMENTS.md).
+- Finalise each branch with a branch work notebook under notebooks/branch_work/, named from its lowercase branch name in snake case. Follow the required sections in [notebooks/README.md](notebooks/README.md). Use native Markdown cells for the title, contributors, scope, data context and narrative; use concise executable Python Code cells for operations. Run Code cells in order and retain concise outputs. Use saved files read-only or an explicitly enabled API source; default execution must not access the network, and notebook data must remain in memory without writing dataset outputs. The notebook describes actual branch work and evidence, not an individual contribution claim or assessed reflection. Use a contributor table headed Registration Number, Member Name and GitHub Account; include a registration number only in that table under D-042. Use verified project names/accounts and omit institutional name forms, email addresses and all other academic identifiers.

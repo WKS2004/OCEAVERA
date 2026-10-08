@@ -9,7 +9,11 @@
 
 - OBIS [Data Access](https://obis.org/data/access/) recommends the AWS-hosted GeoParquet for programmatic work with large subsets and describes the data fields supplied by providers and added by OBIS.
 - The official [OBIS Open Data repository](https://github.com/iobis/obis-open-data) documents one GeoParquet object per source dataset under `s3://obis-open-data/occurrence/`, a complete local sync of approximately 50 GB, an Athena query path and the AWS record schema. The top-level source schema includes `_id`, `dataset_id`, `node_ids`, `source`, `interpreted`, `extensions`, `missing`, `invalid`, `flags`, `dropped`, `absence` and WKB `geometry`. Absence and dropped flags are included in this AWS collection.
-- A metadata-only `GET https://api.obis.org/v3/area/230` on 7 October 2026 returned Area 230 as `Sri Lanka`, type `obis`, without a geometry field. The occurrence API query can use `areaid=230`; the previous live query reported 23,934 records with both absence and dropped records included. That count is historical and may differ from the AWS source release.
+- The metadata-only API request below on 7 October 2026 returned Area 230 as `Sri Lanka`, type `obis`, without a geometry field. The occurrence API query can use `areaid=230`; the previous live query reported 23,934 records with both absence and dropped records included. That count is historical and may differ from the AWS source release.
+
+  ```http
+  GET https://api.obis.org/v3/area/230
+  ```
 - DuckDB's official documentation describes remote Parquet range reads over HTTP(S), and GeoParquet metadata on Parquet output. These capabilities support filtered access and direct GeoParquet writing without a full local bucket sync.
 
 ## Feasibility analysis
