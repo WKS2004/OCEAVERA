@@ -105,7 +105,7 @@ These are completion criteria, not claims about work already performed.
 - Which species and marine boundary are feasible given occurrence coverage and record quality?
 - Which environmental layers can be matched to the biological records in space, time, and depth?
 - Which background design and spatial validation strategy are defensible for the final target?
-- Which implementation language and runtime will the group use?
+- Which ML framework and scientific packages can run reproducibly on the accepted Python 3.14 baseline?
 
 ## 9. Shared participation and accountability
 

@@ -1,5 +1,19 @@
 # Reusable implementation
 
+The project Python baseline is 3.14, recorded in the root
+[`.python-version`](../.python-version). The current scripts remain compatible
+with Python 3.10 or later. Third-party Python packages
+used by code or notebooks belong in the root
+[`requirements.txt`](../requirements.txt), with the selected exact version.
+The current OBIS utilities use only the standard library. See the
+[dependency policy](../CONTRIBUTING.md#python-dependencies) for the install
+command (`python -m pip install -r requirements.txt`) and update rule. Update
+the manifest and the relevant setup instructions in the same change whenever
+a third-party package is added, removed or changed.
+For Conda, create and activate the `OCEAVERA` environment by following the
+[root setup instructions](../README.md#create-the-conda-environment) before
+running these scripts; it uses the baseline Python 3.14.
+
 **Current method:** the standard-library [`obis_occurrences.py`](data_collection/obis_occurrences.py)
 downloads the complete paginated Area 230 response from the OBIS API. It
 includes absence and dropped records, omits the `fields` parameter, applies no

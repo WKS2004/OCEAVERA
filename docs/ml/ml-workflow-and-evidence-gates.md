@@ -74,7 +74,7 @@ Follow the [handover duties](../project/member-contributions/shared-responsibili
 
 ## Execution planning
 
-The proposal leaves the runtime, environment manager, dependency versions, and execution entry points undecided. When these are selected, record the rationale and add reproducible instructions alongside the implementation. Do not introduce install commands that cannot yet run a project workflow.
+Python 3.14 is the project baseline under [D-039](../records/2026-10-08-decision-python-3-14-baseline.md), and the current Python intake and repository tooling use the `OCEAVERA` Conda environment documented in the [root README](../../README.md#create-the-conda-environment). The ML framework, exact scientific dependency versions and experiment configuration remain undecided; confirm selected libraries support the baseline before implementation. The root [`requirements.txt`](../../requirements.txt) is the canonical inventory for third-party Python packages; it currently contains no package requirements because the active intake scripts use the standard library. When implementation adds or changes a package, update the manifest with its selected exact version and revise the setup instructions in the same change.
 
 The [complete responsibility matrix](../project/member-responsibilities.md#complete-pipeline-responsibility-matrix) establishes the finalised working member roles, subject to recorded changes. No calendar deadline is established here. Agree milestones against confirmed course dates and the approved scope; the Industry Explorer bonus requires manageable scope within seven weeks.
 

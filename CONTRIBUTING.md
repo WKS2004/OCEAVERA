@@ -4,7 +4,7 @@ Use this guide for shared project changes, evidence collection and contribution 
 
 ## Working scope
 
-The current authorised work covers shared structure, planning, proposal-based member responsibility documentation and repository automation. Start an analytical technical stage only when requested and the corresponding [workflow gate](docs/ml/ml-workflow-and-evidence-gates.md) is addressed. Keep unresolved species, geography, target, features, methods and environment choices provisional until recorded evidence supports them.
+The current authorised work covers shared structure, planning, proposal-based member responsibility documentation and repository automation. Start an analytical technical stage only when requested and the corresponding [workflow gate](docs/ml/ml-workflow-and-evidence-gates.md) is addressed. Keep unresolved species, geography, target, features, methods, ML framework and experiment-environment choices provisional until recorded evidence supports them.
 
 All members are expected to understand the full pipeline and contribute technically. Use the [responsibility overview](docs/project/member-responsibilities.md) for the group division, the linked member file for complete personal duties and the [common guide](docs/project/member-contributions/shared-responsibilities-and-evidence.md) for shared participation, evidence and handovers. Factual activity logs record performed work; they do not prove fulfilment of an allocation or satisfy a member's assessed learning report. Follow the finalised working allocation and record authorised responsibility changes in the decision register.
 
@@ -65,6 +65,26 @@ Follow [data storage and provenance](docs/data/data-storage-and-provenance.md). 
 Every reported result must identify its dataset, generating work, configuration and decision context. Use relative-suitability language for presence/background outputs unless the observation and sampling design justify occurrence probabilities. Calibration against constructed labels alone is insufficient.
 
 Follow the all-rights-reserved policy in [LICENSE.md](LICENSE.md). Original project ownership remains with the group contributors; academic affiliation must not be presented as institutional ownership. Include only material the contributor is entitled to submit and retain third-party notices and licence conditions. A contribution record does not transfer ownership or grant public reuse rights. Changes to the repository policy require explicit authorisation and a decision record.
+
+## Python dependencies
+
+Keep the root [`requirements.txt`](requirements.txt) as the single list of
+third-party Python packages needed by project code, notebooks and required
+tooling. Whenever a package is added, removed or changed, update this file and
+the relevant setup instructions in the same change. Record the selected exact
+package version (`package==version`); do not list Python standard-library
+modules or add speculative packages for unselected future work. Python 3.14 is
+the project baseline in [`.python-version`](.python-version); the current
+intake scripts remain compatible with Python 3.10 or later and need no
+third-party packages. From the repository root, install listed dependencies
+with `python -m pip install -r requirements.txt`.
+
+For the current OBIS intake scripts and repository tooling, use the Conda
+environment documented in the root [README](README.md#create-the-conda-environment):
+`conda create --name OCEAVERA python=3.14 pip`, then
+`conda activate OCEAVERA`. The future ML framework and dependency stack remain
+open. The requirements file is currently comment-only, so installing it adds
+no third-party packages.
 
 ## Documentation conventions
 

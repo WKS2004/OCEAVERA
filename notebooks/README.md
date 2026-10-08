@@ -8,6 +8,17 @@ method back to the API.
 
 Future notebooks should follow the [project workflow](../docs/ml/ml-workflow-and-evidence-gates.md), identify their input dataset versions and manifests, state row/target meaning, and produce outputs reproducibly in a documented environment. Keep validation boundaries explicit and remove credentials or sensitive payloads before sharing.
 
+For Python notebooks, declare every required third-party package with its
+selected exact version in the root [`requirements.txt`](../requirements.txt).
+From the repository root, install listed packages with
+`python -m pip install -r requirements.txt`; update the manifest and notebook
+setup instructions in the same change. See the
+[contributor dependency policy](../CONTRIBUTING.md#python-dependencies).
+The documented Python Conda environment is named `OCEAVERA` and uses the
+Python 3.14 project baseline; use the [root setup instructions](../README.md#create-the-conda-environment)
+when a Python notebook workflow is authorised. The ML framework and exact
+package stack remain undecided.
+
 Use descriptive sequence/topic names when the workflow exists. Explain execution order and dependencies here at that time. Record observed findings in `docs/records/` following the [record conventions](../CONTRIBUTING.md#project-evidence-records); an exploratory notebook does not replace the required decision and insight logs.
 
 ## Member responsibilities

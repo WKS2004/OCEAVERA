@@ -116,3 +116,55 @@
 - **Summary of what the AI Agent did:** Audited tracked, untracked and ignored files. Removed the redundant `data/interim/obis/.gitkeep`, the empty Bio-ORACLE raw/interim directory markers, their now-empty directories and the matching unused ignore exceptions in [`.gitignore`](../../.gitignore). Kept the OBIS raw JSON/CSV payloads and receipts, active scripts, source-phase marker and historical decision/provenance records. No scratch files, bytecode caches or temporary artefacts were found.
 - **AI output accepted/changed/rejected:** Only the verified redundant placeholders and matching ignore exceptions were removed. The work remains in the worktree; no commit or publication was requested or made, and human review remains pending.
 - **Verification/evidence:** Acting identity follows the user's explicit attribution request and the [canonical contributor mapping](../project/ai-team-members.md). The required structural helper and `git diff --check` passed after this entry was added. `git check-ignore` confirmed the raw OBIS CSV, receipt, JSON pages and derived interim output remain ignored. The worktree and data-directory inventory were reviewed. No dataset was downloaded or deleted, and no test suite was run.
+
+## 2026-10-08 — Add the Python dependency manifest
+
+- **Date/time or time range:** 2026-10-08, entry recorded at 13:45:23 Asia/Colombo (UTC+05:30); task duration not recorded
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; local repository tools; bundled Python runtime
+- **AI Model:** GPT-6; exact serving identifier unavailable
+- **Summary of the user's request:** Add a root Requirements file and update project guidance so every new Python library or package is recorded there for later installation.
+- **Summary of what the AI Agent did:** Added the conventional lowercase [`requirements.txt`](../../requirements.txt), currently comment-only because active project scripts use Python 3.10+ standard-library modules. Documented `python -m pip install -r requirements.txt` and the same-change exact-version update rule in the README, contributor guidance, requirements, ML workflow, readiness review, source index and agent change-safety rule.
+- **AI output accepted/changed/rejected:** The manifest and dependency-update policy are retained in the worktree. No package was added because none is currently required; no commit or publication was requested or made, and human review remains pending.
+- **Verification/evidence:** Acting identity follows the user's explicit attribution request and the [canonical contributor mapping](../project/ai-team-members.md). The active Python import inventory contains standard-library modules only. The required structural helper and `git diff --check` passed after this entry was added. No package installation, network request or test suite was run.
+
+## 2026-10-08 — Synchronise documentation and README dependency guidance
+
+- **Date/time or time range:** 2026-10-08, 15:40:01 Asia/Colombo (UTC+05:30); task duration not recorded
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; local repository tools; bundled Python runtime
+- **AI Model:** GPT-6; exact serving identifier unavailable
+- **Summary of the user's request:** Thoroughly update the project documentation and every README file following creation of the root Python requirements manifest and its update policy.
+- **Summary of what the AI Agent did:** Reviewed all eight repository `README.md` files and the dependency guidance in the canonical requirements, contributor, project, ML workflow, readiness and agent-maintenance documents. Added context-specific pointers to the shared package inventory and update/install policy, clarified the manifest's current empty state, and added the policy to the repository knowledge map. Preserved historical records and the unresolved project-wide modelling environment.
+- **AI output accepted/changed/rejected:** Documentation updates are retained in the worktree for human review. No package, scientific decision, data payload or code implementation was added by this documentation pass. No commit or publication was requested or made.
+- **Verification/evidence:** Acting identity follows the user's explicit attribution request and the [canonical contributor mapping](../project/ai-team-members.md). All eight README files were found and reviewed. The structural helper passed: 8 skills, 10 rules, 12 routing review cases, 98 text files, 755 local links, 94 Markdown section links, four contributor identities, two contribution logs and 26 dated entries. `git diff --check` passed. These are structural checks only; no package installation, network request, dataset operation or test suite was run.
+
+## 2026-10-08 — Document the OCEAVERA Conda environment
+
+- **Date/time or time range:** 2026-10-08, 16:11:18 Asia/Colombo (UTC+05:30); task duration not recorded
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; local repository tools; bundled Python runtime
+- **AI Model:** GPT-6; exact serving identifier unavailable
+- **Summary of the user's request:** Add instructions for creating a Conda environment named `OCEAVERA`.
+- **Summary of what the AI Agent did:** Documented Conda create, activate, interpreter-check and requirements-install commands using Python 3.12 for the current intake and maintenance tooling. Clarified in the root README, contributor guidance, project requirements, ML workflow, readiness, data/source/notebook/agent documentation and repository map that this setup does not choose the later project-wide modelling runtime. Recorded that the current requirements manifest has no third-party packages.
+- **AI output accepted/changed/rejected:** The setup instructions are retained in the worktree for human review. No Conda environment was created and no package was installed. No data was downloaded, and no commit or publication was requested or made.
+- **Verification/evidence:** Acting identity follows the user's explicit attribution request and the [canonical contributor mapping](../project/ai-team-members.md). The structural helper passed: 8 skills, 10 rules, 12 routing review cases, 98 text files, 764 local links, 102 Markdown section links, four contributor identities, two contribution logs and 27 dated entries. `git diff --check` passed. The instructions were documented only; no environment or package operation was executed.
+
+## 2026-10-08 — Adopt Python 3.14 as the project baseline
+
+- **Date/time or time range:** 2026-10-08, 16:24:03 Asia/Colombo (UTC+05:30); task duration not recorded
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; official Python, Conda, GitHub Actions and scientific-library documentation; local repository tools; bundled Python runtime
+- **AI Model:** GPT-6; exact serving identifier unavailable
+- **Summary of the user's request:** Change the repository to use the most suitable Python version after comparing 3.12 with 3.14.
+- **Summary of what the AI Agent did:** Adopted Python 3.14 as the project baseline under D-039, added the root `.python-version` source of truth, and configured CI's setup-python action to read it. Updated Conda setup instructions, the dependency manifest comments, requirements/workflow/readiness guidance, decision register, overview questions and member handover guidance. Kept the current OBIS scripts' Python 3.10+ compatibility floor and recorded that the future ML framework and exact dependency stack remain open. The decision cites official lifecycle, Conda, Actions and scientific-library references.
+- **AI output accepted/changed/rejected:** The Python 3.14 baseline and coordinated documentation/CI changes are retained in the worktree for human review. No Conda environment was created, no Python/package was installed, no dataset was downloaded, and no commit or publication was requested or made.
+- **Verification/evidence:** Acting identity follows the user's explicit attribution request and the [canonical contributor mapping](../project/ai-team-members.md). The structural helper passed: 8 skills, 10 rules, 12 routing review cases, 99 text files, 779 local links, 103 Markdown section links, four contributor identities, two contribution logs and 28 dated entries. `git diff --check` passed. The CI YAML change is limited to the setup-python version-file input and was reviewed against the workflow guidance; `actionlint` is unavailable. No Python 3.14 local runtime or hosted CI execution is claimed.

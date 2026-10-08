@@ -5,6 +5,8 @@
 | Area | Document | Purpose |
 | --- | --- | --- |
 | Requirements | [PROJECT_REQUIREMENTS.md](../PROJECT_REQUIREMENTS.md) | Project obligations, deliverables, rubric and acceptance evidence |
+| Python dependencies | [requirements.txt](../requirements.txt) | Shared third-party Python package inventory; currently no packages are required. Update it and setup guidance together under the [contributor policy](../CONTRIBUTING.md#python-dependencies) |
+| Python environment | [`.python-version`](../.python-version); [root setup instructions](../README.md#create-the-conda-environment) | Project baseline is Python 3.14; CI reads the same version file. The ML framework and scientific dependency stack remain open |
 | Project | [Overview and scope](project/project-overview-and-scope.md) | Identity, proposal commitments, scope and interpretation limits |
 | Project | [Decision register](project/decision-register.md) | Planning positions, repository conventions and unresolved choices |
 | Project | [Readiness and alignment](project/repository-readiness-and-alignment.md) | Current phase, evidence gaps and readiness |

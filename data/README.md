@@ -60,6 +60,16 @@ The existing `raw/`, `interim/` and `processed/` paths serve the proposed Bronze
 
 Data payloads are excluded from Git by default. Review coordinate sensitivity before retaining or sharing marine occurrence data. Put tracked manifests, dictionaries, citations and processing notes in `docs/records/` under the [record conventions](../CONTRIBUTING.md#project-evidence-records). See [data storage and provenance](../docs/data/data-storage-and-provenance.md) before acquiring or sharing data. The [source manifest](../docs/templates/data-source-record.md) records individual resources; the [dictionary](../docs/templates/data-dictionary.md) describes the integrated dataset.
 
+The project Python baseline is 3.14, and the current OBIS collection and handoff
+scripts remain compatible with Python 3.10 or later while using only the
+standard library. If a future data-preparation stage adds a
+third-party Python package, declare its exact version in the root
+[`requirements.txt`](../requirements.txt) and update the
+[setup instructions](../CONTRIBUTING.md#python-dependencies) in the same change.
+The documented Conda environment for running current Python tooling is named
+`OCEAVERA`; its version comes from the root [`.python-version`](../.python-version).
+Follow the setup steps in the [root README](../README.md#create-the-conda-environment).
+
 Preserve publisher files unchanged: the OBIS API's JSON pages are retained byte-for-byte; the CSV is produced separately from the complete pages and validated against them. NetCDF environmental arrays remain an anticipated example until a specific layer is verified. Extract selected raster values at modelling locations into derived tables; do not flatten complete environmental grids. Record actual formats and fingerprints in source records/manifests. COG (`.tif`) and ONNX (`.onnx`) remain optional, unfinalised future BLUEVERSE integration suggestions, not required OCEAVERA data/model formats.
 
 ## Member responsibilities

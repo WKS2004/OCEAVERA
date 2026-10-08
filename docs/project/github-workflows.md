@@ -13,11 +13,15 @@
 | Workflow name | Repository checks |
 | Job name | Repository structure and records |
 | Runner | GitHub-hosted Ubuntu 24.04 |
-| Maintenance interpreter | Python 3.12; standard library only |
+| Maintenance interpreter | Python 3.14 from the root `.python-version` file; standard library only |
 | Time limit | Five minutes |
 | Repository token | Read access to repository contents; checkout credentials are not persisted |
 | Dependencies | Official checkout and Python setup actions pinned to full commit SHAs, with release comments |
 | Concurrent runs | New runs cancel older runs for the same pull request; event types and branch refs have separate groups |
+
+The CI job reads the project interpreter from `.python-version` using the
+official setup-python action's `python-version-file` input. Update the shared
+version file when changing the baseline so local Conda setup and CI stay aligned.
 
 | Backup setting | Current choice |
 | --- | --- |
@@ -45,7 +49,7 @@ The development backup workflow needs GitHub Actions to have repository content 
 
 For each push to either branch, the workflow reads the current `dev` and `dev-backup` commits. It creates a missing backup directly from `dev`, or exits when both commits already match. If `dev-backup` contains commits that are absent from `dev`, it first creates `dev-backup-mistaken-commits/<actor>/<Asia-Colombo timestamp>` from `dev`, merges in the backup history while preferring backup content for conflicts, and pushes that rescue branch. If the merge cannot complete, it records both histories in an explicit merge commit. Only after that preservation step succeeds does it update `dev-backup` to the exact `dev` commit using the previously observed backup SHA as a force-with-lease guard. A backup that is merely behind `dev` is synchronised without creating a rescue branch.
 
-Python here supports repository maintenance. The scientific runtime, ML dependencies and reproducible experiment environment remain undecided.
+Python 3.14 is the project baseline and the interpreter used by repository maintenance CI. The current scripts and helper remain compatible with Python 3.10 or later. ML frameworks, scientific dependencies and reproducible experiment configuration remain undecided.
 
 ## What the check establishes
 
