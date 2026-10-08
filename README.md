@@ -69,7 +69,7 @@ Scientific records belong in `docs/records/`; factual contributor activity belon
 
 ## Repository checks
 
-[Repository checks](.github/workflows/ci.yml) runs the structural helper on pull requests, pushes to `main` and manual dispatch. See [GitHub workflows](docs/project/github-workflows.md) for operation, failure handling and prerequisites for later scientific checks. The hosted maintenance interpreter does not select the ML runtime; a passing structural check does not establish scientific or submission readiness.
+[Repository checks](.github/workflows/ci.yml) runs the structural helper and syntax-compiles the OBIS intake and handoff scripts on pull requests, pushes to every branch and manual dispatch. It does not run the scripts or download dataset records. See [GitHub workflows](docs/project/github-workflows.md) for operation, failure handling and prerequisites for later scientific checks. The hosted maintenance interpreter does not select the ML runtime; passing these checks does not establish scientific or submission readiness.
 
 For documentation and agent-resource changes, run the structural helper from the repository root with Python 3.10 or later:
 

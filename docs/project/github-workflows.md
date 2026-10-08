@@ -2,18 +2,20 @@
 
 ## Current automation
 
-[Repository checks](../../.github/workflows/ci.yml) runs the existing [structural helper](../../.agents/scripts/validate_agent_resources.py) on pull requests, pushes to `main` and manual dispatch. It checks the complete maintained text inventory on each run. It has no path filters or optional jobs that silently pass when required files are missing.
+[Repository checks](../../.github/workflows/ci.yml) runs the [structural helper](../../.agents/scripts/validate_agent_resources.py) and compiles the current OBIS intake and handoff scripts for syntax on pull requests, pushes to every branch and manual dispatch. The push trigger has no branch-name allowlist or pattern; tag pushes create a workflow run whose check job is skipped. Each check-job run checks the complete maintained text inventory, with no path filters or optional checks that silently pass when required files are missing. Python compilation does not execute the scripts or retrieve dataset records.
 
-[Development backup maintenance](../../.github/workflows/dev-backup.yml) keeps `dev-backup` at the exact commit on `dev` after pushes to either branch. If the backup branch contains commits absent from `dev`, it first preserves that history on a timestamped rescue branch. The source `dev` branch is not present in the current OCEAVERA checkout; the workflow will not run until a push to `dev` or `dev-backup` occurs.
+[Development backup maintenance](../../.github/workflows/dev-backup.yml) keeps `dev-backup` at the exact commit on `dev` after pushes to either branch. If the backup branch contains commits absent from `dev`, it first preserves that history on a timestamped rescue branch. This checkout has remote-tracking refs for `dev` and `dev-backup`; those cached refs have not been refreshed against GitHub and do not establish a successful hosted run or working repository permissions.
 
 [Lowercase branch policy](../../.github/workflows/branch-policy.yml) runs when GitHub reports a newly created reference. It ignores tag creations. For a branch, the only rule is that its name must already be lowercase; a name containing uppercase letters is deleted through the GitHub API. Lowercase names are accepted without a list of permitted names or branch patterns. This allows the timestamped rescue branches created by development backup maintenance. Existing branches are not checked retroactively.
 
 | Setting | Current choice |
 | --- | --- |
 | Workflow name | Repository checks |
-| Job name | Repository structure and records |
+| Job name | Repository structure, records and Python syntax |
+| Trigger | Pull requests, pushes to all branches, and manual dispatch; tag-push jobs are skipped |
 | Runner | GitHub-hosted Ubuntu 24.04 |
 | Maintenance interpreter | Python 3.14 from the root `.python-version` file; standard library only |
+| Checks | Maintained structural helper and `py_compile` for the OBIS API downloader, JSON-to-CSV converter and raw-to-interim handoff |
 | Time limit | Five minutes |
 | Repository token | Read access to repository contents; checkout credentials are not persisted |
 | Dependencies | Official checkout and Python setup actions pinned to full commit SHAs, with release comments |
@@ -45,7 +47,7 @@ version file when changing the baseline so local Conda setup and CI stay aligned
 
 Commit this workflow to the default branch before relying on it for new branch creations. GitHub repository permissions and branch rules must permit the Actions token to delete the created branch. GitHub rejects attempts to delete the default branch, so keep the configured default branch lowercase. Uppercase branches already present when the workflow is enabled are not deleted by its creation-only trigger.
 
-The development backup workflow needs GitHub Actions to have repository content write permission. Any repository branch/rule controls must also allow that token to create the rescue branch and update `dev-backup`, including the force update. The workflow reports a failed push and stops before resetting the backup when these operations are rejected. This checkout contains no `dev` or `dev-backup` branch, so the workflow file alone does not establish that backup protection is active.
+The development backup workflow needs GitHub Actions to have repository content write permission. Any repository branch/rule controls must also allow that token to create the rescue branch and update `dev-backup`, including the force update. The workflow reports a failed push and stops before resetting the backup when these operations are rejected. This checkout has no local `dev` or `dev-backup` branch, although remote-tracking refs exist; the workflow file and cached refs alone do not establish that backup protection is active.
 
 For each push to either branch, the workflow reads the current `dev` and `dev-backup` commits. It creates a missing backup directly from `dev`, or exits when both commits already match. If `dev-backup` contains commits that are absent from `dev`, it first creates `dev-backup-mistaken-commits/<actor>/<Asia-Colombo timestamp>` from `dev`, merges in the backup history while preferring backup content for conflicts, and pushes that rescue branch. If the merge cannot complete, it records both histories in an explicit merge commit. Only after that preservation step succeeds does it update `dev-backup` to the exact `dev` commit using the previously observed backup SHA as a force-with-lease guard. A backup that is merely behind `dev` is synchronised without creating a rescue branch.
 
@@ -53,9 +55,9 @@ Python 3.14 is the project baseline and the interpreter used by repository maint
 
 ## What the check establishes
 
-The helper fails on inconsistent skill/rule inventory, stale generated routing, invalid maintained skill metadata, unresolved local file or Markdown section links, malformed JSON, text-format violations and invalid contributor-record structure. It skips byte-preserved `data/raw/` payloads while checking tracked records and code. It checks exact account/name mapping, required entry fields, dates and timezone notation. CI runs in check mode and does not regenerate routing or edit records.
+The helper fails on inconsistent skill/rule inventory, stale generated routing, invalid maintained skill metadata, unresolved local file or Markdown section links, malformed JSON, text-format violations and invalid contributor-record structure. It skips byte-preserved `data/raw/` payloads while checking tracked records and code. It checks exact account/name mapping, required entry fields, dates and timezone notation. CI runs in check mode and does not regenerate routing or edit records. The separate Python compilation step verifies syntax under the configured Python 3.14 baseline only; it does not test API behaviour, completeness, or runtime execution and it does not download OBIS data.
 
-These are structural checks. They do not authenticate a contributor, prove an activity, scan every possible personal-data format, validate general YAML syntax, check external URLs, execute skill evaluations, assess scientific correctness or establish human acceptance. Member privacy still requires the review in [CONTRIBUTING.md](../../CONTRIBUTING.md#member-privacy).
+These are structural and syntax checks. They do not authenticate a contributor, prove an activity, scan every possible personal-data format, validate general YAML syntax, check external URLs, execute skill evaluations, assess scientific correctness or establish human acceptance. Member privacy still requires the review in [CONTRIBUTING.md](../../CONTRIBUTING.md#member-privacy).
 
 ## Local use and failure handling
 
@@ -82,7 +84,7 @@ The supplied workflow analysis was reviewed against actual repository contents. 
 
 | Automation area | Prerequisites for introduction |
 | --- | --- |
-| Source quality and unit checks | Agreed scientific environment, executable modules and relevant checks authorised with their implementation |
+| Further source quality and unit checks | Agreed scientific environment, executable modules and relevant checks authorised with their implementation; the existing syntax compilation is not a substitute |
 | Notebook execution | Actual notebooks, a reproducible environment, bounded execution and a shareable small input; execute a copy and review output privacy before publishing artefacts |
 | Data validation | Actual dataset/manifest contracts, source fingerprints and recorded taxonomic, spatial, temporal, target and leakage policies; blank templates are not dataset evidence |
 | Pipeline smoke checks | Implemented preprocessing, training and evaluation entry points plus a small deterministic fixture; assess expected behaviour without downloading full source datasets on each pull request |
