@@ -14,9 +14,22 @@ The proposed biological source is OBIS, complemented by Bio-ORACLE environmental
 
 ## Current stage
 
-**OBIS data-intake path work is in place.** The shared foundation and member responsibility plan are established. The unrestricted OBIS Area 230 JSON/CSV acquisition is recorded; an OBIS-only raw-to-interim handoff accepts the selected raw CSV path and stages a byte-preserving copy in a stable source-phase folder. It performs structural validation only: scientific cleaning, Bio-ORACLE acquisition/integration, analysis notebooks, ML implementation and model results remain pending. Python 3.14 is the project baseline; the ML framework, package stack and experiment environment remain undecided. Industry Explorer is the proposed track; approval and the stakeholder decision context remain unevidenced.
+The [readiness review](docs/project/repository-readiness-and-alignment.md) records current evidence and unresolved choices; the [decision register](docs/project/decision-register.md) preserves planning positions and accepted conventions.
 
-The [readiness review](docs/project/repository-readiness-and-alignment.md) records current evidence and unresolved choices. The [decision register](docs/project/decision-register.md) preserves planning positions and accepted conventions.
+**In place**
+
+- The shared repository foundation and member responsibility plan.
+- The unrestricted Area 230 JSON/CSV acquisition method and its recorded validation evidence under D-036.
+- An OBIS-only raw-to-interim handoff that accepts a selected CSV and stages a byte-preserving copy in a stable source-phase folder.
+- The [branch work notebook](notebooks/branch_work/pipeline_biological_data_collection.ipynb), which documents the branch and runs its offline CSV demonstration in memory.
+
+**Pending**
+
+Scientific cleaning, Bio-ORACLE acquisition or integration, analytical notebooks, model implementation and model results.
+
+**Open choices and evidence**
+
+The focal species, modelling boundary, compatible environmental resources, ML framework and experiment environment remain unresolved. Industry Explorer is the proposed track; approval and the stakeholder decision context are not evidenced. Python 3.14 is the project baseline.
 
 ## Data and model artefacts
 
@@ -28,7 +41,7 @@ The working convention preserves source files as supplied, uses timestamps for r
 | --- | --- |
 | [PROJECT_REQUIREMENTS.md](PROJECT_REQUIREMENTS.md) | Project obligations, evidence requirements, rubric and submission checklist |
 | [`.python-version`](.python-version) | Shared Python 3.14 baseline used by Conda setup and repository CI |
-| [requirements.txt](requirements.txt) | Shared third-party Python package inventory for project code, notebooks and required tooling; currently empty |
+| [requirements.txt](requirements.txt) | Shared, exactly pinned third-party packages for project code, notebooks and required tooling; includes Jupyter Notebook and its Python kernel |
 | [Project overview and scope](docs/project/project-overview-and-scope.md) | Research context, boundaries and interpretation limits |
 | [Member responsibilities](docs/project/member-responsibilities.md) | General division and pipeline matrix, with links to four detailed member files and shared duties |
 | [ML workflow and evidence gates](docs/ml/ml-workflow-and-evidence-gates.md) | Planned analytical sequence and progression conditions |
@@ -50,20 +63,20 @@ The [responsibility overview](docs/project/member-responsibilities.md) summarise
 
 Feature engineering is jointly led by Ushan and Adithya; candidate training by Adithya and Wanshaja. All four participate technically across the pipeline and share final decisions. The allocation records expected work, not completed contributions or permission to begin implementation.
 
-## Working areas
+## Repository structure
 
-| Location | Purpose |
+| Path | Contents and navigation |
 | --- | --- |
-| [docs/](docs/README.md) | Canonical project knowledge, blank forms and dated records |
-| [data/](data/README.md) | Raw, intermediate and processed data; payloads excluded from Git by default |
-| [notebooks/](notebooks/README.md) | Future reproducible exploration and analysis |
-| [src/](src/README.md) | Future reusable implementation |
-| [outputs/](outputs/README.md) | Future generated figures, maps and evaluation artefacts |
-| [reports/](reports/README.md) | Future report and submission material |
-| [.agents/](.agents/README.md) | Focused rules, skills, task routing and structural validation |
-| [GitHub CI](.github/workflows/ci.yml) | Automated checks of documentation, agent resources and contribution-record structure |
-| [Development backup](.github/workflows/dev-backup.yml) | Preserves extra `dev-backup` history before synchronising it to `dev` |
-| [Branch policy](.github/workflows/branch-policy.yml) | Deletes newly created branches whose names contain uppercase letters |
+| `assets/` | Visual assets used by the project README and documentation |
+| [`.agents/`](.agents/README.md) | Agent rules, skills, routing and structural validation |
+| [`.github/workflows/`](docs/project/github-workflows.md) | Repository CI and maintenance automation |
+| [`data/`](data/README.md) | Raw, interim and processed data; payloads are excluded from Git by default |
+| [`docs/`](docs/README.md) | Canonical project knowledge, templates, dated records and contributor logs |
+| [`notebooks/`](notebooks/README.md) | Branch work notebooks and future reproducible analysis |
+| [`src/data_collection/`](src/README.md) | OBIS Area 230 API retrieval and JSON-to-CSV conversion |
+| [`src/data_preparation/`](src/README.md) | OBIS raw-CSV validation and interim staging |
+| [`outputs/`](outputs/README.md) | Future reviewed figures, maps and evaluation artefacts |
+| [`reports/`](reports/README.md) | Future group report and submission material |
 
 Scientific records belong in `docs/records/`; factual contributor activity belongs in `docs/ai-contribution/`. Their conventions are maintained in [contributor guidance](CONTRIBUTING.md#project-evidence-records) and the [AI-usage template](docs/project/ai-usage-log-template.md). Exact contributor identities are maintained in the [team mapping](docs/project/ai-team-members.md).
 
@@ -84,9 +97,10 @@ The helper uses the standard library and checks maintained resource formats, loc
 
 Python 3.14 is the project baseline, recorded in [`.python-version`](.python-version).
 The current OBIS scripts use the standard library and remain compatible with
-Python 3.10 or later, so no third-party package installation is currently
-required. The root [`requirements.txt`](requirements.txt) is the shared package
-list. Install its entries from the repository root with:
+Python 3.10 or later. Jupyter Notebook and `ipykernel` are pinned in the root
+[`requirements.txt`](requirements.txt) so the shared environment can open and
+run Python notebooks. No Python environment is stored in this repository. The
+following commands document setup for you to run when you choose:
 
 ```text
 python -m pip install -r requirements.txt
@@ -97,6 +111,11 @@ python -m pip install -r requirements.txt
 From the repository root, create and activate the `OCEAVERA` environment with
 the baseline interpreter, then install the shared requirements:
 
+These are user-led setup instructions. Before an agent creates or changes an
+environment, or installs, upgrades or removes packages, it must first receive
+your explicit authorisation in the current task. Editing this manifest or
+documenting setup commands does not provide that authorisation.
+
 ```text
 conda create --name OCEAVERA python=3.14 pip
 conda activate OCEAVERA
@@ -104,12 +123,18 @@ python --version
 python -m pip install -r requirements.txt
 ```
 
-The version check should report Python 3.14.x. The requirements file currently
-contains no third-party packages, so the install command adds none. The current
-scripts also remain compatible with Python 3.10+, but 3.14 is the environment
-baseline used by CI. The future ML framework and dependency stack remain open.
-Conda must be installed and initialised for the shell before running these
-commands.
+The version check should report Python 3.14.x. Installing the requirements adds
+the pinned Jupyter Notebook interface and Python kernel; the OBIS intake scripts
+still use only the standard library. To open the branch notebook from the
+repository root, run:
+
+```text
+jupyter notebook notebooks/branch_work/pipeline_biological_data_collection.ipynb
+```
+
+The branch notebook uses native Markdown cells for its title, contributor table, scope and data context, followed by concise executable Python Code cells. Run the Code cells in order. The default mode does not access the network, and notebook data work remains in memory rather than writing dataset files.
+The future ML framework and scientific dependency stack remain open. Conda
+must be installed and initialised for the shell before running these commands.
 
 Whenever project code, notebooks or required tooling add, remove or change a
 third-party Python package, update `requirements.txt` with the selected exact

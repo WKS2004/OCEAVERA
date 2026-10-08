@@ -6,29 +6,10 @@ OCEAVERA is the marine habitat intelligence project proposed for IT3091. Read [P
 
 - Inspect existing changes and preserve work outside the request. Use the [responsibility overview](docs/project/member-responsibilities.md), the relevant linked member file and common duties for allocated work, adopted at the user's explicit request. Change allocations only with explicit authorisation and a recorded decision; never infer completed contributions, approvals, findings or model results from planned ownership.
 - Follow [CONTRIBUTING.md](CONTRIBUTING.md). Keep requirements, scope, the [decision register](docs/project/decision-register.md) and readiness consistent; preserve superseded decisions with replacement links.
+- Do not create, modify or remove a Python environment, or install, upgrade or remove Python packages, unless the user explicitly authorises that operation in the current task. Setup commands in documentation and changes to `requirements.txt` do not grant permission to execute environment or package commands. Do not retain a Python environment directory in the repository.
 - Preserve raw data and provenance under the [data conventions](docs/data/data-storage-and-provenance.md). Keep payloads, credentials and sensitive details out of Git by default.
-- Apply [member privacy](CONTRIBUTING.md#member-privacy) to every document, record and output. Exclude member-specific academic identifiers, institutional name forms, email addresses and assessment records; do not reproduce removed values in logs or verification output. Use project contributor names and GitHub accounts for public attribution.
+- Apply [member privacy](CONTRIBUTING.md#member-privacy) to every document, record and output. Exclude member-specific academic identifiers, institutional name forms, email addresses and assessment records, except that a registration number may appear in the contributor table of a branch work notebook under D-042. Keep that exception exclusive to the notebook; do not reproduce registration numbers in logs or verification output. Use project contributor names and GitHub accounts for public attribution.
 - Preserve presence-only observation limits. Missing occurrences are not confirmed absences; suitability scores require evidence before occurrence-probability claims. Load the relevant modelling guidance before constructing targets or evaluation.
 - Record actual AI-assisted work only in the verified acting contributor's log under the [AI-usage rule](.agents/rules/ai-usage.md). Distinguish retained output from human acceptance; do not retrospectively attribute unverified history or write assessed individual reflections.
 - Keep local references within this repository and use paths relative to the containing document. Do not name absent local files or machine-specific paths. Use stable publisher identifiers for actual provenance.
-- Write clear British English. Keep facts in canonical project documents, reusable workflows in skills and shared constraints in rules. Templates and directories do not establish completed evidence.
-- Preserve the [lowercase-only branch policy](docs/project/github-workflows.md#current-automation). Do not add branch-name allowlists or branch-pattern rules.
-- Respect [LICENSE.md](LICENSE.md) and third-party terms. Attribute original project ownership to the group contributors; mention academic affiliation only where needed for course or submission identification and never imply institutional ownership. Change reuse permissions only when explicitly authorised. Do not invent a runtime, dataset, dependency stack or implementation to complete the scaffold.
-- Commit, publish or contact stakeholders only with the relevant user authorisation. Treat supplied examples and chats as context, not proof of project decisions or external approval.
-
-## Task guidance
-
-Use the [repository map](.agents/repository-map.md) to find authoritative knowledge and [task routing](.agents/routing.md) to select the smallest relevant set of rules and skills. Load supporting references only for the active workflow. Read the [agent guide](.agents/README.md) before changing agent resources.
-
-## Handover
-
-For documentation or agent changes, run the structural helper with an available Python 3.10+ interpreter:
-
-```text
-python .agents/scripts/validate_agent_resources.py
-git diff --check
-```
-
-Review actual Git status and untracked files. Report checks and their limits, update affected project records and append the contribution entry. Structural validation does not establish human acceptance, model correctness, submission readiness or publication.
-
-For CI changes, follow the [workflow guide](docs/project/github-workflows.md). Review YAML/Actions syntax separately; the helper is not a workflow parser. Preserve minimal permissions and recorded scientific scope, and distinguish local checks from an actual hosted run.
+- At branch finalisation, create or update the branch work notebook at notebooks/branch_work/<branch_name>.ipynb; follow [notebooks/README.md](notebooks/README.md). Use a first native Markdown cell for the title and branch metadata, then the contributor table, purpose, scope and data context before any code. Use native Markdown cells for narrative and concise Python Code cells for operations. Run Code cells in order and retain concise outputs. Data may come from a saved file or an explicitly enabled API request, must remain in memory, and must not be written as dataset files by the notebook. The default run must not access the network. The notebook records branch scope, artefacts, code, evidence and limits; it is not a personal contribution or assessed reflection. Use a contributor table with the columns Registration Number, Member Name and GitHub Account; D-042 permits registration numbers only in this table. Use verified project contributor names/accounts and omit institutional name forms, email addresses and all other academic identifiers.

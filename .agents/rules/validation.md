@@ -5,6 +5,7 @@ Apply before handing over a repository change.
 | Changed surface | Relevant checks |
 | --- | --- |
 | Documents, root instructions, rules or skills | [Resource helper](../scripts/validate_agent_resources.py), local links, formatting and Git whitespace |
+| Branch work notebook | Check native Markdown/Code cell structure and reader-first order; execute every Python Code cell in order using the offline default; verify concise outputs, local links and that no dataset files are written |
 | Skill registry or routing | Registry completeness, regenerated routing view, case references and skill descriptions |
 | Data conventions | Ignore boundaries, tracked metadata destinations and raw-payload preservation |
 | Future executable ML work | Agreed environment, actual affected behaviour, dataset/target contracts and validation partitions |
