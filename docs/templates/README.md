@@ -20,6 +20,12 @@ AI-assisted activity uses the separate [contribution recording template](../proj
 
 A form establishes a recording format. It becomes assessment evidence only when supported by the corresponding data, analysis, decision or approval record.
 
+These templates do not add Python package requirements. If code or notebooks
+are later used to generate or validate evidence artefacts, list each required
+third-party Python package with its exact version in the root
+[`requirements.txt`](../../requirements.txt), following the
+[contributor policy](../../CONTRIBUTING.md#python-dependencies).
+
 The JSON forms deliberately contain nulls and empty collections. Copy and complete them from actual work; they are not acquired datasets, trained-model records or formal validation schemas. Use a code revision only when it identifies the generating work accurately; otherwise record the worktree state and relevant files/configuration without implying a commit exists.
 
 ## Responsibility for evidence

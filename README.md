@@ -14,19 +14,21 @@ The proposed biological source is OBIS, complemented by Bio-ORACLE environmental
 
 ## Current stage
 
-**Finalised shared foundation.** Project context, requirements, evidence conventions, agent guidance and the finalised member responsibility plan are established for the next authorised stage. Data acquisition, analysis notebooks, ML implementation and model results are pending. The runtime has not been selected. Industry Explorer is the proposed track; approval and the stakeholder decision context remain unevidenced.
+**OBIS data-intake path work is in place.** The shared foundation and member responsibility plan are established. The unrestricted OBIS Area 230 JSON/CSV acquisition is recorded; an OBIS-only raw-to-interim handoff accepts the selected raw CSV path and stages a byte-preserving copy in a stable source-phase folder. It performs structural validation only: scientific cleaning, Bio-ORACLE acquisition/integration, analysis notebooks, ML implementation and model results remain pending. Python 3.14 is the project baseline; the ML framework, package stack and experiment environment remain undecided. Industry Explorer is the proposed track; approval and the stakeholder decision context remain unevidenced.
 
 The [readiness review](docs/project/repository-readiness-and-alignment.md) records current evidence and unresolved choices. The [decision register](docs/project/decision-register.md) preserves planning positions and accepted conventions.
 
 ## Data and model artefacts
 
-The working convention preserves source files as supplied, uses GeoParquet for compatible derived spatial tables and Parquet for compatible non-spatial ML tables, and keeps compact manifests/metadata in JSON. Actual resource formats, model serialization and runtime remain to be verified or selected during authorised work. The [data storage and provenance guide](docs/data/data-storage-and-provenance.md) defines the full conventions. COG and ONNX remain optional, unfinalised suggestions for a future BLUEVERSE integration; neither is an OCEAVERA requirement.
+The working convention preserves source files as supplied, uses timestamps for raw acquisition snapshots, and places each interim transformation in a stable phase subfolder under its source. Only the OBIS raw-to-interim handoff accepts a selected run-specific CSV path in this branch; later OBIS stages use their declared fixed paths. Bio-ORACLE's matching folder layout is documented, but no Bio-ORACLE code is included in this branch. GeoParquet is used for compatible derived spatial tables and Parquet for compatible non-spatial ML tables. Actual resource formats, model serialization and experiment environment remain to be verified or selected during authorised work. The [data storage and provenance guide](docs/data/data-storage-and-provenance.md) defines the full conventions. COG and ONNX remain optional, unfinalised suggestions for a future BLUEVERSE integration; neither is an OCEAVERA requirement.
 
 ## Start here
 
 | Document | Purpose |
 | --- | --- |
 | [PROJECT_REQUIREMENTS.md](PROJECT_REQUIREMENTS.md) | Project obligations, evidence requirements, rubric and submission checklist |
+| [`.python-version`](.python-version) | Shared Python 3.14 baseline used by Conda setup and repository CI |
+| [requirements.txt](requirements.txt) | Shared third-party Python package inventory for project code, notebooks and required tooling; currently empty |
 | [Project overview and scope](docs/project/project-overview-and-scope.md) | Research context, boundaries and interpretation limits |
 | [Member responsibilities](docs/project/member-responsibilities.md) | General division and pipeline matrix, with links to four detailed member files and shared duties |
 | [ML workflow and evidence gates](docs/ml/ml-workflow-and-evidence-gates.md) | Planned analytical sequence and progression conditions |
@@ -67,7 +69,7 @@ Scientific records belong in `docs/records/`; factual contributor activity belon
 
 ## Repository checks
 
-[Repository checks](.github/workflows/ci.yml) runs the structural helper on pull requests, pushes to `main` and manual dispatch. See [GitHub workflows](docs/project/github-workflows.md) for operation, failure handling and prerequisites for later scientific checks. The hosted maintenance interpreter does not select the ML runtime; a passing structural check does not establish scientific or submission readiness.
+[Repository checks](.github/workflows/ci.yml) runs the structural helper and syntax-compiles the OBIS intake and handoff scripts on pull requests, pushes to every branch and manual dispatch. It does not run the scripts or download dataset records. See [GitHub workflows](docs/project/github-workflows.md) for operation, failure handling and prerequisites for later scientific checks. The hosted maintenance interpreter does not select the ML runtime; passing these checks does not establish scientific or submission readiness.
 
 For documentation and agent-resource changes, run the structural helper from the repository root with Python 3.10 or later:
 
@@ -77,6 +79,44 @@ git diff --check
 ```
 
 The helper uses the standard library and checks maintained resource formats, local files and section links, text conventions and contribution-record structure. It does not evaluate models or execute behavioural agent evaluations. See the [agent guide](.agents/README.md) for registry maintenance.
+
+## Python dependencies
+
+Python 3.14 is the project baseline, recorded in [`.python-version`](.python-version).
+The current OBIS scripts use the standard library and remain compatible with
+Python 3.10 or later, so no third-party package installation is currently
+required. The root [`requirements.txt`](requirements.txt) is the shared package
+list. Install its entries from the repository root with:
+
+```text
+python -m pip install -r requirements.txt
+```
+
+### Create the Conda environment
+
+From the repository root, create and activate the `OCEAVERA` environment with
+the baseline interpreter, then install the shared requirements:
+
+```text
+conda create --name OCEAVERA python=3.14 pip
+conda activate OCEAVERA
+python --version
+python -m pip install -r requirements.txt
+```
+
+The version check should report Python 3.14.x. The requirements file currently
+contains no third-party packages, so the install command adds none. The current
+scripts also remain compatible with Python 3.10+, but 3.14 is the environment
+baseline used by CI. The future ML framework and dependency stack remain open.
+Conda must be installed and initialised for the shell before running these
+commands.
+
+Whenever project code, notebooks or required tooling add, remove or change a
+third-party Python package, update `requirements.txt` with the selected exact
+version pin and update the relevant setup instructions in the same change.
+Do not add standard-library modules or speculative future ML packages. The
+[contributor dependency policy](CONTRIBUTING.md#python-dependencies) is
+authoritative.
 
 ML setup and execution instructions will accompany the agreed implementation environment when that stage is authorised.
 

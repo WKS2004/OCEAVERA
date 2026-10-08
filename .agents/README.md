@@ -32,7 +32,15 @@ The [contributor mapping](../docs/project/ai-team-members.md) is canonical. The 
 
 ## Validate and maintain
 
-The repository helper requires Python 3.10 or later and only its standard library. This maintenance-tool requirement does not select the ML runtime or add modelling dependencies.
+The repository helper requires Python 3.10 or later and only its standard library. Repository CI runs it on the project baseline from the root [`.python-version`](../.python-version), currently Python 3.14; using 3.10+ locally remains supported. The ML framework and scientific dependencies remain open.
+
+If a maintained agent tool later needs a third-party Python package, declare
+its exact version in the root [`requirements.txt`](../requirements.txt) and
+follow the [dependency update policy](../CONTRIBUTING.md#python-dependencies).
+The manifest currently has no third-party package entries.
+The documented Conda environment for current Python tooling is named
+`OCEAVERA` and uses the baseline version; see the
+[root setup steps](../README.md#create-the-conda-environment).
 
 Run from the repository root with an available Python interpreter:
 
@@ -49,7 +57,7 @@ python .agents/scripts/validate_agent_resources.py
 
 Section checks cover ATX Markdown headings, including repeated-heading suffixes; fenced code is excluded. They do not validate external URLs or the truth of a linked claim.
 
-The helper checks the simple single-line frontmatter and quoted interface metadata used by the maintained skills. It is not a general YAML parser. Extend the schema check before adopting more complex metadata; do not bypass a rejected format.
+The helper checks the simple single-line frontmatter and quoted interface metadata used by the maintained skills. It is not a general YAML parser. It skips `data/raw/` payloads because source bytes must remain unchanged; tracked provenance and code remain subject to text-format checks. Extend the schema check before adopting more complex metadata; do not bypass a rejected format.
 
 Keep rules as constraints, skills as workflows and project documents as knowledge. Avoid duplicate fact sheets, empty support directories or adapters for tools the group has not selected. Ordinary analytical work changes project evidence; guidance changes should be justified by a requested resource change or a demonstrated workflow gap.
 

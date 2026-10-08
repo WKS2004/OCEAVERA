@@ -3,8 +3,6 @@ name: Repository checks
 on:
   pull_request:
   push:
-    branches:
-      - main
   workflow_dispatch:
 
 permissions:
@@ -16,7 +14,8 @@ concurrency:
 
 jobs:
   repository-checks:
-    name: Repository structure and records
+    name: Repository structure, records and Python syntax
+    if: ${{ github.event_name != 'push' || github.ref_type == 'branch' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
@@ -26,10 +25,13 @@ jobs:
           fetch-depth: 1
           persist-credentials: false
 
-      - name: Set up maintenance Python
+      - name: Set up project baseline Python
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
-          python-version: '3.12'
+          python-version-file: .python-version
 
       - name: Validate documentation, agent resources and contribution records
         run: python -B .agents/scripts/validate_agent_resources.py
+
+      - name: Check OBIS intake and handoff Python syntax
+        run: python -m py_compile src/data_collection/obis_occurrences.py src/data_collection/obis_json_to_csv.py src/data_preparation/stage_obis_csv.py

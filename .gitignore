@@ -1,8 +1,16 @@
 # Data payloads are local by default. Track manifests and dictionaries in docs/records/.
 /data/raw/**
 !/data/raw/.gitkeep
+!/data/raw/obis/
+!/data/raw/obis/json/
+!/data/raw/obis/json/.gitkeep
+!/data/raw/obis/csv/
+!/data/raw/obis/csv/.gitkeep
 /data/interim/**
 !/data/interim/.gitkeep
+!/data/interim/obis/
+!/data/interim/obis/*/
+!/data/interim/obis/*/.gitkeep
 /data/processed/**
 !/data/processed/.gitkeep
 

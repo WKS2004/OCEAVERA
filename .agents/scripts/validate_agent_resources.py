@@ -307,7 +307,12 @@ def run(root: Path, write_routing: bool) -> int:
     anchor_cache = {}
     documents = 0
     for path in root.rglob("*"):
-        if not path.is_file() or SKIP.intersection(path.relative_to(root).parts):
+        relative_path = path.relative_to(root)
+        if not path.is_file() or SKIP.intersection(relative_path.parts):
+            continue
+        # Raw source payloads are preserved byte-for-byte; text conventions
+        # apply to tracked records and code, not publisher-delivered payloads.
+        if relative_path.parts[:2] == ("data", "raw"):
             continue
         if path.suffix not in {".md", ".yaml", ".yml", ".json", ".py"} and path.name not in {".editorconfig", ".gitignore", ".gitattributes"}:
             continue
