@@ -47,6 +47,24 @@ def now_utc() -> str:
     )
 
 
+def format_bytes(byte_count: int) -> str:
+    amount = float(byte_count)
+    for unit in ("bytes", "KiB", "MiB", "GiB", "TiB"):
+        if amount < 1024 or unit == "TiB":
+            if unit == "bytes":
+                return f"{byte_count:,} bytes"
+            return f"{amount:.1f} {unit}"
+        amount /= 1024
+    return f"{byte_count:,} bytes"
+
+
+def format_duration(seconds: float) -> str:
+    if seconds < 60:
+        return f"{seconds:.1f} seconds"
+    minutes, remaining_seconds = divmod(int(seconds), 60)
+    return f"{minutes:,} min {remaining_seconds:02d} sec"
+
+
 def sha256_bytes(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
 
@@ -128,7 +146,9 @@ def fetch_page(
             )
         delay = 2 ** (attempt_number - 1)
         print(
-            f"Page {page_number} request failed ({detail}); retrying in {delay}s",
+            f"[WARN] Page {page_number:,} request failed ({detail}). "
+            f"Retrying in {delay} seconds "
+            f"(attempt {attempt_number}/{MAX_ATTEMPTS}).",
             file=sys.stderr,
             flush=True,
         )
@@ -372,11 +392,17 @@ def download(run_dir: Path, manifest: dict[str, object], seen: set[str]) -> int:
         manifest["duplicate_record_ids"] = duplicate_count
         save_manifest(run_dir, manifest)
 
+        total_records = int(expected_total)
+        total_pages = max(1, (total_records + PAGE_SIZE - 1) // PAGE_SIZE)
+        percent_complete = (
+            100.0 if total_records == 0 else record_count / total_records * 100
+        )
+        stored_bytes = sum(int(item["response_body_bytes"]) for item in pages)
         print(
-            f"Saved page {page_number}: {len(batch)} records; "
-            f"{record_count}/{expected_total}; "
-            f"{manifest['response_body_bytes']:,} response-body bytes so far",
-            file=sys.stderr,
+            f"[PROGRESS] Page {page_number:,}/{total_pages:,} | "
+            f"{record_count:,}/{total_records:,} records "
+            f"({percent_complete:.1f}%) | "
+            f"{format_bytes(stored_bytes)} of raw JSON saved.",
             flush=True,
         )
         if batch:
@@ -401,13 +427,23 @@ def download(run_dir: Path, manifest: dict[str, object], seen: set[str]) -> int:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(
+        description="Download every OBIS occurrence returned for Area 230.",
+        epilog=(
+            "Examples:\n"
+            "  python src/data_collection/obis_occurrences.py\n"
+            "  python src/data_collection/obis_occurrences.py --resume "
+            "data/raw/obis/json/<run-directory>"
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
     parser.add_argument(
         "--resume",
         type=Path,
         help="resume an incomplete Area 230 JSON run directory under data/raw/obis/json",
     )
     args = parser.parse_args()
+    started_at = time.perf_counter()
 
     try:
         JSON_ROOT.mkdir(parents=True, exist_ok=True)
@@ -425,31 +461,83 @@ def main() -> int:
             seen = set()
             save_manifest(run_dir, manifest)
 
+        run_path = run_dir.relative_to(ROOT).as_posix()
+        print("OCEAVERA | OBIS Area 230 occurrence download")
+        print("Scope: all taxa; absence and dropped records included; no record filters.")
+        print(f"Run mode: {'resume' if args.resume else 'new download'}")
+        print(f"Raw JSON folder: {run_path}")
+        if manifest.get("expected_records") is not None:
+            print(
+                f"API total: {int(manifest['expected_records']):,} records; "
+                f"already saved: {int(manifest['records_downloaded']):,}."
+            )
+        else:
+            print("Checking the live API total while retrieving the first page.")
+        print()
+
         download(run_dir, manifest, seen)
-        print(json.dumps({
-            "status": manifest["status"],
-            "run_id": manifest["run_id"],
-            "json_directory": run_dir.relative_to(ROOT).as_posix(),
-            "records": manifest["records_downloaded"],
-            "unique_record_ids": manifest["unique_record_ids"],
-            "pages": len(manifest["pages"]),
-            "response_body_bytes": manifest["response_body_bytes"],
-            "manifest": manifest_path(run_dir).relative_to(ROOT).as_posix(),
-        }, indent=2))
+        stored_bytes = sum(
+            int(item["response_body_bytes"]) for item in manifest["pages"]
+        )
+        print("\n[OK] Download completed and verified.")
+        print(f"  Records: {int(manifest['records_downloaded']):,}")
+        print(f"  Unique record IDs: {int(manifest['unique_record_ids']):,}")
+        print(f"  Duplicate record IDs: {int(manifest['duplicate_record_ids']):,}")
+        print(f"  Pages saved: {len(manifest['pages']):,}")
+        print(f"  Raw JSON size: {format_bytes(stored_bytes)}")
+        print(f"  Run folder: {run_path}")
+        print(
+            f"  Manifest: "
+            f"{manifest_path(run_dir).relative_to(ROOT).as_posix()}"
+        )
+        print(f"  Elapsed: {format_duration(time.perf_counter() - started_at)}")
+        print("\nNext step - convert this run to CSV:")
+        print(
+            "  python src/data_collection/obis_json_to_csv.py "
+            f"--json-run {run_path}"
+        )
         return 0
     except KeyboardInterrupt:
         if "run_dir" in locals() and "manifest" in locals():
             manifest["status"] = "interrupted"
             manifest["error"] = "Interrupted; completed JSON pages remain available to resume"
             save_manifest(run_dir, manifest)
-        print("Download interrupted. Completed raw pages are preserved; resume with --resume.", file=sys.stderr)
+            run_path = run_dir.relative_to(ROOT).as_posix()
+            print(
+                "\n[WARN] Download interrupted. Completed JSON pages are preserved.",
+                file=sys.stderr,
+            )
+            print(f"  Run folder: {run_path}", file=sys.stderr)
+            print(
+                "  Resume with: python src/data_collection/obis_occurrences.py "
+                f"--resume {run_path}",
+                file=sys.stderr,
+            )
+        else:
+            print("\n[WARN] Download interrupted before a run was created.", file=sys.stderr)
         return 130
     except (DownloadError, HTTPError, URLError, TimeoutError, OSError, ValueError) as error:
         if "run_dir" in locals() and "manifest" in locals():
             manifest["status"] = "failed"
             manifest["error"] = f"{type(error).__name__}: {error}"
             save_manifest(run_dir, manifest)
-        print(f"OBIS Area 230 download failed: {error}", file=sys.stderr)
+        print(f"\n[ERROR] OBIS Area 230 download did not complete: {error}", file=sys.stderr)
+        if "run_dir" in locals():
+            print(
+                f"  Run folder: {run_dir.relative_to(ROOT).as_posix()}",
+                file=sys.stderr,
+            )
+        if (
+            "run_dir" in locals()
+            and "manifest" in locals()
+            and manifest.get("status") != "complete"
+        ):
+            print("  Completed raw pages are preserved.", file=sys.stderr)
+            print(
+                "  Resume with: python src/data_collection/obis_occurrences.py "
+                f"--resume {run_dir.relative_to(ROOT).as_posix()}",
+                file=sys.stderr,
+            )
         return 1
 
 

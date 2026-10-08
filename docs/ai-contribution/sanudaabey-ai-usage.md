@@ -181,3 +181,29 @@
 - **Summary of what the AI Agent did:** Extended the existing repository-check workflow to cover all branch pushes and syntax-compile the OBIS API downloader, JSON-to-CSV converter and raw-to-interim handoff. Updated the workflow guide, root README, readiness review and decision register, and added D-040. Also corrected the development-backup status wording to distinguish cached remote-tracking refs from live GitHub state. The workflow does not execute these scripts or retrieve dataset data.
 - **AI output accepted/changed/rejected:** The workflow and documentation changes are retained in the worktree for human review. No separate workflow, data-acquisition job, commit or publication was added or requested.
 - **Verification/evidence:** Acting identity follows the user's explicit attribution request and the [canonical contributor mapping](../project/ai-team-members.md). The structural helper passed with 8 skills, 10 rules, 12 routing review cases, 100 text files, 786 local links, 105 Markdown section links, four contributor identities, two contribution logs and 29 dated entries; `git diff --check` passed. The workflow YAML/Actions logic was manually reviewed; `actionlint` is unavailable. No test suite, acquisition script or hosted workflow was run. Local remote-tracking refs for `dev` and `dev-backup` were inspected without querying GitHub.
+
+## 2026-10-08 — Document the OBIS JSON-to-CSV commands
+
+- **Date/time or time range:** 2026-10-08, 17:23:03 Asia/Colombo (UTC+05:30); task duration not recorded
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; local repository tools
+- **AI Model:** GPT-6; exact serving identifier unavailable
+- **Summary of the user's request:** Add runnable command examples for `obis_json_to_csv.py` to the source README, matching the other OBIS scripts.
+- **Summary of what the AI Agent did:** Added the default command, which converts the newest complete JSON run, and an example using `--json-run` to select a specific complete JSON directory in `src/README.md`.
+- **AI output accepted/changed/rejected:** The documentation update is retained in the worktree for human review. The converter and data files were not changed.
+- **Verification/evidence:** Acting identity follows the user's explicit attribution request and the [canonical contributor mapping](../project/ai-team-members.md). The structural helper passed: 8 skills, 10 rules, 12 routing review cases, 100 text files, 787 local links, 105 Markdown section links, four contributor identities, two contribution logs and 30 dated entries. `git diff --check` passed. The documented commands were checked against the converter's argument parser; the converter and dataset were not run.
+
+## 2026-10-08 — Improve OBIS script console experience
+
+- **Date/time or time range:** 2026-10-08, 17:40:55 Asia/Colombo (UTC+05:30); task duration not recorded
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; local repository tools; bundled Python runtime
+- **AI Model:** GPT-6; exact serving identifier unavailable
+- **Summary of the user's request:** Replace JSON-like console output with user-friendly messages in the OBIS JSON-to-CSV converter and improve the console experience of the occurrence downloader and CSV staging script.
+- **Summary of what the AI Agent did:** Added human-readable summaries and progress messages to all three OBIS scripts. The downloader reports scope, page/record progress, saved paths and a resume command after an interruption; the converter reports source verification, row progress, output/checksum details and the next staging command; the staging script reports validation/copy progress and its verified output details. Updated `src/README.md` to explain the console output and retained JSON manifests as files.
+- **AI output accepted/changed/rejected:** The code and documentation changes are retained in the worktree for human review. Data paths, transformation contracts and manifest schemas were preserved; no dataset was downloaded, converted or staged.
+- **Verification/evidence:** Acting identity follows the user's explicit attribution request and the [canonical contributor mapping](../project/ai-team-members.md). Python AST syntax parsing passed for all three scripts. The structural helper passed: 8 skills, 10 rules, 12 routing review cases, 100 text files, 788 local links, 105 Markdown section links, four contributor identities, two contribution logs and 31 dated entries. `git diff --check` passed. No data script, test suite or dataset was run.

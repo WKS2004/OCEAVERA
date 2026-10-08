@@ -7,9 +7,10 @@ import csv
 import hashlib
 import json
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Iterator
+from typing import Callable, Iterator
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -94,10 +95,40 @@ class ConversionError(Exception):
     """Raised when source JSON cannot be proven complete before conversion."""
 
 
+ProgressReporter = Callable[[str], None]
+
+
 def now_utc() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds").replace(
         "+00:00", "Z"
     )
+
+
+def format_bytes(byte_count: int) -> str:
+    amount = float(byte_count)
+    for unit in ("bytes", "KiB", "MiB", "GiB", "TiB"):
+        if amount < 1024 or unit == "TiB":
+            if unit == "bytes":
+                return f"{byte_count:,} bytes"
+            return f"{amount:.1f} {unit}"
+        amount /= 1024
+    return f"{byte_count:,} bytes"
+
+
+def format_duration(seconds: float) -> str:
+    if seconds < 60:
+        return f"{seconds:.1f} seconds"
+    minutes, remaining_seconds = divmod(int(seconds), 60)
+    return f"{minutes:,} min {remaining_seconds:02d} sec"
+
+
+def report_progress(progress: ProgressReporter | None, message: str) -> None:
+    if progress is not None:
+        progress(message)
+
+
+def progress_interval(total: int) -> int:
+    return max(1, (total + 9) // 10)
 
 
 def sha256_file(path: Path) -> str:
@@ -136,11 +167,16 @@ def resolve_run(run_path: Path | None) -> tuple[Path, dict[str, object]]:
         manifest = json.loads(path.read_text(encoding="utf-8"))
         if manifest.get("format") == EXPECTED_FORMAT and manifest.get("status") == "complete":
             return candidate, manifest
-    raise ConversionError("No complete Area 230 JSON run was found")
+    raise ConversionError(
+        "No complete Area 230 JSON run was found. Retrieve a run first with "
+        "python src/data_collection/obis_occurrences.py."
+    )
 
 
 def check_manifest(
-    run_dir: Path, manifest: dict[str, object]
+    run_dir: Path,
+    manifest: dict[str, object],
+    progress: ProgressReporter | None = None,
 ) -> tuple[list[str], int, list[str]]:
     query = manifest.get("query")
     if not isinstance(query, dict):
@@ -210,6 +246,13 @@ def check_manifest(
         if first_id != entry.get("first_id") or previous_last != entry.get("last_id"):
             raise ConversionError(f"JSON page ID boundary mismatch: {name}")
         record_count += len(batch)
+        report_every = max(1, (len(pages) + 4) // 5)
+        if number % report_every == 0 or number == len(pages):
+            report_progress(
+                progress,
+                f"Verified JSON pages: {number:,}/{len(pages):,} "
+                f"({record_count:,} records checked).",
+            )
 
     if record_count != expected or len(seen_ids) != expected:
         raise ConversionError(
@@ -255,10 +298,18 @@ def convert(
     run_dir: Path,
     manifest: dict[str, object],
     replace_existing: bool = False,
+    progress: ProgressReporter | None = None,
 ) -> dict[str, object]:
-    fields, expected_count, fields_not_returned = check_manifest(run_dir, manifest)
+    fields, expected_count, fields_not_returned = check_manifest(
+        run_dir, manifest, progress=progress
+    )
     if not fields and expected_count:
         raise ConversionError("No occurrence fields were found in the downloaded JSON")
+    report_progress(
+        progress,
+        f"Source verification passed: {expected_count:,} records, "
+        f"{len(manifest['pages']):,} JSON pages and {len(fields):,} CSV columns.",
+    )
 
     CSV_ROOT.mkdir(parents=True, exist_ok=True)
     run_id = str(manifest["run_id"])
@@ -280,6 +331,7 @@ def convert(
             )
     temporary_path = output_path.with_suffix(".csv.part")
 
+    report_progress(progress, "Writing the CSV from all verified source records...")
     with temporary_path.open("x", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(
             stream,
@@ -292,6 +344,15 @@ def convert(
         for record in iter_records(run_dir, manifest):
             writer.writerow({field: csv_cell(csv_value(record, field)) for field in fields})
             written += 1
+            if written % progress_interval(expected_count) == 0 or written == expected_count:
+                percentage = (
+                    100.0 if expected_count == 0 else written / expected_count * 100
+                )
+                report_progress(
+                    progress,
+                    f"CSV rows written: {written:,}/{expected_count:,} "
+                    f"({percentage:.1f}%).",
+                )
         stream.flush()
 
     if written != expected_count:
@@ -299,6 +360,7 @@ def convert(
         raise ConversionError(f"Wrote {written} CSV records; expected {expected_count}")
 
     # Verify every row and column against the retained raw JSON before publishing.
+    report_progress(progress, "Comparing every CSV row with its source JSON record...")
     with temporary_path.open("r", encoding="utf-8", newline="") as stream:
         reader = csv.DictReader(stream)
         if reader.fieldnames != fields:
@@ -311,6 +373,15 @@ def convert(
                 temporary_path.unlink(missing_ok=True)
                 raise ConversionError(f"CSV value verification failed at row {checked + 1}")
             checked += 1
+            if checked % progress_interval(expected_count) == 0 or checked == expected_count:
+                percentage = (
+                    100.0 if expected_count == 0 else checked / expected_count * 100
+                )
+                report_progress(
+                    progress,
+                    f"CSV rows verified: {checked:,}/{expected_count:,} "
+                    f"({percentage:.1f}%).",
+                )
         if checked != expected_count or next(reader, None) is not None:
             temporary_path.unlink(missing_ok=True)
             raise ConversionError("CSV row count verification failed")
@@ -356,10 +427,20 @@ def convert(
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(
+        description="Convert a complete, verified OBIS Area 230 JSON run to CSV.",
+        epilog=(
+            "Examples:\n"
+            "  python src/data_collection/obis_json_to_csv.py\n"
+            "  python src/data_collection/obis_json_to_csv.py --json-run "
+            "data/raw/obis/json/<run-directory>"
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
     parser.add_argument(
         "--json-run",
         type=Path,
+        metavar="DIRECTORY",
         help="specific complete JSON run directory; default is the newest complete run",
     )
     parser.add_argument(
@@ -368,13 +449,50 @@ def main() -> int:
         help="replace an existing verified CSV/receipt pair only when it refers to the same JSON run",
     )
     args = parser.parse_args()
+    started_at = time.perf_counter()
+    print("OCEAVERA | OBIS JSON-to-CSV conversion")
     try:
         run_dir, manifest = resolve_run(args.json_run)
-        receipt = convert(run_dir, manifest, replace_existing=args.replace_existing)
-        print(json.dumps(receipt, indent=2))
+        run_path = run_dir.relative_to(ROOT).as_posix()
+        print(f"Source JSON run: {run_path}")
+        print(f"Output folder: {CSV_ROOT.relative_to(ROOT).as_posix()}")
+        print("[INFO] Checking the run manifest, page checksums and record IDs.")
+
+        def show_progress(message: str) -> None:
+            print(f"[INFO] {message}", flush=True)
+
+        receipt = convert(
+            run_dir,
+            manifest,
+            replace_existing=args.replace_existing,
+            progress=show_progress,
+        )
+        print("\n[OK] CSV conversion completed and verified.")
+        print(f"  Records preserved: {int(receipt['records']):,}")
+        print(f"  JSON pages verified: {len(manifest['pages']):,}")
+        print(f"  CSV rows compared with source JSON: {int(receipt['records']):,}")
+        print(f"  Columns: {int(receipt['column_count']):,}")
+        print(
+            "  OBIS Data Access fields absent under their documented API keys: "
+            f"{len(receipt['access_fields_not_returned_as_api_keys']):,} "
+            "(all documented columns remain in the CSV schema)"
+        )
+        print(f"  CSV file: {receipt['csv']}")
+        print(f"  CSV size: {format_bytes(int(receipt['csv_bytes']))}")
+        print(f"  CSV SHA-256: {receipt['csv_sha256']}")
+        receipt_path = CSV_ROOT / f"area-230-{manifest['run_id']}.manifest.json"
+        print(f"  Receipt: {receipt_path.relative_to(ROOT).as_posix()}")
+        print(f"  Elapsed: {format_duration(time.perf_counter() - started_at)}")
+        print("  Original JSON pages were not changed.")
+        print("\nNext step - stage this CSV for source validation:")
+        print(
+            "  python src/data_preparation/stage_obis_csv.py "
+            f"--obis-csv {receipt['csv']}"
+        )
         return 0
     except (ConversionError, OSError, ValueError, csv.Error) as error:
-        print(f"OBIS Area 230 CSV conversion failed: {error}", file=sys.stderr)
+        print(f"\n[ERROR] CSV conversion did not complete: {error}", file=sys.stderr)
+        print("  Any existing source JSON pages were left unchanged.", file=sys.stderr)
         return 1
 
 

@@ -43,6 +43,19 @@ from the same JSON run. Neither script writes occurrence data to
 `data/interim/` or deletes earlier runs. The exact raw responses remain the
 lossless source for the CSV copy.
 
+From the repository root, convert the newest complete JSON run with:
+
+```text
+python src/data_collection/obis_json_to_csv.py
+```
+
+To select a particular complete run instead, pass its directory with
+`--json-run`:
+
+```text
+python src/data_collection/obis_json_to_csv.py --json-run data/raw/obis/json/<run-directory>
+```
+
 ## OBIS raw-to-interim handoff
 
 [`stage_obis_csv.py`](data_preparation/stage_obis_csv.py) accepts the selected
@@ -67,6 +80,11 @@ phase folders under `data/interim/obis/`; each script reads the preceding
 phase's fixed path and writes its own fixed path without timestamps. This
 branch contains no Bio-ORACLE code; its phase-folder layout is documented for
 future work only.
+
+The three OBIS commands print readable status, progress and completion details
+in the console. Their machine-readable provenance remains in the JSON manifests
+saved alongside the raw or interim data; the converter does not print the full
+receipt as JSON to the console.
 
 The API currently reports a live total during retrieval; the actual count,
 page hashes, response-body bytes and CSV fingerprint are recorded in the
