@@ -568,3 +568,21 @@
   ```text
   git diff --check
   ```
+
+## 2026-10-08 — PR #2 review-finding fixes
+
+- **Date/time or time range:** 8 October 2026, 23:15:11 Asia/Colombo (UTC+05:30); record timestamp, not a verified task-duration interval.
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell, Git and the bundled Python standard library.
+- **AI Model:** GPT-6 family; exact variant unavailable in session metadata.
+- **Summary of the user's request:** Fix the three actionable findings from the private review of OCEAVERA PR #2.
+- **Summary of what the AI Agent did:** Confirmed the clean checkout matched the pinned PR head. Moved D-041 through D-045 into the decision-register table, restored the root pointers to agent guidance, and removed the notebook's occurrence-level preview code and saved OBIS rows while retaining aggregate verification output.
+- **AI output accepted/changed/rejected:** The requested changes are retained in the local worktree. Human review of these edits is pending; no commit or publication was made.
+- **Verification/evidence:** The user explicitly corrected attribution to Sanuda Abeysinghe (`sanudaabey`), matching the canonical contributor mapping. `git diff --check` passed. The notebook JSON parsed, and all nine code cells executed sequentially offline with the available Python 3.12.14 standard-library runtime; eight saved output blocks matched. The remaining runtime banner differs because saved output records an earlier Python 3.14.8 run and no local 3.14 environment was available. No network request or dataset-file write occurred.
+
+  Copyable check command:
+  ```text
+  git diff --check
+  ```

@@ -4,6 +4,7 @@ OCEAVERA is the marine habitat intelligence project proposed for IT3091. Read [P
 
 ## Rules for every task
 
+- For each task, read the [agent guide](.agents/README.md), [repository map](.agents/repository-map.md) and [task routing guide](.agents/routing.md) to load the applicable project rules and workflow.
 - Inspect existing changes and preserve work outside the request. Use the [responsibility overview](docs/project/member-responsibilities.md), the relevant linked member file and common duties for allocated work, adopted at the user's explicit request. Change allocations only with explicit authorisation and a recorded decision; never infer completed contributions, approvals, findings or model results from planned ownership.
 - Follow [CONTRIBUTING.md](CONTRIBUTING.md). Keep requirements, scope, the [decision register](docs/project/decision-register.md) and readiness consistent; preserve superseded decisions with replacement links.
 - Do not create, modify or remove a Python environment, or install, upgrade or remove Python packages, unless the user explicitly authorises that operation in the current task. Setup commands in documentation and changes to `requirements.txt` do not grant permission to execute environment or package commands. Do not retain a Python environment directory in the repository.
