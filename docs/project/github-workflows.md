@@ -40,10 +40,16 @@ version file when changing the baseline so local Conda setup and CI stay aligned
 | --- | --- |
 | Workflow name | Lowercase branch policy |
 | Trigger | GitHub `create` event; only branch creations are evaluated |
-| Rule | `branch === branch.toLowerCase()`; no name list, prefixes or branch-pattern rules |
+| Rule | Lowercase-only comparison; exact code is shown below. No name list, prefixes or branch-pattern rules |
 | Action | Delete an uppercase branch reference, then fail the workflow run |
 | Permissions | `contents: write` for the GitHub reference deletion API |
 | Action pin | Official GitHub Script v9.0.0 release pinned to its full commit SHA |
+
+The lowercase-name comparison is:
+
+```js
+branch === branch.toLowerCase()
+```
 
 Commit this workflow to the default branch before relying on it for new branch creations. GitHub repository permissions and branch rules must permit the Actions token to delete the created branch. GitHub rejects attempts to delete the default branch, so keep the configured default branch lowercase. Uppercase branches already present when the workflow is enabled are not deleted by its creation-only trigger.
 
@@ -85,7 +91,7 @@ The supplied workflow analysis was reviewed against actual repository contents. 
 | Automation area | Prerequisites for introduction |
 | --- | --- |
 | Further source quality and unit checks | Agreed scientific environment, executable modules and relevant checks authorised with their implementation; the existing syntax compilation is not a substitute |
-| Notebook execution | Actual notebooks, a reproducible environment, bounded execution and a shareable small input; execute a copy and review output privacy before publishing artefacts |
+| Analytical notebook execution | An authorised scientific notebook, reproducible environment, bounded execution and a shareable small input; execute a copy and review output privacy before publishing artefacts |
 | Data validation | Actual dataset/manifest contracts, source fingerprints and recorded taxonomic, spatial, temporal, target and leakage policies; blank templates are not dataset evidence |
 | Pipeline smoke checks | Implemented preprocessing, training and evaluation entry points plus a small deterministic fixture; assess expected behaviour without downloading full source datasets on each pull request |
 | Experiment reproduction | A recorded experiment, pinned environment and retrievable, permitted data snapshot; use explicit manual or narrowly scoped triggers for expensive execution |
@@ -93,6 +99,8 @@ The supplied workflow analysis was reviewed against actual repository contents. 
 | BLUEVERSE integration checks | An authorised integration surface and actual inference contract, with agreed analytical handover and scope |
 
 Introduce these checks as their prerequisites are met. Full training, scheduled acquisition/retraining, deployment and automatic model publication require separate scope and evidence decisions. Preserve the [ML evidence gates](../ml/ml-workflow-and-evidence-gates.md); a green structural check does not advance them.
+
+Branch work notebooks under notebooks/branch_work/ follow D-041, D-042, D-044 and D-045. Use native Markdown cells for narrative and concise executable Python Code cells for operations; run every Code cell in order during notebook review. CI does not execute them. The default notebook mode is offline, saved files are read-only, and notebook data processing stays in memory without writing dataset outputs.
 
 ## Maintenance and official references
 

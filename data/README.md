@@ -68,7 +68,10 @@ third-party Python package, declare its exact version in the root
 [setup instructions](../CONTRIBUTING.md#python-dependencies) in the same change.
 The documented Conda environment for running current Python tooling is named
 `OCEAVERA`; its version comes from the root [`.python-version`](../.python-version).
-Follow the setup steps in the [root README](../README.md#create-the-conda-environment).
+Follow the user-led setup steps in the [root README](../README.md#create-the-conda-environment).
+Agents require explicit prior user authorisation before creating, modifying or
+removing an environment or installing, upgrading or removing packages. This
+repository does not store a Python environment; see the [contributor policy](../CONTRIBUTING.md#python-dependencies).
 
 Preserve publisher files unchanged: the OBIS API's JSON pages are retained byte-for-byte; the CSV is produced separately from the complete pages and validated against them. NetCDF environmental arrays remain an anticipated example until a specific layer is verified. Extract selected raster values at modelling locations into derived tables; do not flatten complete environmental grids. Record actual formats and fingerprints in source records/manifests. COG (`.tif`) and ONNX (`.onnx`) remain optional, unfinalised future BLUEVERSE integration suggestions, not required OCEAVERA data/model formats.
 
