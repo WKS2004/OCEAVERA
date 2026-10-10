@@ -23,7 +23,7 @@ The [readiness review](docs/project/repository-readiness-and-alignment.md) recor
 - An OBIS-only raw-to-interim handoff that accepts a selected CSV and stages a byte-preserving copy in a stable source-phase folder.
 - The first catalog-wide Bio-ORACLE v3 intake and a later partial manual snapshot were deleted at the user's request. The final Python collector run under D-047/D-048 completed all 356 regional grids and 2,392 variables (4,017,532,960 payload bytes); every payload passed byte-count, SHA-256 and NetCDF-signature checks, with zero failed or pending layers. The [regional source record](docs/records/2026-10-09-source-bio-oracle-sri-lanka-catalog.md) preserves all run histories and the audit. The retrieved source axes exposed baseline coordinates at 2000/2010 and SSP coordinates at 2020–2090; there is no separate 2100 snapshot.
 - Bio-ORACLE provides decade summaries, not annual values. Its publisher-level present-day product spans 2000–2020, split into 2000–2010 and 2010–2020 decades; whether every baseline layer includes the full period through 2020 is unresolved because layer titles end in 2018, 2019 or 2020 while retrieved time metadata labels only 2000/2010. SSP labels run from 2020 through 2090, with the final decade reaching the 2100 horizon but no separate 2100 timestamp. See the [source record](docs/records/2026-10-09-source-bio-oracle-sri-lanka-catalog.md).
-- The [branch work notebook](notebooks/branch_work/pipeline_biological_data_collection.ipynb), which documents the branch and runs its offline CSV demonstration in memory.
+- The [branch work notebook](notebooks/branch_work/01_pipeline_biological_data_collection.ipynb), which documents the branch and runs its offline CSV demonstration in memory.
 
 **Pending**
 
@@ -133,7 +133,7 @@ still use only the standard library. To open the branch notebook from the
 repository root, run:
 
 ```text
-jupyter notebook notebooks/branch_work/pipeline_biological_data_collection.ipynb
+jupyter notebook notebooks/branch_work/01_pipeline_biological_data_collection.ipynb
 ```
 
 The branch notebook uses native Markdown cells for its title, contributor table, scope and data context, followed by concise executable Python Code cells. Run the Code cells in order. The default mode does not access the network, and notebook data work remains in memory rather than writing dataset files.
