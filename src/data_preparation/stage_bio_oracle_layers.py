@@ -173,8 +173,22 @@ def validate_receipt(
     receipt, receipt_bytes = read_json_bytes(receipt_path, label=f"{dataset_id} receipt")
     if receipt.get("status") != "complete":
         raise StageError(f"The {dataset_id} layer receipt is not complete")
-    if receipt.get("catalog_run_id") != run.get("catalog_run_id"):
-        raise StageError(f"The {dataset_id} receipt belongs to a different catalogue run")
+    receipt_run_id = receipt.get("catalog_run_id")
+    if layer.get("status") == "complete":
+        if receipt_run_id != run.get("catalog_run_id"):
+            raise StageError(f"The {dataset_id} receipt belongs to a different catalogue run")
+    elif layer.get("status") == "reused":
+        if (
+            not isinstance(receipt_run_id, str)
+            or not receipt_run_id
+            or receipt_run_id == run.get("catalog_run_id")
+        ):
+            raise StageError(
+                f"The {dataset_id} reused receipt does not identify "
+                "its original catalogue run"
+            )
+    else:
+        raise StageError(f"The {dataset_id} run entry has an unsupported status")
     if receipt.get("dataset_id") != dataset_id:
         raise StageError(f"The {dataset_id} receipt has a mismatched dataset ID")
 
@@ -287,8 +301,13 @@ def inspect_run(
     seen_ids: set[str] = set()
     seen_payloads: set[Path] = set()
     for index, layer in enumerate(layers, start=1):
-        if not isinstance(layer, dict) or layer.get("status") != "complete":
-            raise StageError("Every layer in the selected catalogue run must be complete")
+        if (
+            not isinstance(layer, dict)
+            or layer.get("status") not in {"complete", "reused"}
+        ):
+            raise StageError(
+                "Every layer in the selected catalogue run must be complete or reused"
+            )
         dataset_id = layer.get("dataset_id")
         if not isinstance(dataset_id, str) or not DATASET_ID_PATTERN.fullmatch(dataset_id):
             raise StageError("The run manifest contains an invalid dataset ID")

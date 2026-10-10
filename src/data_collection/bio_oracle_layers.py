@@ -893,6 +893,8 @@ def _reusable_download(
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
             if (
                 manifest.get("status") != "complete"
+                or not isinstance(manifest.get("catalog_run_id"), str)
+                or not manifest.get("catalog_run_id")
                 or manifest.get("dataset_id") != dataset_id
                 or manifest.get("query_url") != item["query_url"]
                 or manifest.get("region") != plan.get("region")
