@@ -2,7 +2,7 @@
 
 ## Current automation
 
-[Repository checks](../../.github/workflows/ci.yml) runs the [structural helper](../../.agents/scripts/validate_agent_resources.py) and compiles the current OBIS intake and handoff scripts for syntax on pull requests, pushes to every branch and manual dispatch. The push trigger has no branch-name allowlist or pattern; tag pushes create a workflow run whose check job is skipped. Each check-job run checks the complete maintained text inventory, with no path filters or optional checks that silently pass when required files are missing. Python compilation does not execute the scripts or retrieve dataset records.
+[Repository checks](../../.github/workflows/ci.yml) runs the [structural helper](../../.agents/scripts/validate_agent_resources.py) and compiles the current OBIS and Bio-ORACLE intake and handoff scripts for syntax on pull requests, pushes to every branch and manual dispatch. The push trigger has no branch-name allowlist or pattern; tag pushes create a workflow run whose check job is skipped. Each check-job run checks the complete maintained text inventory, with no path filters or optional checks that silently pass when required files are missing. Python compilation does not execute the scripts or retrieve dataset records.
 
 [Development backup maintenance](../../.github/workflows/dev-backup.yml) keeps `dev-backup` at the exact commit on `dev` after pushes to either branch. If the backup branch contains commits absent from `dev`, it first preserves that history on a timestamped rescue branch. This checkout has remote-tracking refs for `dev` and `dev-backup`; those cached refs have not been refreshed against GitHub and do not establish a successful hosted run or working repository permissions.
 
@@ -15,7 +15,7 @@
 | Trigger | Pull requests, pushes to all branches, and manual dispatch; tag-push jobs are skipped |
 | Runner | GitHub-hosted Ubuntu 24.04 |
 | Maintenance interpreter | Python 3.14 from the root `.python-version` file; standard library only |
-| Checks | Maintained structural helper and `py_compile` for the OBIS API downloader, JSON-to-CSV converter and raw-to-interim handoff |
+| Checks | Maintained structural helper and `py_compile` for the OBIS API downloader and converter, Bio-ORACLE catalogue collector, and OBIS/Bio-ORACLE raw-to-interim handoffs |
 | Time limit | Five minutes |
 | Repository token | Read access to repository contents; checkout credentials are not persisted |
 | Dependencies | Official checkout and Python setup actions pinned to full commit SHAs, with release comments |

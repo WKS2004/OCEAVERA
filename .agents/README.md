@@ -41,8 +41,9 @@ The repository helper requires Python 3.10 or later and only its standard librar
 If a maintained agent tool later needs a third-party Python package, declare
 its exact version in the root [`requirements.txt`](../requirements.txt) and
 follow the [dependency update policy](../CONTRIBUTING.md#python-dependencies).
-The manifest pins Jupyter Notebook and `ipykernel` for project notebook use;
-no ML framework or scientific package stack has been selected.
+The manifest pins Jupyter Notebook and `ipykernel` as notebook tooling; no ML
+framework or scientific package stack has been selected. The OBIS and
+Bio-ORACLE intake utilities use only the standard library.
 The documented Conda environment for current Python tooling is named
 `OCEAVERA` and uses the baseline version; see the
 [root setup steps](../README.md#create-the-conda-environment).

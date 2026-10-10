@@ -8,7 +8,8 @@ This document defines the OCEAVERA data and model-artefact storage conventions. 
 | --- | --- | --- |
 | Original occurrence source | OBIS API response JSON (`.json`) | Preserve every complete paginated response unchanged under `data/raw/obis/json/`. Use the Area 230 API query and cursor pages; request all returned fields, include absence and dropped records, and record page hashes, counts, response-body bytes and the final API-reported total. |
 | Area 230 tabular copy | CSV (`.csv`), stored under `data/raw/obis/csv/` by explicit user decision D-036 | Convert only a manifest-verified complete JSON run. Include the union of all top-level fields, all 68 names on the OBIS Data Access page and every record without filtering or deduplication; encode nested values as compact JSON strings. Retain the exact JSON pages as the lossless source because CSV cannot represent JSON types without a conversion convention. |
-| Original environmental arrays | Publisher-delivered format; NetCDF (`.nc`) where supplied | Retain the complete source array in its delivered format. NetCDF is the anticipated form for Bio-ORACLE layers in the proposed workflow, subject to verification of the selected resource. |
+| Environmental layer responses | Publisher-delivered format; NetCDF (`.nc`) for the current Bio-ORACLE ERDDAP collector | Retain each bounded publisher response byte-for-byte under `data/raw/bio_oracle/<dataset-id>/`; record the exact layer, variable, bounds, URL and checksum in its local manifest and dated source record. Keep the returned grid in NetCDF and do not flatten the full raster. |
+| Bio-ORACLE source-validation copy | NetCDF (`.nc`) with unchanged per-layer JSON receipts | The first Bio-ORACLE handoff copies one complete, selected catalogue run to `data/interim/bio_oracle/source_validation/<dataset-id>/`. Verify the D-048 rectangle, requested time window, complete run counts, receipt scope, NetCDF signature, byte count and SHA-256. Keep copied receipts and the catalogue run manifest with a stable aggregate `manifest.json`; do not alter or remove the raw source. This is structural validation, not scientific processing. |
 | Derived spatial tables | GeoParquet, normally using `.parquet` | Use for spatial occurrences, background samples, integrated records and spatial prediction tables when the selected tools support the format. Preserve geometry and its CRS metadata. |
 | Non-spatial modelling tables | Apache Parquet (`.parquet`) | Use for tabular feature matrices or other derived tables when spatial geometry is no longer required and the format is compatible with the agreed tools. Retain stable sample/grid identifiers and lineage. |
 | Dataset manifests, model metadata and compact machine-readable metrics | JSON (`.json`) | Keep metadata and summaries in tracked records outside ignored payload directories. JSON is not the storage format for large tables or rasters. |
@@ -44,11 +45,35 @@ the CSV unchanged to a stable phase folder. The manifest is colocated with the
 output and has no timestamp in its name; it may refer to the timestamped raw
 source path for lineage.
 
+The Bio-ORACLE collector, [`bio_oracle_layers.py`](../../src/data_collection/bio_oracle_layers.py),
+is a fixed, no-option script. Running it inventories the live Bio-ORACLE v3
+catalogue, then downloads all matching grids and their data variables for the
+EEZ-extrema rectangle under [D-048](../records/2026-10-09-decision-bio-oracle-sri-lanka-bbox.md)
+and the requested 2000–2100 time window. It preserves each publisher NetCDF
+response and records its query/checksum in a local manifest; an incremental run
+manifest tracks completed and failed layers. Raw files and local manifests are
+ignored by Git. Bio-ORACLE supplies decade-level values rather than annual
+records; only publisher coordinates within the requested time bounds are
+downloaded. The rectangle is not polygon-clipped and may include land or waters
+outside the EEZ. The script shows stage and transfer progress, retries transient
+response interruptions, and reports a final layer/variable summary with a run
+manifest path. Previous catalogue and download outcomes are recorded in the
+dated intake record. The earlier complete and partial snapshots were deleted
+at the user's request; the latest Python-file run has all 356 of 356 layers
+verified. The user reports running the source-validation handoff, which leaves
+raw data unchanged. Its local aggregate manifest records 356 layers, 2,392
+variables and 4,017,532,960 payload bytes; the current interim inventory
+contains 714 files totaling 4,021,176,513 bytes. The manifest and inventory
+were inspected, but payload hashes were not independently recalculated during
+the later UX update. No scientific environmental processing, integration or
+processed data exists.
+
 | Stage or source | Stable path pattern | Status and use |
 | --- | --- | --- |
 | OBIS source validation | `data/interim/obis/source_validation/occurrences.csv` and adjacent `manifest.json` | Implemented; byte-preserving structural validation only. |
 | Later OBIS phases | `data/interim/obis/<phase>/<artifact>` | Adopted layout; each implemented phase reads the preceding fixed path and writes its own fixed path. |
-| Bio-ORACLE phases | `data/interim/bio_oracle/<phase>/<artifact>` | Documentation only. This branch adds no Bio-ORACLE code or processing. |
+| Bio-ORACLE source validation | `data/interim/bio_oracle/source_validation/<dataset-id>/` with `catalog_run_manifest.json` and adjacent `manifest.json` | Implemented in [`stage_bio_oracle_layers.py`](../../src/data_preparation/stage_bio_oracle_layers.py); the user reports a completed run, and its local manifest/inventory records are summarized above. The script copies a selected complete D-047/D-048 run unchanged after structural and integrity checks; no scientific processing is applied. |
+| Later Bio-ORACLE phases | `data/interim/bio_oracle/<phase>/<artifact>` | Path pattern adopted; scientific processing and integration are not implemented. |
 | Cross-source integration | A fixed, timestamp-free integration-stage path beneath `data/interim/` | Planned; not implemented. |
 | Analysis-ready table | `data/processed/modeling_dataset.parquet` | Stable planned destination; record whether the actual file is GeoParquet or non-spatial Parquet. Processing is not implemented. |
 
@@ -78,7 +103,9 @@ Use descriptive resource IDs and version identifiers consistently in manifests, 
 
 When an integrated dataset is created, complete the [machine-readable manifest](../templates/dataset-manifest.json), including its actual data format and specification version when applicable. Link its source records, dictionary, processing artefact, configuration, counts and fingerprint. This complements the narrative source records; blank template fields establish no acquisition evidence.
 
-OBIS occurrences and Bio-ORACLE layers are proposed core inputs; OBIStherm is only a possible supporting resource. Use current authoritative publisher documentation when actual acquisition begins. Verify the exact resource packaging, access and terms at that time.
+OBIS occurrences and Bio-ORACLE layers are proposed core inputs; OBIStherm is only a possible supporting resource. The D-046 test response's array shape, coordinate centers and fill/non-fill counts remain historical measurements in the [source record](../records/2026-10-09-source-bio-oracle-oceantemperature.md); that payload and its local manifest were deleted at the user's request. Under [D-047](../records/2026-10-09-decision-bio-oracle-catalog-intake.md) and [D-048](../records/2026-10-09-decision-bio-oracle-sri-lanka-bbox.md), the first complete regional acquisition and a later partial manual snapshot were deleted at the user's request. The latest Python-file run completed all 356 grids and 2,392 variables, totaling 4,017,532,960 bytes; every payload matched its recorded size and SHA-256, and all 356 per-layer receipts passed the request-scope audit. The tracked [regional intake record](../records/2026-10-09-source-bio-oracle-sri-lanka-catalog.md) preserves all three outcomes and current run details. The latest payloads and manifests remain in the ignored raw folder. The current ERDDAP axes expose baseline coordinates at 2000/2010 and SSP coordinates at 2020–2090, with no 2100 coordinate in these layers. The deleted test response's fill-cell marine meaning, exact time aggregation and compatibility remain unverified.
+
+The current Bio-ORACLE v3 layers are decade summaries rather than annual values. The publisher defines present-day conditions as 2000–2020 and offers the 2000–2010 and 2010–2020 decades, but the downloaded per-layer metadata does not specify the exact averaging window attached to its 2000/2010 labels. Since titles vary between 2000–2018, 2000–2019 and 2000–2020, coverage through 2020 remains unresolved for individual baseline layers. SSP labels 2020–2090 reach the documented 2100 horizon; 2090 is the last decade label, with no separate 2100 timestamp. See the [regional source record](../records/2026-10-09-source-bio-oracle-sri-lanka-catalog.md) and the publisher's [documentation](https://www.bio-oracle.org/documentation.php).
 
 ## Targets, models and interpretation
 

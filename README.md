@@ -21,11 +21,13 @@ The [readiness review](docs/project/repository-readiness-and-alignment.md) recor
 - The shared repository foundation and member responsibility plan.
 - The unrestricted Area 230 JSON/CSV acquisition method and its recorded validation evidence under D-036.
 - An OBIS-only raw-to-interim handoff that accepts a selected CSV and stages a byte-preserving copy in a stable source-phase folder.
+- The first catalog-wide Bio-ORACLE v3 intake and a later partial manual snapshot were deleted at the user's request. The final Python collector run under D-047/D-048 completed all 356 regional grids and 2,392 variables (4,017,532,960 payload bytes); every payload passed byte-count, SHA-256 and NetCDF-signature checks, with zero failed or pending layers. The [regional source record](docs/records/2026-10-09-source-bio-oracle-sri-lanka-catalog.md) preserves all run histories and the audit. The retrieved source axes exposed baseline coordinates at 2000/2010 and SSP coordinates at 2020–2090; there is no separate 2100 snapshot.
+- Bio-ORACLE provides decade summaries, not annual values. Its publisher-level present-day product spans 2000–2020, split into 2000–2010 and 2010–2020 decades; whether every baseline layer includes the full period through 2020 is unresolved because layer titles end in 2018, 2019 or 2020 while retrieved time metadata labels only 2000/2010. SSP labels run from 2020 through 2090, with the final decade reaching the 2100 horizon but no separate 2100 timestamp. See the [source record](docs/records/2026-10-09-source-bio-oracle-sri-lanka-catalog.md).
 - The [branch work notebook](notebooks/branch_work/pipeline_biological_data_collection.ipynb), which documents the branch and runs its offline CSV demonstration in memory.
 
 **Pending**
 
-Scientific cleaning, Bio-ORACLE acquisition or integration, analytical notebooks, model implementation and model results.
+Scientific cleaning, environmental compatibility review and integration, analytical notebooks, model implementation and model results.
 
 **Open choices and evidence**
 
@@ -33,7 +35,7 @@ The focal species, modelling boundary, compatible environmental resources, ML fr
 
 ## Data and model artefacts
 
-The working convention preserves source files as supplied, uses timestamps for raw acquisition snapshots, and places each interim transformation in a stable phase subfolder under its source. Only the OBIS raw-to-interim handoff accepts a selected run-specific CSV path in this branch; later OBIS stages use their declared fixed paths. Bio-ORACLE's matching folder layout is documented, but no Bio-ORACLE code is included in this branch. GeoParquet is used for compatible derived spatial tables and Parquet for compatible non-spatial ML tables. Actual resource formats, model serialization and experiment environment remain to be verified or selected during authorised work. The [data storage and provenance guide](docs/data/data-storage-and-provenance.md) defines the full conventions. COG and ONNX remain optional, unfinalised suggestions for a future BLUEVERSE integration; neither is an OCEAVERA requirement.
+The working convention preserves raw source responses, uses timestamps for raw acquisition snapshots, and places each interim transformation in a stable phase subfolder under its source. The OBIS handoff accepts a selected run-specific CSV path; the Bio-ORACLE collector inventories the catalogue, requests all variables within explicit bounds and records its query beside each raw NetCDF response. The earlier complete and partial Bio-ORACLE snapshots were deleted at the user's request; the latest local snapshot contains all 356 planned layers and passed transfer-integrity checks. Source compatibility, spatial/temporal alignment and final predictor selection remain subject to review. GeoParquet is used for compatible derived spatial tables and Parquet for compatible non-spatial ML tables. Actual resource formats, model serialization and experiment environment remain to be verified or selected during authorised work. The [data storage and provenance guide](docs/data/data-storage-and-provenance.md) defines the full conventions. COG and ONNX remain optional, unfinalised suggestions for a future BLUEVERSE integration; neither is an OCEAVERA requirement.
 
 ## Start here
 
@@ -73,7 +75,7 @@ Feature engineering is jointly led by Ushan and Adithya; candidate training by A
 | [`data/`](data/README.md) | Raw, interim and processed data; payloads are excluded from Git by default |
 | [`docs/`](docs/README.md) | Canonical project knowledge, templates, dated records and contributor logs |
 | [`notebooks/`](notebooks/README.md) | Branch work notebooks and future reproducible analysis |
-| [`src/data_collection/`](src/README.md) | OBIS Area 230 API retrieval and JSON-to-CSV conversion |
+| [`src/data_collection/`](src/README.md) | OBIS Area 230 retrieval, JSON-to-CSV conversion and catalog-wide Bio-ORACLE regional intake |
 | [`src/data_preparation/`](src/README.md) | OBIS raw-CSV validation and interim staging |
 | [`outputs/`](outputs/README.md) | Future reviewed figures, maps and evaluation artefacts |
 | [`reports/`](reports/README.md) | Future group report and submission material |
@@ -82,7 +84,7 @@ Scientific records belong in `docs/records/`; factual contributor activity belon
 
 ## Repository checks
 
-[Repository checks](.github/workflows/ci.yml) runs the structural helper and syntax-compiles the OBIS intake and handoff scripts on pull requests, pushes to every branch and manual dispatch. It does not run the scripts or download dataset records. See [GitHub workflows](docs/project/github-workflows.md) for operation, failure handling and prerequisites for later scientific checks. The hosted maintenance interpreter does not select the ML runtime; passing these checks does not establish scientific or submission readiness.
+[Repository checks](.github/workflows/ci.yml) runs the structural helper and syntax-compiles the OBIS and Bio-ORACLE intake plus OBIS handoff scripts on pull requests, pushes to every branch and manual dispatch. It does not run the scripts or download dataset records. See [GitHub workflows](docs/project/github-workflows.md) for operation, failure handling and prerequisites for later scientific checks. The hosted maintenance interpreter does not select the ML runtime; passing these checks does not establish scientific or submission readiness.
 
 For documentation and agent-resource changes, run the structural helper from the repository root with Python 3.10 or later:
 
@@ -96,11 +98,13 @@ The helper uses the standard library and checks maintained resource formats, loc
 ## Python dependencies
 
 Python 3.14 is the project baseline, recorded in [`.python-version`](.python-version).
-The current OBIS scripts use the standard library and remain compatible with
-Python 3.10 or later. Jupyter Notebook and `ipykernel` are pinned in the root
-[`requirements.txt`](requirements.txt) so the shared environment can open and
-run Python notebooks. No Python environment is stored in this repository. The
-following commands document setup for you to run when you choose:
+The current OBIS and Bio-ORACLE intake scripts use the standard library and
+remain compatible with Python 3.10 or later. Jupyter Notebook and `ipykernel`
+are pinned in the root [`requirements.txt`](requirements.txt) as notebook
+tooling, not as the ML or scientific stack. No Python environment is stored in
+this repository. The following commands document user-led setup; agents need
+explicit authorisation in the current task before environment or package
+operations:
 
 ```text
 python -m pip install -r requirements.txt

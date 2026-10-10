@@ -1,6 +1,6 @@
 # OCEAVERA agent instructions
 
-OCEAVERA is the marine habitat intelligence project proposed for IT3091. Read [PROJECT_REQUIREMENTS.md](PROJECT_REQUIREMENTS.md), the [overview and scope](docs/project/project-overview-and-scope.md) and [current readiness](docs/project/repository-readiness-and-alignment.md) before making project or completion claims. The current authorised work covers the shared foundation, documented member responsibility plan and repository automation; begin analytical technical stages only when requested.
+OCEAVERA is the marine habitat intelligence project proposed for IT3091. Read [PROJECT_REQUIREMENTS.md](PROJECT_REQUIREMENTS.md), the [overview and scope](docs/project/project-overview-and-scope.md) and [current readiness](docs/project/repository-readiness-and-alignment.md) before making project or completion claims. The shared foundation, documented member responsibility plan and repository automation are established. The user has now authorised the initial Bio-ORACLE environmental data intake under [D-046](docs/records/2026-10-08-decision-bio-oracle-environmental-intake.md); later analytical stages still require a request.
 
 ## Rules for every task
 
