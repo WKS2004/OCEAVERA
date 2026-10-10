@@ -89,7 +89,7 @@ dependencies with:
 python -m pip install -r requirements.txt
 ```
 
-For the current OBIS intake scripts and repository tooling, use the Conda
+For the current data-intake scripts and repository tooling, use the Conda
 environment documented in the root [README](README.md#create-the-conda-environment):
 users can create and activate it with:
 

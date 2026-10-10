@@ -33,5 +33,5 @@ jobs:
       - name: Validate documentation, agent resources and contribution records
         run: python -B .agents/scripts/validate_agent_resources.py
 
-      - name: Check OBIS intake and handoff Python syntax
-        run: python -m py_compile src/data_collection/obis_occurrences.py src/data_collection/obis_json_to_csv.py src/data_preparation/stage_obis_csv.py
+      - name: Check data intake and handoff Python syntax
+        run: python -m py_compile src/data_collection/obis_occurrences.py src/data_collection/obis_json_to_csv.py src/data_collection/bio_oracle_layers.py src/data_preparation/stage_obis_csv.py src/data_preparation/stage_bio_oracle_layers.py

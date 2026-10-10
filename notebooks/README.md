@@ -7,7 +7,7 @@ This directory holds two distinct kinds of notebook:
 - **Branch work notebooks** record what a branch implements and documents when that branch is finalised. They are not personal contribution logs, assessed reflections, scientific source records or model evidence.
 - **Analytical notebooks** support an authorised, reproducible scientific workflow. They identify their data and manifests, row and target meaning, environment, validation boundaries, generated outputs and limitations.
 
-The current branch record is [pipeline_biological_data_collection.ipynb](branch_work/pipeline_biological_data_collection.ipynb). Its opening Markdown cells introduce the branch, contributor table, scope and recorded Area 230 data before the executable Code cells. The default reads and verifies the newest complete local JSON run; if no run exists, it uses a clearly labelled synthetic fixture. CSV conversion is demonstrated in memory. The notebook makes no API requests and writes no dataset output. No exploratory, cleaning, integration or modelling notebook is implemented. The current acquisition and source checks remain documented under [D-036](../docs/records/2026-10-08-decision-obis-area-230-api-csv.md) and its [source record](../docs/records/2026-10-08-source-obis-area-230-api-csv.md).
+The branch work records are [01_pipeline_biological_data_collection.ipynb](branch_work/01_pipeline_biological_data_collection.ipynb) and [02_pipeline_environmental_data_collection.ipynb](branch_work/02_pipeline_environmental_data_collection.ipynb). The biological notebook documents the Area 230 API/CSV intake and read-only handoff under [D-036](../docs/records/2026-10-08-decision-obis-area-230-api-csv.md). The environmental notebook documents the D-047/D-048 Bio-ORACLE catalogue intake, fixed collection rectangle, raw payload and receipt audit, and D-038 source-validation handoff to the stable interim folder. Its offline Code cells read saved manifests, payloads and inventory without making API requests or writing dataset files; staged payload checksums are recorded in the handoff manifest and are not recalculated by the notebook. Both are branch-level implementation summaries, not personal contribution logs. No exploratory, cleaning, integration or modelling notebook is implemented.
 
 ## Branch work notebook convention
 
@@ -17,7 +17,7 @@ Create or update one branch work notebook as the final substantive artefact when
 notebooks/branch_work/<branch_name>.ipynb
 ```
 
-Use the lowercase Git branch name in snake case: replace separators such as `/` and `-` with `_`. For example, `pipeline/biological-data-collection` becomes `pipeline_biological_data_collection.ipynb`.
+Use the lowercase Git branch name in snake case: replace separators such as `/` and `-` with `_`. Add a leading sequence number when related branch notebooks need a fixed reading order. For this collection sequence, the biological notebook is `01_pipeline_biological_data_collection.ipynb` and the environmental notebook is `02_pipeline_environmental_data_collection.ipynb`.
 
 Use this section order so a reader can understand each branch without relying on chat history:
 

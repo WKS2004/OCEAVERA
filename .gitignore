@@ -6,6 +6,8 @@
 !/data/raw/obis/json/.gitkeep
 !/data/raw/obis/csv/
 !/data/raw/obis/csv/.gitkeep
+!/data/raw/bio_oracle/
+!/data/raw/bio_oracle/.gitkeep
 /data/interim/**
 !/data/interim/.gitkeep
 !/data/interim/obis/

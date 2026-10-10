@@ -20,7 +20,7 @@ Use this map to find information, then inspect the actual artefact before claimi
 | Blank evidence forms | [Template index](../docs/templates/README.md) |
 | Dated scientific evidence and detailed decisions | [Record conventions](../CONTRIBUTING.md#project-evidence-records) |
 | Contribution and naming conventions | [Contributor guide](../CONTRIBUTING.md) |
-| Finalised branch implementation summaries | [Branch work notebook index and structure](../notebooks/README.md#branch-work-notebook-convention); [current biological data collection branch notebook](../notebooks/branch_work/pipeline_biological_data_collection.ipynb) |
+| Finalised branch implementation summaries | [Branch work notebook index and structure](../notebooks/README.md#branch-work-notebook-convention); [first biological data collection branch notebook](../notebooks/branch_work/01_pipeline_biological_data_collection.ipynb); [second environmental data collection branch notebook](../notebooks/branch_work/02_pipeline_environmental_data_collection.ipynb) |
 | Actual data, notebooks, code, generated outputs and reports | [Data](../data/README.md), [notebooks](../notebooks/README.md), [source](../src/README.md), [outputs](../outputs/README.md), [reports](../reports/README.md) |
 
 Inspect the relevant directory rather than assuming its README proves technical work exists. Consult the [routing map](routing.md) for the workflow after identifying the task.
