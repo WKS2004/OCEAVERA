@@ -2,7 +2,7 @@
 
 This is the detailed common guide for all four members. The [overview](../member-responsibilities.md) holds the group allocation and complete pipeline matrix; each linked member file holds that person's full activities and handover expectations. The shared duties below preserve proposal Sections 6.1 and 6.6. Requirements, evidence and submission instructions operationalise the maintained project obligations; they do not assign extra exclusive administrative roles.
 
-The contribution plan is finalised for the current scope on 6 October 2026. Its proposal-based allocation remains revisable through recorded decisions. Planned responsibilities do not establish completed contributions, stakeholder engagement or track approval. This documentation review does not initiate technical implementation.
+The contribution plan is finalised for the current scope on 6 October 2026. Its proposal-based allocation remains revisable through recorded decisions. Planned responsibilities do not establish completed contributions, stakeholder engagement or track approval. This plan records expected ownership; actual technical work proceeds under project authorisation and is documented separately.
 
 Follow [member privacy](../../../CONTRIBUTING.md#member-privacy) throughout reporting and contribution recording. Public attribution uses project contributor names and GitHub accounts; member-specific academic identity fields and individual assessment material are excluded. Prepare individual learning submissions through the authorised private submission process.
 

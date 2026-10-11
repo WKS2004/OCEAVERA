@@ -9,7 +9,9 @@ This document defines the OCEAVERA data and model-artefact storage conventions. 
 | Original occurrence source | OBIS API response JSON (`.json`) | Preserve every complete paginated response unchanged under `data/raw/obis/json/`. Use the Area 230 API query and cursor pages; request all returned fields, include absence and dropped records, and record page hashes, counts, response-body bytes and the final API-reported total. |
 | Area 230 tabular copy | CSV (`.csv`), stored under `data/raw/obis/csv/` by explicit user decision D-036 | Convert only a manifest-verified complete JSON run. Include the union of all top-level fields, all 68 names on the OBIS Data Access page and every record without filtering or deduplication; encode nested values as compact JSON strings. Retain the exact JSON pages as the lossless source because CSV cannot represent JSON types without a conversion convention. |
 | Environmental layer responses | Publisher-delivered format; NetCDF (`.nc`) for the current Bio-ORACLE ERDDAP collector | Retain each bounded publisher response byte-for-byte under `data/raw/bio_oracle/<dataset-id>/`; record the exact layer, variable, bounds, URL and checksum in its local manifest and dated source record. Keep the returned grid in NetCDF and do not flatten the full raster. |
-| Bio-ORACLE source-validation copy | NetCDF (`.nc`) with unchanged per-layer JSON receipts | The first Bio-ORACLE handoff copies one complete, selected catalogue run to `data/interim/bio_oracle/source_validation/<dataset-id>/`. Verify the D-048 rectangle, requested time window, complete run counts, receipt scope, NetCDF signature, byte count and SHA-256. Keep copied receipts and the catalogue run manifest with a stable aggregate `manifest.json`; do not alter or remove the raw source. This is structural validation, not scientific processing. |
+| Current Bio-ORACLE interim dataset | One logical NetCDF collection with unchanged per-layer JSON receipts | The only current stage directory is `data/interim/bio_oracle/source_validation/<dataset-id>/`. The layer files and receipts/manifests form one dataset bundle. After validation, a later stage must replace this directory rather than add a sibling phase directory; future cleaning must publish the `cleaning/` directory only after a complete result passes checks. Raw sources remain unchanged. This is structural validation, not scientific processing. |
+| Current OBIS interim dataset | One stage directory, `data/interim/obis/cleaning/`, with one cleaned CSV and support JSON | Keep the cleaned table at `occurrences_cleaned.csv`; place `source_validation_manifest.json`, the column report and run summary in the same directory. This is the only directory directly under `data/interim/obis/`; source validation does not create a sibling directory. |
+| Planned integrated interim dataset | One spatial table in GeoParquet (`.parquet`) when supported | Use the stable destination `data/interim/integrated/integrated_dataset.parquet`; no integrated dataset currently exists. |
 | Derived spatial tables | GeoParquet, normally using `.parquet` | Use for spatial occurrences, background samples, integrated records and spatial prediction tables when the selected tools support the format. Preserve geometry and its CRS metadata. |
 | Non-spatial modelling tables | Apache Parquet (`.parquet`) | Use for tabular feature matrices or other derived tables when spatial geometry is no longer required and the format is compatible with the agreed tools. Retain stable sample/grid identifiers and lineage. |
 | Dataset manifests, model metadata and compact machine-readable metrics | JSON (`.json`) | Keep metadata and summaries in tracked records outside ignored payload directories. JSON is not the storage format for large tables or rasters. |
@@ -29,21 +31,27 @@ Keep the repository's existing `data/raw/`, `data/interim/` and `data/processed/
 | `docs/records/` | Manifests, dictionaries and processing evidence | Track provenance and definitions here, outside ignored data directories. Keep credentials and sensitive payloads out. |
 | `outputs/` | Reviewed figures, maps and evaluation outputs | Include deliberately after checking provenance, rights, size and ecological sensitivity. Identify the generating dataset and work. |
 
-### Timestamp and phase-folder convention
+### Raw-history and interim-current-dataset convention
 
 Use timestamps only to distinguish retained raw acquisition snapshots. Repeated
 downloads may add raw files and consume more local storage; the collector does
-not silently delete prior source responses. The current path decision keeps
-that raw-history trade-off while preventing timestamped copies from
-accumulating at derived stages. Any future retention cleanup must preserve
-the provenance record and be separately authorised.
+not silently delete prior source responses. Under [D-049](../records/2026-10-11-decision-interim-one-current-dataset.md),
+each data family has one current interim dataset. Where a family uses stage
+directories, exactly one active stage directory remains directly beneath the
+family path; a later validated stage replaces it. A single-table family may
+use its fixed dataset-file destination.
+Interim versions are regenerated from raw inputs and scripts rather than
+retained. Raw snapshots and their provenance are unchanged. Manifests,
+diagnostics and run summaries are support metadata, not dataset copies.
 
-At the first OBIS raw-to-interim CSV handoff, provide the selected raw path to
-[`stage_obis_csv.py`](../../src/data_preparation/stage_obis_csv.py). This is the
-only OBIS stage that accepts a run-specific input path. It validates and copies
-the CSV unchanged to a stable phase folder. The manifest is colocated with the
-output and has no timestamp in its name; it may refer to the timestamped raw
-source path for lineage.
+At the OBIS source-validation step, provide the selected raw path to
+[`stage_obis_csv.py`](../../src/data_preparation/stage_obis_csv.py). It checks
+CSV row widths and records the raw file's path, dimensions, byte count and
+SHA-256 in `data/interim/obis/cleaning/source_validation_manifest.json`; it
+does not copy the dataset or create a `source_validation/` directory. The
+cleaner verifies this provenance and writes its CSV and JSON reports into the
+same `cleaning/` directory. The cleaned output therefore replaces the prior
+OBIS phase directory instead of creating a sibling.
 
 The Bio-ORACLE collector, [`bio_oracle_layers.py`](../../src/data_collection/bio_oracle_layers.py),
 is a fixed, no-option script. Running it inventories the live Bio-ORACLE v3
@@ -61,7 +69,10 @@ manifest path. Previous catalogue and download outcomes are recorded in the
 dated intake record. The earlier complete and partial snapshots were deleted
 at the user's request; the latest Python-file run has all 356 of 356 layers
 verified. The user reports running the source-validation handoff, which leaves
-raw data unchanged. Its local aggregate manifest records 356 layers, 2,392
+raw data unchanged. It stages a complete collection in a temporary directory,
+checks the payloads and receipts, then replaces the prior interim collection
+directory only after the full copy succeeds; if publication fails, it restores
+the prior collection. Its local aggregate manifest records 356 layers, 2,392
 variables and 4,017,532,960 payload bytes; the current interim inventory
 contains 714 files totaling 4,021,176,513 bytes. The manifest and inventory
 were inspected, but payload hashes were not independently recalculated during
@@ -70,20 +81,19 @@ processed data exists.
 
 | Stage or source | Stable path pattern | Status and use |
 | --- | --- | --- |
-| OBIS source validation | `data/interim/obis/source_validation/occurrences.csv` and adjacent `manifest.json` | Implemented; byte-preserving structural validation only. |
-| Later OBIS phases | `data/interim/obis/<phase>/<artifact>` | Adopted layout; each implemented phase reads the preceding fixed path and writes its own fixed path. |
-| Bio-ORACLE source validation | `data/interim/bio_oracle/source_validation/<dataset-id>/` with `catalog_run_manifest.json` and adjacent `manifest.json` | Implemented in [`stage_bio_oracle_layers.py`](../../src/data_preparation/stage_bio_oracle_layers.py); the user reports a completed run, and its local manifest/inventory records are summarized above. The script copies a selected complete D-047/D-048 run unchanged after structural and integrity checks; no scientific processing is applied. |
-| Later Bio-ORACLE phases | `data/interim/bio_oracle/<phase>/<artifact>` | Path pattern adopted; scientific processing and integration are not implemented. |
-| Cross-source integration | A fixed, timestamp-free integration-stage path beneath `data/interim/` | Planned; not implemented. |
+| OBIS source validation | `data/interim/obis/cleaning/source_validation_manifest.json` | Implemented; records raw CSV structure and fingerprint without making a copy. The manifest is stored in the sole `cleaning/` directory; there is no sibling `source_validation/` directory. |
+| OBIS occurrence cleaning | `data/interim/obis/cleaning/occurrences_cleaned.csv` plus JSON support files in that same directory | Implemented in [`clean_obis_occurrences_csv.py`](../../src/data_preparation/clean_obis_occurrences_csv.py); keeps protected fields and other columns at least 10% complete, then applies conservative row checks. Current output: 23,371 rows × 112 columns. Evidence: [current cleaning record](../records/2026-10-11-obis-area-230-cleaning.md); earlier 90% screen and row-filter trial remain historical. |
+| Current Bio-ORACLE dataset | One replaceable bundle at `data/interim/bio_oracle/source_validation/<dataset-id>/` | Implemented in [`stage_bio_oracle_layers.py`](../../src/data_preparation/stage_bio_oracle_layers.py). A complete D-047/D-048 run's NetCDF layers and JSON receipts/manifests form one collection; validation precedes whole-directory replacement. This is currently the only stage directory under `data/interim/bio_oracle/`. When cleaning is implemented, the validated `cleaning/` directory must replace it rather than coexist beside it. The current aggregate manifest records 356 layers and 2,392 variables. No scientific processing is applied. |
+| Integrated dataset | One current table at `data/interim/integrated/integrated_dataset.parquet` | Planned; not implemented. Replace the previous interim table only after a new result passes validation. |
 | Analysis-ready table | `data/processed/modeling_dataset.parquet` | Stable planned destination; record whether the actual file is GeoParquet or non-spatial Parquet. Processing is not implemented. |
 
-`<phase>` and `<artifact>` stand for names chosen when a specific transformation
-is implemented; they are not timestamp fields. Each transformation phase gets
-its own folder under the relevant source directory. Later scripts use fixed
-upstream and output paths rather than prompting for a run-specific location.
-Regeneration replaces the same phase output only after successful validation.
-The phase folders keep successive transformations distinct without creating a
-new derived run folder on every execution.
+Pipeline scripts use fixed destinations. Each family has one current
+stage directory beneath its interim family directory. When a new stage is
+ready, its complete validated result replaces the current directory; do not
+retain sibling phase directories, phase-by-phase dataset copies or timestamped
+derived-run folders. Scripts regenerate earlier states from preserved raw
+inputs when needed. Keep source history under `data/raw/` and record run
+provenance in manifests and dated documentation.
 
 Data payloads are excluded from Git by default. The earlier feasibility response bodies and historical Area 230 JSON/CSV payloads were removed at the user's request; their query summaries and available fingerprints remain as historical evidence. The 8 October AWS export attempt retained no subset. The current API collection is stored locally under the two D-036 raw paths, with tracked checksums and provenance in `docs/records/`; payloads remain ignored by Git. An ignore rule does not remove an already tracked file. Keep trained model binaries out of Git unless the group has reviewed the artefact's size, provenance, rights and storage purpose.
 
