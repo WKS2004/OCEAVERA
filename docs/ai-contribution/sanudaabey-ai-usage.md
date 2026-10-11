@@ -786,3 +786,17 @@
   python src/data_preparation/stage_obis_csv.py --obis-csv data/raw/obis/csv/area-230-20261008T055217394846Z.csv
   python src/data_preparation/clean_obis_occurrences_csv.py
   ```
+
+## 2026-10-11 — Recheck the OBIS data-cleaning branch
+
+- **Date/time or time range:** 11 October 2026, 22:14 Asia/Colombo (UTC+05:30); task duration not recorded.
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; bundled Python 3.12.14 standard library; repository resource validator; Git.
+- **AI Model:** GPT-6; exact serving identifier unavailable.
+- **Summary of the user's request:** Recheck the whole branch and confirm the intended OBIS data-cleaning work is finalized.
+- **Summary of what the AI Agent did:** Audited the committed branch, data-layout documentation, OBIS source validator and cleaner, generated outputs, and numbered branch notebook. Removed an empty local orphan data/interim/obis/source_validation/ directory. Re-ran source validation and cleaning, repeated the cleaner for reproducibility, and confirmed the raw source and Bio-ORACLE collection were unchanged. Removed the notebook's unused trailing Code cell, executed its four offline verification cells in order, and refreshed their saved outputs. No downstream analysis or model work was done.
+- **AI output accepted/changed/rejected:** The notebook's empty cell and stale saved execution evidence were corrected. Human acceptance of the branch remains unclaimed.
+- **Verification/evidence:** The source remains 23,934 rows × 230 columns with SHA-256 16ec5ff96e57dc1e58baa33912d16fe7e9098c78759e750608611bf9a2dc0c43. The cleaner reproducibly produced 23,371 rows × 112 columns; 563 records were excluded as dropped=true, and no other rows were excluded. The cleaned CSV hash is 1e51a18bb6cf096e111dd0f2c810c97e93619501f74574c3b2c6be130b1aec21; the column report hash is 63774d6050980f089e0a979cc3dcf904ccf168a5202251f75e6549baeff6cae5; the run summary hash is f9dfa24d37fdce919f3b9bfd755ffcbb28a066e6b30785cb965cdd22cbe102fd. OBIS interim contains one cleaning/ directory and one CSV. Bio-ORACLE inventory remained 714 files totaling 4,021,176,513 bytes. All four notebook checks passed. The repository resource validator passed; git diff --check passed before this log entry and will be rerun after it.
+Reproduction from the repository root: python src/data_preparation/stage_obis_csv.py --obis-csv data/raw/obis/csv/area-230-20261008T055217394846Z.csv followed by python src/data_preparation/clean_obis_occurrences_csv.py.
