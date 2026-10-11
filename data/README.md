@@ -6,34 +6,45 @@
 | `interim/` | Reproducible cleaning, extraction and spatial integration products; GeoParquet for compatible spatial tables |
 | `processed/` | Reviewed analysis-ready tables; GeoParquet where geometry is retained, Parquet for compatible non-spatial ML tables |
 
-## Paths and phase folders
+## Interim dataset policy
 
-Raw acquisition folders may include timestamps so a source snapshot and its
-manifest stay together. The OBIS raw-to-interim entry point accepts the chosen
-CSV path once; [`stage_obis_csv.py`](../src/data_preparation/stage_obis_csv.py)
-validates and copies it to the current phase path:
+Under [D-049](../docs/records/2026-10-11-decision-interim-one-current-dataset.md),
+`data/interim/` holds one current dataset per family. Where a family uses stage
+directories, only the active stage directory remains directly beneath that
+family path; a later stage replaces it only after its complete output passes
+validation. Do not keep sibling phase directories. Prior interim dataset
+versions are not retained because raw sources and scripts allow a state to be
+regenerated.
+Timestamped raw snapshots and provenance remain unchanged. Manifests,
+completeness reports and run summaries are support metadata, not additional
+dataset versions.
 
-| Source or stage | Input selection | Stable destination or layout | Status |
-| --- | --- | --- | --- |
-| OBIS source validation | `--obis-csv <path>` | `interim/obis/source_validation/occurrences.csv` and its `manifest.json` | Code implemented; it makes a byte-for-byte copy and does not apply scientific cleaning. |
-| Later OBIS phases | Fixed input from the previous phase | `interim/obis/<phase>/<artifact>` | Path pattern adopted; later phase scripts are not implemented. |
-| Bio-ORACLE source responses | Run `python src/data_collection/bio_oracle_layers.py` with no options | `raw/bio_oracle/<dataset-id>/<UTC timestamp>_all-variables.nc` plus per-layer query manifests and a run manifest | The latest D-047/D-048 run completed 356/356 grids and all 2,392 variables (4,017,532,960 payload bytes); every payload passed byte-count, SHA-256 and NetCDF-signature checks, with no failed or pending layer. Earlier complete and partial snapshots were deleted at the user's request. See the [dated source record](../docs/records/2026-10-09-source-bio-oracle-sri-lanka-catalog.md) for run history. The earlier D-046 test payload and its local manifest were also deleted at the user's request. |
-| Bio-ORACLE source validation | `--run-manifest <complete-run>`; add `--dry-run` for preflight | `interim/bio_oracle/source_validation/<dataset-id>/` plus `catalog_run_manifest.json` and `manifest.json` | User-reported run completed; the local aggregate manifest records all 356 layers and 2,392 variables (4,017,532,960 payload bytes). This is structural validation and byte-for-byte copying, not scientific processing. |
-| Later Bio-ORACLE phases | Fixed input from the preceding phase | `interim/bio_oracle/<phase>/<artifact>` | Path pattern adopted; scientific processing and integration scripts are not implemented. |
-| Cross-source integration | Fixed inputs from the relevant source phases | A fixed integration-stage path under `interim/` | Not implemented. |
-| Analysis-ready data | Fixed input from the completed integration stage | `processed/modeling_dataset.parquet` | Stable destination convention; not generated. |
+| Dataset family | Current interim dataset or planned destination | Status |
+| --- | --- | --- |
+| OBIS | One stage directory: `interim/obis/cleaning/`, containing `occurrences_cleaned.csv`, JSON reports and `source_validation_manifest.json` | This is the only directory directly under `interim/obis/`. The source validator writes its manifest here; it does not create a sibling `source_validation/` directory. Current output: 23,371 rows × 112 columns. See the [cleaning record](../docs/records/2026-10-11-obis-area-230-cleaning.md). |
+| Bio-ORACLE | Current stage directory: `interim/bio_oracle/source_validation/<dataset-id>/` | Its NetCDF files and receipts/manifests are one collection bundle. `source_validation/` is the only current stage directory under `interim/bio_oracle/`. When cleaning is implemented, its validated `cleaning/` output must replace the current directory rather than be added beside it. The current manifest records 356 layers and 2,392 variables (4,017,532,960 payload bytes). |
+| Integrated dataset | `interim/integrated/integrated_dataset.parquet` | Planned single current table; use GeoParquet when the selected integrated output retains spatial geometry. No integrated interim dataset exists yet. |
+| Analysis-ready dataset | `processed/modeling_dataset.parquet` | Stable destination convention; not generated. |
 
-`<phase>` and `<artifact>` are placeholders for meaningful names selected when
-each stage is implemented; do not copy a raw timestamp into a derived path.
-Each new transformation stage gets its own stable subfolder beneath its source
-directory. A stage script reads the fixed output of the preceding stage and
-writes its own fixed destination. Re-running a stage replaces its output only
-after successful validation; it does not create another run folder.
-
-The OBIS entry point accepts CSVs under `data/raw/obis/`, validates row widths,
-preserves source bytes, rows and fields, and writes a timestamp-free manifest
-inside its phase folder. That manifest may cite the timestamped raw source path
-for provenance. No cleaning rules have been applied. Under D-047 and D-048,
+The OBIS validation utility accepts a CSV under `data/raw/obis/`, checks CSV
+row widths, calculates its SHA-256 and dimensions, and atomically writes
+`interim/obis/cleaning/source_validation_manifest.json`. It does not copy or
+modify the raw CSV or create a separate source-validation directory. The
+cleaner verifies that manifest and source, then writes the cleaned CSV, a JSON
+completeness report and a JSON run summary into that same sole `cleaning/`
+directory. It keeps
+protected fields and other columns with at least 10% usable values after
+field-specific sentinels are excluded. Rows require valid coordinates and a
+taxonomic name or identifier at any rank; explicit `dropped=true` records and
+exact full-source duplicates are excluded. Missing dates, species-level
+fields, coordinate uncertainty and optional metadata do not exclude rows. The
+cleaner does not filter by `absence`, `marine` or quality flags. The prior 90%
+screen and first row-filter experiment remain historical in their [dated
+records](../docs/records/2026-10-10-obis-area-230-column-screening.md) and
+[row-cleaning record](../docs/records/2026-10-10-obis-area-230-cleaning.md);
+the current run is documented in the [cleaning
+record](../docs/records/2026-10-11-obis-area-230-cleaning.md).
+Under D-047 and D-048,
 [`bio_oracle_layers.py`](../src/data_collection/bio_oracle_layers.py) is a
 fixed, no-option collector. A run inventories the live catalogue, then
 downloads every matching Bio-ORACLE v3 grid and all its data variables for the
@@ -74,9 +85,11 @@ failed its final field check and retained no output; its advertised object
 sizes and unknown transfer are documented in the [failure record](../docs/records/2026-10-08-obis-area-230-export-attempt.md).
 The current API acquisition outcome and checksums are recorded in the
 [Area 230 source record](../docs/records/2026-10-08-source-obis-area-230-api-csv.md).
-The intake scripts do not clean, select taxa, integrate sources or create an
-analysis-ready dataset. The new handoff command only validates and stages
-explicitly selected raw CSVs; cleaning and source integration remain unrun.
+The acquisition scripts do not select taxa, integrate sources or create an
+analysis-ready dataset. The OBIS validation command records the selected raw
+CSV's fingerprint; the cleaning script applies the bounded source-status and
+coordinate exclusions documented above. Species-level review, remaining
+cleaning decisions and source integration remain pending.
 
 The existing `raw/`, `interim/` and `processed/` paths serve the proposed Bronze, Silver and Gold lifecycle roles respectively; no duplicate lifecycle directories are planned.
 

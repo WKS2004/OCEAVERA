@@ -586,3 +586,219 @@
   ```text
   git diff --check
   ```
+
+## 2026-10-10 — Initial OBIS Area 230 quality screen
+
+- **Date/time or time range:** 10 October 2026, 12:30 Asia/Colombo (UTC+05:30); task duration not recorded.
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; repository file tools; bundled Python 3.12.14 standard-library runtime; official OBIS documentation search; Git.
+- **AI Model:** GPT-6; exact serving identifier unavailable.
+- **Summary of the user's request:** Start data cleaning for the OBIS dataset only on the current branch and update the AI-usage record as Sanuda.
+- **Summary of what the AI Agent did:** Confirmed the current branch and clean starting worktree; followed OCEAVERA's data, quality, member and recording guidance; byte-staged the selected Area 230 raw CSV at the fixed source-validation path; implemented and ran a temporary review-cue prototype that preserved every source row, then removed it after the user clarified that this task requires actual row cleaning with no new fields. The follow-up entry below records the replacement. No Bio-ORACLE, integration or modelling artefacts were changed.
+- **AI output accepted/changed/rejected:** The initial row-preserving annotation prototype was temporarily retained for review, then rejected after the user clarified that this step must clean rows and add no fields. It was removed in the follow-up below. No human acceptance of the replacement is asserted. No commit or publication was made.
+- **Verification/evidence:** The user explicitly identified Sanuda, matched to the canonical name/account mapping. The source-validation handoff confirmed a 23,934-row, 230-column byte-for-byte copy with SHA-256 `16ec5ff96e57dc1e58baa33912d16fe7e9098c78759e750608611bf9a2dc0c43`. The quality-screen script verified each output row against its source row, retained all 23,934 rows and all source values, and produced a 231-column output with SHA-256 `78e62d34d4c9dff41814747f008dc13351e4524a7277c458b5b280b3e639d1c0`; 23,933 rows carry review cues and one has an empty cue list. The output and manifest are ignored under `data/interim/`. The repository resource validator and `git diff --check` passed with this entry included; no test suite or hosted CI was run. No package or environment operation occurred. Human review remains pending.
+
+  Copyable check command:
+  ```text
+  git diff --check
+  ```
+
+## 2026-10-10 — Correct OBIS cleaning scope
+
+- **Date/time or time range:** 10 October 2026, 13:52 Asia/Colombo (UTC+05:30); task duration not recorded.
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; repository file tools; bundled Python 3.12.14 standard-library runtime; official OBIS documentation search; Git.
+- **AI Model:** GPT-6; exact serving identifier unavailable.
+- **Summary of the user's request:** Clarify that the OBIS-only branch must clean the dataset for a later merge, without adding fields.
+- **Summary of what the AI Agent did:** Removed the review-cue script, its derived-field dictionary and quality-screen record, and replaced them with [`clean_obis_occurrences_csv.py`](../../src/data_preparation/clean_obis_occurrences_csv.py). The new stage reads the checksum-verified source-validation table and excludes OBIS records marked dropped, absence or non-marine, plus invalid-coordinate rows, while keeping the original schema and retained source values. Added dated EDA and cleaning evidence, updated the data-path and readiness documentation, and removed the old ignored quality-screen output. No Bio-ORACLE or integration artefacts were changed.
+- **AI output accepted/changed/rejected:** The annotation approach was rejected by the user and removed. The corrected cleaning output and records are retained in the worktree for review; human acceptance remains pending. No commit or publication was made.
+- **Verification/evidence:** The cleaning script processed the 23,934-row, 230-column source and retained 23,217 rows with 230 columns; 717 rows were removed by the recorded rules. Its validation checked the staged-source fingerprint, unchanged schema, row order and exact field values for retained rows before replacing the interim output. Output SHA-256: `9d3eb7482e447897b178c65fe11ceef3b072dca4c3db12d95973596794bf88ab`. Zero rows failed the coordinate-range check. `git diff --check` passed. The resource validator passed: 8 skills, 10 rules, 12 routing cases, 478 text files, 1,096 local links, 121 Markdown section links, 4 contributor identities, 3 activity logs and 73 dated entries; this is structural validation only. No test suite or hosted CI was run. No package or environment operation occurred.
+
+  Copyable check command:
+  ```text
+  git diff --check
+  ```
+
+## 2026-10-10 — Simplify the OBIS row cleaner
+
+- **Date/time or time range:** 10 October 2026, 15:57 Asia/Colombo (UTC+05:30); task duration not recorded.
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; repository file tools; Git.
+- **AI Model:** GPT-6; exact serving identifier unavailable.
+- **Summary of the user's request:** Simplify the OBIS cleaning script on the current `pipeline/data-cleaning-obis` branch.
+- **Summary of what the AI Agent did:** Replaced the multi-pass, profiling and manifest-generating cleaner with a single-pass script using the fixed source and output paths. It retains the existing row exclusions, source columns, values and row order. Removed the old ignored local manifest and updated the data-path and cleaning records to match the simpler script. The existing cleaned CSV was left in place and was not regenerated. No Bio-ORACLE or integration artefacts were changed.
+- **AI output accepted/changed/rejected:** The simplified script and documentation updates are retained in the worktree for review. Human acceptance remains pending. No commit or publication was made.
+- **Verification/evidence:** `git diff --check` passed. The repository resource validator passed: 8 skills, 10 rules, 12 routing cases, 477 text files, 1,098 local links, 121 section links, 4 contributor identities, 3 activity logs and 74 dated entries; this is structural validation only. A focused search found no stale path references to the removed cleaning manifest. The cleaner and test suite were not run; therefore the previously recorded row counts and output checksum describe the earlier execution, not a rerun of this simplified script. No package or environment operation occurred.
+
+  Copyable whitespace-check command:
+  ```text
+  git diff --check
+  ```
+
+## 2026-10-10 — Screen OBIS columns by completeness
+
+- **Date/time or time range:** 10 October 2026, 18:16 Asia/Colombo (UTC+05:30); task duration not recorded.
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; repository file tools; bundled Python runtime; Git.
+- **AI Model:** GPT-6; exact serving identifier unavailable.
+- **Summary of the user's request:** First remove OBIS columns filled in fewer than 90% of source rows, report how many columns remain, and defer row removal.
+- **Summary of what the AI Agent did:** Changed `clean_obis_occurrences_csv.py` to count non-empty cells across all 23,934 source rows and retain columns meeting the 90% threshold. Ran it on the fixed source-validation CSV: 22 of 230 columns remain, 208 were removed, and all 23,934 rows were preserved. Updated the column-screening and EDA records, repository/data/source documentation and readiness state. Marked the earlier 23,217-row exclusion output as historical; no row exclusions were applied in this step. The raw source and Bio-ORACLE artefacts were not changed.
+- **AI output accepted/changed/rejected:** The 90% threshold came from the user. The column-screen output and documentation are retained for review; human acceptance remains pending. No commit or publication was made.
+- **Verification/evidence:** The script completed using the bundled Python runtime and reported 23,934 rows, 22 retained columns and 208 removed columns. Output: `data/interim/obis/cleaning/occurrences.csv`, 6,925,359 bytes, SHA-256 `c12bf1912a27aa9c2fa2a4698d2eba64186e1c0be77bb1fda344d23fd056858b`; the interim output is ignored by Git. `git diff --check` and the repository resource validator passed; the validator is structural only. No test suite or row-filter run occurred. No package or environment operation occurred.
+
+  Copyable whitespace-check command:
+  ```text
+  git diff --check
+  ```
+
+## 2026-10-10 — OBIS species feasibility audit
+
+- **Date/time or time range:** 10 October 2026, 22:59 Asia/Colombo (UTC+05:30); duration not recorded.
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; bundled Python runtime with pandas and NumPy; Git; web documentation search (official OBIS and Bio-ORACLE documentation only).
+- **AI Model:** GPT-6; exact serving identifier unavailable.
+- **Summary of the user's request:** Perform the attached comprehensive, repository-local OBIS species feasibility audit and produce the requested report without changing datasets or running models.
+- **Summary of what the AI Agent did:** Audited the saved 23,934-row, 230-column OBIS Area 230 snapshot and recorded dataset discovery, taxonomic coverage, conservative candidate counts, status semantics, spatial/temporal patterns, quality flags, environmental-field coverage, Bio-ORACLE compatibility limits, ranked candidates, feasibility verdict and next steps in reports/obis_species_feasibility.md. No species was finalized; Stenella longirostris is recommended only for the next QA gate. Dataset arrays and masks were not readable in the available runtime, so local raster valid-cell coverage remains unknown. No data, code, configuration, environment or package was changed for this audit.
+- **AI output accepted/changed/rejected:** The report is retained for user and project review. Human acceptance and any species decision remain pending. No commit or publication was made.
+- **Verification/evidence:** Source counts and summaries were computed from the saved CSV in memory. The report includes the full year-by-year counts, top-25 frequency/spatial tables and limitations. Repository resource validator passed: 8 skills, 10 rules, 12 routing cases, 479 text files, 1,115 local links, 121 section links, 4 contributor identities, 3 activity logs and 75 dated entries; this is structural validation only. Report section/completeness and whitespace checks passed. No tests, model training, API requests, data downloads, or package/environment operations occurred.
+
+## 2026-10-10 — OBIS species and environmental feasibility verification
+
+- **Date/time or time range:** 10 October 2026, 23:50 Asia/Colombo (UTC+05:30); task duration not recorded.
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; Git; bundled Python standard library; web documentation and literature search.
+- **AI Model:** GPT-6 family; exact serving identifier unavailable.
+- **Summary of the user's request:** Continue the 10 October OBIS species-feasibility audit by verifying taxonomic recovery, marine filtering, local Bio-ORACLE rasters, coordinate uncertainty and coastal flags, candidate ecology and conditional feasibility, without training or changing raw data or existing source code.
+- **Summary of what the AI Agent did:** Read the saved OBIS snapshot and all 356 local Bio-ORACLE classic NetCDF files in memory. Verified candidate-specific rank-gap records against identifiers and current taxonomic records; quantified nearest-cell raster matches, valid marine-cell masks and uncertainty sensitivity; inspected source metadata, ON_LAND/shoredistance flags and relevant ecological sources. Created [`obis_species_feasibility_phase2.md`](../../reports/obis_species_feasibility_phase2.md) with the comparison, evidence limits, ranked conditional shortlist and remaining decisions. Clarified the historical row-filter counts versus the current 90% column-only cleaner. Used and then removed a temporary standard-library NetCDF reader. No raw or interim dataset, existing source code, package or environment was changed; no model or pseudo-absence was produced.
+- **AI output accepted/changed/rejected:** The Phase 2 report is retained in the worktree for review. No focal species is approved and human acceptance remains pending. No commit or publication was made.
+- **Verification/evidence:** Analysis covered the 23,934-row saved raw snapshot and all 356 NetCDF files (2,392 variables). The report records the 0.05° grid, time coordinates, masks, candidate counts and uncertainty thresholds; all conclusions are limited to the saved crop and source metadata. The repository resource validator passed structural checks (8 skills, 10 rules, 12 routing cases, 480 text files, 1,120 local links, 121 section links, 4 contributor identities, 3 logs and 77 dated entries); `git diff --check` passed after this entry. No test suite, model training, pseudo-absence generation, package/environment operation or source-data write occurred. Human review is pending.
+
+  Copyable check command:
+  ```text
+  git diff --check
+  ```
+
+## 2026-10-11 — Implement conservative OBIS column and row cleaning
+
+- **Date/time or time range:** 11 October 2026, 10:50 Asia/Colombo (UTC+05:30); task duration not recorded.
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; bundled Python 3.12.14 standard library; Git.
+- **AI Model:** GPT-6 family; exact serving identifier unavailable.
+- **Summary of the user's request:** Replace the exploratory 90% OBIS column screen with a configurable 10% completeness rule that protects required columns, perform conservative generic row cleaning, generate a new cleaned CSV and concise cleaning record, and verify the output without changing raw data or entering later modelling stages.
+- **Summary of what the AI Agent did:** Reworked `clean_obis_occurrences_csv.py` to report completeness for every source column, retain the 37 specified protected fields plus columns at least 10% complete, and remove only explicit `dropped=true`, invalid coordinates, records with no taxonomic identification, rows over 60% missing across four defined indicators, and confirmed full-source duplicate rows. It records—but does not remove—repeated IDs/combinations and preserves `absence`, `marine` and QC flags. Generated `occurrences_cleaned.csv` and `column_completeness.csv` at new paths, leaving the earlier 90% outputs untouched. Added the 11 October cleaning record, an executed branch work notebook with offline checks, and updates to the current data-path, code, workflow, readiness and documentation indexes. No Bio-ORACLE files, raw source, package or Python environment was changed; no models, pseudo-absences, species selection, raster joins or other later stages were performed.
+- **AI output accepted/changed/rejected:** The implementation and cleaning results are retained in the worktree for review. Human acceptance remains pending; no commit or publication was made.
+- **Verification/evidence:** The script ran successfully and reran with identical output hashes. Results: 23,934 × 230 input; 113 columns retained and 117 removed; 23,371 × 113 final output; 563 explicit dropped records removed; all other row-exclusion counts zero. All protected columns were present, 3,188 non-empty species names remained, 58 repeated occurrenceID groups and 496 species/location/date groups were preserved. An independent check confirmed the output rows and retained values match non-dropped source records in original order. The branch notebook JSON parsed and both offline Code cells executed in order with concise outputs saved; they confirmed the source/staged hashes, protected-column schema and unchanged retained rows. Raw and staged-source SHA-256 remained `16ec5ff96e57dc1e58baa33912d16fe7e9098c78759e750608611bf9a2dc0c43`; cleaned CSV SHA-256 is `83b5a404816a3f21844b58b29371736c34c81cf110a7482214a4cf1bd5f53e0e`; column report SHA-256 is `a2351eb73820eb367eb6b30de377049767f0d9aff803cb437c61e505ad6440d3`. The old 90% CSV and copy retain their previous matching hashes. WSL returned `Wsl/ERROR_ACCESS_DENIED` in this tool session and no Conda command/terminal was available, so execution used the bundled Python 3.12.14 runtime; the script uses only the standard library and no environment/package operation occurred. The repository resource validator passed structural checks (8 skills, 10 rules, 12 routing cases, 481 text files, 1,119 local links, 121 section links, 4 contributor identities, 3 logs and 78 dated entries); `git diff --check` passed.
+
+  Copyable reproduction command (with OCEAVERA activated):
+  ```text
+  python src/data_preparation/clean_obis_occurrences_csv.py
+  ```
+
+## 2026-10-11 — Retain one current interim dataset per family
+
+- **Date/time or time range:** 11 October 2026, 18:25 Asia/Colombo (UTC+05:30); task duration not recorded.
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; bundled Python 3.12.14 standard library; repository resource validator; Git.
+- **AI Model:** GPT-6 family; exact serving identifier unavailable.
+- **Summary of the user's request:** Document and apply the policy to retain only one current interim dataset for each of OBIS, Bio-ORACLE and the future integrated dataset, replacing prior derived outputs so earlier states can be regenerated from preserved raw data and scripts.
+- **Summary of what the AI Agent did:** Added accepted decision D-049 and updated the root README and requirements, data guide, storage/provenance guide, source guide, ML workflow, project overview/readiness, decision register and documentation index. Updated the current OBIS cleaning record, historical OBIS records, the 10 October feasibility report, the notebook index and all three relevant branch notebooks to show the current retention rule. Amended D-038/D-046 cross-references to identify D-049 as superseding separate interim phase outputs. Changed `stage_obis_csv.py` to validate the selected raw CSV and atomically write only a provenance manifest. Updated the cleaner to read and verify that raw file directly and to write its per-column report as JSON, leaving one interim OBIS CSV. Removed the obsolete source-validation CSV copy and CSV diagnostics after producing the new outputs. Documented the Bio-ORACLE NetCDF files as one replaceable collection bundle and the integrated table as planned, not yet generated.
+- **AI output accepted/changed/rejected:** The policy implementation and documentation are retained in the worktree for review. Human acceptance remains pending; no commit or publication was made.
+- **Verification/evidence:** The validator and cleaner ran successfully; the cleaner reran with identical output hashes. The final OBIS CSV inventory contains exactly one file, 23,371 rows × 112 columns. CSV SHA-256: `1e51a18bb6cf096e111dd0f2c810c97e93619501f74574c3b2c6be130b1aec21`; JSON column report SHA-256: `63774d6050980f089e0a979cc3dcf904ccf168a5202251f75e6549baeff6cae5`. The raw CSV remained 23,934 × 230 with SHA-256 `16ec5ff96e57dc1e58baa33912d16fe7e9098c78759e750608611bf9a2dc0c43`. The notebook's two Code cells executed in order and confirmed one OBIS interim CSV, all 37 protected columns, 563 `dropped=true` exclusions and no other row exclusions. The Bio-ORACLE interim collection inventory remained at 714 files; no integrated interim dataset exists. Both OBIS scripts passed in-memory syntax compilation; the repository resource validator and `git diff --check` passed. No raw or Bio-ORACLE data was changed; no package or environment operation occurred.
+
+  Reproduction from the repository root:
+  ```text
+  python src/data_preparation/stage_obis_csv.py --obis-csv data/raw/obis/csv/area-230-20261008T055217394846Z.csv
+  python src/data_preparation/clean_obis_occurrences_csv.py
+  ```
+
+## 2026-10-11 — Expand and number the OBIS cleaning branch notebook
+
+- **Date/time or time range:** 11 October 2026, 21:56 Asia/Colombo (UTC+05:30); task duration not recorded.
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; bundled Python 3.12.14 standard library; repository resource validator; Git.
+- **AI Model:** GPT-6 family; exact serving identifier unavailable.
+- **Summary of the user's request:** Rename the OBIS cleaning branch notebook with a sequence number and expand it so it explains the branch's actual purpose and work in more useful detail.
+- **Summary of what the AI Agent did:** Replaced the former unnumbered notebook with `03_pipeline_data_cleaning_obis.ipynb`, following the existing biological and environmental notebook sequence. Expanded the narrative with source provenance, the 10% threshold and why the exploratory 90% rule was not retained, all protected fields, field-specific missing sentinels, column results including `lifeStage`, row eligibility and exclusion counts, optional missingness, duplicate diagnostics, preserved marine/absence/quality information, current interim outputs, reproduction steps and limits. Added four ordered offline Code cells and updated the notebook index, documentation index, readiness link and this log's notebook reference. No source code, raw dataset, cleaned dataset, Bio-ORACLE file, package or environment was changed.
+- **AI output accepted/changed/rejected:** The numbered notebook and navigation updates are retained in the worktree for review. Human acceptance remains pending; no commit or publication was made.
+- **Verification/evidence:** All four notebook Code cells ran in order, then ran again with outputs matching the saved notebook outputs. The checks confirm the source hash, byte count and dimensions; the 112 retained/118 removed columns and 37 protected fields; 563 OBIS-dropped rows and zero other eligibility exclusions; 23,371 × 112 output; source-value preservation; 3,188 distinct non-empty species names; and final output hashes. Notebook data checks use local files read-only, made no network requests and wrote no dataset files. The repository resource validator and `git diff --check` passed. The checks used bundled Python 3.12.14 and the standard library; the project Conda environment was not used. Identity follows the contributor's explicit request to record AI usage as Sanuda, matched to the canonical `sanudaabey` / Sanuda Abeysinghe mapping.
+
+
+## 2026-10-11 — Correct OBIS column and row cleaning
+
+- **Date/time or time range:** 11 October 2026, 17:31 Asia/Colombo (UTC+05:30); task duration not recorded.
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; bundled Python 3.12.14 standard library; repository resource validator; Git.
+- **AI Model:** GPT-6 family; exact serving identifier unavailable.
+- **Summary of the user's request:** Correct the OBIS cleaner's ineffective row-missingness rule, treat confirmed field-specific missing sentinels as missing for column completeness, verify staged input provenance, write safe outputs and a reproducible cleaning summary, then run and verify only this OBIS cleaning stage.
+- **Summary of what the AI Agent did:** Updated the OBIS cleaner to verify raw and staged hashes, byte count and dimensions against the source-validation manifest; handle exact NA/null sentinels only in fields where they cannot be valid values; remove the redundant row-missingness cutoff; require valid coordinates and any retained taxonomic name or identifier at any rank, including taxonID; report optional-field missingness; and write the CSV outputs and JSON run summary through temporary files with atomic replacement. Reran the cleaner, updated the cleaning evidence record, the branch notebook, and current data, source, workflow, readiness and documentation references. The output is 23,371 rows × 112 columns; lifeStage was removed after its 2,806 NA sentinels reduced usable completeness to 6.46%. No raw data, Bio-ORACLE data, package or environment was changed, and no downstream species or modelling work was performed.
+- **AI output accepted/changed/rejected:** The corrected script, outputs and documentation are retained in the worktree for review. Human acceptance remains pending; no commit or publication was made.
+- **Verification/evidence:** The cleaner ran repeatedly with identical output hashes. Final output hashes: cleaned CSV 1e51a18bb6cf096e111dd0f2c810c97e93619501f74574c3b2c6be130b1aec21; column report 71c6314cf009e1e50831b2d07b9a2c9e05303dd4508194ba8a0f2a59185ec251. Source and staged SHA-256 both remain 16ec5ff96e57dc1e58baa33912d16fe7e9098c78759e750608611bf9a2dc0c43. Independent checks confirmed 37/37 protected columns, 3,188 distinct species names, 563 dropped rows excluded and zero coordinate, taxonomy or exact-duplicate exclusions; retained output values match eligible source records in source order. The branch notebook's two offline Code cells ran in order. The repository resource validator passed (8 skills, 10 rules, 12 routing cases, 482 text files, 1,124 local links, 121 section links, 4 contributor identities, 3 logs and 79 dated entries); git diff --check passed. WSL returned Wsl/ERROR_ACCESSDENIED, so the bundled Python runtime was used without changing Conda or installing packages. Identity was recorded as explicitly requested by the contributor as Sanuda and matched to the canonical mapping sanudaabey / Sanuda Abeysinghe; no authenticated GitHub session was used.
+
+  Cleaning code: [clean_obis_occurrences_csv.py](../../src/data_preparation/clean_obis_occurrences_csv.py)
+  Cleaning evidence: [OBIS Area 230 cleaning record](../records/2026-10-11-obis-area-230-cleaning.md)
+  Branch notebook: [03_pipeline_data_cleaning_obis.ipynb](../../notebooks/branch_work/03_pipeline_data_cleaning_obis.ipynb)
+  Reproduction command:
+      python src/data_preparation/clean_obis_occurrences_csv.py
+
+**Correction amendment — 11 October 2026, 19:23 Asia/Colombo:** The user clarified that OBIS must have one child directory under `data/interim/obis/`, with `cleaning/` replacing the former `source_validation/` directory. Updated `stage_obis_csv.py` to write, and `clean_obis_occurrences_csv.py` to read, `data/interim/obis/cleaning/source_validation_manifest.json`; reran the staging script to create the manifest there, and removed the old directory after verifying it held only the obsolete manifest. Updated D-049, the root/project README and requirements, storage/data/source/workflow/readiness documentation, indexes and affected branch notebooks. Documented that Bio-ORACLE keeps its current single `source_validation/` directory until a validated `cleaning/` stage replaces it; Bio-ORACLE data and code were not changed.
+
+**Correction verification:** The source validator and cleaner completed; the cleaner reran with identical output hashes. OBIS now has only the `cleaning/` directory and one CSV, 23,371 rows × 112 columns. The raw source hash remains `16ec5ff96e57dc1e58baa33912d16fe7e9098c78759e750608611bf9a2dc0c43`. Cleaned CSV SHA-256: `1e51a18bb6cf096e111dd0f2c810c97e93619501f74574c3b2c6be130b1aec21`; column report: `63774d6050980f089e0a979cc3dcf904ccf168a5202251f75e6549baeff6cae5`; run summary: `f9dfa24d37fdce919f3b9bfd755ffcbb28a066e6b30785cb965cdd22cbe102fd`. The Bio-ORACLE inventory remains 714 files and 4,021,176,513 bytes. The biological notebook's nine Code cells, the OBIS cleaning notebook's two Code cells and the environmental notebook's three offline Code cells ran in order; the OBIS notebook verifies the sole `cleaning/` directory and the environmental notebook verifies the Bio-ORACLE source-validation handoff. The repository resource validator and whitespace check passed; no package, environment, raw dataset or downstream ML stage was changed.
+
+**Documentation follow-up — 11 October 2026, 21:06 Asia/Colombo:** Restarted the full interim-policy documentation sweep. Made D-049 explicit that families using stage directories retain exactly one active stage directory directly beneath the family path, with support metadata stored alongside the current dataset. Made the corresponding wording consistent in the root README, requirements, data and storage guides, workflow, overview, readiness, decision register, documentation index and notebook index. Added prominent current-layout notes to historical D-038 and the 7 October OBIS acquisition record so their old paths cannot be mistaken for current outputs. Kept prior activity entries describing paths that existed at the time unchanged. No code, raw data, Bio-ORACLE payload or interim dataset was changed in this documentation-only follow-up.
+
+**Documentation follow-up verification:** `git diff --check` passed. The repository resource validator passed with 8 skills, 10 rules, 12 routing cases, 484 text files, 1,146 local links, 121 section links, four contributor identities, three logs and 80 dated entries; it reports structural checks only. A direct inventory confirmed that `data/interim/obis/` contains only `cleaning/` and that directory contains one CSV; Bio-ORACLE still has only `source_validation/`, and no integrated interim output exists. Human review remains pending; no commit or publication was made.
+
+## 2026-10-11 — Finalize the OBIS data-cleaning branch
+
+- **Date/time or time range:** 11 October 2026, 21:38 Asia/Colombo (UTC+05:30); task duration not recorded.
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; bundled Python 3.12.14 standard library; Git.
+- **AI Model:** GPT-6 family; exact serving identifier unavailable.
+- **Summary of the user's request:** Finalize the current OBIS data-cleaning branch.
+- **Summary of what the AI Agent did:** Reviewed branch instructions and current changes; corrected the member overview, Sanuda responsibility file, common responsibilities guide and decision-register status text to distinguish implemented OBIS work from pending later stages. Updated the branch notebook's closeout evidence. Reran the OBIS source validator and cleaner from the saved raw CSV. Executed the notebook's two read-only Code cells in order and confirmed that their saved outputs match. No Bio-ORACLE or raw dataset values were changed.
+- **AI output accepted/changed/rejected:** The branch artefacts and closeout evidence remain in the worktree for review. Human acceptance remains pending.
+- **Verification/evidence:** The source validator confirmed 23,934 rows × 230 columns and raw SHA-256 `16ec5ff96e57dc1e58baa33912d16fe7e9098c78759e750608611bf9a2dc0c43`. The cleaner completed with 112 columns retained, 118 removed, all 37 protected fields retained, 563 `dropped=true` exclusions and zero other row exclusions; final output is 23,371 rows × 112 columns with 3,188 distinct non-empty species names. Cleaned CSV SHA-256: `1e51a18bb6cf096e111dd0f2c810c97e93619501f74574c3b2c6be130b1aec21`; column report SHA-256: `63774d6050980f089e0a979cc3dcf904ccf168a5202251f75e6549baeff6cae5`. OBIS has one interim stage directory and one CSV; Bio-ORACLE retains its one source-validation directory, and the integrated output is absent. Both notebook cells ran in document order with saved output matches. `git diff --check` passed. The repository resource validator passed before this entry with 8 skills, 10 rules, 12 routing cases, 484 text files, 1,146 local links and 121 section links, then passed again after this entry with 81 dated log entries. Its checks are structural only.
+
+  Reproduction from the repository root:
+  ```text
+  python src/data_preparation/stage_obis_csv.py --obis-csv data/raw/obis/csv/area-230-20261008T055217394846Z.csv
+  python src/data_preparation/clean_obis_occurrences_csv.py
+  ```
+
+## 2026-10-11 — Recheck the OBIS data-cleaning branch
+
+- **Date/time or time range:** 11 October 2026, 22:14 Asia/Colombo (UTC+05:30); task duration not recorded.
+- **GitHub Username:** sanudaabey
+- **Team Member Name:** Sanuda Abeysinghe
+- **Agent Name:** Codex
+- **Tool/App:** Codex desktop; PowerShell; bundled Python 3.12.14 standard library; repository resource validator; Git.
+- **AI Model:** GPT-6; exact serving identifier unavailable.
+- **Summary of the user's request:** Recheck the whole branch and confirm the intended OBIS data-cleaning work is finalized.
+- **Summary of what the AI Agent did:** Audited the committed branch, data-layout documentation, OBIS source validator and cleaner, generated outputs, and numbered branch notebook. Removed an empty local orphan data/interim/obis/source_validation/ directory. Re-ran source validation and cleaning, repeated the cleaner for reproducibility, and confirmed the raw source and Bio-ORACLE collection were unchanged. Removed the notebook's unused trailing Code cell, executed its four offline verification cells in order, and refreshed their saved outputs. No downstream analysis or model work was done.
+- **AI output accepted/changed/rejected:** The notebook's empty cell and stale saved execution evidence were corrected. Human acceptance of the branch remains unclaimed.
+- **Verification/evidence:** The source remains 23,934 rows × 230 columns with SHA-256 16ec5ff96e57dc1e58baa33912d16fe7e9098c78759e750608611bf9a2dc0c43. The cleaner reproducibly produced 23,371 rows × 112 columns; 563 records were excluded as dropped=true, and no other rows were excluded. The cleaned CSV hash is 1e51a18bb6cf096e111dd0f2c810c97e93619501f74574c3b2c6be130b1aec21; the column report hash is 63774d6050980f089e0a979cc3dcf904ccf168a5202251f75e6549baeff6cae5; the run summary hash is f9dfa24d37fdce919f3b9bfd755ffcbb28a066e6b30785cb965cdd22cbe102fd. OBIS interim contains one cleaning/ directory and one CSV. Bio-ORACLE inventory remained 714 files totaling 4,021,176,513 bytes. All four notebook checks passed. The repository resource validator passed; git diff --check passed before this log entry and will be rerun after it.
+Reproduction from the repository root: python src/data_preparation/stage_obis_csv.py --obis-csv data/raw/obis/csv/area-230-20261008T055217394846Z.csv followed by python src/data_preparation/clean_obis_occurrences_csv.py.
+
+**Verification amendment — 11 October 2026, 22:27 UTC+0530:** The GitHub workflow reported Markdown links to raw and interim data that are intentionally excluded from Git. Updated the Phase 2 report to link the tracked OBIS and Bio-ORACLE source records, and changed links to generated OBIS outputs into plain local paths with regeneration guidance. Re-ran the repository validator successfully (8 skills, 10 rules, 12 routing cases, 1,143 local links and 121 section links); git diff --check passed. No data files or pipeline code changed.

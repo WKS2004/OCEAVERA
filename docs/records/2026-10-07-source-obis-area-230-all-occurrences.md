@@ -1,5 +1,11 @@
 # OBIS source record — all Area 230 occurrence records
 
+> **Interim-layout update — 11 October 2026:** The historical CSV export path
+> below is not a current dataset and is no longer retained. Under [D-049](2026-10-11-decision-interim-one-current-dataset.md),
+> the OBIS family has exactly one interim stage directory, `data/interim/obis/cleaning/`,
+> containing the current cleaned CSV and its support metadata. Earlier interim
+> states are regenerated from preserved raw inputs and scripts.
+
 > **Historical acquisition record:** The API JSON pages and derived CSV below
 > were created during the earlier API/CSV workflow and removed from local
 > storage on 7 October 2026 after the user requested cleanup and a switch to

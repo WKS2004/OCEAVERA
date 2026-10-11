@@ -73,17 +73,43 @@ python src/data_preparation/stage_obis_csv.py --obis-csv data/raw/obis/csv/<sele
 ```
 
 The path is supplied once at this boundary. The script checks CSV row widths,
-copies every byte unchanged, verifies the checksum and writes to the fixed
-`data/interim/obis/source_validation/occurrences.csv` path with a fixed
-`manifest.json` alongside it. Re-running replaces that phase's output after
-validation rather than creating another run folder. Interim payloads and the
-local manifest are ignored by Git.
+calculates the source checksum and writes its dimensions and provenance to
+`data/interim/obis/cleaning/source_validation_manifest.json`. It does not copy
+or modify the raw CSV. Re-running safely replaces the manifest. The `cleaning/`
+directory is shared with the cleaner, so source validation does not create a
+sibling `source_validation/` directory.
 
 This is structural validation and staging, not scientific cleaning: it removes
 no rows or fields and does not decide exclusions, taxonomic rules, missing
-values or feature extraction. Later OBIS transformations use separate stable
-phase folders under `data/interim/obis/`; each script reads the preceding
-phase's fixed path and writes its own fixed path without timestamps.
+values or feature extraction. Under [D-049](../docs/records/2026-10-11-decision-interim-one-current-dataset.md),
+`data/interim/obis/` has only the `cleaning/` directory, which contains the
+source manifest, cleaned CSV and JSON diagnostics. Pipeline scripts regenerate
+prior states from raw inputs when needed instead of retaining sibling
+phase directories.
+
+## OBIS occurrence cleaning
+
+[`clean_obis_occurrences_csv.py`](data_preparation/clean_obis_occurrences_csv.py)
+reads the raw CSV identified by the verified source-validation manifest and
+writes the sole OBIS interim output directory,
+`data/interim/obis/cleaning/`. It contains `occurrences_cleaned.csv`,
+`column_completeness.json`, `cleaning_summary.json` and
+`source_validation_manifest.json`.
+Run it from the repository root:
+
+```text
+python src/data_preparation/clean_obis_occurrences_csv.py
+```
+
+The configurable column threshold is 10% usable values after field-specific sentinels are excluded. Essential OBIS
+fields are retained even below that threshold. Row checks remove records
+explicitly marked `dropped=true`, with invalid coordinates, or with no usable
+taxonomic name or identifier at any rank, including taxonID. No row-wide missingness cutoff is applied; optional dates, species-level fields and metadata are reported separately. Only exact full-source duplicate rows are removed.
+Absence, marine classification, quality flags, repeated IDs and combinations
+that become identical after column reduction are preserved. No values are
+imputed or normalised, and all taxa remain in the output. See the
+[cleaning decision and results](../docs/records/2026-10-11-obis-area-230-cleaning.md)
+and the [earlier column-screen record](../docs/records/2026-10-10-obis-area-230-column-screening.md).
 
 ## Bio-ORACLE environmental source intake
 
@@ -169,8 +195,13 @@ The sidecar receipts retain their original raw-source references; the aggregate
 manifest maps those raw paths to the interim copies.
 
 This is structural source validation, not raster transformation or scientific
-cleaning. Raw files remain unchanged. A complete replacement folder becomes
-the stable output only after every layer passes validation. The preflight
+cleaning. Raw files remain unchanged. `source_validation/` is currently the
+only stage directory under `data/interim/bio_oracle/`; a complete replacement
+bundle becomes current only after every layer passes validation. When a later
+Bio-ORACLE cleaning stage is implemented, its validated `cleaning/` directory
+must replace `source_validation/` rather than sit beside it. Successful
+source-staging publication replaces the prior bundle as a whole.
+The preflight
 requires space for the payloads and receipts plus a 64 MiB safety buffer. The
 user reports a successful run; its local manifest records 356 layers, 2,392
 variables and 4,017,532,960 payload bytes. The current local inventory contains
