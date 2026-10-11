@@ -60,7 +60,7 @@ The cleaner was corrected after the read-only audit. The current output is 23,37
 
 ### Source verification
 
-Before cleaning, the script reads the [source-validation manifest](../../data/interim/obis/cleaning/source_validation_manifest.json) and verifies:
+Before cleaning, the script reads the generated source-validation manifest (`data/interim/obis/cleaning/source_validation_manifest.json`) and verifies it. The tracked [`stage_obis_csv.py`](../../src/data_preparation/stage_obis_csv.py) script creates this manifest without copying the raw CSV.
 
 - The source path resolves inside `data/raw/obis/`.
 - The raw CSV's SHA-256 and byte count match the manifest.
@@ -87,7 +87,7 @@ The 10% threshold and the 37 protected columns are unchanged. Completeness now e
 
 Matching trims surrounding whitespace and ignores case. Other strings such as unknown are not treated as missing because they may be explicit category or text values.
 
-The result is **112 retained columns** and **118 removed columns**. All 37 protected columns are present and retained; the same four protected columns remain below the threshold: eventID, habitat, samplingEffort and samplingProtocol. lifeStage is no longer retained: after excluding its 2,806 NA values, it has 1,547 usable values out of 23,934 (**6.46%**). specificEpithet remains above the threshold at 3,245 usable values (**13.56%**). Exact counts and decisions for all 230 source columns are in the [JSON column-completeness report](../../data/interim/obis/cleaning/column_completeness.json).
+The result is **112 retained columns** and **118 removed columns**. All 37 protected columns are present and retained; the same four protected columns remain below the threshold: eventID, habitat, samplingEffort and samplingProtocol. lifeStage is no longer retained: after excluding its 2,806 NA values, it has 1,547 usable values out of 23,934 (**6.46%**). specificEpithet remains above the threshold at 3,245 usable values (**13.56%**). Exact counts and decisions for all 230 source columns are in the generated JSON column-completeness report (`data/interim/obis/cleaning/column_completeness.json`).
 
 ### Row eligibility and optional missingness
 
@@ -115,11 +115,11 @@ The output retains 3,188 distinct non-empty species values, 115 marine=false rec
 
 ### Safe outputs and reproducibility
 
-The script writes each output to a temporary file in the target directory, flushes it, then atomically replaces the destination. It replaces the JSON run summary last so its recorded hashes identify the completed CSV and JSON report.
+The script writes each output to a temporary file in the target directory, flushes it, then atomically replaces the destination. It replaces the JSON run summary last so its recorded hashes identify the completed CSV and JSON report. These interim outputs are local generated artefacts; the tracked [cleaner script](../../src/data_preparation/clean_obis_occurrences_csv.py) recreates them.
 
-- Cleaned CSV: [occurrences_cleaned.csv](../../data/interim/obis/cleaning/occurrences_cleaned.csv), 23,371 × 112, SHA-256 `1e51a18bb6cf096e111dd0f2c810c97e93619501f74574c3b2c6be130b1aec21`.
-- Column report: [column_completeness.json](../../data/interim/obis/cleaning/column_completeness.json), 230 source-column entries, SHA-256 `63774d6050980f089e0a979cc3dcf904ccf168a5202251f75e6549baeff6cae5`.
-- Run summary: [cleaning_summary.json](../../data/interim/obis/cleaning/cleaning_summary.json); it records source metadata, criteria, sentinel rules, column decisions, row exclusions, optional missingness, duplicate diagnostics and hashes for the CSV and JSON report.
+- Cleaned CSV: `data/interim/obis/cleaning/occurrences_cleaned.csv`, 23,371 × 112, SHA-256 `1e51a18bb6cf096e111dd0f2c810c97e93619501f74574c3b2c6be130b1aec21`.
+- Column report: `data/interim/obis/cleaning/column_completeness.json`, 230 source-column entries, SHA-256 `63774d6050980f089e0a979cc3dcf904ccf168a5202251f75e6549baeff6cae5`.
+- Run summary: `data/interim/obis/cleaning/cleaning_summary.json`; it records source metadata, criteria, sentinel rules, column decisions, row exclusions, optional missingness, duplicate diagnostics and hashes for the CSV and JSON report.
 
 The cleaner completed twice with identical primary-output and column-report hashes. Independent checks confirmed the output rows and retained values match eligible source records in source order, every protected field is present, and the only exclusions in this snapshot are the 563 OBIS-dropped records. The bundled Python 3.12.14 runtime was used because WSL returned Wsl/ERROR_ACCESS_DENIED; no environment or package was changed. Reproduction from the repository root:
 
