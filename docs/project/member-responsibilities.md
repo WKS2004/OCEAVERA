@@ -2,7 +2,7 @@
 
 OCEAVERA's four members contribute to one marine ML pipeline. This overview records the current working division, based on the initial group submission dated **17 September 2026**, Sections 6.1–6.7 and Tables 6.1–6.2. Detailed duties are linked below.
 
-**Status:** contribution plan finalised on 6 October 2026 at the user's request. The proposal-based division is the current working allocation; later revisions require a recorded decision. Ownership describes expected work; it does not establish performed contributions. OBIS Area 230 acquisition and generic cleaning, and Bio-ORACLE source intake, are documented as implemented. Species-specific analysis, environmental processing and integration, and model implementation remain subject to further requests and shared decisions. Consult [current readiness](repository-readiness-and-alignment.md).
+**Status:** contribution plan finalised on 6 October 2026 at the user's request. The proposal-based division is the current working allocation; later revisions require a recorded decision. Ownership describes expected work; it does not establish performed contributions. OBIS Area 230 acquisition and generic cleaning, and Bio-ORACLE source intake and structural/numerical validation, are documented as implemented. Species-specific analysis, ecological environmental processing, integration and model implementation remain subject to further requests and shared decisions. Consult [current readiness](repository-readiness-and-alignment.md).
 
 ## Member identities and primary ownership
 

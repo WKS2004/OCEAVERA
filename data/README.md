@@ -22,7 +22,7 @@ dataset versions.
 | Dataset family | Current interim dataset or planned destination | Status |
 | --- | --- | --- |
 | OBIS | One stage directory: `interim/obis/cleaning/`, containing `occurrences_cleaned.csv`, JSON reports and `source_validation_manifest.json` | This is the only directory directly under `interim/obis/`. The source validator writes its manifest here; it does not create a sibling `source_validation/` directory. Current output: 23,371 rows × 112 columns. See the [cleaning record](../docs/records/2026-10-11-obis-area-230-cleaning.md). |
-| Bio-ORACLE | Current stage directory: `interim/bio_oracle/source_validation/<dataset-id>/` | Its NetCDF files and receipts/manifests are one collection bundle. `source_validation/` is the only current stage directory under `interim/bio_oracle/`. When cleaning is implemented, its validated `cleaning/` output must replace the current directory rather than be added beside it. The current manifest records 356 layers and 2,392 variables (4,017,532,960 payload bytes). |
+| Bio-ORACLE | Current stage directory: `interim/bio_oracle/cleaning/`, containing 356 NetCDF products under `products/<dataset-id>/` and the manifest and summary | The cleaner verifies each interim copy against its immutable raw source. The current files remain byte-identical because no correction was justified; 355 products are validated/reused and one needs review. See the [cleaning record](../docs/records/2026-10-11-bio-oracle-cleaning.md). |
 | Integrated dataset | `interim/integrated/integrated_dataset.parquet` | Planned single current table; use GeoParquet when the selected integrated output retains spatial geometry. No integrated interim dataset exists yet. |
 | Analysis-ready dataset | `processed/modeling_dataset.parquet` | Stable destination convention; not generated. |
 
@@ -44,6 +44,18 @@ records](../docs/records/2026-10-10-obis-area-230-column-screening.md) and
 [row-cleaning record](../docs/records/2026-10-10-obis-area-230-cleaning.md);
 the current run is documented in the [cleaning
 record](../docs/records/2026-10-11-obis-area-230-cleaning.md).
+
+The Bio-ORACLE cleaner,
+[`clean_bio_oracle_layers.py`](../src/data_preparation/clean_bio_oracle_layers.py),
+reads and validates every raw NetCDF product without changing array values or
+writing raster copies. Its current `cleaning/` directory contains a compact
+manifest and full structural/numerical summary. All products are readable;
+one `kdpar_mean_range` fill cell at the 2000 baseline slice remains flagged
+for review. Fourteen groups of identical all-zero sea-ice summary arrays are
+reported and retained, and the sparse `coastline` variable is assessed
+separately from continuous-layer missingness. The [cleaning
+record](../docs/records/2026-10-11-bio-oracle-cleaning.md) documents the
+evidence and limits.
 Under D-047 and D-048,
 [`bio_oracle_layers.py`](../src/data_collection/bio_oracle_layers.py) is a
 fixed, no-option collector. A run inventories the live catalogue, then
@@ -60,14 +72,15 @@ identifies the current run manifest and audit evidence.
 The earlier D-046 test response was also deleted with its local manifest; its
 historical measurements remain in the [source
 record](../docs/records/2026-10-09-source-bio-oracle-oceantemperature.md).
-The user reports running the Bio-ORACLE handoff. The local
-`interim/bio_oracle/source_validation/` inventory contains 714 files totaling
-4,021,176,513 bytes; its aggregate manifest records run
-`20261009T163625858012Z`, 356 layers, 2,392 variables and 4,017,532,960 bytes
-of NetCDF payloads. That manifest and file inventory were inspected, but the
-payload SHA-256 values were not independently recalculated during the later UX
-update. The handoff preserves the raw files and does not perform scientific
-processing or integration.
+Before cleaning replaced the source-validation stage, its 714 files were
+independently rechecked against raw payloads, receipts and run provenance;
+all 714 matched, with no missing, extra or checksum-mismatched paths. The
+aggregate handoff manifest recorded run `20261009T163625858012Z`, 356 layers,
+2,392 variables and 4,017,532,960 payload bytes. The source-validation folder
+was then replaced under D-049; its earlier state is reproducible from the raw
+run and staging script. The tracked [cleaning
+record](../docs/records/2026-10-11-bio-oracle-cleaning.md) records the current
+cleaning evidence.
 
 **Current collection:** D-036 uses the OBIS API to save every Area 230
 occurrence response unchanged under `raw/obis/json/`, then converts a

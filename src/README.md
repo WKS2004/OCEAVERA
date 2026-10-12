@@ -181,8 +181,9 @@ layer IDs, variables and per-layer receipts agree, then checks free space on
 the target drive. During copying it verifies each NetCDF signature, byte count
 and SHA-256, and reports byte progress, current layer, transfer rate and ETA.
 Receipt preflight progress is shown every 25 layers. To inspect the selected
-run and available disk space without writing files or reading NetCDF payload
-bytes, add `--dry-run`:
+run and available disk space without writing files, add `--dry-run`. If an
+interim stage already exists, the script also verifies its recorded payload
+hashes before reporting whether that stage can safely be replaced:
 
 ```text
 python src/data_preparation/stage_bio_oracle_layers.py --run-manifest data/raw/bio_oracle/_runs/<complete-run>_bio_oracle_catalog.json --dry-run
@@ -192,22 +193,65 @@ The script writes all layer files and unchanged receipts beneath
 `data/interim/bio_oracle/source_validation/<dataset-id>/`, copies the selected
 catalogue run manifest, and writes a timestamp-free aggregate `manifest.json`.
 The sidecar receipts retain their original raw-source references; the aggregate
-manifest maps those raw paths to the interim copies.
+manifest maps those raw paths to the interim copies. If `cleaning/` is the
+current stage, a successful rerun replaces it with this earlier
+source-validation state so the family never has sibling stage directories.
 
 This is structural source validation, not raster transformation or scientific
-cleaning. Raw files remain unchanged. `source_validation/` is currently the
-only stage directory under `data/interim/bio_oracle/`; a complete replacement
-bundle becomes current only after every layer passes validation. When a later
-Bio-ORACLE cleaning stage is implemented, its validated `cleaning/` directory
-must replace `source_validation/` rather than sit beside it. Successful
-source-staging publication replaces the prior bundle as a whole.
+cleaning. Raw files remain unchanged. A complete replacement bundle becomes
+current only after every layer passes validation. Successful source-staging
+publication replaces the one current stage directory as a whole. Under D-049,
+this can regenerate the earlier `source_validation/` state from raw inputs;
+the validated cleaning stage can then be regenerated from that bundle.
 The preflight
 requires space for the payloads and receipts plus a 64 MiB safety buffer. The
-user reports a successful run; its local manifest records 356 layers, 2,392
-variables and 4,017,532,960 payload bytes. The current local inventory contains
-714 files totaling 4,021,176,513 bytes. The manifest and inventory were
-inspected, but payload hashes were not independently recalculated during the
-later UX update.
+source-validation run's local manifest recorded 356 layers, 2,392 variables
+and 4,017,532,960 payload bytes; its interim inventory contained 714 files
+totaling 4,021,176,513 bytes. Payload hashes were not recalculated during an
+earlier UX update. Before the later cleaning transition replaced that stage,
+all 714 staged files were independently rechecked against their sources and
+receipts.
+
+## Bio-ORACLE environmental cleaning
+
+[`clean_bio_oracle_layers.py`](data_preparation/clean_bio_oracle_layers.py)
+scans all products referenced by the current Bio-ORACLE manifest and publishes
+the validated byte-for-byte NetCDF products under
+`data/interim/bio_oracle/cleaning/<dataset-id>/`, alongside `manifest.json`
+and `cleaning_summary.json`. When the sole current stage is
+`source_validation/`, the cleaner scans those existing products and promotes
+that directory to `cleaning/` by rename after the scan succeeds. Full per-layer
+diagnostics are spooled during scanning to bound RAM; no second dataset copy
+is made. Raw publisher files remain unchanged. Run staging, then cleaning,
+from the repository root:
+
+```text
+python src/data_preparation/stage_bio_oracle_layers.py --run-manifest data/raw/bio_oracle/_runs/<catalog-run>.json
+python src/data_preparation/clean_bio_oracle_layers.py
+```
+
+The standard-library reader inspects every NetCDF header and array, then checks
+file and receipt inventories and checksums, variable metadata and fill values,
+finite/range statistics, coordinate order and grid alignment, CRS, temporal
+coordinates, candidate-domain consistency, and exact duplicate arrays. Each
+interim NetCDF copy is verified against its raw size and SHA-256 before the
+current stage is replaced. A repeat run rehashes raw products and receipts,
+verifies interim product hashes, and reuses the saved array diagnostics. Add
+`--force-full-scan` to read every array again. The default run makes no network
+requests. It preserves source values when no verified correction is justified.
+
+The current evidence covers 356/356 readable products and 2,392 variable
+instances (139 names): all 356 NetCDF products are materialized in interim,
+355 are validated/reused and one requires review because `kdpar_mean_range`
+has one fill cell in its 2000 slice. Interim products are byte-identical to
+raw because no correction was justified; no products were excluded. Fourteen groups of
+identical all-zero sea-ice summaries and the sparse `coastline` layer are
+reported without deduplication or interpreting their fill cells as continuous
+marine missingness. The `landmass` non-fill pattern matches 24,503 candidate
+cells, but its numeric land/water convention is undocumented, so the code does
+not treat that pattern as an authoritative marine mask. See the [cleaning
+record](../docs/records/2026-10-11-bio-oracle-cleaning.md) for the complete
+evidence and limits.
 
 The three OBIS commands print readable status, progress and completion details
 in the console. Their machine-readable provenance remains in the JSON manifests

@@ -9,7 +9,7 @@ This document defines the OCEAVERA data and model-artefact storage conventions. 
 | Original occurrence source | OBIS API response JSON (`.json`) | Preserve every complete paginated response unchanged under `data/raw/obis/json/`. Use the Area 230 API query and cursor pages; request all returned fields, include absence and dropped records, and record page hashes, counts, response-body bytes and the final API-reported total. |
 | Area 230 tabular copy | CSV (`.csv`), stored under `data/raw/obis/csv/` by explicit user decision D-036 | Convert only a manifest-verified complete JSON run. Include the union of all top-level fields, all 68 names on the OBIS Data Access page and every record without filtering or deduplication; encode nested values as compact JSON strings. Retain the exact JSON pages as the lossless source because CSV cannot represent JSON types without a conversion convention. |
 | Environmental layer responses | Publisher-delivered format; NetCDF (`.nc`) for the current Bio-ORACLE ERDDAP collector | Retain each bounded publisher response byte-for-byte under `data/raw/bio_oracle/<dataset-id>/`; record the exact layer, variable, bounds, URL and checksum in its local manifest and dated source record. Keep the returned grid in NetCDF and do not flatten the full raster. |
-| Current Bio-ORACLE interim dataset | One logical NetCDF collection with unchanged per-layer JSON receipts | The only current stage directory is `data/interim/bio_oracle/source_validation/<dataset-id>/`. The layer files and receipts/manifests form one dataset bundle. After validation, a later stage must replace this directory rather than add a sibling phase directory; future cleaning must publish the `cleaning/` directory only after a complete result passes checks. Raw sources remain unchanged. This is structural validation, not scientific processing. |
+| Current Bio-ORACLE interim dataset | NetCDF (`.nc`) product bundle with JSON manifest and structural/numerical report | The only current stage directory is `data/interim/bio_oracle/cleaning/`; its 356 NetCDF copies are under `products/<dataset-id>/`. Each copy is verified against its immutable raw source. Current products remain byte-identical to raw because no correction was justified. The report covers 2,392 variable instances: 355 products are validated/reused and one needs review for a single fill cell. See the [cleaning record](../records/2026-10-11-bio-oracle-cleaning.md). |
 | Current OBIS interim dataset | One stage directory, `data/interim/obis/cleaning/`, with one cleaned CSV and support JSON | Keep the cleaned table at `occurrences_cleaned.csv`; place `source_validation_manifest.json`, the column report and run summary in the same directory. This is the only directory directly under `data/interim/obis/`; source validation does not create a sibling directory. |
 | Planned integrated interim dataset | One spatial table in GeoParquet (`.parquet`) when supported | Use the stable destination `data/interim/integrated/integrated_dataset.parquet`; no integrated dataset currently exists. |
 | Derived spatial tables | GeoParquet, normally using `.parquet` | Use for spatial occurrences, background samples, integrated records and spatial prediction tables when the selected tools support the format. Preserve geometry and its CRS metadata. |
@@ -68,22 +68,25 @@ response interruptions, and reports a final layer/variable summary with a run
 manifest path. Previous catalogue and download outcomes are recorded in the
 dated intake record. The earlier complete and partial snapshots were deleted
 at the user's request; the latest Python-file run has all 356 of 356 layers
-verified. The user reports running the source-validation handoff, which leaves
-raw data unchanged. It stages a complete collection in a temporary directory,
-checks the payloads and receipts, then replaces the prior interim collection
-directory only after the full copy succeeds; if publication fails, it restores
-the prior collection. Its local aggregate manifest records 356 layers, 2,392
-variables and 4,017,532,960 payload bytes; the current interim inventory
-contains 714 files totaling 4,021,176,513 bytes. The manifest and inventory
-were inspected, but payload hashes were not independently recalculated during
-the later UX update. No scientific environmental processing, integration or
-processed data exists.
+verified. The staging script leaves raw data unchanged. It stages a complete
+collection in a temporary directory, checks payloads and receipts, then
+replaces the current stage only after the full copy succeeds; if publication
+fails, it restores the prior stage. Immediately before cleaning replaced that
+state, the 714-file interim bundle was independently rechecked against source
+payloads, receipts and run provenance; no files were missing, additional or
+mismatched. The Bio-ORACLE cleaner reads raw files, validates their arrays and
+publishes byte-for-byte NetCDF copies in the current `cleaning/` stage, alongside
+the manifest and summary. Its report covers 356 products and 2,392 variable
+instances. This is structural and numerical validation; values are not
+corrected, normalized or imputed, and environmental integration or processed
+data has not been generated.
 
 | Stage or source | Stable path pattern | Status and use |
 | --- | --- | --- |
 | OBIS source validation | `data/interim/obis/cleaning/source_validation_manifest.json` | Implemented; records raw CSV structure and fingerprint without making a copy. The manifest is stored in the sole `cleaning/` directory; there is no sibling `source_validation/` directory. |
 | OBIS occurrence cleaning | `data/interim/obis/cleaning/occurrences_cleaned.csv` plus JSON support files in that same directory | Implemented in [`clean_obis_occurrences_csv.py`](../../src/data_preparation/clean_obis_occurrences_csv.py); keeps protected fields and other columns at least 10% complete, then applies conservative row checks. Current output: 23,371 rows × 112 columns. Evidence: [current cleaning record](../records/2026-10-11-obis-area-230-cleaning.md); earlier 90% screen and row-filter trial remain historical. |
-| Current Bio-ORACLE dataset | One replaceable bundle at `data/interim/bio_oracle/source_validation/<dataset-id>/` | Implemented in [`stage_bio_oracle_layers.py`](../../src/data_preparation/stage_bio_oracle_layers.py). A complete D-047/D-048 run's NetCDF layers and JSON receipts/manifests form one collection; validation precedes whole-directory replacement. This is currently the only stage directory under `data/interim/bio_oracle/`. When cleaning is implemented, the validated `cleaning/` directory must replace it rather than coexist beside it. The current aggregate manifest records 356 layers and 2,392 variables. No scientific processing is applied. |
+| Bio-ORACLE source-validation state | Reconstructible at `data/interim/bio_oracle/source_validation/<dataset-id>/` | Implemented in [`stage_bio_oracle_layers.py`](../../src/data_preparation/stage_bio_oracle_layers.py). It rebuilds the unchanged collection bundle from the selected complete raw run and replaces the current stage only after every layer passes checks. It can replace the current `cleaning/` state; the two directories must not coexist. |
+| Current Bio-ORACLE cleaning state | `data/interim/bio_oracle/cleaning/<dataset-id>/<source-file>.nc` with `manifest.json` and `cleaning_summary.json` | Implemented in [`clean_bio_oracle_layers.py`](../../src/data_preparation/clean_bio_oracle_layers.py). It scans the staged files, retains full diagnostics in a temporary spool, then promotes the stage by directory rename. The manifest maps each interim product to its raw source and records hashes. One `kdpar_mean_range` fill cell remains under review. Evidence: [Bio-ORACLE cleaning record](../records/2026-10-11-bio-oracle-cleaning.md). |
 | Integrated dataset | One current table at `data/interim/integrated/integrated_dataset.parquet` | Planned; not implemented. Replace the previous interim table only after a new result passes validation. |
 | Analysis-ready table | `data/processed/modeling_dataset.parquet` | Stable planned destination; record whether the actual file is GeoParquet or non-spatial Parquet. Processing is not implemented. |
 
