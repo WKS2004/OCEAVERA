@@ -2,8 +2,9 @@
 
 This is a source-validation handoff, not scientific processing. It checks the
 catalogue run and per-layer receipts, verifies each NetCDF payload while
-copying, and replaces the stable interim phase only after the full new copy is
-ready. The publisher-delivered raw files are never changed or removed.
+copying, and replaces the one current Bio-ORACLE interim stage only after the
+full new copy is ready. The publisher-delivered raw files are never changed or
+removed.
 """
 
 from __future__ import annotations
@@ -27,6 +28,7 @@ RAW_BIO_ORACLE_ROOT = (ROOT / "data" / "raw" / "bio_oracle").resolve()
 RAW_RUNS_ROOT = RAW_BIO_ORACLE_ROOT / "_runs"
 INTERIM_BIO_ORACLE_ROOT = ROOT / "data" / "interim" / "bio_oracle"
 OUTPUT_DIR = INTERIM_BIO_ORACLE_ROOT / "source_validation"
+ACTIVE_STAGE_DIRS = (OUTPUT_DIR, INTERIM_BIO_ORACLE_ROOT / "cleaning")
 OUTPUT_MANIFEST_NAME = "manifest.json"
 COPIED_RUN_MANIFEST_NAME = "catalog_run_manifest.json"
 MANIFEST_FORMAT = "oceavera-bio-oracle-interim-source-validation-v1"
@@ -64,6 +66,14 @@ def format_duration(seconds: float) -> str:
 
 def sha256_bytes(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
 
 
 def resolve_run_manifest(value: str) -> Path:
@@ -491,22 +501,160 @@ def write_json_atomic(path: Path, value: dict[str, Any]) -> None:
             temporary_path.unlink(missing_ok=True)
 
 
-def publish_staging_directory(temporary_dir: Path, *, progress: ProgressReporter | None) -> None:
-    """Replace the stable output only after every staged file is verified."""
-    backup_dir: Path | None = None
-    if OUTPUT_DIR.is_symlink() or (OUTPUT_DIR.exists() and not OUTPUT_DIR.is_dir()):
-        raise StageError(f"The stable output path is not a regular directory: {OUTPUT_DIR}")
+def current_stage_directory() -> Path:
+    """Validate and return the sole current Bio-ORACLE stage, if present."""
+    present: list[Path] = []
+    for candidate in ACTIVE_STAGE_DIRS:
+        if candidate.is_symlink() or (candidate.exists() and not candidate.is_dir()):
+            raise StageError(f"The interim stage path is not a regular directory: {candidate}")
+        if candidate.exists():
+            present.append(candidate)
+    if len(present) > 1:
+        raise StageError(
+            "The Bio-ORACLE interim family has more than one active stage directory: "
+            + ", ".join(path.name for path in present)
+        )
+    return present[0] if present else OUTPUT_DIR
 
-    if OUTPUT_DIR.exists():
-        backup_dir = Path(tempfile.mkdtemp(prefix=".source_validation.backup-", dir=INTERIM_BIO_ORACLE_ROOT))
+
+def verify_replaceable_source_stage(stage_dir: Path) -> None:
+    """Allow replacement only of an exact, script-owned interim dataset stage."""
+    cleaning_dir = INTERIM_BIO_ORACLE_ROOT / "cleaning"
+    if stage_dir not in {OUTPUT_DIR, cleaning_dir} or stage_dir.is_symlink():
+        raise StageError("Refusing to replace an unknown or symbolic-link Bio-ORACLE stage.")
+    manifest_path = stage_dir / OUTPUT_MANIFEST_NAME
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise StageError(f"Refusing to replace an unverifiable interim stage: {error}") from error
+
+    expected_hashes: dict[Path, str] = {}
+    expected_sizes: dict[Path, int] = {}
+    stage_root = stage_dir.resolve()
+    if stage_dir == OUTPUT_DIR:
+        if manifest.get("format") != MANIFEST_FORMAT or not isinstance(manifest.get("layers"), list):
+            raise StageError("Refusing to replace a source-validation folder with an unknown manifest or layout.")
+        for layer in manifest["layers"]:
+            for staged_key, raw_key, digest_key in (
+                ("staged_payload", "source_payload", "sha256"),
+                ("staged_receipt", "source_receipt", None),
+            ):
+                staged_value = layer.get(staged_key)
+                raw_value = layer.get(raw_key)
+                if not isinstance(staged_value, str) or not isinstance(raw_value, str):
+                    raise StageError("Refusing to replace a source-validation stage with incomplete layer paths.")
+                staged_path = (ROOT / staged_value).resolve()
+                raw_path = (ROOT / raw_value).resolve()
+                if not staged_path.is_relative_to(stage_root) or not raw_path.is_relative_to(RAW_BIO_ORACLE_ROOT):
+                    raise StageError("Refusing to replace a source-validation stage with paths outside their expected roots.")
+                expected_hash = layer.get(digest_key) if digest_key else sha256_file(raw_path)
+                expected_hashes[staged_path] = str(expected_hash)
+                expected_sizes[staged_path] = raw_path.stat().st_size
+        source_run = manifest.get("source_run", {})
+        staged_run = source_run.get("staged_copy")
+        raw_run = source_run.get("path")
+        if staged_run:
+            staged_path = (ROOT / staged_run).resolve()
+            raw_path = (ROOT / raw_run).resolve()
+            if not staged_path.is_relative_to(stage_root) or not raw_path.is_relative_to(RAW_RUNS_ROOT):
+                raise StageError("Refusing to replace a source-validation stage with an invalid run-manifest path.")
+            expected_hashes[staged_path] = str(source_run.get("sha256", ""))
+            expected_sizes[staged_path] = raw_path.stat().st_size
+    else:
+        if manifest.get("format") != "oceavera-bio-oracle-cleaning-manifest-v2" or not isinstance(manifest.get("products"), list):
+            raise StageError("Refusing to replace a cleaning folder with an unknown manifest or layout.")
+        for product in manifest["products"]:
+            staged_value = product.get("product_path")
+            raw_value = product.get("source_file")
+            if not isinstance(staged_value, str) or not isinstance(raw_value, str):
+                raise StageError("Refusing to replace a cleaning stage with incomplete product paths.")
+            staged_path = (ROOT / staged_value).resolve()
+            raw_path = (ROOT / raw_value).resolve()
+            if not staged_path.is_relative_to(stage_root) or not raw_path.is_relative_to(RAW_BIO_ORACLE_ROOT):
+                raise StageError("Refusing to replace a cleaning stage with paths outside their expected roots.")
+            if product.get("output_sha256") != product.get("source_sha256"):
+                raise StageError("Refusing to replace an interim stage containing payloads that differ from raw; preserve or review those corrections first.")
+            expected_hashes[staged_path] = str(product.get("output_sha256", ""))
+            expected_sizes[staged_path] = int(product.get("output_bytes", -1))
+            if raw_path.stat().st_size != int(product.get("source_bytes", -1)) or sha256_file(raw_path) != product.get("source_sha256"):
+                raise StageError("Refusing to replace a cleaning stage whose raw recovery source no longer matches its manifest.")
+            staged_receipt = product.get("staged_receipt")
+            if staged_receipt:
+                receipt_source_value = product.get("source_receipt")
+                if not isinstance(receipt_source_value, str):
+                    raise StageError("Refusing to replace a cleaning stage with an incomplete receipt reference.")
+                staged_receipt_path = (ROOT / staged_receipt).resolve()
+                receipt_source_path = (ROOT / receipt_source_value).resolve()
+                if (
+                    not staged_receipt_path.is_relative_to(stage_root)
+                    or not receipt_source_path.is_relative_to(RAW_BIO_ORACLE_ROOT)
+                    or not receipt_source_path.is_file()
+                ):
+                    raise StageError("Refusing to replace a cleaning stage with an invalid receipt path.")
+                receipt_hash = sha256_file(receipt_source_path)
+                if product.get("staged_receipt_sha256") not in (None, receipt_hash):
+                    raise StageError("Refusing to replace a cleaning stage whose receipt hash differs from raw.")
+                expected_hashes[staged_receipt_path] = receipt_hash
+                expected_sizes[staged_receipt_path] = receipt_source_path.stat().st_size
+
+        source_run = manifest.get("source_run", {})
+        staged_run = source_run.get("staged_copy")
+        raw_run = source_run.get("path")
+        if staged_run:
+            if not isinstance(raw_run, str):
+                raise StageError("Refusing to replace a cleaning stage with an incomplete catalogue-run reference.")
+            staged_path = (ROOT / staged_run).resolve()
+            raw_path = (ROOT / raw_run).resolve()
+            if (
+                not staged_path.is_relative_to(stage_root)
+                or not raw_path.is_relative_to(RAW_RUNS_ROOT)
+                or not raw_path.is_file()
+            ):
+                raise StageError("Refusing to replace a cleaning stage with an invalid catalogue-run path.")
+            expected_hash = str(source_run.get("sha256", ""))
+            if sha256_file(raw_path) != expected_hash:
+                raise StageError("Refusing to replace a cleaning stage whose raw catalogue manifest changed.")
+            expected_hashes[staged_path] = expected_hash
+            expected_sizes[staged_path] = raw_path.stat().st_size
+
+    expected_paths = set(expected_hashes) | {manifest_path.resolve()}
+    if stage_dir == cleaning_dir:
+        summary_path = (stage_dir / "cleaning_summary.json").resolve()
+        if not summary_path.is_file():
+            raise StageError("Refusing to replace a cleaning stage without its summary report.")
+        expected_paths.add(summary_path)
+    actual_paths = {path.resolve() for path in stage_dir.rglob("*") if path.is_file()}
+    if actual_paths != expected_paths:
+        raise StageError("Refusing to replace source-validation output containing missing or unrecognized files.")
+    expected_dirs = {
+        parent.resolve()
+        for file_path in expected_paths
+        for parent in file_path.parents
+        if parent != stage_dir.resolve() and parent.is_relative_to(stage_dir.resolve())
+    }
+    actual_dirs = {path.resolve() for path in stage_dir.rglob("*") if path.is_dir()}
+    if actual_dirs != expected_dirs:
+        raise StageError("Refusing to replace source-validation output containing unrecognized directories.")
+    for staged_path, expected_hash in expected_hashes.items():
+        if not staged_path.is_file() or staged_path.stat().st_size != expected_sizes.get(staged_path, staged_path.stat().st_size) or sha256_file(staged_path) != expected_hash:
+            raise StageError(f"Refusing to replace interim output that fails its recorded checksum: {staged_path.name}")
+
+
+def publish_staging_directory(temporary_dir: Path, *, progress: ProgressReporter | None) -> None:
+    """Replace the sole current stage with source validation after full verification."""
+    backup_dir: Path | None = None
+    prior_stage = current_stage_directory()
+    if prior_stage.exists():
+        verify_replaceable_source_stage(prior_stage)
+        backup_dir = Path(tempfile.mkdtemp(prefix=".bio_oracle_stage.backup-", dir=INTERIM_BIO_ORACLE_ROOT))
         backup_dir.rmdir()
-        OUTPUT_DIR.replace(backup_dir)
+        prior_stage.replace(backup_dir)
     try:
         temporary_dir.replace(OUTPUT_DIR)
     except OSError as error:
-        if backup_dir is not None and backup_dir.exists() and not OUTPUT_DIR.exists():
+        if backup_dir is not None and backup_dir.exists() and not prior_stage.exists():
             try:
-                backup_dir.replace(OUTPUT_DIR)
+                backup_dir.replace(prior_stage)
             except OSError as restore_error:
                 raise StageError(
                     "Could not publish the new interim folder or restore the previous one; "
@@ -543,8 +691,9 @@ def stage(
         or not INTERIM_BIO_ORACLE_ROOT.resolve().is_relative_to(ROOT.resolve())
     ):
         raise StageError("The Bio-ORACLE interim root must not be a symbolic link")
-    if OUTPUT_DIR.is_symlink() or (OUTPUT_DIR.exists() and not OUTPUT_DIR.is_dir()):
-        raise StageError(f"The stable output path is not a regular directory: {OUTPUT_DIR}")
+    prior_stage = current_stage_directory()
+    if prior_stage.exists():
+        verify_replaceable_source_stage(prior_stage)
 
     required_bytes = estimate_required_space(payload_bytes, run_bytes, layers)
     available_bytes = check_available_space(required_bytes)
@@ -630,6 +779,7 @@ def stage(
                     "staged_receipt": (OUTPUT_DIR / item["dataset_id"] / staged_receipt.name)
                     .relative_to(ROOT)
                     .as_posix(),
+                    "staged_receipt_sha256": item["receipt_sha256"],
                     "bytes": item["payload_bytes"],
                     "sha256": item["payload_sha256"],
                     "variables": item["variables"],
@@ -708,7 +858,7 @@ def main() -> int:
     print(f"Stable output: {OUTPUT_DIR.relative_to(ROOT).as_posix()}")
     print("Raw data are preserved; the interim folder is published after all payloads pass verification.")
     if args.dry_run:
-        print("Mode: dry run (metadata and file-size checks only; no files will be written).")
+        print("Mode: dry run (no files will be written; an existing interim stage may be integrity-checked).")
 
     def show_progress(message: str) -> None:
         print(f"[INFO] {message}", flush=True)
@@ -721,7 +871,7 @@ def main() -> int:
         return 1
 
     if args.dry_run:
-        print("\n[OK] Dry run passed. No files were written and no NetCDF payload bytes were read.")
+        print("\n[OK] Dry run passed. No files were written; the existing stage passed replacement-integrity checks.")
         print(f"  Catalogue run: {result['catalog_run_id']}")
         print(f"  Layers: {result['layer_count']:,}")
         print(f"  Variables: {result['variable_count']:,}")
