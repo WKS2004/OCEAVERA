@@ -1,0 +1,52 @@
+{
+  "executed_at_utc": "2026-10-15T20:08:21.498772+00:00",
+  "python_version": "3.14.8",
+  "commands": [
+    {
+      "name": "script08",
+      "command": "python src/data_preparation/08_integrate_spatiotemporal_data.py",
+      "exit_status": 0,
+      "evidence": "Executed in this task; manifest, all-source field/geometry read-back and terminal completion recorded. Full raw stdout was not retained."
+    },
+    {
+      "name": "script09-reuse",
+      "command": "python src/data_preparation/09_filter_and_grid_data.py",
+      "exit_status": 0,
+      "output_file": "docs/records/2026-10-16-integration-script09-reuse-output.txt"
+    },
+    {
+      "name": "unittest",
+      "command": "python -m unittest discover -s tests -v",
+      "exit_status": 0,
+      "output_file": "docs/records/2026-10-16-integration-unittest-output.txt"
+    },
+    {
+      "name": "compilation",
+      "command": "python -m compileall -q src tests",
+      "exit_status": 0,
+      "output_file": "docs/records/2026-10-16-integration-compilation-output.txt"
+    },
+    {
+      "name": "dependency-consistency",
+      "command": "python -m pip check",
+      "exit_status": 0,
+      "output_file": "docs/records/2026-10-16-integration-dependency-consistency-output.txt"
+    },
+    {
+      "name": "git-whitespace",
+      "command": "git diff --check",
+      "exit_status": 0,
+      "warning": "Existing 03_pipeline_data_cleaning_obis.ipynb CRLF-normalisation warning; no whitespace errors."
+    },
+    {
+      "name": "repository-consistency",
+      "command": "python .agents/scripts/validate_agent_resources.py",
+      "exit_status": 0,
+      "output_file": "docs/records/2026-10-16-integration-repository-check-output.txt"
+    }
+  ],
+  "environment_modified": false,
+  "packages_installed": false,
+  "independent_audit_exit_status": 0,
+  "independent_date_and_summary_recheck_exit_status": 0
+}

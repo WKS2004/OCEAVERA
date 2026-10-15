@@ -14,10 +14,10 @@ concurrency:
 
 jobs:
   repository-checks:
-    name: Repository structure, records and Python syntax
+    name: Repository structure, records and integration checks
     if: ${{ github.event_name != 'push' || github.ref_type == 'branch' }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 15
     steps:
       - name: Check out repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -30,8 +30,24 @@ jobs:
         with:
           python-version-file: .python-version
 
+      - name: Install pinned project dependencies
+        run: python -m pip install --only-binary=:all: -r requirements.txt
+
       - name: Validate documentation, agent resources and contribution records
         run: python -B .agents/scripts/validate_agent_resources.py
 
       - name: Check data intake and preparation Python syntax
-        run: python -m py_compile src/data_collection/obis_occurrences.py src/data_collection/obis_json_to_csv.py src/data_collection/bio_oracle_layers.py src/data_preparation/stage_obis_csv.py src/data_preparation/stage_bio_oracle_layers.py src/data_preparation/clean_bio_oracle_layers.py
+        run: >-
+          python -m py_compile
+          src/data_collection/01_obis_occurrences.py
+          src/data_collection/02_obis_json_to_csv.py
+          src/data_preparation/03_stage_obis_csv.py
+          src/data_preparation/04_clean_obis_occurrences_csv.py
+          src/data_collection/05_bio_oracle_layers.py
+          src/data_preparation/06_stage_bio_oracle_layers.py
+          src/data_preparation/07_clean_bio_oracle_layers.py
+          src/data_preparation/08_integrate_spatiotemporal_data.py
+          src/data_preparation/09_filter_and_grid_data.py
+
+      - name: Check integration and spatial helpers
+        run: python -m unittest discover -s tests -v

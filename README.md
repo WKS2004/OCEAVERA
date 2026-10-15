@@ -20,22 +20,23 @@ The [readiness review](docs/project/repository-readiness-and-alignment.md) recor
 
 - The shared repository foundation and member responsibility plan.
 - The unrestricted Area 230 JSON/CSV acquisition method and its recorded validation evidence under D-036.
-- Conservative cleaning for OBIS occurrences and a full structural/numerical scan of Bio-ORACLE rasters. OBIS writes its current CSV and JSON provenance reports inside the sole `data/interim/obis/cleaning/` directory. Bio-ORACLE retains no interim raster copies; its compact manifest and summary report 356 readable products, 355 validated/reused products and one value requiring review. See the [Bio-ORACLE cleaning record](docs/records/2026-10-11-bio-oracle-cleaning.md).
+- Conservative cleaning for OBIS occurrences and a full structural/numerical scan of Bio-ORACLE rasters. OBIS writes its current CSV and JSON provenance reports inside the sole `data/interim/obis/cleaning/` directory. Bio-ORACLE retains 356 byte-identical interim NetCDF copies beside its manifest and summary; 355 products are validated/reused and one value requires review. See the [Bio-ORACLE cleaning record](docs/records/2026-10-11-bio-oracle-cleaning.md).
 - The first catalog-wide Bio-ORACLE v3 intake and a later partial manual snapshot were deleted at the user's request. The final Python collector run under D-047/D-048 completed all 356 regional grids and 2,392 variables (4,017,532,960 payload bytes); every payload passed byte-count, SHA-256 and NetCDF-signature checks, with zero failed or pending layers. The [regional source record](docs/records/2026-10-09-source-bio-oracle-sri-lanka-catalog.md) preserves all run histories and the audit. The retrieved source axes exposed baseline coordinates at 2000/2010 and SSP coordinates at 2020–2090; there is no separate 2100 snapshot.
 - Bio-ORACLE provides decade summaries, not annual values. Its publisher-level present-day product spans 2000–2020, split into 2000–2010 and 2010–2020 decades; whether every baseline layer includes the full period through 2020 is unresolved because layer titles end in 2018, 2019 or 2020 while retrieved time metadata labels only 2000/2010. SSP labels run from 2020 through 2090, with the final decade reaching the 2100 horizon but no separate 2100 timestamp. See the [source record](docs/records/2026-10-09-source-bio-oracle-sri-lanka-catalog.md).
+- D-054 applies Policy B to Script 09. The current interim GeoParquets contain 23,371 full rows, 9,681 temporal rows, 2,353 marine water-centre candidates, 2,353 gridded observations and 1,389 species/cell/period summaries. All 382 environmental definitions remain present; 2,082 marine candidates have at least one environmental value. Policy B excludes exact `ON_LAND`/`MARINE_UNSURE` flags and points outside GSHHG water, while keeping positional uncertainty as a diagnostic. The prior strict-policy counts are preserved as historical evidence. See the [D-054 decision](docs/records/2026-10-16-decision-policy-b-marine-water-centre.md), [execution report](docs/records/2026-10-16-policy-b-execution-report.md), [D-053 historical report](docs/records/2026-10-16-integration-final-technical-report.md), [catalogue](docs/records/2026-10-16-integration-variable-catalog.json) and [branch notebook](notebooks/branch_work/05_pipeline_data_integration_and_data_cleaning.ipynb).
 - The [branch work notebook](notebooks/branch_work/01_pipeline_biological_data_collection.ipynb), which documents the branch and runs its offline CSV demonstration in memory.
 
 **Pending**
 
-Further species-specific review, environmental compatibility and integration, analytical notebooks, model implementation and model results.
+Species-specific review, target construction, EDA, feature work, model implementation and model results.
 
 **Open choices and evidence**
 
-The focal species, modelling boundary, compatible environmental resources, ML framework and experiment environment remain unresolved. Industry Explorer is the proposed track; approval and the stakeholder decision context are not evidenced. Python 3.14 is the project baseline.
+The focal species, modelling boundary, later predictor eligibility, ML framework and experiment environment remain unresolved. Industry Explorer is the proposed track; approval and the stakeholder decision context are not evidenced. Python 3.14 is the project baseline. NumPy, pandas, netCDF4, GeoPandas and PyArrow support the integration pipeline; the existing pyproj runtime is pinned for geodesic uncertainty checks; Matplotlib and Seaborn are used by the branch notebook. These pins do not select the ML stack.
 
 ## Data and model artefacts
 
-The working convention preserves raw source responses and uses timestamps for raw acquisition snapshots. Under [D-049](docs/records/2026-10-11-decision-interim-one-current-dataset.md), each interim data family has one current dataset. If a family uses stage directories, exactly one active stage directory sits directly beneath that family path; a later stage replaces it only after validation. A single-table family may use its fixed file destination. OBIS has only `data/interim/obis/cleaning/`; Bio-ORACLE has only `data/interim/bio_oracle/cleaning/`, with its manifest referencing unchanged raw NetCDF products. The latest Bio-ORACLE cleaning scan read all 356 products and 2,392 variable instances; one fill value remains flagged for review. The earlier source-validation bundle was rechecked before replacement and can be regenerated from the raw run and staging script. See the [Bio-ORACLE cleaning record](docs/records/2026-10-11-bio-oracle-cleaning.md). The OBIS handoff accepts a selected run-specific CSV path; the Bio-ORACLE collector inventories the catalogue, requests all variables within explicit bounds and records its query beside each raw NetCDF response. The earlier complete and partial Bio-ORACLE snapshots were deleted at the user's request; the latest local snapshot contains all 356 planned layers and passed transfer-integrity checks. Source compatibility, spatial/temporal alignment and final predictor selection remain subject to review. GeoParquet is used for compatible derived spatial tables and Parquet for compatible non-spatial ML tables. Actual resource formats, model serialization and experiment environment remain to be verified or selected during authorised work. The [data storage and provenance guide](docs/data/data-storage-and-provenance.md) defines the full conventions. COG and ONNX remain optional, unfinalised suggestions for a future BLUEVERSE integration; neither is an OCEAVERA requirement.
+The working convention preserves raw source responses and uses timestamps for raw acquisition snapshots. Under [D-049](docs/records/2026-10-11-decision-interim-one-current-dataset.md), each interim data family has one current dataset. If a family uses stage directories, exactly one active stage directory sits directly beneath that family path; a later stage replaces it only after validation. A single-table family may use its fixed file destination. OBIS has only `data/interim/obis/cleaning/`; Bio-ORACLE has only `data/interim/bio_oracle/cleaning/`, with its manifest referencing unchanged raw NetCDF products. The latest Bio-ORACLE cleaning scan read all 356 products and 2,392 variable instances; one fill value remains flagged for review. The earlier source-validation bundle was rechecked before replacement and can be regenerated from the raw run and staging script. See the [Bio-ORACLE cleaning record](docs/records/2026-10-11-bio-oracle-cleaning.md). The OBIS handoff accepts a selected run-specific CSV path; the Bio-ORACLE collector inventories the catalogue, requests all variables within explicit bounds and records its query beside each raw NetCDF response. The earlier complete and partial Bio-ORACLE snapshots were deleted at the user's request; the latest local snapshot contains all 356 planned layers and passed transfer-integrity checks. D-050 is historical. D-053 records the completed full integration and the former strict marine policy; [D-054](docs/records/2026-10-16-decision-policy-b-marine-water-centre.md) supersedes that marine rule and records the current 23,371 full, 9,681 temporal, 2,353 marine, 2,353 gridded and 1,389 summary outputs. All 382 feature definitions and the documented source quarantines remain. Later species eligibility and feature selection remain subject to review. GeoParquet is used for compatible derived spatial tables and Parquet for compatible non-spatial ML tables. NumPy, pandas, netCDF4, GeoPandas and PyArrow are pinned for integration; Matplotlib and Seaborn support the branch notebook. The ML framework and experiment environment remain unselected. The [data storage and provenance guide](docs/data/data-storage-and-provenance.md) defines the full conventions. COG and ONNX remain optional, unfinalised suggestions for a future BLUEVERSE integration; neither is an OCEAVERA requirement.
 
 ## Start here
 
@@ -43,7 +44,7 @@ The working convention preserves raw source responses and uses timestamps for ra
 | --- | --- |
 | [PROJECT_REQUIREMENTS.md](PROJECT_REQUIREMENTS.md) | Project obligations, evidence requirements, rubric and submission checklist |
 | [`.python-version`](.python-version) | Shared Python 3.14 baseline used by Conda setup and repository CI |
-| [requirements.txt](requirements.txt) | Shared, exactly pinned third-party packages for project code, notebooks and required tooling; includes Jupyter Notebook and its Python kernel |
+| [requirements.txt](requirements.txt) | Shared, exactly pinned third-party packages for project code, notebooks and required tooling; includes the GeoParquet writer and notebook tooling |
 | [Project overview and scope](docs/project/project-overview-and-scope.md) | Research context, boundaries and interpretation limits |
 | [Member responsibilities](docs/project/member-responsibilities.md) | General division and pipeline matrix, with links to four detailed member files and shared duties |
 | [ML workflow and evidence gates](docs/ml/ml-workflow-and-evidence-gates.md) | Planned analytical sequence and progression conditions |
@@ -76,7 +77,7 @@ Feature engineering is jointly led by Ushan and Adithya; candidate training by A
 | [`docs/`](docs/README.md) | Canonical project knowledge, templates, dated records and contributor logs |
 | [`notebooks/`](notebooks/README.md) | Branch work notebooks and future reproducible analysis |
 | [`src/data_collection/`](src/README.md) | OBIS Area 230 retrieval, JSON-to-CSV conversion and catalog-wide Bio-ORACLE regional intake |
-| [`src/data_preparation/`](src/README.md) | OBIS raw-CSV validation and interim staging |
+| [`src/data_preparation/`](src/README.md) | OBIS/Bio-ORACLE validation, cleaning, spatial integration and GeoParquet publication |
 | [`outputs/`](outputs/README.md) | Future reviewed figures, maps and evaluation artefacts |
 | [`reports/`](reports/README.md) | Future group report and submission material |
 
@@ -84,7 +85,7 @@ Scientific records belong in `docs/records/`; factual contributor activity belon
 
 ## Repository checks
 
-[Repository checks](.github/workflows/ci.yml) runs the structural helper and syntax-compiles the OBIS and Bio-ORACLE intake plus OBIS handoff scripts on pull requests, pushes to every branch and manual dispatch. It does not run the scripts or download dataset records. See [GitHub workflows](docs/project/github-workflows.md) for operation, failure handling and prerequisites for later scientific checks. The hosted maintenance interpreter does not select the ML runtime; passing these checks does not establish scientific or submission readiness.
+[Repository checks](.github/workflows/ci.yml) runs the structural helper, syntax-compiles the OBIS and Bio-ORACLE intake, handoff, cleaning and integration scripts, and executes the standard-library spatial integration unit checks on pull requests, pushes to every branch and manual dispatch. It does not run the data integration or download dataset records. See [GitHub workflows](docs/project/github-workflows.md) for operation, failure handling and prerequisites for later scientific checks. The hosted maintenance interpreter does not select the ML runtime; passing these checks does not establish scientific or submission readiness.
 
 For documentation and agent-resource changes, run the structural helper from the repository root with Python 3.10 or later:
 
@@ -98,11 +99,12 @@ The helper uses the standard library and checks maintained resource formats, loc
 ## Python dependencies
 
 Python 3.14 is the project baseline, recorded in [`.python-version`](.python-version).
-The current OBIS and Bio-ORACLE intake scripts use the standard library and
-remain compatible with Python 3.10 or later. Jupyter Notebook and `ipykernel`
-are pinned in the root [`requirements.txt`](requirements.txt) as notebook
-tooling, not as the ML or scientific stack. No Python environment is stored in
-this repository. The following commands document user-led setup; agents need
+The OBIS and Bio-ORACLE intake scripts use the standard library and remain
+compatible with Python 3.10 or later. The integration pipeline uses pinned
+NumPy, pandas, netCDF4, GeoPandas and PyArrow; the branch notebook also uses
+Jupyter, Matplotlib and Seaborn. These packages do not select the ML stack. No
+Python environment is stored in this repository. The following commands
+document user-led setup; agents need
 explicit authorisation in the current task before environment or package
 operations:
 
@@ -128,16 +130,16 @@ python -m pip install -r requirements.txt
 ```
 
 The version check should report Python 3.14.x. Installing the requirements adds
-the pinned Jupyter Notebook interface and Python kernel; the OBIS intake scripts
-still use only the standard library. To open the branch notebook from the
+the pinned Jupyter tooling, GeoParquet writer, and Matplotlib/Seaborn plotting
+packages used by the integration branch notebook. To open that notebook from the
 repository root, run:
 
 ```text
-jupyter notebook notebooks/branch_work/01_pipeline_biological_data_collection.ipynb
+jupyter notebook notebooks/branch_work/05_pipeline_data_integration_and_data_cleaning.ipynb
 ```
 
 The branch notebook uses native Markdown cells for its title, contributor table, scope and data context, followed by concise executable Python Code cells. Run the Code cells in order. The default mode does not access the network, and notebook data work remains in memory rather than writing dataset files.
-The future ML framework and scientific dependency stack remain open. Conda
+The ML framework and modelling dependency stack remain open. Conda
 must be installed and initialised for the shell before running these commands.
 
 Whenever project code, notebooks or required tooling add, remove or change a

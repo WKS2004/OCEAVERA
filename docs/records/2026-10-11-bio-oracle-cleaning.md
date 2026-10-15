@@ -8,11 +8,11 @@
 
 - **Source run:** `20261009T163625858012Z`, recorded in `data/raw/bio_oracle/_runs/20261009T163625858012Z_bio_oracle_catalog.json`; the source manifest SHA-256 is `cd35ee526ffbf9a57b7279016c0e4a5c7348afabec39369e2946cadff0b12b8b`.
 - **Source payloads:** 356 publisher-delivered NetCDF files, 4,017,532,960 payload bytes, and their per-layer receipts. The source run contains 2,392 environmental variable instances across 139 distinct names: 55 baseline products, 300 future-scenario products and one static terrain product.
-- **Cleaner:** [`clean_bio_oracle_layers.py`](../../src/data_preparation/clean_bio_oracle_layers.py), using the Python standard library. The reader parses each current interim NetCDF file and inspects complete variable arrays while independently checking raw source, run and receipt hashes. It checks product and variable declarations, fill/missing values, finite and declared-range values, per-time statistics, coordinate axes, grid consistency, CRS metadata, candidate-domain consistency and exact duplicate arrays.
+- **Cleaner:** [`07_clean_bio_oracle_layers.py`](../../src/data_preparation/07_clean_bio_oracle_layers.py), using the Python standard library. The reader parses each current interim NetCDF file and inspects complete variable arrays while independently checking raw source, run and receipt hashes. It checks product and variable declarations, fill/missing values, finite and declared-range values, per-time statistics, coordinate axes, grid consistency, CRS metadata, candidate-domain consistency and exact duplicate arrays.
 - **Current interim outputs:** 356 byte-for-byte NetCDF copies under `data/interim/bio_oracle/cleaning/<dataset-id>/`, plus `manifest.json` and `cleaning_summary.json`. The manifest records each immutable raw source and its interim product path, byte count and SHA-256. Raw products remain unchanged.
 - **Environment:** The scan used the bundled Python 3.12.14 runtime and no third-party packages. The project baseline remains Python 3.14 under D-039. No Python environment or package was created, modified or installed.
 
-Before the cleaner replaced the prior source-validation stage, it rechecked all 714 staged files against their raw payloads, source receipts and catalogue run manifest. All 714 matched; there were no missing paths, additional paths or checksum mismatches. The source-validation directory was then replaced by the `cleaning/` directory under D-049. The earlier stage remains reproducible from the raw source run and [`stage_bio_oracle_layers.py`](../../src/data_preparation/stage_bio_oracle_layers.py).
+Before the cleaner replaced the prior source-validation stage, it rechecked all 714 staged files against their raw payloads, source receipts and catalogue run manifest. All 714 matched; there were no missing paths, additional paths or checksum mismatches. The source-validation directory was then replaced by the `cleaning/` directory under D-049. The earlier stage remains reproducible from the raw source run and [`06_stage_bio_oracle_layers.py`](../../src/data_preparation/06_stage_bio_oracle_layers.py).
 
 The official publisher metadata identify the terrain product as `terrain_characteristics` and document WGS84/EPSG:4326 coordinate reference metadata; see the [Bio-ORACLE ERDDAP dataset metadata](https://erddap.bio-oracle.org/erddap/info/terrain_characteristics/index.html). This does not document the numeric land/water convention for the `landmass` variable.
 
@@ -80,8 +80,8 @@ Bio-ORACLE cleaning can be closed as a completed structural and numerical valida
 Run from the repository root:
 
 ```text
-python src/data_preparation/stage_bio_oracle_layers.py --run-manifest data/raw/bio_oracle/_runs/20261009T163625858012Z_bio_oracle_catalog.json
-python src/data_preparation/clean_bio_oracle_layers.py
+python src/data_preparation/06_stage_bio_oracle_layers.py --run-manifest data/raw/bio_oracle/_runs/20261009T163625858012Z_bio_oracle_catalog.json
+python src/data_preparation/07_clean_bio_oracle_layers.py
 ```
 
 The initial 11 October scan read every array and published its JSON reports.

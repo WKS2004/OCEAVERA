@@ -1,0 +1,22 @@
+{
+  "format": "oceavera-marine-filter-blocker-v1",
+  "status": "blocked_missing_verified_marine_area",
+  "temporal_rows_waiting_for_marine_review": 9681,
+  "checked_local_search": [
+    "data/interim/",
+    "data/raw/",
+    "docs/records/",
+    "docs/data/"
+  ],
+  "reason": "No local publisher-identified water polygon or independently validated land-sea mask was present. Bio-ORACLE's rectangular collection envelope, source marine flag, raster cell footprint, and terrain coastline/landmass layers are not accepted as independent proof that an observation is marine.",
+  "not_produced": [
+    "data/interim/integrated/marine/marine_observations.parquet",
+    "data/interim/integrated/gridded/grid_observations.parquet",
+    "data/interim/integrated/gridded/species_cell_period_summary.parquet"
+  ],
+  "next_input_required": "A versioned, documented polygon layer explicitly representing marine areas, with its publisher, identifier, licence, retrieval date, CRS and geographic scope recorded. The pipeline accepts it only through --marine-mask and --marine-source.",
+  "source_records": [
+    "docs/records/2026-10-09-source-bio-oracle-sri-lanka-catalog.md",
+    "docs/records/2026-10-09-source-marine-regions-sri-lanka-eez-bounds.md"
+  ]
+}

@@ -9,12 +9,11 @@
 ## Interim dataset policy
 
 Under [D-049](../docs/records/2026-10-11-decision-interim-one-current-dataset.md),
-`data/interim/` holds one current dataset per family. Where a family uses stage
-directories, only the active stage directory remains directly beneath that
-family path; a later stage replaces it only after its complete output passes
-validation. Do not keep sibling phase directories. Prior interim dataset
-versions are not retained because raw sources and scripts allow a state to be
-regenerated.
+`data/interim/` holds one current dataset per family. The scoped [D-051](../docs/records/2026-10-15-decision-spatiotemporal-integration-rework.md)
+exception and [D-054](../docs/records/2026-10-16-decision-policy-b-marine-water-centre.md)
+keep separately validated full, temporal, marine and gridded outputs for the
+integrated family. Other families retain one active stage directory.
+Earlier states remain reproducible from raw sources and scripts.
 Timestamped raw snapshots and provenance remain unchanged. Manifests,
 completeness reports and run summaries are support metadata, not additional
 dataset versions.
@@ -22,8 +21,8 @@ dataset versions.
 | Dataset family | Current interim dataset or planned destination | Status |
 | --- | --- | --- |
 | OBIS | One stage directory: `interim/obis/cleaning/`, containing `occurrences_cleaned.csv`, JSON reports and `source_validation_manifest.json` | This is the only directory directly under `interim/obis/`. The source validator writes its manifest here; it does not create a sibling `source_validation/` directory. Current output: 23,371 rows × 112 columns. See the [cleaning record](../docs/records/2026-10-11-obis-area-230-cleaning.md). |
-| Bio-ORACLE | Current stage directory: `interim/bio_oracle/cleaning/`, containing 356 NetCDF products under `products/<dataset-id>/` and the manifest and summary | The cleaner verifies each interim copy against its immutable raw source. The current files remain byte-identical because no correction was justified; 355 products are validated/reused and one needs review. See the [cleaning record](../docs/records/2026-10-11-bio-oracle-cleaning.md). |
-| Integrated dataset | `interim/integrated/integrated_dataset.parquet` | Planned single current table; use GeoParquet when the selected integrated output retains spatial geometry. No integrated interim dataset exists yet. |
+| Bio-ORACLE | Current stage directory: `interim/bio_oracle/cleaning/`, containing 356 NetCDF products directly under `<dataset-id>/` and the manifest and summary | The cleaner verifies each interim copy against its immutable raw source. The current files remain byte-identical because no correction was justified; 355 products are validated/reused and one needs review. See the [cleaning record](../docs/records/2026-10-11-bio-oracle-cleaning.md). |
+| Integrated dataset stages | `interim/integrated/full/integrated_observations.parquet`, `interim/integrated/temporal/observations_2000_2026.parquet`, `interim/integrated/marine/marine_observations.parquet`, and the two `interim/integrated/gridded/` GeoParquets | Current D-054 outputs: full 23,371 × 513; temporal 9,681 × 514; marine 2,353 × 518; grid observations 2,353 × 519; species/cell/period summary 1,389 × 391. All are GeoParquet 1.1.0, EPSG:4326 and ZSTD; the four individual outputs preserve the full integration schema. See the [D-054 execution report](../docs/records/2026-10-16-policy-b-execution-report.md), [integration manifest](../docs/records/2026-10-16-integration-manifest.json), [temporal report](../docs/records/2026-10-16-temporal-filter-report.md) and [spatial report](../docs/records/2026-10-16-spatial-grid-report.md). D-053 strict-policy output evidence is historical. |
 | Analysis-ready dataset | `processed/modeling_dataset.parquet` | Stable destination convention; not generated. |
 
 The OBIS validation utility accepts a CSV under `data/raw/obis/`, checks CSV
@@ -46,7 +45,7 @@ the current run is documented in the [cleaning
 record](../docs/records/2026-10-11-obis-area-230-cleaning.md).
 
 The Bio-ORACLE cleaner,
-[`clean_bio_oracle_layers.py`](../src/data_preparation/clean_bio_oracle_layers.py),
+[`07_clean_bio_oracle_layers.py`](../src/data_preparation/07_clean_bio_oracle_layers.py),
 reads and validates every raw NetCDF product without changing array values or
 writing raster copies. Its current `cleaning/` directory contains a compact
 manifest and full structural/numerical summary. All products are readable;
@@ -57,7 +56,7 @@ separately from continuous-layer missingness. The [cleaning
 record](../docs/records/2026-10-11-bio-oracle-cleaning.md) documents the
 evidence and limits.
 Under D-047 and D-048,
-[`bio_oracle_layers.py`](../src/data_collection/bio_oracle_layers.py) is a
+[`05_bio_oracle_layers.py`](../src/data_collection/05_bio_oracle_layers.py) is a
 fixed, no-option collector. A run inventories the live catalogue, then
 downloads every matching Bio-ORACLE v3 grid and all its data variables for the
 EEZ-extrema rectangle and 2000–2100 request window. The rectangle may include
@@ -82,6 +81,10 @@ run and staging script. The tracked [cleaning
 record](../docs/records/2026-10-11-bio-oracle-cleaning.md) records the current
 cleaning evidence.
 
+D-054 records the current no-argument Script 09 execution under Policy B. The five validated interim GeoParquets contain 23,371 full rows, 9,681 temporal rows, 2,353 marine water-centre candidates, 2,353 gridded observations and 1,389 species/cell/period summaries. Of the candidates, 1,389 have complete environmental coverage, 693 have partial coverage and 271 have no valid environmental values; 590 have unknown positional uncertainty. A further 1,025 known uncertainty footprints cross coast/land and 29 extend beyond reference coverage; Policy B retains these points for sensitivity review. The original 382 environmental definitions and documented quarantines remain.
+
+Routine processing uses [Script 08](../src/data_preparation/08_integrate_spatiotemporal_data.py) followed by [Script 09](../src/data_preparation/09_filter_and_grid_data.py), without mandatory arguments. Policy B requires a valid JSON flags array with neither `ON_LAND` nor `MARINE_UNSURE`, and a point strictly inside the verified GSHHG marine-water polygon. Coordinate uncertainty is retained as a diagnostic and does not exclude a qualifying point. GSHHG source data is preserved in raw/geography/gshhg/ and its reusable positive-water derivative in interim/geography/. See the [D-054 execution report](../docs/records/2026-10-16-policy-b-execution-report.md) and [source provenance](../docs/records/2026-10-16-gshhg-marine-reference.json). D-053 strict-policy outputs and reports remain historical evidence.
+
 **Current collection:** D-036 uses the OBIS API to save every Area 230
 occurrence response unchanged under `raw/obis/json/`, then converts a
 verified-complete run to `raw/obis/csv/`. The query includes absence and
@@ -102,16 +105,16 @@ The acquisition scripts do not select taxa, integrate sources or create an
 analysis-ready dataset. The OBIS validation command records the selected raw
 CSV's fingerprint; the cleaning script applies the bounded source-status and
 coordinate exclusions documented above. Species-level review, remaining
-cleaning decisions and source integration remain pending.
+cleaning decisions and species-specific eligibility remain pending.
 
 The existing `raw/`, `interim/` and `processed/` paths serve the proposed Bronze, Silver and Gold lifecycle roles respectively; no duplicate lifecycle directories are planned.
 
 Data payloads are excluded from Git by default. Review coordinate sensitivity before retaining or sharing marine occurrence data. Put tracked manifests, dictionaries, citations and processing notes in `docs/records/` under the [record conventions](../CONTRIBUTING.md#project-evidence-records). See [data storage and provenance](../docs/data/data-storage-and-provenance.md) before acquiring or sharing data. The [source manifest](../docs/templates/data-source-record.md) records individual resources; the [dictionary](../docs/templates/data-dictionary.md) describes the integrated dataset.
 
-The project Python baseline is 3.14, and the current data-intake and handoff
-scripts remain compatible with Python 3.10 or later while using only the
-standard library. If a future data-preparation stage adds a
-third-party Python package, declare its exact version in the root
+The project Python baseline is 3.14. The intake, cleaning and in-memory
+integration audit use only the standard library; GeoPandas and PyArrow are
+pinned for GeoParquet publication. Declare third-party Python packages with
+exact versions in the root
 [`requirements.txt`](../requirements.txt) and update the
 [setup instructions](../CONTRIBUTING.md#python-dependencies) in the same change.
 The documented Conda environment for running current Python tooling is named

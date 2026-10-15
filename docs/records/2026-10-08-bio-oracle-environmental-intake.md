@@ -33,7 +33,7 @@ The initial collector supported this explicit candidate query:
 - Requested latitude bounds: 5–10°N
 - Time selection: full UTC coordinate extent advertised for the chosen variable
 - Output at acquisition time: a publisher ERDDAP NetCDF response under `data/raw/bio_oracle/<dataset-id>/`, with a timestamped filename and adjacent local manifest; both local files were later deleted at the user's request
-- Generating artefact: [`bio_oracle_layers.py`](../../src/data_collection/bio_oracle_layers.py)
+- Generating artefact: [`05_bio_oracle_layers.py`](../../src/data_collection/05_bio_oracle_layers.py)
 
 The bounds were a deliberately small Sri Lanka-adjacent feasibility window aligned with the project's regional preference. They are not an approved study area, an EEZ polygon or a final modelling boundary. The regional raster was received as NetCDF and later deleted; no values were converted, filtered or joined.
 

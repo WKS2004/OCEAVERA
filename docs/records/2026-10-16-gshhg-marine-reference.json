@@ -1,0 +1,132 @@
+{
+  "status": "validated",
+  "publisher": "Paul Wessel (SOEST) and Walter H. F. Smith (NOAA)",
+  "dataset": "Global Self-consistent Hierarchical High-resolution Geography",
+  "version": "2.3.7",
+  "publication_date": "2017-06-15",
+  "official_url": "https://ftp.soest.hawaii.edu/gshhg/gshhg-shp-2.3.7.zip",
+  "documentation_url": "https://www.soest.hawaii.edu/wessel/gshhg/",
+  "citation": "GSHHG 2.3.7, Wessel and Smith; DOI 10.1029/96JB00104; full-resolution coastline; D-048 collection envelope",
+  "licence": "GNU Lesser General Public License, as distributed in archive",
+  "retrieval_date_utc": "2026-10-15",
+  "source_archive": "data/raw/geography/gshhg/gshhg-shp-2.3.7.zip",
+  "archive_bytes": 149157845,
+  "archive_sha256": "8dbbe7e071e77e9e75f2d639239099ebca8d5c16d6a07df8169729d49f15cf41",
+  "resolution": "full (f), original source resolution; no uniform metre accuracy claimed",
+  "study_bounds": [
+    77.02333333333333,
+    2.5665,
+    85.23291666666667,
+    11.44883333333333
+  ],
+  "scope": "D-048 source collection rectangle; no EEZ clipping or final modelling domain selection",
+  "source_polygons_intersecting_extent_by_level": {
+    "1": 216,
+    "2": 11,
+    "3": 0,
+    "4": 0
+  },
+  "topology": "Envelope minus union of L1 land outer shells. L2-L4 inspected; all enclosed freshwater remains excluded with land. No Bio-ORACLE masks used.",
+  "crs": "EPSG:4326",
+  "geometry_type": "Polygon",
+  "prepared_path": "data/interim/geography/sri_lanka_marine_water.gpkg",
+  "prepared_sha256": "ef21fe8791b16e314a441480781f9e5e8cb2a47bf3e9030f57e6b2bc0f02ce8e",
+  "prepared_bytes": 442368,
+  "location_sanity_tests": [
+    {
+      "name": "offshore_south",
+      "longitude": 80.0,
+      "latitude": 5.0,
+      "expected_marine": true,
+      "actual_marine": true
+    },
+    {
+      "name": "mainland_interior",
+      "longitude": 80.7,
+      "latitude": 7.5,
+      "expected_marine": false,
+      "actual_marine": false
+    },
+    {
+      "name": "Delft_island",
+      "longitude": 79.7,
+      "latitude": 9.51,
+      "expected_marine": false,
+      "actual_marine": false
+    },
+    {
+      "name": "Kandy_inland_water_location",
+      "longitude": 80.642,
+      "latitude": 7.291,
+      "expected_marine": false,
+      "actual_marine": false
+    },
+    {
+      "name": "L2_inland_water_0",
+      "expected_marine": false,
+      "actual_marine": false
+    },
+    {
+      "name": "L2_inland_water_1",
+      "expected_marine": false,
+      "actual_marine": false
+    },
+    {
+      "name": "L2_inland_water_2",
+      "expected_marine": false,
+      "actual_marine": false
+    },
+    {
+      "name": "L2_inland_water_3",
+      "expected_marine": false,
+      "actual_marine": false
+    },
+    {
+      "name": "L2_inland_water_4",
+      "expected_marine": false,
+      "actual_marine": false
+    },
+    {
+      "name": "L2_inland_water_5",
+      "expected_marine": false,
+      "actual_marine": false
+    },
+    {
+      "name": "L2_inland_water_6",
+      "expected_marine": false,
+      "actual_marine": false
+    },
+    {
+      "name": "L2_inland_water_7",
+      "expected_marine": false,
+      "actual_marine": false
+    },
+    {
+      "name": "L2_inland_water_8",
+      "expected_marine": false,
+      "actual_marine": false
+    },
+    {
+      "name": "L2_inland_water_9",
+      "expected_marine": false,
+      "actual_marine": false
+    },
+    {
+      "name": "L2_inland_water_10",
+      "expected_marine": false,
+      "actual_marine": false
+    },
+    {
+      "name": "exact_source_coast_boundary",
+      "expected_marine": false,
+      "actual_marine": false
+    }
+  ],
+  "limits": [
+    "2017 source is not a current shoreline survey; small islands, lagoons and reclamation can differ.",
+    "Sanity tests check topology and sample locations, not metre-level coastal accuracy.",
+    "Marine mask covers the collection rectangle only; uncertainty beyond it is unverified."
+  ],
+  "retrieval_timestamp_utc": "2026-10-15T19:50:13.210656+00:00",
+  "prepared_at_utc": "2026-10-15T19:56:20.543605+00:00"
+}

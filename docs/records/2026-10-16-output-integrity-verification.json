@@ -1,0 +1,150 @@
+{
+  "datasets": [
+    {
+      "label": "full",
+      "path": "data/interim/integrated/full/integrated_observations.parquet",
+      "exists": true,
+      "bytes": 7866289,
+      "sha256": "34e756d9fa0d5478da14b6a2d627c16076c486d8e43317363d387d69a661ee34",
+      "rows": 23371,
+      "columns": 513,
+      "geometry_types": [
+        "Point"
+      ],
+      "crs": "EPSG:4326",
+      "geoparquet_version": "1.1.0",
+      "compression": [
+        "ZSTD"
+      ],
+      "missing_geometries": 0,
+      "invalid_geometries": 0,
+      "distinct_source_rows": 23371,
+      "duplicate_source_rows": 0
+    },
+    {
+      "label": "temporal",
+      "path": "data/interim/integrated/temporal/observations_2000_2026.parquet",
+      "exists": true,
+      "bytes": 5344561,
+      "sha256": "6669327ec1aba406bf8aa8346dc743d1ab721a1237c0266705119881cc21479a",
+      "rows": 9681,
+      "columns": 514,
+      "geometry_types": [
+        "Point"
+      ],
+      "crs": "EPSG:4326",
+      "geoparquet_version": "1.1.0",
+      "compression": [
+        "ZSTD"
+      ],
+      "missing_geometries": 0,
+      "invalid_geometries": 0,
+      "distinct_source_rows": 9681,
+      "duplicate_source_rows": 0,
+      "preservation_mismatches": 0
+    },
+    {
+      "label": "marine",
+      "path": "data/interim/integrated/marine/marine_observations.parquet",
+      "exists": true,
+      "bytes": 1449806,
+      "sha256": "4b7d4f1dacb7147d03d2e9db208741e73126a180404c9a7a173e35cfb55f0a6b",
+      "rows": 1299,
+      "columns": 518,
+      "geometry_types": [
+        "Point"
+      ],
+      "crs": "EPSG:4326",
+      "geoparquet_version": "1.1.0",
+      "compression": [
+        "ZSTD"
+      ],
+      "missing_geometries": 0,
+      "invalid_geometries": 0,
+      "distinct_source_rows": 1299,
+      "duplicate_source_rows": 0,
+      "preservation_mismatches": 0
+    },
+    {
+      "label": "grid",
+      "path": "data/interim/integrated/gridded/grid_observations.parquet",
+      "exists": true,
+      "bytes": 1451815,
+      "sha256": "db57dc3b1836eae5af872633fb7627b77209cf3875adca75c7e4bef2e31512c8",
+      "rows": 1299,
+      "columns": 519,
+      "geometry_types": [
+        "Point"
+      ],
+      "crs": "EPSG:4326",
+      "geoparquet_version": "1.1.0",
+      "compression": [
+        "ZSTD"
+      ],
+      "missing_geometries": 0,
+      "invalid_geometries": 0,
+      "distinct_source_rows": 1299,
+      "duplicate_source_rows": 0,
+      "preservation_mismatches": 0
+    },
+    {
+      "label": "summary",
+      "path": "data/interim/integrated/gridded/species_cell_period_summary.parquet",
+      "exists": true,
+      "bytes": 818861,
+      "sha256": "d767b245682c681325133cf6e4015e58bb921930f82ee616d7426f86c1b9ebc0",
+      "rows": 667,
+      "columns": 391,
+      "geometry_types": [
+        "Polygon"
+      ],
+      "crs": "EPSG:4326",
+      "geoparquet_version": "1.1.0",
+      "compression": [
+        "ZSTD"
+      ],
+      "missing_geometries": 0,
+      "invalid_geometries": 0,
+      "distinct_summary_keys": 667,
+      "duplicate_summary_keys": 0
+    }
+  ],
+  "source_field_comparisons": 2617552,
+  "source_field_mismatches": 0,
+  "original_coordinate_geometry_checks": 23371,
+  "geometry_mismatches": 0,
+  "exact_temporal_source_ids_match": true,
+  "independent_geographical_decision_comparisons": 9681,
+  "independent_geographical_decision_mismatches": 0,
+  "geographical_decision_counts": {
+    "ON_LAND": 6423,
+    "retained_unknown_uncertainty": 590,
+    "known_uncertainty_crosses_coast": 1025,
+    "outside_marine_water": 904,
+    "retained_known_uncertainty_marine": 709,
+    "known_uncertainty_outside_reference": 29,
+    "MARINE_UNSURE": 1
+  },
+  "geographic_check_method": "Independent 720-bearing WGS84 footprint, compared with production 360-bearing footprint.",
+  "summary_count_keys_match": true,
+  "summary_occurrence_count_sum": 1006,
+  "eligible_species_observations": 1006,
+  "ungrouped_taxonomy_observations": 293,
+  "independent_grid_polygon_checks": 667,
+  "grid_polygon_mismatches": 0,
+  "independent_observation_date_resolutions_checked": 23371,
+  "independent_date_resolution_mismatches": 0,
+  "reuse_run_binary_hash_changes": [
+    {
+      "path": "data/interim/integrated/gridded/species_cell_period_summary.parquet",
+      "previous_sha256": "7a8376f6fb0e1c40313cb7f8f089a1ed50c84604f70e99c282fd77d2da2c8f2a",
+      "current_sha256": "d767b245682c681325133cf6e4015e58bb921930f82ee616d7426f86c1b9ebc0"
+    }
+  ],
+  "summary_rechecked_after_reference_reuse": true,
+  "summary_environmental_positions_checked": 254794,
+  "summary_environmental_mismatches": 0,
+  "reference_reused_without_preparation": true,
+  "independent_nearest_cell_assignments_checked": 23371,
+  "nearest_cell_assignment_mismatches": 0
+}

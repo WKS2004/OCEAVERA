@@ -1,0 +1,79 @@
+{
+  "format": "oceavera-temporal-filter-report-v1",
+  "generated_at_utc": "2026-10-15T22:24:50.420349+00:00",
+  "input": "data/interim/integrated/full/integrated_observations.parquet",
+  "output": "data/interim/integrated/temporal/observations_2000_2026.parquet",
+  "input_rows": 23371,
+  "retained_rows": 9681,
+  "excluded_rows": 13690,
+  "counts_by_reason": {
+    "retained_2000_2026": 9681,
+    "before_2000": 10386,
+    "missing_or_invalid_date": 3282,
+    "ambiguous_temporal_assignment": 22
+  },
+  "counts_by_analysis_period": {
+    "2020-2026": 6466,
+    "2000-2009": 651,
+    "2010-2019": 2564
+  },
+  "counts_by_temporal_resolution_status": {
+    "resolved_single_year_with_interval": 9391,
+    "resolved_single_year": 290
+  },
+  "year_min": 2000,
+  "year_max": 2026,
+  "date_assignment_comparison": {
+    "previous_first_parseable_year_counts_by_period": {
+      "ssp245_2020": 6466,
+      "baseline_2000": 653,
+      "no_supported_slice": 13690,
+      "baseline_2010": 2562
+    },
+    "corrected_environment_period_counts": {
+      "ssp245_2020": 6466,
+      "baseline_2000": 651,
+      "no_supported_slice": 13690,
+      "baseline_2010": 2564
+    },
+    "rows_with_changed_resolved_year": 429,
+    "rows_with_changed_or_ambiguous_environment_period": 2,
+    "corrected_resolution_status_counts": {
+      "resolved_single_year_with_interval": 18246,
+      "missing_or_invalid_date": 3282,
+      "resolved_single_year": 1821,
+      "ambiguous_conflicting_date_evidence": 22
+    },
+    "strict_temporal_eligibility_counts": {
+      "eligible": 9681,
+      "ineligible": 10386,
+      "unknown": 3282,
+      "ambiguous": 22
+    }
+  },
+  "environmental_coverage_by_geography_and_period": {
+    "json": "docs/records/2026-10-16-environmental-coverage-by-geography-and-period.json",
+    "markdown": "docs/records/2026-10-16-environmental-coverage-by-geography-and-period.md",
+    "row_count_reconciliation": {
+      "cross_tab_total": 9681,
+      "temporal_dataset_rows": 9681,
+      "matches": true
+    }
+  },
+  "marine_policy_context": "D-054 Policy B: temporal eligibility alone does not establish marine eligibility; see the spatial-grid report for current water-centre screening.",
+  "output_sha256": "6669327ec1aba406bf8aa8346dc743d1ab721a1237c0266705119881cc21479a",
+  "geoparquet": {
+    "rows": 9681,
+    "columns": 514,
+    "geoparquet_version": "1.1.0",
+    "compression": [
+      "ZSTD"
+    ]
+  },
+  "limits": [
+    "Rows are retained only when date evidence supports one Bio-ORACLE environmental period within 2000–2026; interval-only records are retained only when the interval is wholly within one period.",
+    "Unresolved cross-period or contradictory date evidence remains in the full archive and is excluded from this strict temporal output.",
+    "An environmental time slice is a decadal source approximation, not an annual measurement.",
+    "Temporal eligibility does not establish marine eligibility."
+  ]
+}

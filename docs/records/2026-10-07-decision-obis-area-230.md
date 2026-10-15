@@ -70,7 +70,7 @@ record-level decisions are documented.
   modelling domain remains open.
 - D-007 focal-species selection, target construction, filtering, cleaning,
   environmental integration and model decisions remain open.
-- The current [collector](../../src/data_collection/obis_occurrences.py) uses
+- The current [collector](../../src/data_collection/01_obis_occurrences.py) uses
   the API for Area 230 membership IDs and reads full records from matching AWS
   Open Data GeoParquet source files; its preflight and export have not been run.
 - The [historical source record](2026-10-07-source-obis-area-230-all-occurrences.md)

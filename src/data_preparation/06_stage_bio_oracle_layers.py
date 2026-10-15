@@ -826,7 +826,7 @@ def build_parser() -> argparse.ArgumentParser:
         ),
         epilog=(
             "Example (run from the repository root):\n"
-            "  python src/data_preparation/stage_bio_oracle_layers.py "
+            "  python src/data_preparation/06_stage_bio_oracle_layers.py "
             "--run-manifest data/raw/bio_oracle/_runs/<complete-run>_bio_oracle_catalog.json\n\n"
             "Raw data are preserved. The selected run must use the D-048 Sri Lanka "
             "rectangle and request the 2000 to 2100 time window. Use --dry-run to "

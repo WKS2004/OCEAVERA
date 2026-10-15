@@ -431,8 +431,8 @@ def main() -> int:
         description="Download every OBIS occurrence returned for Area 230.",
         epilog=(
             "Examples:\n"
-            "  python src/data_collection/obis_occurrences.py\n"
-            "  python src/data_collection/obis_occurrences.py --resume "
+            "  python src/data_collection/01_obis_occurrences.py\n"
+            "  python src/data_collection/01_obis_occurrences.py --resume "
             "data/raw/obis/json/<run-directory>"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -493,7 +493,7 @@ def main() -> int:
         print(f"  Elapsed: {format_duration(time.perf_counter() - started_at)}")
         print("\nNext step - convert this run to CSV:")
         print(
-            "  python src/data_collection/obis_json_to_csv.py "
+            "  python src/data_collection/02_obis_json_to_csv.py "
             f"--json-run {run_path}"
         )
         return 0
@@ -509,7 +509,7 @@ def main() -> int:
             )
             print(f"  Run folder: {run_path}", file=sys.stderr)
             print(
-                "  Resume with: python src/data_collection/obis_occurrences.py "
+                "  Resume with: python src/data_collection/01_obis_occurrences.py "
                 f"--resume {run_path}",
                 file=sys.stderr,
             )
@@ -534,7 +534,7 @@ def main() -> int:
         ):
             print("  Completed raw pages are preserved.", file=sys.stderr)
             print(
-                "  Resume with: python src/data_collection/obis_occurrences.py "
+                "  Resume with: python src/data_collection/01_obis_occurrences.py "
                 f"--resume {run_dir.relative_to(ROOT).as_posix()}",
                 file=sys.stderr,
             )

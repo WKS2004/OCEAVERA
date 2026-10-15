@@ -70,8 +70,8 @@ sequential.
 
 ## Affected artefacts
 
-- [JSON downloader](../../src/data_collection/obis_occurrences.py)
-- [JSON-to-CSV converter](../../src/data_collection/obis_json_to_csv.py)
+- [JSON downloader](../../src/data_collection/01_obis_occurrences.py)
+- [JSON-to-CSV converter](../../src/data_collection/02_obis_json_to_csv.py)
 - [Data storage and provenance](../data/data-storage-and-provenance.md)
 - [Data directory guide](../../data/README.md)
 - [OBIS API Swagger UI](https://api.obis.org/)

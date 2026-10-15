@@ -1297,7 +1297,7 @@ def download_catalog_plan(plan: dict[str, Any]) -> int:
                 f"({len(result['variables'])} variable(s)): {result['reason']}"
             )
         print(
-            "  Retry by running `python src/data_collection/bio_oracle_layers.py` "
+            "  Retry by running `python src/data_collection/05_bio_oracle_layers.py` "
             "again; complete files are checksum-verified and reused."
         )
     if prior_partials:

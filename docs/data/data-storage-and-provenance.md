@@ -1,6 +1,6 @@
 # Data storage and provenance
 
-This document defines the OCEAVERA data and model-artefact storage conventions. The conventions guide future work; they do not establish that a model has been trained or an integration has been implemented. Two limited OBIS feasibility samples were reviewed and their raw payloads were later removed. An earlier Area 230 API JSON/CSV retrieval was also removed at the user's request. D-035's AWS GeoParquet route was later attempted, failed its final field-schema check and retained no output. Under current D-036, the user has selected the OBIS API: preserve every downloaded JSON response unchanged under `data/raw/obis/json/` and place its complete CSV conversion under `data/raw/obis/csv/` as requested. The conversion does not replace the raw JSON source. The current acquisition result is recorded in the [dated source record](../records/2026-10-08-source-obis-area-230-api-csv.md).
+This document defines the OCEAVERA data and model-artefact storage conventions. The conventions do not establish that a model has been trained or that an integration is scientifically accepted. D-053 records the integration and former strict marine filter; [D-054](../records/2026-10-16-decision-policy-b-marine-water-centre.md) records the current full, temporal, marine and grid stages under Policy B, with coordinate uncertainty retained as a diagnostic. The strict marine output reports are archived as historical evidence. Source quarantines remain explicit and later analytical decisions remain open. D-050 and the original D-051 report set remain historical. Two limited OBIS feasibility samples were reviewed and their raw payloads were later removed. An earlier Area 230 API JSON/CSV retrieval was also removed at the user's request. D-035's AWS GeoParquet route was later attempted, failed its final field-schema check and retained no output. Under current D-036, the user has selected the OBIS API: preserve every downloaded JSON response unchanged under `data/raw/obis/json/` and place its complete CSV conversion under `data/raw/obis/csv/` as requested. The conversion does not replace the raw JSON source. The current acquisition result is recorded in the [dated source record](../records/2026-10-08-source-obis-area-230-api-csv.md).
 
 ## Storage choices by role
 
@@ -9,9 +9,9 @@ This document defines the OCEAVERA data and model-artefact storage conventions. 
 | Original occurrence source | OBIS API response JSON (`.json`) | Preserve every complete paginated response unchanged under `data/raw/obis/json/`. Use the Area 230 API query and cursor pages; request all returned fields, include absence and dropped records, and record page hashes, counts, response-body bytes and the final API-reported total. |
 | Area 230 tabular copy | CSV (`.csv`), stored under `data/raw/obis/csv/` by explicit user decision D-036 | Convert only a manifest-verified complete JSON run. Include the union of all top-level fields, all 68 names on the OBIS Data Access page and every record without filtering or deduplication; encode nested values as compact JSON strings. Retain the exact JSON pages as the lossless source because CSV cannot represent JSON types without a conversion convention. |
 | Environmental layer responses | Publisher-delivered format; NetCDF (`.nc`) for the current Bio-ORACLE ERDDAP collector | Retain each bounded publisher response byte-for-byte under `data/raw/bio_oracle/<dataset-id>/`; record the exact layer, variable, bounds, URL and checksum in its local manifest and dated source record. Keep the returned grid in NetCDF and do not flatten the full raster. |
-| Current Bio-ORACLE interim dataset | NetCDF (`.nc`) product bundle with JSON manifest and structural/numerical report | The only current stage directory is `data/interim/bio_oracle/cleaning/`; its 356 NetCDF copies are under `products/<dataset-id>/`. Each copy is verified against its immutable raw source. Current products remain byte-identical to raw because no correction was justified. The report covers 2,392 variable instances: 355 products are validated/reused and one needs review for a single fill cell. See the [cleaning record](../records/2026-10-11-bio-oracle-cleaning.md). |
+| Current Bio-ORACLE interim dataset | NetCDF (`.nc`) product bundle with JSON manifest and structural/numerical report | The only current stage directory is `data/interim/bio_oracle/cleaning/`; its 356 NetCDF copies are directly under `<dataset-id>/`. Each copy is verified against its immutable raw source. Current products remain byte-identical to raw because no correction was justified. The report covers 2,392 variable instances: 355 products are validated/reused and one needs review for a single fill cell. See the [cleaning record](../records/2026-10-11-bio-oracle-cleaning.md). |
 | Current OBIS interim dataset | One stage directory, `data/interim/obis/cleaning/`, with one cleaned CSV and support JSON | Keep the cleaned table at `occurrences_cleaned.csv`; place `source_validation_manifest.json`, the column report and run summary in the same directory. This is the only directory directly under `data/interim/obis/`; source validation does not create a sibling directory. |
-| Planned integrated interim dataset | One spatial table in GeoParquet (`.parquet`) when supported | Use the stable destination `data/interim/integrated/integrated_dataset.parquet`; no integrated dataset currently exists. |
+| Integrated interim datasets | Full, temporal, marine and grid GeoParquet stages | Current D-054 outputs contain 23,371 full rows, 9,681 temporal rows, 2,353 marine water-centre candidates, 2,353 gridded observations and 1,389 species/cell/period summaries. All 382 environmental definitions remain present; 1,389 candidates have complete coverage, 693 partial coverage and 271 no valid environmental values. Policy B retains water-centre records despite known uncertainty crossing coast/land (1,025) or extending beyond reference coverage (29); 590 uncertainties are unknown. See the [D-054 execution report](../records/2026-10-16-policy-b-execution-report.md). D-053 strict-policy outputs are historical; the [strict spatial report](../records/2026-10-16-spatial-grid-report-strict-policy.md) preserves those counts. |
 | Derived spatial tables | GeoParquet, normally using `.parquet` | Use for spatial occurrences, background samples, integrated records and spatial prediction tables when the selected tools support the format. Preserve geometry and its CRS metadata. |
 | Non-spatial modelling tables | Apache Parquet (`.parquet`) | Use for tabular feature matrices or other derived tables when spatial geometry is no longer required and the format is compatible with the agreed tools. Retain stable sample/grid identifiers and lineage. |
 | Dataset manifests, model metadata and compact machine-readable metrics | JSON (`.json`) | Keep metadata and summaries in tracked records outside ignored payload directories. JSON is not the storage format for large tables or rasters. |
@@ -36,16 +36,19 @@ Keep the repository's existing `data/raw/`, `data/interim/` and `data/processed/
 Use timestamps only to distinguish retained raw acquisition snapshots. Repeated
 downloads may add raw files and consume more local storage; the collector does
 not silently delete prior source responses. Under [D-049](../records/2026-10-11-decision-interim-one-current-dataset.md),
-each data family has one current interim dataset. Where a family uses stage
-directories, exactly one active stage directory remains directly beneath the
-family path; a later validated stage replaces it. A single-table family may
-use its fixed dataset-file destination.
+each data family has one current interim dataset. [D-051](../records/2026-10-15-decision-spatiotemporal-integration-rework.md), refined by [D-052](../records/2026-10-16-decision-integration-filtering-corrections.md),
+defines a narrow integrated-family exception: full and temporal GeoParquet
+outputs remain at separate fixed paths because each is an independently
+validated stage. D-054 adds marine and grid outputs using Policy B: a valid
+flags array without exact `ON_LAND` or `MARINE_UNSURE`, plus a strict point-in-water
+match to the sourced GSHHG reference. Positional uncertainty is diagnostic and
+does not determine eligibility. OBIS and Bio-ORACLE continue to use one active stage directory.
 Interim versions are regenerated from raw inputs and scripts rather than
 retained. Raw snapshots and their provenance are unchanged. Manifests,
 diagnostics and run summaries are support metadata, not dataset copies.
 
 At the OBIS source-validation step, provide the selected raw path to
-[`stage_obis_csv.py`](../../src/data_preparation/stage_obis_csv.py). It checks
+[`03_stage_obis_csv.py`](../../src/data_preparation/03_stage_obis_csv.py). It checks
 CSV row widths and records the raw file's path, dimensions, byte count and
 SHA-256 in `data/interim/obis/cleaning/source_validation_manifest.json`; it
 does not copy the dataset or create a `source_validation/` directory. The
@@ -53,7 +56,7 @@ cleaner verifies this provenance and writes its CSV and JSON reports into the
 same `cleaning/` directory. The cleaned output therefore replaces the prior
 OBIS phase directory instead of creating a sibling.
 
-The Bio-ORACLE collector, [`bio_oracle_layers.py`](../../src/data_collection/bio_oracle_layers.py),
+The Bio-ORACLE collector, [`05_bio_oracle_layers.py`](../../src/data_collection/05_bio_oracle_layers.py),
 is a fixed, no-option script. Running it inventories the live Bio-ORACLE v3
 catalogue, then downloads all matching grids and their data variables for the
 EEZ-extrema rectangle under [D-048](../records/2026-10-09-decision-bio-oracle-sri-lanka-bbox.md)
@@ -78,25 +81,27 @@ mismatched. The Bio-ORACLE cleaner reads raw files, validates their arrays and
 publishes byte-for-byte NetCDF copies in the current `cleaning/` stage, alongside
 the manifest and summary. Its report covers 356 products and 2,392 variable
 instances. This is structural and numerical validation; values are not
-corrected, normalized or imputed, and environmental integration or processed
-data has not been generated.
+corrected, normalized or imputed. The current D-054 integration and
+temporal outputs are generated, read-back validated and independently checked
+against source NetCDF values. Marine filtering and grid outputs are generated
+with the documented GSHHG reference; uncertainty-crossing and unknown cases remain explicitly qualified under Policy B. D-050 output
+and the first D-051 report set are historical evidence only.
 
 | Stage or source | Stable path pattern | Status and use |
 | --- | --- | --- |
 | OBIS source validation | `data/interim/obis/cleaning/source_validation_manifest.json` | Implemented; records raw CSV structure and fingerprint without making a copy. The manifest is stored in the sole `cleaning/` directory; there is no sibling `source_validation/` directory. |
-| OBIS occurrence cleaning | `data/interim/obis/cleaning/occurrences_cleaned.csv` plus JSON support files in that same directory | Implemented in [`clean_obis_occurrences_csv.py`](../../src/data_preparation/clean_obis_occurrences_csv.py); keeps protected fields and other columns at least 10% complete, then applies conservative row checks. Current output: 23,371 rows × 112 columns. Evidence: [current cleaning record](../records/2026-10-11-obis-area-230-cleaning.md); earlier 90% screen and row-filter trial remain historical. |
-| Bio-ORACLE source-validation state | Reconstructible at `data/interim/bio_oracle/source_validation/<dataset-id>/` | Implemented in [`stage_bio_oracle_layers.py`](../../src/data_preparation/stage_bio_oracle_layers.py). It rebuilds the unchanged collection bundle from the selected complete raw run and replaces the current stage only after every layer passes checks. It can replace the current `cleaning/` state; the two directories must not coexist. |
-| Current Bio-ORACLE cleaning state | `data/interim/bio_oracle/cleaning/<dataset-id>/<source-file>.nc` with `manifest.json` and `cleaning_summary.json` | Implemented in [`clean_bio_oracle_layers.py`](../../src/data_preparation/clean_bio_oracle_layers.py). It scans the staged files, retains full diagnostics in a temporary spool, then promotes the stage by directory rename. The manifest maps each interim product to its raw source and records hashes. One `kdpar_mean_range` fill cell remains under review. Evidence: [Bio-ORACLE cleaning record](../records/2026-10-11-bio-oracle-cleaning.md). |
-| Integrated dataset | One current table at `data/interim/integrated/integrated_dataset.parquet` | Planned; not implemented. Replace the previous interim table only after a new result passes validation. |
+| OBIS occurrence cleaning | `data/interim/obis/cleaning/occurrences_cleaned.csv` plus JSON support files in that same directory | Implemented in [`04_clean_obis_occurrences_csv.py`](../../src/data_preparation/04_clean_obis_occurrences_csv.py); keeps protected fields and other columns at least 10% complete, then applies conservative row checks. Current output: 23,371 rows × 112 columns. Evidence: [current cleaning record](../records/2026-10-11-obis-area-230-cleaning.md); earlier 90% screen and row-filter trial remain historical. |
+| Bio-ORACLE source-validation state | Reconstructible at `data/interim/bio_oracle/source_validation/<dataset-id>/` | Implemented in [`06_stage_bio_oracle_layers.py`](../../src/data_preparation/06_stage_bio_oracle_layers.py). It rebuilds the unchanged collection bundle from the selected complete raw run and replaces the current stage only after every layer passes checks. It can replace the current `cleaning/` state; the two directories must not coexist. |
+| Current Bio-ORACLE cleaning state | `data/interim/bio_oracle/cleaning/<dataset-id>/<source-file>.nc` with `manifest.json` and `cleaning_summary.json` | Implemented in [`07_clean_bio_oracle_layers.py`](../../src/data_preparation/07_clean_bio_oracle_layers.py). It scans the staged files, retains full diagnostics in a temporary spool, then promotes the stage by directory rename. The manifest maps each interim product to its raw source and records hashes. One `kdpar_mean_range` fill cell remains under review. Evidence: [Bio-ORACLE cleaning record](../records/2026-10-11-bio-oracle-cleaning.md). |
+| Integrated dataset stages | Full, temporal, marine, individual grid and species/cell/period GeoParquet files under data/interim/integrated/ | Current Policy B outputs implemented and read back under [D-054](../records/2026-10-16-decision-policy-b-marine-water-centre.md); strict D-053 marine results are archived historical evidence; all remain interim. |
 | Analysis-ready table | `data/processed/modeling_dataset.parquet` | Stable planned destination; record whether the actual file is GeoParquet or non-spatial Parquet. Processing is not implemented. |
 
-Pipeline scripts use fixed destinations. Each family has one current
-stage directory beneath its interim family directory. When a new stage is
-ready, its complete validated result replaces the current directory; do not
-retain sibling phase directories, phase-by-phase dataset copies or timestamped
-derived-run folders. Scripts regenerate earlier states from preserved raw
-inputs when needed. Keep source history under `data/raw/` and record run
-provenance in manifests and dated documentation.
+Pipeline scripts use fixed destinations. Each family follows D-049's single
+current stage unless a recorded, scope-limited decision requires separate
+validated outputs. D-051 applies only to the integrated family. Scripts
+regenerate earlier states from preserved raw inputs when needed. Keep source
+history under `data/raw/` and record run provenance in manifests and dated
+documentation.
 
 Data payloads are excluded from Git by default. The earlier feasibility response bodies and historical Area 230 JSON/CSV payloads were removed at the user's request; their query summaries and available fingerprints remain as historical evidence. The 8 October AWS export attempt retained no subset. The current API collection is stored locally under the two D-036 raw paths, with tracked checksums and provenance in `docs/records/`; payloads remain ignored by Git. An ignore rule does not remove an already tracked file. Keep trained model binaries out of Git unless the group has reviewed the artefact's size, provenance, rights and storage purpose.
 

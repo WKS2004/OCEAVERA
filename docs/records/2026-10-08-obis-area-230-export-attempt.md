@@ -54,7 +54,7 @@ permission for the API/CSV route is recorded under [D-036](2026-10-08-decision-o
 
 ## Affected artefacts
 
-- [Collector](../../src/data_collection/obis_occurrences.py)
+- [Collector](../../src/data_collection/01_obis_occurrences.py)
 - [D-035 acquisition decision](2026-10-07-decision-obis-area-230-geoparquet.md)
 - [Feasibility assessment](2026-10-07-obis-area-230-geoparquet-feasibility.md)
 - [Readiness review](../project/repository-readiness-and-alignment.md)

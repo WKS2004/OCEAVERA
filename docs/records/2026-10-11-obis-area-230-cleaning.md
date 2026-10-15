@@ -9,7 +9,7 @@
 ## Initial implementation record (superseded)
 
 - **Input at that time:** The now-removed `data/interim/obis/source_validation/occurrences.csv` was a byte-preserving copy of the 23,934-row, 230-column raw source. Its SHA-256 matched the raw source: `16ec5ff96e57dc1e58baa33912d16fe7e9098c78759e750608611bf9a2dc0c43`.
-- **Code:** [`clean_obis_occurrences_csv.py`](../../src/data_preparation/clean_obis_occurrences_csv.py).
+- **Code:** [`04_clean_obis_occurrences_csv.py`](../../src/data_preparation/04_clean_obis_occurrences_csv.py).
 - **Primary output at that time:** `data/interim/obis/cleaning/occurrences_cleaned.csv` (23,371 rows × 113 columns; SHA-256 `83b5a404816a3f21844b58b29371736c34c81cf110a7482214a4cf1bd5f53e0e`); it was later replaced by the corrected output and is not retained as a separate version.
 - **Column diagnostics at that time:** `data/interim/obis/cleaning/column_completeness.csv` (230 original columns; SHA-256 `a2351eb73820eb367eb6b30de377049767f0d9aff803cb437c61e505ad6440d3`). It recorded populated/missing counts and percentages, protection status, retention status and reason for each column; the CSV report is no longer retained.
 - **Runtime:** Python 3.12.14 bundled with Codex, standard library only. The WSL launch from this tool session returned `Wsl/ERROR_ACCESS_DENIED`, and no Conda command or WSL terminal was attached. No environment or package was changed. The implementation uses only standard-library functionality.
@@ -51,7 +51,7 @@ This is generic biological data cleaning only. It does not resolve taxonomic con
 Run from the repository root with the OCEAVERA environment activated:
 
 ```text
-python src/data_preparation/clean_obis_occurrences_csv.py
+python src/data_preparation/04_clean_obis_occurrences_csv.py
 ```
 
 ## Final correction and verified run — 11 October 2026
@@ -60,7 +60,7 @@ The cleaner was corrected after the read-only audit. The current output is 23,37
 
 ### Source verification
 
-Before cleaning, the script reads the generated source-validation manifest (`data/interim/obis/cleaning/source_validation_manifest.json`) and verifies it. The tracked [`stage_obis_csv.py`](../../src/data_preparation/stage_obis_csv.py) script creates this manifest without copying the raw CSV.
+Before cleaning, the script reads the generated source-validation manifest (`data/interim/obis/cleaning/source_validation_manifest.json`) and verifies it. The tracked [`03_stage_obis_csv.py`](../../src/data_preparation/03_stage_obis_csv.py) script creates this manifest without copying the raw CSV.
 
 - The source path resolves inside `data/raw/obis/`.
 - The raw CSV's SHA-256 and byte count match the manifest.
@@ -115,7 +115,7 @@ The output retains 3,188 distinct non-empty species values, 115 marine=false rec
 
 ### Safe outputs and reproducibility
 
-The script writes each output to a temporary file in the target directory, flushes it, then atomically replaces the destination. It replaces the JSON run summary last so its recorded hashes identify the completed CSV and JSON report. These interim outputs are local generated artefacts; the tracked [cleaner script](../../src/data_preparation/clean_obis_occurrences_csv.py) recreates them.
+The script writes each output to a temporary file in the target directory, flushes it, then atomically replaces the destination. It replaces the JSON run summary last so its recorded hashes identify the completed CSV and JSON report. These interim outputs are local generated artefacts; the tracked [cleaner script](../../src/data_preparation/04_clean_obis_occurrences_csv.py) recreates them.
 
 - Cleaned CSV: `data/interim/obis/cleaning/occurrences_cleaned.csv`, 23,371 × 112, SHA-256 `1e51a18bb6cf096e111dd0f2c810c97e93619501f74574c3b2c6be130b1aec21`.
 - Column report: `data/interim/obis/cleaning/column_completeness.json`, 230 source-column entries, SHA-256 `63774d6050980f089e0a979cc3dcf904ccf168a5202251f75e6549baeff6cae5`.
@@ -123,7 +123,7 @@ The script writes each output to a temporary file in the target directory, flush
 
 The cleaner completed twice with identical primary-output and column-report hashes. Independent checks confirmed the output rows and retained values match eligible source records in source order, every protected field is present, and the only exclusions in this snapshot are the 563 OBIS-dropped records. The bundled Python 3.12.14 runtime was used because WSL returned Wsl/ERROR_ACCESS_DENIED; no environment or package was changed. Reproduction from the repository root:
 
-    python src/data_preparation/clean_obis_occurrences_csv.py
+    python src/data_preparation/04_clean_obis_occurrences_csv.py
 
 This remains generic OBIS cleaning only. Taxonomic reconciliation, marine-raster validation, Bio-ORACLE integration, species selection, feature or target construction and model training were not performed.
 
