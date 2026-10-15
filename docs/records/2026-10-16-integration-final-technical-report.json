@@ -1,0 +1,1760 @@
+{
+  "date": "2026-10-16",
+  "status": "CONDITIONAL PASS",
+  "pipeline_completed": true,
+  "blocked_processing_stages": [],
+  "decision": "D-053",
+  "source_cleaning_modified": false,
+  "original_sources_preserved": true,
+  "environment_modified": false,
+  "packages_installed": false,
+  "datasets": [
+    {
+      "label": "full",
+      "path": "data/interim/integrated/full/integrated_observations.parquet",
+      "exists": true,
+      "bytes": 7866289,
+      "sha256": "34e756d9fa0d5478da14b6a2d627c16076c486d8e43317363d387d69a661ee34",
+      "rows": 23371,
+      "columns": 513,
+      "geometry_types": [
+        "Point"
+      ],
+      "crs": "EPSG:4326",
+      "geoparquet_version": "1.1.0",
+      "compression": [
+        "ZSTD"
+      ],
+      "missing_geometries": 0,
+      "invalid_geometries": 0,
+      "distinct_source_rows": 23371,
+      "duplicate_source_rows": 0
+    },
+    {
+      "label": "temporal",
+      "path": "data/interim/integrated/temporal/observations_2000_2026.parquet",
+      "exists": true,
+      "bytes": 5344561,
+      "sha256": "6669327ec1aba406bf8aa8346dc743d1ab721a1237c0266705119881cc21479a",
+      "rows": 9681,
+      "columns": 514,
+      "geometry_types": [
+        "Point"
+      ],
+      "crs": "EPSG:4326",
+      "geoparquet_version": "1.1.0",
+      "compression": [
+        "ZSTD"
+      ],
+      "missing_geometries": 0,
+      "invalid_geometries": 0,
+      "distinct_source_rows": 9681,
+      "duplicate_source_rows": 0,
+      "preservation_mismatches": 0
+    },
+    {
+      "label": "marine",
+      "path": "data/interim/integrated/marine/marine_observations.parquet",
+      "exists": true,
+      "bytes": 1449806,
+      "sha256": "4b7d4f1dacb7147d03d2e9db208741e73126a180404c9a7a173e35cfb55f0a6b",
+      "rows": 1299,
+      "columns": 518,
+      "geometry_types": [
+        "Point"
+      ],
+      "crs": "EPSG:4326",
+      "geoparquet_version": "1.1.0",
+      "compression": [
+        "ZSTD"
+      ],
+      "missing_geometries": 0,
+      "invalid_geometries": 0,
+      "distinct_source_rows": 1299,
+      "duplicate_source_rows": 0,
+      "preservation_mismatches": 0
+    },
+    {
+      "label": "grid",
+      "path": "data/interim/integrated/gridded/grid_observations.parquet",
+      "exists": true,
+      "bytes": 1451815,
+      "sha256": "db57dc3b1836eae5af872633fb7627b77209cf3875adca75c7e4bef2e31512c8",
+      "rows": 1299,
+      "columns": 519,
+      "geometry_types": [
+        "Point"
+      ],
+      "crs": "EPSG:4326",
+      "geoparquet_version": "1.1.0",
+      "compression": [
+        "ZSTD"
+      ],
+      "missing_geometries": 0,
+      "invalid_geometries": 0,
+      "distinct_source_rows": 1299,
+      "duplicate_source_rows": 0,
+      "preservation_mismatches": 0
+    },
+    {
+      "label": "summary",
+      "path": "data/interim/integrated/gridded/species_cell_period_summary.parquet",
+      "exists": true,
+      "bytes": 818861,
+      "sha256": "d767b245682c681325133cf6e4015e58bb921930f82ee616d7426f86c1b9ebc0",
+      "rows": 667,
+      "columns": 391,
+      "geometry_types": [
+        "Polygon"
+      ],
+      "crs": "EPSG:4326",
+      "geoparquet_version": "1.1.0",
+      "compression": [
+        "ZSTD"
+      ],
+      "missing_geometries": 0,
+      "invalid_geometries": 0,
+      "distinct_summary_keys": 667,
+      "duplicate_summary_keys": 0
+    }
+  ],
+  "catalogue": {
+    "source_product_count": 356,
+    "selected_product_count": 106,
+    "selected_product_counts": {
+      "baseline": 55,
+      "ssp245": 50,
+      "terrain": 1
+    },
+    "selected_variable_name_count": 139,
+    "feature_column_count": 382
+  },
+  "feature_availability": {
+    "static": 10,
+    "historical-only": 30,
+    "both": 300,
+    "SSP245-only": 42
+  },
+  "families": [
+    {
+      "family": "area",
+      "source_variables": 1,
+      "features": 1,
+      "depths": [
+        "benthic"
+      ],
+      "statistics": [
+        "static"
+      ],
+      "availability": {
+        "static": 1
+      },
+      "units": [
+        "m2"
+      ],
+      "concerns": "Static; not marine-location proof"
+    },
+    {
+      "family": "aspect",
+      "source_variables": 1,
+      "features": 1,
+      "depths": [
+        "benthic"
+      ],
+      "statistics": [
+        "static"
+      ],
+      "availability": {
+        "static": 1
+      },
+      "units": [
+        "degree"
+      ],
+      "concerns": "Static; not marine-location proof"
+    },
+    {
+      "family": "bathymetry",
+      "source_variables": 3,
+      "features": 3,
+      "depths": [
+        "benthic"
+      ],
+      "statistics": [
+        "max",
+        "mean",
+        "min"
+      ],
+      "availability": {
+        "static": 3
+      },
+      "units": [
+        "m"
+      ],
+      "concerns": "Static; not marine-location proof"
+    },
+    {
+      "family": "chl",
+      "source_variables": 7,
+      "features": 25,
+      "depths": [
+        "depthmax",
+        "depthmean",
+        "depthmin",
+        "depthsurf"
+      ],
+      "statistics": [
+        "ltmax",
+        "ltmin",
+        "max",
+        "mean",
+        "min",
+        "range",
+        "sd"
+      ],
+      "availability": {
+        "historical-only": 18,
+        "both": 6,
+        "SSP245-only": 1
+      },
+      "units": [
+        "mg m-3"
+      ],
+      "concerns": "Depth/ecological suitability still to review"
+    },
+    {
+      "family": "clt",
+      "source_variables": 7,
+      "features": 7,
+      "depths": [
+        "depthsurf"
+      ],
+      "statistics": [
+        "ltmax",
+        "ltmin",
+        "max",
+        "mean",
+        "min",
+        "range",
+        "sd"
+      ],
+      "availability": {
+        "both": 6,
+        "SSP245-only": 1
+      },
+      "units": [
+        "1"
+      ],
+      "concerns": "sd quarantined"
+    },
+    {
+      "family": "coastline",
+      "source_variables": 1,
+      "features": 1,
+      "depths": [
+        "benthic"
+      ],
+      "statistics": [
+        "static"
+      ],
+      "availability": {
+        "static": 1
+      },
+      "units": [
+        "1"
+      ],
+      "concerns": "Static; not marine-location proof"
+    },
+    {
+      "family": "dfe",
+      "source_variables": 7,
+      "features": 28,
+      "depths": [
+        "depthmax",
+        "depthmean",
+        "depthmin",
+        "depthsurf"
+      ],
+      "statistics": [
+        "ltmax",
+        "ltmin",
+        "max",
+        "mean",
+        "min",
+        "range",
+        "sd"
+      ],
+      "availability": {
+        "both": 24,
+        "SSP245-only": 4
+      },
+      "units": [
+        "MMol' 'M-3"
+      ],
+      "concerns": "Unit notation requires review"
+    },
+    {
+      "family": "kdpar_mean",
+      "source_variables": 6,
+      "features": 6,
+      "depths": [
+        "depthsurf"
+      ],
+      "statistics": [
+        "ltmax",
+        "ltmin",
+        "max",
+        "mean",
+        "min",
+        "range"
+      ],
+      "availability": {
+        "historical-only": 6
+      },
+      "units": [
+        "m-1"
+      ],
+      "concerns": "Depth/ecological suitability still to review"
+    },
+    {
+      "family": "landmass",
+      "source_variables": 1,
+      "features": 1,
+      "depths": [
+        "benthic"
+      ],
+      "statistics": [
+        "static"
+      ],
+      "availability": {
+        "static": 1
+      },
+      "units": [
+        "1"
+      ],
+      "concerns": "Static; not marine-location proof"
+    },
+    {
+      "family": "mlotst",
+      "source_variables": 7,
+      "features": 7,
+      "depths": [
+        "depthsurf"
+      ],
+      "statistics": [
+        "ltmax",
+        "ltmin",
+        "max",
+        "mean",
+        "min",
+        "range",
+        "sd"
+      ],
+      "availability": {
+        "both": 6,
+        "SSP245-only": 1
+      },
+      "units": [
+        "m"
+      ],
+      "concerns": "Depth/ecological suitability still to review"
+    },
+    {
+      "family": "no3",
+      "source_variables": 7,
+      "features": 28,
+      "depths": [
+        "depthmax",
+        "depthmean",
+        "depthmin",
+        "depthsurf"
+      ],
+      "statistics": [
+        "ltmax",
+        "ltmin",
+        "max",
+        "mean",
+        "min",
+        "range",
+        "sd"
+      ],
+      "availability": {
+        "both": 24,
+        "SSP245-only": 4
+      },
+      "units": [
+        "MMol' 'M-3"
+      ],
+      "concerns": "Unit notation requires review"
+    },
+    {
+      "family": "o2",
+      "source_variables": 7,
+      "features": 28,
+      "depths": [
+        "depthmax",
+        "depthmean",
+        "depthmin",
+        "depthsurf"
+      ],
+      "statistics": [
+        "ltmax",
+        "ltmin",
+        "max",
+        "mean",
+        "min",
+        "range",
+        "sd"
+      ],
+      "availability": {
+        "both": 24,
+        "SSP245-only": 4
+      },
+      "units": [
+        "MMol' 'M-3"
+      ],
+      "concerns": "Unit notation requires review"
+    },
+    {
+      "family": "par_mean",
+      "source_variables": 6,
+      "features": 6,
+      "depths": [
+        "depthsurf"
+      ],
+      "statistics": [
+        "ltmax",
+        "ltmin",
+        "max",
+        "mean",
+        "min",
+        "range"
+      ],
+      "availability": {
+        "historical-only": 6
+      },
+      "units": [
+        "einstein/m2/day"
+      ],
+      "concerns": "Depth/ecological suitability still to review"
+    },
+    {
+      "family": "ph",
+      "source_variables": 7,
+      "features": 28,
+      "depths": [
+        "depthmax",
+        "depthmean",
+        "depthmin",
+        "depthsurf"
+      ],
+      "statistics": [
+        "ltmax",
+        "ltmin",
+        "max",
+        "mean",
+        "min",
+        "range",
+        "sd"
+      ],
+      "availability": {
+        "both": 24,
+        "SSP245-only": 4
+      },
+      "units": [
+        "1"
+      ],
+      "concerns": "Depth/ecological suitability still to review"
+    },
+    {
+      "family": "phyc",
+      "source_variables": 7,
+      "features": 28,
+      "depths": [
+        "depthmax",
+        "depthmean",
+        "depthmin",
+        "depthsurf"
+      ],
+      "statistics": [
+        "ltmax",
+        "ltmin",
+        "max",
+        "mean",
+        "min",
+        "range",
+        "sd"
+      ],
+      "availability": {
+        "both": 24,
+        "SSP245-only": 4
+      },
+      "units": [
+        "MMol' 'M-3"
+      ],
+      "concerns": "Unit notation requires review"
+    },
+    {
+      "family": "po4",
+      "source_variables": 7,
+      "features": 28,
+      "depths": [
+        "depthmax",
+        "depthmean",
+        "depthmin",
+        "depthsurf"
+      ],
+      "statistics": [
+        "ltmax",
+        "ltmin",
+        "max",
+        "mean",
+        "min",
+        "range",
+        "sd"
+      ],
+      "availability": {
+        "both": 24,
+        "SSP245-only": 4
+      },
+      "units": [
+        "MMol' 'M-3"
+      ],
+      "concerns": "Unit notation requires review"
+    },
+    {
+      "family": "si",
+      "source_variables": 7,
+      "features": 28,
+      "depths": [
+        "depthmax",
+        "depthmean",
+        "depthmin",
+        "depthsurf"
+      ],
+      "statistics": [
+        "ltmax",
+        "ltmin",
+        "max",
+        "mean",
+        "min",
+        "range",
+        "sd"
+      ],
+      "availability": {
+        "both": 24,
+        "SSP245-only": 4
+      },
+      "units": [
+        "MMol' 'M-3"
+      ],
+      "concerns": "Unit notation requires review"
+    },
+    {
+      "family": "siconc",
+      "source_variables": 7,
+      "features": 7,
+      "depths": [
+        "depthsurf"
+      ],
+      "statistics": [
+        "ltmax",
+        "ltmin",
+        "max",
+        "mean",
+        "min",
+        "range",
+        "sd"
+      ],
+      "availability": {
+        "both": 6,
+        "SSP245-only": 1
+      },
+      "units": [
+        "1"
+      ],
+      "concerns": "Depth/ecological suitability still to review"
+    },
+    {
+      "family": "sithick",
+      "source_variables": 7,
+      "features": 7,
+      "depths": [
+        "depthsurf"
+      ],
+      "statistics": [
+        "ltmax",
+        "ltmin",
+        "max",
+        "mean",
+        "min",
+        "range",
+        "sd"
+      ],
+      "availability": {
+        "both": 6,
+        "SSP245-only": 1
+      },
+      "units": [
+        "m"
+      ],
+      "concerns": "Depth/ecological suitability still to review"
+    },
+    {
+      "family": "slope",
+      "source_variables": 1,
+      "features": 1,
+      "depths": [
+        "benthic"
+      ],
+      "statistics": [
+        "static"
+      ],
+      "availability": {
+        "static": 1
+      },
+      "units": [
+        "degree"
+      ],
+      "concerns": "Static; not marine-location proof"
+    },
+    {
+      "family": "so",
+      "source_variables": 7,
+      "features": 28,
+      "depths": [
+        "depthmax",
+        "depthmean",
+        "depthmin",
+        "depthsurf"
+      ],
+      "statistics": [
+        "ltmax",
+        "ltmin",
+        "max",
+        "mean",
+        "min",
+        "range",
+        "sd"
+      ],
+      "availability": {
+        "both": 24,
+        "SSP245-only": 4
+      },
+      "units": [
+        "1e-3",
+        "PSU"
+      ],
+      "concerns": "PSU / 1e-3 statistic units retained"
+    },
+    {
+      "family": "swd",
+      "source_variables": 6,
+      "features": 24,
+      "depths": [
+        "depthmax",
+        "depthmean",
+        "depthmin",
+        "depthsurf"
+      ],
+      "statistics": [
+        "ltmax",
+        "ltmin",
+        "max",
+        "mean",
+        "min",
+        "range"
+      ],
+      "availability": {
+        "both": 24
+      },
+      "units": [
+        "degree"
+      ],
+      "concerns": "Depth/ecological suitability still to review"
+    },
+    {
+      "family": "sws",
+      "source_variables": 6,
+      "features": 24,
+      "depths": [
+        "depthmax",
+        "depthmean",
+        "depthmin",
+        "depthsurf"
+      ],
+      "statistics": [
+        "ltmax",
+        "ltmin",
+        "max",
+        "mean",
+        "min",
+        "range"
+      ],
+      "availability": {
+        "both": 24
+      },
+      "units": [
+        "m s**-1"
+      ],
+      "concerns": "Depth/ecological suitability still to review"
+    },
+    {
+      "family": "tas",
+      "source_variables": 7,
+      "features": 7,
+      "depths": [
+        "depthsurf"
+      ],
+      "statistics": [
+        "ltmax",
+        "ltmin",
+        "max",
+        "mean",
+        "min",
+        "range",
+        "sd"
+      ],
+      "availability": {
+        "both": 6,
+        "SSP245-only": 1
+      },
+      "units": [
+        "degree_C"
+      ],
+      "concerns": "Baseline absolute values and all ranges quarantined"
+    },
+    {
+      "family": "terrain_ruggedness_index",
+      "source_variables": 1,
+      "features": 1,
+      "depths": [
+        "benthic"
+      ],
+      "statistics": [
+        "static"
+      ],
+      "availability": {
+        "static": 1
+      },
+      "units": [
+        "1"
+      ],
+      "concerns": "Static; not marine-location proof"
+    },
+    {
+      "family": "thetao",
+      "source_variables": 7,
+      "features": 28,
+      "depths": [
+        "depthmax",
+        "depthmean",
+        "depthmin",
+        "depthsurf"
+      ],
+      "statistics": [
+        "ltmax",
+        "ltmin",
+        "max",
+        "mean",
+        "min",
+        "range",
+        "sd"
+      ],
+      "availability": {
+        "both": 24,
+        "SSP245-only": 4
+      },
+      "units": [
+        "degree_C"
+      ],
+      "concerns": "Depth/ecological suitability still to review"
+    },
+    {
+      "family": "topographic_position_index",
+      "source_variables": 1,
+      "features": 1,
+      "depths": [
+        "benthic"
+      ],
+      "statistics": [
+        "static"
+      ],
+      "availability": {
+        "static": 1
+      },
+      "units": [
+        "1"
+      ],
+      "concerns": "Static; not marine-location proof"
+    }
+  ],
+  "usable_features_by_period": {
+    "baseline_2000": 334,
+    "baseline_2010": 334,
+    "ssp245_2020": 350
+  },
+  "quarantined_columns_and_periods": {
+    "bio_oracle__clt_sd__depthsurf": [
+      "ssp245_2020"
+    ],
+    "bio_oracle__tas_ltmax__depthsurf": [
+      "baseline_2000",
+      "baseline_2010"
+    ],
+    "bio_oracle__tas_ltmin__depthsurf": [
+      "baseline_2000",
+      "baseline_2010"
+    ],
+    "bio_oracle__tas_max__depthsurf": [
+      "baseline_2000",
+      "baseline_2010"
+    ],
+    "bio_oracle__tas_mean__depthsurf": [
+      "baseline_2000",
+      "baseline_2010"
+    ],
+    "bio_oracle__tas_min__depthsurf": [
+      "baseline_2000",
+      "baseline_2010"
+    ],
+    "bio_oracle__tas_range__depthsurf": [
+      "baseline_2000",
+      "baseline_2010",
+      "ssp245_2020"
+    ]
+  },
+  "entirely_null_environmental_columns": [
+    "bio_oracle__tas_range__depthsurf",
+    "bio_oracle__clt_sd__depthsurf"
+  ],
+  "temperature_examples": [
+    {
+      "variable": "tas_ltmax",
+      "period": "baseline_2000",
+      "source_row": 2,
+      "raster_row": 93,
+      "raster_column": 56,
+      "raw_decoded": 27.84680976916161,
+      "cleaned_decoded": 27.84680976916161,
+      "old_integration_rule_result": -245.30319023083837,
+      "final_value": null,
+      "source_units": "K",
+      "target_units": "degree_C",
+      "quarantined": true,
+      "original_packed_value": 27.84680976916161,
+      "packing_scale_factor": "absent",
+      "packing_add_offset": "absent",
+      "original_dtype": "float64"
+    },
+    {
+      "variable": "tas_ltmax",
+      "period": "baseline_2010",
+      "source_row": 33,
+      "raster_row": 69,
+      "raster_column": 64,
+      "raw_decoded": 28.338439169677656,
+      "cleaned_decoded": 28.338439169677656,
+      "old_integration_rule_result": -244.81156083032232,
+      "final_value": null,
+      "source_units": "K",
+      "target_units": "degree_C",
+      "quarantined": true,
+      "original_packed_value": 28.338439169677656,
+      "packing_scale_factor": "absent",
+      "packing_add_offset": "absent",
+      "original_dtype": "float64"
+    },
+    {
+      "variable": "tas_ltmin",
+      "period": "baseline_2000",
+      "source_row": 2,
+      "raster_row": 93,
+      "raster_column": 56,
+      "raw_decoded": 25.71888240828764,
+      "cleaned_decoded": 25.71888240828764,
+      "old_integration_rule_result": -247.43111759171234,
+      "final_value": null,
+      "source_units": "K",
+      "target_units": "degree_C",
+      "quarantined": true,
+      "original_packed_value": 25.71888240828764,
+      "packing_scale_factor": "absent",
+      "packing_add_offset": "absent",
+      "original_dtype": "float64"
+    },
+    {
+      "variable": "tas_ltmin",
+      "period": "baseline_2010",
+      "source_row": 33,
+      "raster_row": 69,
+      "raster_column": 64,
+      "raw_decoded": 26.562641107293814,
+      "cleaned_decoded": 26.562641107293814,
+      "old_integration_rule_result": -246.58735889270616,
+      "final_value": null,
+      "source_units": "K",
+      "target_units": "degree_C",
+      "quarantined": true,
+      "original_packed_value": 26.562641107293814,
+      "packing_scale_factor": "absent",
+      "packing_add_offset": "absent",
+      "original_dtype": "float64"
+    },
+    {
+      "variable": "tas_max",
+      "period": "baseline_2000",
+      "source_row": 2,
+      "raster_row": 93,
+      "raster_column": 56,
+      "raw_decoded": 28.179737817165858,
+      "cleaned_decoded": 28.179737817165858,
+      "old_integration_rule_result": -244.97026218283412,
+      "final_value": null,
+      "source_units": "K",
+      "target_units": "degree_C",
+      "quarantined": true,
+      "original_packed_value": 28.179737817165858,
+      "packing_scale_factor": "absent",
+      "packing_add_offset": "absent",
+      "original_dtype": "float64"
+    },
+    {
+      "variable": "tas_max",
+      "period": "baseline_2010",
+      "source_row": 33,
+      "raster_row": 69,
+      "raster_column": 64,
+      "raw_decoded": 29.23825821719828,
+      "cleaned_decoded": 29.23825821719828,
+      "old_integration_rule_result": -243.9117417828017,
+      "final_value": null,
+      "source_units": "K",
+      "target_units": "degree_C",
+      "quarantined": true,
+      "original_packed_value": 29.23825821719828,
+      "packing_scale_factor": "absent",
+      "packing_add_offset": "absent",
+      "original_dtype": "float64"
+    },
+    {
+      "variable": "tas_mean",
+      "period": "baseline_2000",
+      "source_row": 2,
+      "raster_row": 93,
+      "raster_column": 56,
+      "raw_decoded": 26.72473488096375,
+      "cleaned_decoded": 26.72473488096375,
+      "old_integration_rule_result": -246.42526511903623,
+      "final_value": null,
+      "source_units": "K",
+      "target_units": "degree_C",
+      "quarantined": true,
+      "original_packed_value": 26.72473488096375,
+      "packing_scale_factor": "absent",
+      "packing_add_offset": "absent",
+      "original_dtype": "float64"
+    },
+    {
+      "variable": "tas_mean",
+      "period": "baseline_2010",
+      "source_row": 33,
+      "raster_row": 69,
+      "raster_column": 64,
+      "raw_decoded": 27.318541920113546,
+      "cleaned_decoded": 27.318541920113546,
+      "old_integration_rule_result": -245.83145807988643,
+      "final_value": null,
+      "source_units": "K",
+      "target_units": "degree_C",
+      "quarantined": true,
+      "original_packed_value": 27.318541920113546,
+      "packing_scale_factor": "absent",
+      "packing_add_offset": "absent",
+      "original_dtype": "float64"
+    },
+    {
+      "variable": "tas_min",
+      "period": "baseline_2000",
+      "source_row": 2,
+      "raster_row": 93,
+      "raster_column": 56,
+      "raw_decoded": 25.163865923366757,
+      "cleaned_decoded": 25.163865923366757,
+      "old_integration_rule_result": -247.98613407663322,
+      "final_value": null,
+      "source_units": "K",
+      "target_units": "degree_C",
+      "quarantined": true,
+      "original_packed_value": 25.163865923366757,
+      "packing_scale_factor": "absent",
+      "packing_add_offset": "absent",
+      "original_dtype": "float64"
+    },
+    {
+      "variable": "tas_min",
+      "period": "baseline_2010",
+      "source_row": 33,
+      "raster_row": 69,
+      "raster_column": 64,
+      "raw_decoded": 26.029665284221267,
+      "cleaned_decoded": 26.029665284221267,
+      "old_integration_rule_result": -247.1203347157787,
+      "final_value": null,
+      "source_units": "K",
+      "target_units": "degree_C",
+      "quarantined": true,
+      "original_packed_value": 26.029665284221267,
+      "packing_scale_factor": "absent",
+      "packing_add_offset": "absent",
+      "original_dtype": "float64"
+    },
+    {
+      "variable": "tas_range",
+      "period": "baseline_2000",
+      "source_row": 2,
+      "raster_row": 93,
+      "raster_column": 56,
+      "raw_decoded": -270.1341281062009,
+      "cleaned_decoded": -270.1341281062009,
+      "old_integration_rule_result": -270.1341281062009,
+      "final_value": null,
+      "source_units": "K",
+      "target_units": "degree_C",
+      "quarantined": true,
+      "original_packed_value": -270.1341281062009,
+      "packing_scale_factor": "absent",
+      "packing_add_offset": "absent",
+      "original_dtype": "float64"
+    },
+    {
+      "variable": "tas_range",
+      "period": "baseline_2010",
+      "source_row": 33,
+      "raster_row": 69,
+      "raster_column": 64,
+      "raw_decoded": -269.94140706702296,
+      "cleaned_decoded": -269.94140706702296,
+      "old_integration_rule_result": -269.94140706702296,
+      "final_value": null,
+      "source_units": "K",
+      "target_units": "degree_C",
+      "quarantined": true,
+      "original_packed_value": -269.94140706702296,
+      "packing_scale_factor": "absent",
+      "packing_add_offset": "absent",
+      "original_dtype": "float64"
+    },
+    {
+      "variable": "tas_ltmax",
+      "period": "ssp245_2020",
+      "source_row": 9,
+      "raster_row": 78,
+      "raster_column": 59,
+      "raw_decoded": 27.973521566589113,
+      "cleaned_decoded": 27.973521566589113,
+      "old_integration_rule_result": 27.973521566589113,
+      "final_value": 27.973521566589113,
+      "source_units": "degree_C",
+      "target_units": "degree_C",
+      "quarantined": false,
+      "original_packed_value": 27.973521566589113,
+      "packing_scale_factor": "absent",
+      "packing_add_offset": "absent",
+      "original_dtype": "float64"
+    },
+    {
+      "variable": "tas_ltmin",
+      "period": "ssp245_2020",
+      "source_row": 9,
+      "raster_row": 78,
+      "raster_column": 59,
+      "raw_decoded": 26.052420790884184,
+      "cleaned_decoded": 26.052420790884184,
+      "old_integration_rule_result": 26.052420790884184,
+      "final_value": 26.052420790884184,
+      "source_units": "degree_C",
+      "target_units": "degree_C",
+      "quarantined": false,
+      "original_packed_value": 26.052420790884184,
+      "packing_scale_factor": "absent",
+      "packing_add_offset": "absent",
+      "original_dtype": "float64"
+    },
+    {
+      "variable": "tas_max",
+      "period": "ssp245_2020",
+      "source_row": 9,
+      "raster_row": 78,
+      "raster_column": 59,
+      "raw_decoded": 29.49139282993508,
+      "cleaned_decoded": 29.49139282993508,
+      "old_integration_rule_result": 29.49139282993508,
+      "final_value": 29.49139282993508,
+      "source_units": "degree_C",
+      "target_units": "degree_C",
+      "quarantined": false,
+      "original_packed_value": 29.49139282993508,
+      "packing_scale_factor": "absent",
+      "packing_add_offset": "absent",
+      "original_dtype": "float64"
+    },
+    {
+      "variable": "tas_mean",
+      "period": "ssp245_2020",
+      "source_row": 9,
+      "raster_row": 78,
+      "raster_column": 59,
+      "raw_decoded": 26.975557512265254,
+      "cleaned_decoded": 26.975557512265254,
+      "old_integration_rule_result": 26.975557512265254,
+      "final_value": 26.975557512265254,
+      "source_units": "degree_C",
+      "target_units": "degree_C",
+      "quarantined": false,
+      "original_packed_value": 26.975557512265254,
+      "packing_scale_factor": "absent",
+      "packing_add_offset": "absent",
+      "original_dtype": "float64"
+    },
+    {
+      "variable": "tas_min",
+      "period": "ssp245_2020",
+      "source_row": 9,
+      "raster_row": 78,
+      "raster_column": 59,
+      "raw_decoded": 24.855590908061117,
+      "cleaned_decoded": 24.855590908061117,
+      "old_integration_rule_result": 24.855590908061117,
+      "final_value": 24.855590908061117,
+      "source_units": "degree_C",
+      "target_units": "degree_C",
+      "quarantined": false,
+      "original_packed_value": 24.855590908061117,
+      "packing_scale_factor": "absent",
+      "packing_add_offset": "absent",
+      "original_dtype": "float64"
+    },
+    {
+      "variable": "tas_range",
+      "period": "ssp245_2020",
+      "source_row": 9,
+      "raster_row": 78,
+      "raster_column": 59,
+      "raw_decoded": -268.51419807812607,
+      "cleaned_decoded": -268.51419807812607,
+      "old_integration_rule_result": -268.51419807812607,
+      "final_value": null,
+      "source_units": "degree_C",
+      "target_units": "degree_C",
+      "quarantined": true,
+      "original_packed_value": -268.51419807812607,
+      "packing_scale_factor": "absent",
+      "packing_add_offset": "absent",
+      "original_dtype": "float64"
+    }
+  ],
+  "range_offset_checks": [
+    {
+      "dataset_id": "tas_baseline_2000_2020_depthsurf",
+      "actual_time_year": 2000,
+      "valid_cells": 24503,
+      "maximum_absolute_offset_identity_residual": 0.0,
+      "range_min": -271.27975295170785,
+      "range_max": -266.6010803222656,
+      "original_dtype": "float64",
+      "scale_factor": "absent",
+      "add_offset": "absent"
+    },
+    {
+      "dataset_id": "tas_baseline_2000_2020_depthsurf",
+      "actual_time_year": 2010,
+      "valid_cells": 24503,
+      "maximum_absolute_offset_identity_residual": 0.0,
+      "range_min": -270.9891356801441,
+      "range_max": -265.95816650390617,
+      "original_dtype": "float64",
+      "scale_factor": "absent",
+      "add_offset": "absent"
+    },
+    {
+      "dataset_id": "tas_ssp245_2020_2100_depthsurf",
+      "actual_time_year": 2020,
+      "valid_cells": 24503,
+      "maximum_absolute_offset_identity_residual": 2.2737367544323206e-13,
+      "range_min": -270.04792699670395,
+      "range_max": -264.078916759759,
+      "original_dtype": "float64",
+      "scale_factor": "absent",
+      "add_offset": "absent"
+    }
+  ],
+  "date_corrections": {
+    "changed_resolution_records": 267,
+    "changed_resolved_year": 267,
+    "changed_environment_period": 0,
+    "changed_eligibility_label": 267,
+    "changed_retention_eligibility": 0,
+    "previously_ambiguous_now_resolved": 266,
+    "remaining_ambiguous": 22,
+    "corrected_ambiguous_destinations": {
+      "ineligible": 266
+    }
+  },
+  "legacy_date_comparison": {
+    "previous_first_parseable_year_counts_by_period": {
+      "ssp245_2020": 6466,
+      "baseline_2000": 653,
+      "no_supported_slice": 13690,
+      "baseline_2010": 2562
+    },
+    "corrected_environment_period_counts": {
+      "ssp245_2020": 6466,
+      "baseline_2000": 651,
+      "no_supported_slice": 13690,
+      "baseline_2010": 2564
+    },
+    "rows_with_changed_resolved_year": 429,
+    "rows_with_changed_or_ambiguous_environment_period": 2,
+    "corrected_resolution_status_counts": {
+      "resolved_single_year_with_interval": 18246,
+      "missing_or_invalid_date": 3282,
+      "resolved_single_year": 1821,
+      "ambiguous_conflicting_date_evidence": 22
+    },
+    "strict_temporal_eligibility_counts": {
+      "eligible": 9681,
+      "ineligible": 10386,
+      "unknown": 3282,
+      "ambiguous": 22
+    }
+  },
+  "temporal_counts": {
+    "retained_2000_2026": 9681,
+    "before_2000": 10386,
+    "missing_or_invalid_date": 3282,
+    "ambiguous_temporal_assignment": 22
+  },
+  "temporal_period_counts": {
+    "2020-2026": "6466",
+    "2010-2019": "2564",
+    "2000-2009": "651"
+  },
+  "environmental_verification": {
+    "reader": "netCDF4 1.7.4",
+    "status": "PASS",
+    "totals": {
+      "checked_positions": 8927722,
+      "source_period_positions": 3369132,
+      "applicable_positions": 3336910,
+      "source_masked_positions": 1709114,
+      "original_source_masked_positions": 1725844,
+      "quarantined_positions": 32222,
+      "quarantined_nonnull_source_values": 15492,
+      "valid_source_values_compared": 1627796,
+      "expected_null_fill_positions": 7299926,
+      "legitimate_zeros_verified": 139457,
+      "mismatches": 0,
+      "null_fill_discrepancies": 0,
+      "unsupported_or_unavailable_period_positions": 5558590,
+      "distinct_cell_samples": 322576,
+      "unsupported_observation_period_positions": 5229580,
+      "unavailable_feature_period_positions": 329010
+    },
+    "actual_time_coordinate_slices": 1012,
+    "maximum_difference": 0.0,
+    "coordinate_discrepancies": 0
+  },
+  "environmental_coverage_by_period": [
+    {
+      "period": "2000-2009",
+      "records": 651,
+      "complete": 331,
+      "partial": 109,
+      "none": 211,
+      "non_null_feature_positions": 146851,
+      "null_feature_positions": 101831,
+      "applicable_features": 334
+    },
+    {
+      "period": "2010-2019",
+      "records": 2564,
+      "complete": 872,
+      "partial": 200,
+      "none": 1492,
+      "non_null_feature_positions": 357848,
+      "null_feature_positions": 621600,
+      "applicable_features": 334
+    },
+    {
+      "period": "2020-2026",
+      "records": 6466,
+      "complete": 2807,
+      "partial": 403,
+      "none": 3256,
+      "non_null_feature_positions": 1123097,
+      "null_feature_positions": 1346915,
+      "applicable_features": 350
+    }
+  ],
+  "flags": {
+    "ON_LAND_full": 8000,
+    "ON_LAND_temporal": 6423,
+    "MARINE_UNSURE_full": 51,
+    "MARINE_UNSURE_temporal": 41,
+    "overlap_full": 42,
+    "overlap_temporal": 40
+  },
+  "coordinate_uncertainty_metres": {
+    "numeric": 10964,
+    "missing_or_nonnumeric": 12407,
+    "min": 1.0,
+    "median": 2088.0,
+    "p90": 100000.0,
+    "p95": 669329.0,
+    "max": 2753412.0
+  },
+  "marine": {
+    "counts": {
+      "input_temporal_rows": 9681,
+      "inside_marine_polygon": 2815,
+      "on_land_flagged_rows": 6423,
+      "marine_unsure_flagged_rows": 41,
+      "rows_with_both_flags": 40,
+      "missing_or_invalid_flags_rows": 0,
+      "excluded_by_geographic_quality_flags": 6424,
+      "retained_verified_marine_rows": 1299,
+      "retained_known_uncertainty_marine": 709,
+      "retained_unknown_uncertainty": 590,
+      "excluded_by_known_uncertainty": 1054,
+      "marine_polygon_boundary_excluded_by_strict_contains": 0
+    },
+    "exclusive_decision_counts": {
+      "ON_LAND": 6423,
+      "retained_unknown_uncertainty": 590,
+      "known_uncertainty_crosses_coast": 1025,
+      "outside_marine_water": 904,
+      "retained_known_uncertainty_marine": 709,
+      "known_uncertainty_outside_reference": 29,
+      "MARINE_UNSURE": 1
+    },
+    "position_confidence_counts": {
+      "not_assessed_due_to_prior_exclusion": 7328,
+      "unknown_uncertainty": 590,
+      "known_footprint_crosses_coast_or_land": 1025,
+      "known_footprint_marine": 709,
+      "known_footprint_outside_reference_extent": 29
+    },
+    "marine_policy": "Exclude ON_LAND/MARINE_UNSURE/invalid flags/invalid coordinates/non-water centers. Exclude known uncertainty footprints crossing land or reference extent. Retain unknown uncertainty explicitly as point-only verification; never treat unknown as zero.",
+    "individual_rows_by_period": {
+      "2000-2009": 328,
+      "2020-2026": 734,
+      "2010-2019": 237
+    },
+    "eligible_species_rows_by_period": {
+      "2020-2026": 685,
+      "2000-2009": 151,
+      "2010-2019": 170
+    },
+    "ungrouped_taxonomy_by_period": {
+      "2000-2009": 177,
+      "2010-2019": 67,
+      "2020-2026": 49
+    },
+    "summary_rows_by_period": {
+      "2010-2019": 141,
+      "2020-2026": 457,
+      "2000-2009": 69
+    },
+    "unique_eligible_species_identifiers": 358,
+    "distinct_matched_grid_cells": 188,
+    "species_cell_period_summary_rows": 667,
+    "occurrence_count_reconciliation": {
+      "source_species_rank_observations": 1006,
+      "summed_summary_occurrence_record_count": 1006,
+      "matches": true,
+      "species_cell_period_keys_match": true
+    }
+  },
+  "marine_reference": {
+    "status": "validated",
+    "publisher": "Paul Wessel (SOEST) and Walter H. F. Smith (NOAA)",
+    "dataset": "Global Self-consistent Hierarchical High-resolution Geography",
+    "version": "2.3.7",
+    "publication_date": "2017-06-15",
+    "official_url": "https://ftp.soest.hawaii.edu/gshhg/gshhg-shp-2.3.7.zip",
+    "documentation_url": "https://www.soest.hawaii.edu/wessel/gshhg/",
+    "citation": "GSHHG 2.3.7, Wessel and Smith; DOI 10.1029/96JB00104; full-resolution coastline; D-048 collection envelope",
+    "licence": "GNU Lesser General Public License, as distributed in archive",
+    "retrieval_date_utc": "2026-10-15",
+    "source_archive": "data/raw/geography/gshhg/gshhg-shp-2.3.7.zip",
+    "archive_bytes": 149157845,
+    "archive_sha256": "8dbbe7e071e77e9e75f2d639239099ebca8d5c16d6a07df8169729d49f15cf41",
+    "resolution": "full (f), original source resolution; no uniform metre accuracy claimed",
+    "study_bounds": [
+      77.02333333333333,
+      2.5665,
+      85.23291666666667,
+      11.44883333333333
+    ],
+    "scope": "D-048 source collection rectangle; no EEZ clipping or final modelling domain selection",
+    "source_polygons_intersecting_extent_by_level": {
+      "1": 216,
+      "2": 11,
+      "3": 0,
+      "4": 0
+    },
+    "topology": "Envelope minus union of L1 land outer shells. L2-L4 inspected; all enclosed freshwater remains excluded with land. No Bio-ORACLE masks used.",
+    "crs": "EPSG:4326",
+    "geometry_type": "Polygon",
+    "prepared_path": "data/interim/geography/sri_lanka_marine_water.gpkg",
+    "prepared_sha256": "ef21fe8791b16e314a441480781f9e5e8cb2a47bf3e9030f57e6b2bc0f02ce8e",
+    "prepared_bytes": 442368,
+    "location_sanity_tests": [
+      {
+        "name": "offshore_south",
+        "longitude": 80.0,
+        "latitude": 5.0,
+        "expected_marine": true,
+        "actual_marine": true
+      },
+      {
+        "name": "mainland_interior",
+        "longitude": 80.7,
+        "latitude": 7.5,
+        "expected_marine": false,
+        "actual_marine": false
+      },
+      {
+        "name": "Delft_island",
+        "longitude": 79.7,
+        "latitude": 9.51,
+        "expected_marine": false,
+        "actual_marine": false
+      },
+      {
+        "name": "Kandy_inland_water_location",
+        "longitude": 80.642,
+        "latitude": 7.291,
+        "expected_marine": false,
+        "actual_marine": false
+      },
+      {
+        "name": "L2_inland_water_0",
+        "expected_marine": false,
+        "actual_marine": false
+      },
+      {
+        "name": "L2_inland_water_1",
+        "expected_marine": false,
+        "actual_marine": false
+      },
+      {
+        "name": "L2_inland_water_2",
+        "expected_marine": false,
+        "actual_marine": false
+      },
+      {
+        "name": "L2_inland_water_3",
+        "expected_marine": false,
+        "actual_marine": false
+      },
+      {
+        "name": "L2_inland_water_4",
+        "expected_marine": false,
+        "actual_marine": false
+      },
+      {
+        "name": "L2_inland_water_5",
+        "expected_marine": false,
+        "actual_marine": false
+      },
+      {
+        "name": "L2_inland_water_6",
+        "expected_marine": false,
+        "actual_marine": false
+      },
+      {
+        "name": "L2_inland_water_7",
+        "expected_marine": false,
+        "actual_marine": false
+      },
+      {
+        "name": "L2_inland_water_8",
+        "expected_marine": false,
+        "actual_marine": false
+      },
+      {
+        "name": "L2_inland_water_9",
+        "expected_marine": false,
+        "actual_marine": false
+      },
+      {
+        "name": "L2_inland_water_10",
+        "expected_marine": false,
+        "actual_marine": false
+      },
+      {
+        "name": "exact_source_coast_boundary",
+        "expected_marine": false,
+        "actual_marine": false
+      }
+    ],
+    "limits": [
+      "2017 source is not a current shoreline survey; small islands, lagoons and reclamation can differ.",
+      "Sanity tests check topology and sample locations, not metre-level coastal accuracy.",
+      "Marine mask covers the collection rectangle only; uncertainty beyond it is unverified."
+    ],
+    "retrieval_timestamp_utc": "2026-10-15T19:50:13.210656+00:00",
+    "prepared_at_utc": "2026-10-15T19:56:20.543605+00:00"
+  },
+  "output_integrity": {
+    "source_field_comparisons": 2617552,
+    "source_field_mismatches": 0,
+    "original_coordinate_geometry_checks": 23371,
+    "geometry_mismatches": 0,
+    "exact_temporal_source_ids_match": true,
+    "independent_geographical_decision_comparisons": 9681,
+    "independent_geographical_decision_mismatches": 0,
+    "geographical_decision_counts": {
+      "ON_LAND": 6423,
+      "retained_unknown_uncertainty": 590,
+      "known_uncertainty_crosses_coast": 1025,
+      "outside_marine_water": 904,
+      "retained_known_uncertainty_marine": 709,
+      "known_uncertainty_outside_reference": 29,
+      "MARINE_UNSURE": 1
+    },
+    "geographic_check_method": "Independent 720-bearing WGS84 footprint, compared with production 360-bearing footprint.",
+    "summary_count_keys_match": true,
+    "summary_occurrence_count_sum": 1006,
+    "eligible_species_observations": 1006,
+    "ungrouped_taxonomy_observations": 293,
+    "independent_grid_polygon_checks": 667,
+    "grid_polygon_mismatches": 0,
+    "independent_observation_date_resolutions_checked": 23371,
+    "independent_date_resolution_mismatches": 0,
+    "reuse_run_binary_hash_changes": [
+      {
+        "path": "data/interim/integrated/gridded/species_cell_period_summary.parquet",
+        "previous_sha256": "7a8376f6fb0e1c40313cb7f8f089a1ed50c84604f70e99c282fd77d2da2c8f2a",
+        "current_sha256": "d767b245682c681325133cf6e4015e58bb921930f82ee616d7426f86c1b9ebc0"
+      }
+    ],
+    "summary_rechecked_after_reference_reuse": true,
+    "summary_environmental_positions_checked": 254794,
+    "summary_environmental_mismatches": 0,
+    "reference_reused_without_preparation": true,
+    "independent_nearest_cell_assignments_checked": 23371,
+    "nearest_cell_assignment_mismatches": 0
+  },
+  "tests": {
+    "executed": 25,
+    "passed": 25,
+    "failed": 0,
+    "skipped": 0
+  },
+  "commands": [
+    {
+      "name": "script08",
+      "command": "python src/data_preparation/08_integrate_spatiotemporal_data.py",
+      "exit_status": 0,
+      "evidence": "Executed in this task; manifest, all-source field/geometry read-back and terminal completion recorded. Full raw stdout was not retained."
+    },
+    {
+      "name": "script09-reuse",
+      "command": "python src/data_preparation/09_filter_and_grid_data.py",
+      "exit_status": 0,
+      "output_file": "docs/records/2026-10-16-integration-script09-reuse-output.txt"
+    },
+    {
+      "name": "unittest",
+      "command": "python -m unittest discover -s tests -v",
+      "exit_status": 0,
+      "output_file": "docs/records/2026-10-16-integration-unittest-output.txt"
+    },
+    {
+      "name": "compilation",
+      "command": "python -m compileall -q src tests",
+      "exit_status": 0,
+      "output_file": "docs/records/2026-10-16-integration-compilation-output.txt"
+    },
+    {
+      "name": "dependency-consistency",
+      "command": "python -m pip check",
+      "exit_status": 0,
+      "output_file": "docs/records/2026-10-16-integration-dependency-consistency-output.txt"
+    },
+    {
+      "name": "git-whitespace",
+      "command": "git diff --check",
+      "exit_status": 0,
+      "warning": "Existing 03_pipeline_data_cleaning_obis.ipynb CRLF-normalisation warning; no whitespace errors."
+    },
+    {
+      "name": "repository-consistency",
+      "command": "python .agents/scripts/validate_agent_resources.py",
+      "exit_status": 0,
+      "output_file": "docs/records/2026-10-16-integration-repository-check-output.txt"
+    }
+  ],
+  "notebook": {
+    "cells": 21,
+    "markdown_cells": 13,
+    "code_cells": 8,
+    "execution_counts": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "errors": 0,
+    "offline_default": true,
+    "dataset_files_written_by_notebook": false,
+    "dataset_hashes_unchanged": true,
+    "executed_from": "notebooks/branch_work",
+    "root_discovery_validated_from_project_and_notebook_folders": true
+  },
+  "readiness": {
+    "basic_eda": "CONDITIONAL PASS",
+    "species_eligibility_review": "CONDITIONAL PASS",
+    "feature_selection": "Requires ecological/source review and a separate request",
+    "pseudo_absence": "NOT READY: species/domain/bias/validation decisions pending",
+    "model_training": "NOT READY: targets/features/validation/preprocessing pending"
+  },
+  "acceptance_matrix": [
+    {
+      "area": "Source preservation",
+      "status": "PASS",
+      "reason": "112 OBIS fields and original coordinates preserved; 106 raw/cleaned NetCDF pairs byte-identical."
+    },
+    {
+      "area": "Environmental extraction",
+      "status": "PASS",
+      "reason": "Retained values, masked cells, zeros and intentional quarantines agree with original sources."
+    },
+    {
+      "area": "Temperature correctness",
+      "status": "CONDITIONAL PASS",
+      "reason": "No fabricated correction; baseline absolute tas and all tas_range values remain quarantined pending publisher clarification."
+    },
+    {
+      "area": "Scientific unit consistency",
+      "status": "CONDITIONAL PASS",
+      "reason": "Questionable clt_sd quarantined; concentration notation, salinity statistics and climatological windows require interpretation."
+    },
+    {
+      "area": "Temporal resolution",
+      "status": "PASS",
+      "reason": "Field units fixed; 23,371 independently resolved source dates match; 22 genuine conflicts excluded."
+    },
+    {
+      "area": "Historical matching",
+      "status": "PASS",
+      "reason": "Actual 2000/2010 coordinates used; averaging-window meaning remains a scientific limitation."
+    },
+    {
+      "area": "SSP245 matching",
+      "status": "PASS",
+      "reason": "Only SSP245 2020 used for eligible 2020–2026 observations, explicitly as a projection assumption."
+    },
+    {
+      "area": "GeoParquet integrity",
+      "status": "PASS",
+      "reason": "Five current outputs read back; geometry, CRS, compression, identities and values checked."
+    },
+    {
+      "area": "Geographical flags",
+      "status": "PASS",
+      "reason": "Exact JSON tokens; ON_LAND and MARINE_UNSURE excluded; taxon marine attribute unused."
+    },
+    {
+      "area": "Independent marine verification",
+      "status": "CONDITIONAL PASS",
+      "reason": "1,299 water-centre observations retained; 709 known footprints marine, 590 unknown uncertainty explicitly retained."
+    },
+    {
+      "area": "Grid categorization",
+      "status": "PASS",
+      "reason": "1,299 Point records, stable cell IDs and 188 occupied cells."
+    },
+    {
+      "area": "Species-by-grid summaries",
+      "status": "PASS",
+      "reason": "667 Polygon groups reconcile to 1,006 species-rank records; 293 records ungrouped."
+    },
+    {
+      "area": "Independent source verification",
+      "status": "PASS",
+      "reason": "8,927,722 positions, 1,012 original-source slices, zero value/null/coordinate mismatches."
+    },
+    {
+      "area": "Automated tests",
+      "status": "PASS",
+      "reason": "25 executed, 25 passed, zero failures/skips."
+    },
+    {
+      "area": "Documentation",
+      "status": "PASS",
+      "reason": "D-053, current guides, reports, evidence, logs and executed notebook; historical evidence preserved."
+    },
+    {
+      "area": "Overall pipeline completion",
+      "status": "CONDITIONAL PASS",
+      "reason": "All five requested processing outputs completed. Source quarantines and geographic/temporal assumptions prevent unconditional scientific acceptance."
+    }
+  ],
+  "ranked_upload_paths": [
+    "docs/records/2026-10-16-integration-final-technical-report.md",
+    "docs/records/2026-10-16-integration-final-technical-report.json",
+    "docs/records/2026-10-16-independent-environmental-verification.json",
+    "docs/records/2026-10-16-source-lineage-investigation.json",
+    "docs/records/2026-10-16-integration-manifest.json",
+    "docs/records/2026-10-16-integration-variable-catalog.json",
+    "docs/records/2026-10-16-output-integrity-verification.json",
+    "docs/records/2026-10-16-date-correction-evidence.json",
+    "docs/records/2026-10-16-gshhg-marine-reference.json",
+    "docs/records/2026-10-16-spatial-grid-report-strict-policy.json",
+    "docs/records/2026-10-16-environmental-coverage-by-geography-and-period-strict-policy.json",
+    "docs/records/2026-10-16-independent-environmental-verification.md",
+    "docs/records/2026-10-16-environmental-coverage-by-geography-and-period-strict-policy.md",
+    "docs/records/2026-10-16-spatial-grid-report-strict-policy.md",
+    "docs/records/2026-10-16-marine-filter-blocker-strict-policy.md",
+    "docs/records/2026-10-16-temporal-filter-report-strict-policy.json",
+    "docs/records/2026-10-16-integration-execution-evidence.json",
+    "docs/records/2026-10-16-integration-unittest-output.txt",
+    "notebooks/branch_work/05_pipeline_data_integration_and_data_cleaning.ipynb",
+    "data/interim/integrated/full/integrated_observations.parquet",
+    "data/interim/integrated/temporal/observations_2000_2026.parquet",
+    "data/interim/integrated/marine/marine_observations.parquet",
+    "data/interim/integrated/gridded/grid_observations.parquet",
+    "data/interim/integrated/gridded/species_cell_period_summary.parquet",
+    "src/data_preparation/08_integrate_spatiotemporal_data.py",
+    "src/data_preparation/09_filter_and_grid_data.py"
+  ],
+  "scientific_limitations": [
+    "Raw and cleaned baseline absolute tas declare K but decoded values are Celsius-like: quarantined.",
+    "Original tas_range has -273.15 offset relative to max-min: quarantined.",
+    "Original SSP245 clt_sd exceeds fraction scale: quarantined.",
+    "Concentration units and baseline averaging windows remain publisher interpretation limitations.",
+    "2017 source is not a current shoreline survey; small islands, lagoons and reclamation can differ.",
+    "Sanity tests check topology and sample locations, not metre-level coastal accuracy.",
+    "Marine mask covers the collection rectangle only; uncertainty beyond it is unverified.",
+    "590 retained points have unknown coordinate uncertainty.",
+    "Projected/climatological values are approximations; no annual environmental matching.",
+    "Presence records and repeated observations do not establish absence or population abundance."
+  ],
+  "historical_policy_status": {
+    "current_marine_policy": "D-053 strict uncertainty-footprint marine and grid counts are historical; D-054 Policy B supersedes those outputs.",
+    "strict_policy_report_archives": [
+      "docs/records/2026-10-16-temporal-filter-report-strict-policy.json",
+      "docs/records/2026-10-16-environmental-coverage-by-geography-and-period-strict-policy.json",
+      "docs/records/2026-10-16-spatial-grid-report-strict-policy.json",
+      "docs/records/2026-10-16-marine-filter-blocker-strict-policy.json"
+    ],
+    "current_report": "docs/records/2026-10-16-policy-b-execution-report.json"
+  }
+}

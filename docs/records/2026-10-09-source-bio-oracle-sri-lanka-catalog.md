@@ -4,7 +4,7 @@
 - **Publisher:** Bio-ORACLE consortium, ERDDAP service
 - **Catalogue:** [Bio-ORACLE ERDDAP all-datasets table](https://erddap.bio-oracle.org/erddap/tabledap/allDatasets.html)
 - **Product documentation:** [Bio-ORACLE data documentation](https://www.bio-oracle.org/documentation.php)
-- **Collector:** [`bio_oracle_layers.py`](../../src/data_collection/bio_oracle_layers.py)
+- **Collector:** [`05_bio_oracle_layers.py`](../../src/data_collection/05_bio_oracle_layers.py)
 - **Scope decision:** [D-047](2026-10-09-decision-bio-oracle-catalog-intake.md)
 - **Collection rectangle:** [D-048](2026-10-09-decision-bio-oracle-sri-lanka-bbox.md)
 

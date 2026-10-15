@@ -1,0 +1,35 @@
+{
+  "format": "oceavera-temporal-filter-report-v1",
+  "generated_at_utc": "2026-10-15T17:46:45.359934+00:00",
+  "input": "data/interim/integrated/full/integrated_observations.parquet",
+  "output": "data/interim/integrated/temporal/observations_2000_2026.parquet",
+  "input_rows": 23371,
+  "retained_rows": 9681,
+  "excluded_rows": 13690,
+  "counts_by_reason": {
+    "retained_2000_2026": 9681,
+    "before_2000": 10409,
+    "missing_or_invalid_date": 3281
+  },
+  "counts_by_analysis_period": {
+    "2020-2026": 6466,
+    "2000-2009": 653,
+    "2010-2019": 2562
+  },
+  "year_min": 2000,
+  "year_max": 2026,
+  "output_sha256": "41a039be228d6312ae294cdd24a442f83f06a564473a75673b4f1cb444630803",
+  "geoparquet": {
+    "rows": 9681,
+    "columns": 510,
+    "geoparquet_version": "1.1.0",
+    "compression": [
+      "ZSTD"
+    ]
+  },
+  "limits": [
+    "Rows are retained by a resolved occurrence year between 2000 and 2026 inclusive.",
+    "An environmental time slice is a decadal source approximation, not an annual measurement.",
+    "Temporal eligibility does not establish marine eligibility."
+  ]
+}

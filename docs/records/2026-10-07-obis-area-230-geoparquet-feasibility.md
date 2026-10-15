@@ -37,9 +37,9 @@ The 8 October metadata preflight reported 23,934 API records over 24 pages; all 
 
 ## Generating artefacts and publisher references
 
-- [Python collector](../../src/data_collection/obis_occurrences.py)
-- [Current API downloader](../../src/data_collection/obis_occurrences.py)
-- [Current CSV converter](../../src/data_collection/obis_json_to_csv.py)
+- [Python collector](../../src/data_collection/01_obis_occurrences.py)
+- [Current API downloader](../../src/data_collection/01_obis_occurrences.py)
+- [Current CSV converter](../../src/data_collection/02_obis_json_to_csv.py)
 - [OBIS data access](https://obis.org/data/access/)
 - [OBIS AWS Open Data README](https://github.com/iobis/obis-open-data)
 - [OBIS Area API](https://api.obis.org/v3/area/230)

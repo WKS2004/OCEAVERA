@@ -29,7 +29,7 @@
 - **Licence / terms reference and sharing conditions:** No full review of the contributing datasets’ licences or redistribution conditions has been completed. Inspect OBIS source/dataset terms and ecological sensitivity before sharing records or coordinates.
 - **Required attribution / citation:** Cite OBIS and the contributing datasets according to their actual terms. The acquisition retains source fields returned by OBIS; this record does not claim that every contributing dataset has the same licence.
 - **Processing and limitations:** No occurrence was cleaned, filtered by quality, deduplicated, or excluded. The only conversion was serialisation of the API response fields into CSV cells; original JSON pages remain unchanged. This collection decision does not select a focal species, define the modelling population, or turn absence of a returned record into a confirmed absence.
-- **Generating artefact:** [Python standard-library collector](../../src/data_collection/obis_occurrences.py); [collection decision D-034](2026-10-07-decision-obis-area-230.md).
+- **Generating artefact:** [Python standard-library collector](../../src/data_collection/01_obis_occurrences.py); [collection decision D-034](2026-10-07-decision-obis-area-230.md).
 
 ## Original page fingerprints
 

@@ -1,0 +1,108 @@
+{
+  "format": "oceavera-environmental-coverage-crosstab",
+  "temporal_rows": 9681,
+  "row_count_reconciliation": {
+    "cross_tab_total": 9681,
+    "temporal_dataset_rows": 9681,
+    "matches": true
+  },
+  "unparseable_or_missing_flag_rows": 0,
+  "group_priority": [
+    "ON_LAND takes priority when both exact flags occur.",
+    "MARINE_UNSURE excludes ON_LAND overlaps.",
+    "Neither group means neither exact flag was parsed; malformed or missing flags are counted separately and are not evidence of marine location."
+  ],
+  "marine_policy_context": "D-054 Policy B applies after this temporal diagnostic: exact ON_LAND and MARINE_UNSURE flags remain excluded; unflagged points inside the GSHHG water polygon are retained regardless of positional-uncertainty footprint. This cross-tab itself does not select records.",
+  "rows": [
+    {
+      "geographic_quality_group": "ON_LAND",
+      "analysis_period": "2000-2009",
+      "total_observation_records": 271,
+      "complete_environmental_coverage": 123,
+      "partial_environmental_coverage": 0,
+      "no_valid_environmental_values": 148,
+      "distinct_species_rank_taxonomic_identifiers": 73,
+      "expected_environment_feature_count": 334
+    },
+    {
+      "geographic_quality_group": "MARINE_UNSURE (excluding ON_LAND overlap)",
+      "analysis_period": "2000-2009",
+      "total_observation_records": 1,
+      "complete_environmental_coverage": 1,
+      "partial_environmental_coverage": 0,
+      "no_valid_environmental_values": 0,
+      "distinct_species_rank_taxonomic_identifiers": 1,
+      "expected_environment_feature_count": 334
+    },
+    {
+      "geographic_quality_group": "Neither ON_LAND nor MARINE_UNSURE",
+      "analysis_period": "2000-2009",
+      "total_observation_records": 379,
+      "complete_environmental_coverage": 207,
+      "partial_environmental_coverage": 109,
+      "no_valid_environmental_values": 63,
+      "distinct_species_rank_taxonomic_identifiers": 79,
+      "expected_environment_feature_count": 334
+    },
+    {
+      "geographic_quality_group": "ON_LAND",
+      "analysis_period": "2010-2019",
+      "total_observation_records": 1778,
+      "complete_environmental_coverage": 351,
+      "partial_environmental_coverage": 0,
+      "no_valid_environmental_values": 1427,
+      "distinct_species_rank_taxonomic_identifiers": 243,
+      "expected_environment_feature_count": 334
+    },
+    {
+      "geographic_quality_group": "MARINE_UNSURE (excluding ON_LAND overlap)",
+      "analysis_period": "2010-2019",
+      "total_observation_records": 0,
+      "complete_environmental_coverage": 0,
+      "partial_environmental_coverage": 0,
+      "no_valid_environmental_values": 0,
+      "distinct_species_rank_taxonomic_identifiers": 0,
+      "expected_environment_feature_count": 334
+    },
+    {
+      "geographic_quality_group": "Neither ON_LAND nor MARINE_UNSURE",
+      "analysis_period": "2010-2019",
+      "total_observation_records": 786,
+      "complete_environmental_coverage": 521,
+      "partial_environmental_coverage": 200,
+      "no_valid_environmental_values": 65,
+      "distinct_species_rank_taxonomic_identifiers": 273,
+      "expected_environment_feature_count": 334
+    },
+    {
+      "geographic_quality_group": "ON_LAND",
+      "analysis_period": "2020-2026",
+      "total_observation_records": 4374,
+      "complete_environmental_coverage": 1398,
+      "partial_environmental_coverage": 15,
+      "no_valid_environmental_values": 2961,
+      "distinct_species_rank_taxonomic_identifiers": 512,
+      "expected_environment_feature_count": 350
+    },
+    {
+      "geographic_quality_group": "MARINE_UNSURE (excluding ON_LAND overlap)",
+      "analysis_period": "2020-2026",
+      "total_observation_records": 0,
+      "complete_environmental_coverage": 0,
+      "partial_environmental_coverage": 0,
+      "no_valid_environmental_values": 0,
+      "distinct_species_rank_taxonomic_identifiers": 0,
+      "expected_environment_feature_count": 350
+    },
+    {
+      "geographic_quality_group": "Neither ON_LAND nor MARINE_UNSURE",
+      "analysis_period": "2020-2026",
+      "total_observation_records": 2092,
+      "complete_environmental_coverage": 1409,
+      "partial_environmental_coverage": 388,
+      "no_valid_environmental_values": 295,
+      "distinct_species_rank_taxonomic_identifiers": 477,
+      "expected_environment_feature_count": 350
+    }
+  ]
+}

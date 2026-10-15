@@ -1,8 +1,19 @@
 # OCEAVERA Python package requirements.
 # Project Python baseline is recorded in .python-version (currently 3.14).
-# Current OBIS scripts use the standard library and remain compatible with 3.10+.
+# OBIS and Bio-ORACLE intake and cleaning use the standard library.
+# Array, table and NetCDF readers for spatiotemporal integration.
+numpy==2.5.4
+pandas==3.0.6
+netCDF4==1.7.4
+cftime==1.6.6
 # Jupyter interface and Python kernel for project notebooks.
 ipykernel==7.4.0
 notebook==7.6.3
-# Add each third-party dependency here with an exact version pin when selected,
-# and update the setup documentation in the same change.
+# GeoParquet integration writer, filtering and read-back validation.
+geopandas==1.2.0
+pyarrow==26.0.0
+# Existing GeoPandas runtime used directly for geodesic uncertainty footprints.
+pyproj==3.8.0
+# Notebook figures.
+matplotlib==3.11.2
+seaborn==0.13.2

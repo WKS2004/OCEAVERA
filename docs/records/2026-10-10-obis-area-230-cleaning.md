@@ -11,7 +11,7 @@
 - **Source resource:** Complete OBIS Area 230 API/CSV snapshot selected under [D-036](2026-10-08-decision-obis-area-230-api-csv.md), retrieved 8 October 2026. The source query includes all taxa, absence and dropped records, with no date, depth or record-quality filter.
 - **Raw CSV:** `data/raw/obis/csv/area-230-20261008T055217394846Z.csv`; 23,934 rows, 230 columns; SHA-256 `16ec5ff96e57dc1e58baa33912d16fe7e9098c78759e750608611bf9a2dc0c43`.
 - **Input at that time:** `data/interim/obis/source_validation/occurrences.csv`; a verified byte-for-byte copy of the raw CSV, later removed under D-049.
-- **Generating code:** [`clean_obis_occurrences_csv.py`](../../src/data_preparation/clean_obis_occurrences_csv.py), using the Python standard library.
+- **Generating code:** [`04_clean_obis_occurrences_csv.py`](../../src/data_preparation/04_clean_obis_occurrences_csv.py), using the Python standard library.
 - **Earlier row-filter output (superseded):** `data/interim/obis/cleaning/occurrences.csv`; 23,217 rows, 230 columns, 25,945,951 bytes; SHA-256 `9d3eb7482e447897b178c65fe11ceef3b072dca4c3db12d95973596794bf88ab`.
 - **Implementation update:** This row-filter output was superseded first by the user's request to screen columns, then by the current 10% protected-column and conservative row-cleaning implementation; see the [current cleaning record](2026-10-11-obis-area-230-cleaning.md).
 - **Runtime:** Configured bundled Python 3.12.14; no environment or package operation was performed.

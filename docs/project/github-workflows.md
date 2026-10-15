@@ -2,7 +2,7 @@
 
 ## Current automation
 
-[Repository checks](../../.github/workflows/ci.yml) runs the [structural helper](../../.agents/scripts/validate_agent_resources.py) and compiles the current OBIS and Bio-ORACLE intake, handoff and cleaning scripts for syntax on pull requests, pushes to every branch and manual dispatch. The push trigger has no branch-name allowlist or pattern; tag pushes create a workflow run whose check job is skipped. Each check-job run checks the complete maintained text inventory, with no path filters or optional checks that silently pass when required files are missing. Python compilation does not execute the scripts or retrieve dataset records.
+[Repository checks](../../.github/workflows/ci.yml) runs the [structural helper](../../.agents/scripts/validate_agent_resources.py), installs the exact pinned project requirements using binary wheels, compiles the current OBIS and Bio-ORACLE intake and preparation scripts, and runs the in-memory integration/spatial unit tests on pull requests, pushes to every branch and manual dispatch. The push trigger has no branch-name allowlist or pattern; tag pushes create a workflow run whose check job is skipped. Each check-job run checks the complete maintained text inventory, with no path filters or optional checks that silently pass when required files are missing. These checks do not process the full datasets, publish GeoParquet or retrieve dataset records.
 
 [Development backup maintenance](../../.github/workflows/dev-backup.yml) keeps `dev-backup` at the exact commit on `dev` after pushes to either branch. If the backup branch contains commits absent from `dev`, it first preserves that history on a timestamped rescue branch. This checkout has remote-tracking refs for `dev` and `dev-backup`; those cached refs have not been refreshed against GitHub and do not establish a successful hosted run or working repository permissions.
 
@@ -11,14 +11,14 @@
 | Setting | Current choice |
 | --- | --- |
 | Workflow name | Repository checks |
-| Job name | Repository structure, records and Python syntax |
+| Job name | Repository structure, records and integration checks |
 | Trigger | Pull requests, pushes to all branches, and manual dispatch; tag-push jobs are skipped |
 | Runner | GitHub-hosted Ubuntu 24.04 |
-| Maintenance interpreter | Python 3.14 from the root `.python-version` file; standard library only |
-| Checks | Maintained structural helper and `py_compile` for the OBIS API downloader and converter, Bio-ORACLE catalogue collector, OBIS/Bio-ORACLE source handoffs, and Bio-ORACLE cleaner |
-| Time limit | Five minutes |
+| Maintenance interpreter | Python 3.14 from the root `.python-version` file |
+| Checks | Maintained structural helper; binary-wheel install from `requirements.txt`; `py_compile` for OBIS/Bio-ORACLE intake and preparation scripts; in-memory integration and spatial unit checks |
+| Time limit | Fifteen minutes |
 | Repository token | Read access to repository contents; checkout credentials are not persisted |
-| Dependencies | Official checkout and Python setup actions pinned to full commit SHAs, with release comments |
+| Dependencies | Official checkout and Python setup actions pinned to full commit SHAs; exact Python package pins from root `requirements.txt`; binary wheels only |
 | Concurrent runs | New runs cancel older runs for the same pull request; event types and branch refs have separate groups |
 
 The CI job reads the project interpreter from `.python-version` using the
@@ -61,16 +61,17 @@ Python 3.14 is the project baseline and the interpreter used by repository maint
 
 ## What the check establishes
 
-The helper fails on inconsistent skill/rule inventory, stale generated routing, invalid maintained skill metadata, unresolved local file or Markdown section links, malformed JSON, text-format violations and invalid contributor-record structure. It skips byte-preserved `data/raw/` payloads while checking tracked records and code. It checks exact account/name mapping, required entry fields, dates and timezone notation. CI runs in check mode and does not regenerate routing or edit records. The separate Python compilation step verifies syntax under the configured Python 3.14 baseline only; it does not test API behaviour, completeness, or runtime execution and it does not download OBIS data.
+The helper fails on inconsistent skill/rule inventory, stale generated routing, invalid maintained skill metadata, unresolved local file or Markdown section links, malformed JSON, text-format violations and invalid contributor-record structure. It skips byte-preserved `data/raw/` payloads while checking tracked records and code. It checks exact account/name mapping, required entry fields, dates and timezone notation. CI runs in check mode and does not regenerate routing or edit records. Python compilation verifies syntax under the configured Python 3.14 baseline; the unit checks exercise date parsing, spatial matching, NetCDF masking/scaling, GeoParquet read-back and marine-mask gates with small in-memory fixtures. CI installs declared dependencies but neither runs the full integration nor accesses source datasets or publishes an artifact.
 
 These are structural and syntax checks. They do not authenticate a contributor, prove an activity, scan every possible personal-data format, validate general YAML syntax, check external URLs, execute skill evaluations, assess scientific correctness or establish human acceptance. Member privacy still requires the review in [CONTRIBUTING.md](../../CONTRIBUTING.md#member-privacy).
 
 ## Local use and failure handling
 
-From the repository root, use Python 3.10 or later:
+From the repository root, use the configured Python 3.14 environment with the exact packages pinned in `requirements.txt`:
 
 ```text
 python -B .agents/scripts/validate_agent_resources.py
+python -m unittest discover -s tests -v
 git diff --check
 ```
 

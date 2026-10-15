@@ -1,0 +1,343 @@
+{
+  "format": "oceavera-policy-b-execution-report-v1",
+  "date": "2026-10-16",
+  "decision": "D-054",
+  "policy": "Policy B marine water-centre candidate selection",
+  "execution": {
+    "command": "python src/data_preparation/09_filter_and_grid_data.py",
+    "flags": [],
+    "exit_status": 0,
+    "used_existing_wsl_environment": true,
+    "python": "3.14.8",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "geopandas": "1.2.0",
+    "pyarrow": "26.0.0",
+    "netCDF4": "1.7.4",
+    "pyproj": "3.8.0",
+    "script_08_executed": false,
+    "netcdf_reopened": false,
+    "publication": "Each output was written to a validated temporary GeoParquet, read back and atomically replaced at its fixed path."
+  },
+  "full_archive": {
+    "path": "data/interim/integrated/full/integrated_observations.parquet",
+    "shape": [
+      23371,
+      513
+    ],
+    "actual_sha256": "34e756d9fa0d5478da14b6a2d627c16076c486d8e43317363d387d69a661ee34",
+    "manifest_sha256": "34e756d9fa0d5478da14b6a2d627c16076c486d8e43317363d387d69a661ee34",
+    "unchanged": true,
+    "bytes": 7866289,
+    "original_obis_fields_preserved": 112,
+    "environmental_feature_definitions": 382
+  },
+  "retired_strict_policy_datasets": [
+    {
+      "path": "data/interim/integrated/temporal/observations_2000_2026.parquet",
+      "shape": [
+        9681,
+        514
+      ],
+      "sha256": "6669327ec1aba406bf8aa8346dc743d1ab721a1237c0266705119881cc21479a",
+      "replaced_by_policy_b": true
+    },
+    {
+      "path": "data/interim/integrated/marine/marine_observations.parquet",
+      "shape": [
+        1299,
+        518
+      ],
+      "sha256": "4b7d4f1dacb7147d03d2e9db208741e73126a180404c9a7a173e35cfb55f0a6b",
+      "replaced_by_policy_b": true
+    },
+    {
+      "path": "data/interim/integrated/gridded/grid_observations.parquet",
+      "shape": [
+        1299,
+        519
+      ],
+      "sha256": "db57dc3b1836eae5af872633fb7627b77209cf3875adca75c7e4bef2e31512c8",
+      "replaced_by_policy_b": true
+    },
+    {
+      "path": "data/interim/integrated/gridded/species_cell_period_summary.parquet",
+      "shape": [
+        667,
+        391
+      ],
+      "sha256": "d767b245682c681325133cf6e4015e58bb921930f82ee616d7426f86c1b9ebc0",
+      "replaced_by_policy_b": true
+    }
+  ],
+  "strict_policy_report_archives": {
+    "2026-10-16-temporal-filter-report-strict-policy.json": "c9e645791af1fa3698d9938442db4cc07df026dabb1e998d55730a14e624a772",
+    "2026-10-16-temporal-filter-report-strict-policy.md": "7512aebe84a21b5ea9ce3656cf0dbd222aab4f998a8e7bed93d9beda84a4cf62",
+    "2026-10-16-environmental-coverage-by-geography-and-period-strict-policy.json": "a1aaa3b8dbe35522d4048d04d756c44b664ec6679e365029cb8c15b8e38cf265",
+    "2026-10-16-environmental-coverage-by-geography-and-period-strict-policy.md": "e0ff61e63ab8705d77914e81208b820558f6f99398ac3775d4e988f45b5f3ca7",
+    "2026-10-16-spatial-grid-report-strict-policy.json": "b5fe492d50f3de43a400bbb5fd457eea1d9e32f11f5b77aa42d3961ecff78a35",
+    "2026-10-16-spatial-grid-report-strict-policy.md": "f28613efc0112627a7311d40246481ad056953e00d930cd10fd4b404badc8dea",
+    "2026-10-16-marine-filter-blocker-strict-policy.json": "2b52a5357760e10e5892d28a4222a6e07b6d6b8ee570726bb37525801bccb588",
+    "2026-10-16-marine-filter-blocker-strict-policy.md": "6c20f0e6a8533cfa0f1ea25736fc798cbf0a64fffa698bd0cabdf12f8091d79e"
+  },
+  "outputs": {
+    "full": {
+      "path": "data/interim/integrated/full/integrated_observations.parquet",
+      "rows": 23371,
+      "columns": 513,
+      "bytes": 7866289,
+      "sha256": "34e756d9fa0d5478da14b6a2d627c16076c486d8e43317363d387d69a661ee34",
+      "crs": "EPSG:4326",
+      "geometry_types": [
+        "Point"
+      ],
+      "geoparquet_version": "1.1.0",
+      "compression": [
+        "ZSTD"
+      ],
+      "null_geometry_count": 0,
+      "invalid_geometry_count": 0,
+      "metadata_valid": true,
+      "geometry_valid": true
+    },
+    "temporal": {
+      "path": "data/interim/integrated/temporal/observations_2000_2026.parquet",
+      "rows": 9681,
+      "columns": 514,
+      "bytes": 5344561,
+      "sha256": "6669327ec1aba406bf8aa8346dc743d1ab721a1237c0266705119881cc21479a",
+      "crs": "EPSG:4326",
+      "geometry_types": [
+        "Point"
+      ],
+      "geoparquet_version": "1.1.0",
+      "compression": [
+        "ZSTD"
+      ],
+      "null_geometry_count": 0,
+      "invalid_geometry_count": 0,
+      "metadata_valid": true,
+      "geometry_valid": true
+    },
+    "marine": {
+      "path": "data/interim/integrated/marine/marine_observations.parquet",
+      "rows": 2353,
+      "columns": 518,
+      "bytes": 2643608,
+      "sha256": "76a2812ae4d031bc9515d15931a2a97221d584b2b24cfad7e1e2fb5e77ba1d49",
+      "crs": "EPSG:4326",
+      "geometry_types": [
+        "Point"
+      ],
+      "geoparquet_version": "1.1.0",
+      "compression": [
+        "ZSTD"
+      ],
+      "null_geometry_count": 0,
+      "invalid_geometry_count": 0,
+      "metadata_valid": true,
+      "geometry_valid": true
+    },
+    "grid": {
+      "path": "data/interim/integrated/gridded/grid_observations.parquet",
+      "rows": 2353,
+      "columns": 519,
+      "bytes": 2647502,
+      "sha256": "71fa9ff9ad959122811ef01117a2157baf0498fbcc1e93bfb340ba87d94d2fc0",
+      "crs": "EPSG:4326",
+      "geometry_types": [
+        "Point"
+      ],
+      "geoparquet_version": "1.1.0",
+      "compression": [
+        "ZSTD"
+      ],
+      "null_geometry_count": 0,
+      "invalid_geometry_count": 0,
+      "metadata_valid": true,
+      "geometry_valid": true
+    },
+    "summary": {
+      "path": "data/interim/integrated/gridded/species_cell_period_summary.parquet",
+      "rows": 1389,
+      "columns": 391,
+      "bytes": 1646016,
+      "sha256": "eb14bebd83f993894672f143f16a452470cdd1c924c390c3c061b580b8c77433",
+      "crs": "EPSG:4326",
+      "geometry_types": [
+        "Polygon"
+      ],
+      "geoparquet_version": "1.1.0",
+      "compression": [
+        "ZSTD"
+      ],
+      "null_geometry_count": 0,
+      "invalid_geometry_count": 0,
+      "metadata_valid": true,
+      "geometry_valid": true
+    }
+  },
+  "temporal": {
+    "rows": 9681,
+    "rows_by_period": {
+      "2000-2009": 651,
+      "2010-2019": 2564,
+      "2020-2026": 6466
+    },
+    "environmental_completeness_by_period": {
+      "2000-2009": {
+        "complete": 331,
+        "partial": 109,
+        "none": 211
+      },
+      "2010-2019": {
+        "complete": 872,
+        "partial": 200,
+        "none": 1492
+      },
+      "2020-2026": {
+        "complete": 2807,
+        "partial": 403,
+        "none": 3256
+      }
+    },
+    "environmental_completeness_total": {
+      "complete": 4010,
+      "partial": 712,
+      "none": 4959
+    }
+  },
+  "marine": {
+    "input_temporal_rows": 9681,
+    "retained_rows": 2353,
+    "water_centres_before_quality_flags": 2815,
+    "outside_water_centres": 6866,
+    "flag_exclusions": {
+      "on_land": 6423,
+      "marine_unsure": 41,
+      "both": 40,
+      "union": 6424,
+      "excluded_by_priority_reason": {
+        "ON_LAND": 6423,
+        "MARINE_UNSURE_only": 1
+      }
+    },
+    "flagged_water_centres_excluded": 462,
+    "unflagged_outside_water_centres_excluded": 904,
+    "invalid_or_missing_flags": 0,
+    "invalid_coordinates": 0,
+    "boundary_points_excluded": 0,
+    "environmental_completeness": {
+      "complete": 1389,
+      "partial": 693,
+      "none": 271,
+      "with_any_environment": 2082
+    },
+    "environmental_completeness_by_period": {
+      "2000-2009": {
+        "records": 376,
+        "complete": 204,
+        "partial": 109,
+        "none": 63,
+        "with_any_environment": 313
+      },
+      "2010-2019": {
+        "records": 596,
+        "complete": 354,
+        "partial": 196,
+        "none": 46,
+        "with_any_environment": 550
+      },
+      "2020-2026": {
+        "records": 1381,
+        "complete": 831,
+        "partial": 388,
+        "none": 162,
+        "with_any_environment": 1219
+      }
+    },
+    "retained_positional_confidence": {
+      "unknown_uncertainty": 590,
+      "known_footprint_crosses_coast_or_land": 1025,
+      "known_footprint_marine": 709,
+      "known_footprint_outside_reference_extent": 29
+    }
+  },
+  "grid_and_species": {
+    "gridded_observations": 2353,
+    "species_rank_records_with_identifier": 2009,
+    "distinct_species_identifiers": 501,
+    "distinct_occupied_cells": 362,
+    "species_cell_period_summary_rows": 1389,
+    "record_count_sum": 2009,
+    "ungrouped_observations": 344,
+    "records_by_period": {
+      "2000-2009": 376,
+      "2020-2026": 1381,
+      "2010-2019": 596
+    },
+    "species_rank_records_by_period": {
+      "2020-2026": 1324,
+      "2000-2009": 172,
+      "2010-2019": 513
+    },
+    "summary_rows_by_period": {
+      "2010-2019": 414,
+      "2020-2026": 885,
+      "2000-2009": 90
+    },
+    "summary_counts_reconcile": true
+  },
+  "marine_reference": {
+    "path": "data/interim/geography/sri_lanka_marine_water.gpkg",
+    "sha256": "ef21fe8791b16e314a441480781f9e5e8cb2a47bf3e9030f57e6b2bc0f02ce8e",
+    "provenance_sha256": "ef21fe8791b16e314a441480781f9e5e8cb2a47bf3e9030f57e6b2bc0f02ce8e",
+    "status": "validated",
+    "source": "GSHHG 2.3.7, Wessel and Smith; DOI 10.1029/96JB00104; full-resolution coastline; D-048 collection envelope"
+  },
+  "validation": {
+    "all_outputs_pass": true,
+    "geo_parquet_1_1_epsg4326_zstd": true,
+    "all_geometries_valid": true,
+    "all_full_columns_preserved_in_individual_outputs": {
+      "temporal": true,
+      "marine": true,
+      "grid": true
+    },
+    "all_382_environmental_features_present": {
+      "full": true,
+      "temporal": true,
+      "marine": true,
+      "grid": true,
+      "summary": true
+    },
+    "source_row_ids_unique": {
+      "full": true,
+      "temporal": true,
+      "marine": true,
+      "grid": true
+    },
+    "original_point_geometry_preserved": {
+      "temporal": true,
+      "marine": true,
+      "grid": true
+    },
+    "summary_record_counts_reconcile": true,
+    "historical_strict_report_archives_verified": true
+  },
+  "verification_commands": {
+    "unit_tests": "PASS: 27 tests",
+    "compileall": "PASS",
+    "pip_check": "PASS: No broken requirements found",
+    "git_diff_check": "PASS (exit 0; pre-existing notebook CRLF warning)",
+    "repository_resource_validation": "PASS: 8 skills, 10 rules, 12 routing cases, 543 text files, 1450 local links, 121 Markdown section links, 4 contributor identities and 4 logs."
+  },
+  "scientific_limits": [
+    "Policy B water-centre candidates are not proof that every organism position or full uncertainty footprint is in marine habitat.",
+    "GSHHG is a source shoreline reference, not a current metre-accuracy survey; the collection rectangle is not an EEZ or final modelling boundary.",
+    "Environmental extraction success is technical value availability, not marine-validity evidence.",
+    "Bio-ORACLE uses decadal products; 2020–2026 maps to the SSP245 2020 slice as an explicit approximation.",
+    "No species selection, predictor subset, supervised target, background sampling, preprocessing or modelling was introduced."
+  ],
+  "no_ml_stages_introduced": true
+}

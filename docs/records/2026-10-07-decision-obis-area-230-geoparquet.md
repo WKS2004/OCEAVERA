@@ -101,7 +101,7 @@ or continue that AWS scan.
 
 ## Affected artefacts
 
-- [Collector](../../src/data_collection/obis_occurrences.py)
+- [Collector](../../src/data_collection/01_obis_occurrences.py)
 - [Storage and provenance](../data/data-storage-and-provenance.md)
 - [Readiness review](../project/repository-readiness-and-alignment.md)
 - [Replacement API/CSV decision D-036](2026-10-08-decision-obis-area-230-api-csv.md)

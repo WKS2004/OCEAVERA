@@ -1,0 +1,8 @@
+{
+  "status": "resolved",
+  "resolved_by": "docs/records/2026-10-16-spatial-grid-report.json",
+  "current_policy": "D-054 Policy B water-centre candidates; positional uncertainty is diagnostic only",
+  "marine_observations": 2353,
+  "previous_strict_policy_results": "historical; see 2026-10-16-spatial-grid-report-strict-policy.json",
+  "historical_blocker_preserved": "2026-10-16-pre-completion-evidence.json"
+}

@@ -5,7 +5,9 @@ The project Python baseline is 3.14, recorded in the root
 with Python 3.10 or later. Third-party Python packages
 used by code or notebooks belong in the root
 [`requirements.txt`](../requirements.txt), with the selected exact version.
-The current OBIS and Bio-ORACLE intake utilities use only the standard library. See the
+OBIS and Bio-ORACLE intake and cleaning use the standard library. The
+spatiotemporal integration uses pinned NumPy, pandas, netCDF4, GeoPandas and
+PyArrow for source extraction and GeoParquet publication/read-back. See the
 [dependency policy](../CONTRIBUTING.md#python-dependencies) for the package
 manifest and update rule. Users can install the listed requirements with:
 
@@ -20,7 +22,23 @@ creating, modifying or
 removing an environment or installing, upgrading or removing packages. This
 repository does not store a Python environment.
 
-**Current method:** the standard-library [`obis_occurrences.py`](data_collection/obis_occurrences.py)
+## Script run order
+
+The numeric prefixes show the full pipeline order when rebuilding the derived
+outputs. The OBIS and Bio-ORACLE collection paths can be prepared separately;
+the integration step needs both cleaned inputs.
+
+1. [`01_obis_occurrences.py`](data_collection/01_obis_occurrences.py) — download the OBIS occurrence pages.
+2. [`02_obis_json_to_csv.py`](data_collection/02_obis_json_to_csv.py) — convert a complete OBIS JSON run to CSV.
+3. [`03_stage_obis_csv.py`](data_preparation/03_stage_obis_csv.py) — validate the selected raw CSV and write its source manifest.
+4. [`04_clean_obis_occurrences_csv.py`](data_preparation/04_clean_obis_occurrences_csv.py) — create the cleaned OBIS table.
+5. [`05_bio_oracle_layers.py`](data_collection/05_bio_oracle_layers.py) — retrieve the selected Bio-ORACLE products.
+6. [`06_stage_bio_oracle_layers.py`](data_preparation/06_stage_bio_oracle_layers.py) — validate and stage the selected product bundle.
+7. [`07_clean_bio_oracle_layers.py`](data_preparation/07_clean_bio_oracle_layers.py) — verify and publish the current cleaned product bundle.
+8. [`08_integrate_spatiotemporal_data.py`](data_preparation/08_integrate_spatiotemporal_data.py) — join the cleaned occurrences to the selected environmental products.
+9. [`09_filter_and_grid_data.py`](data_preparation/09_filter_and_grid_data.py) — create temporal/marine outputs and grid summaries using the reusable GSHHG reference and recorded uncertainty policy.
+
+**Current method:** the standard-library [`01_obis_occurrences.py`](data_collection/01_obis_occurrences.py)
 downloads the complete paginated Area 230 response from the OBIS API. It
 includes absence and dropped records, omits the `fields` parameter, applies no
 taxon/date/depth/record filter, and saves each response body unchanged beneath
@@ -32,11 +50,11 @@ pages and can be resumed with `--resume`.
 From the repository root:
 
 ```text
-python src/data_collection/obis_occurrences.py
+python src/data_collection/01_obis_occurrences.py
 ```
 
 The separate standard-library
-[`obis_json_to_csv.py`](data_collection/obis_json_to_csv.py) converts only a
+[`02_obis_json_to_csv.py`](data_collection/02_obis_json_to_csv.py) converts only a
 complete, checksum-verified JSON run. It writes the union of every top-level
 field and every record to `data/raw/obis/csv/`, serialises nested arrays and
 objects as compact JSON strings, and checks each CSV row against the raw JSON.
@@ -52,24 +70,24 @@ lossless source for the CSV copy.
 From the repository root, convert the newest complete JSON run with:
 
 ```text
-python src/data_collection/obis_json_to_csv.py
+python src/data_collection/02_obis_json_to_csv.py
 ```
 
 To select a particular complete run instead, pass its directory with
 `--json-run`:
 
 ```text
-python src/data_collection/obis_json_to_csv.py --json-run data/raw/obis/json/<run-directory>
+python src/data_collection/02_obis_json_to_csv.py --json-run data/raw/obis/json/<run-directory>
 ```
 
 ## OBIS raw-to-interim handoff
 
-[`stage_obis_csv.py`](data_preparation/stage_obis_csv.py) accepts the selected
+[`03_stage_obis_csv.py`](data_preparation/03_stage_obis_csv.py) accepts the selected
 OBIS CSV path at the first raw-to-interim boundary. Run it from the repository
 root:
 
 ```text
-python src/data_preparation/stage_obis_csv.py --obis-csv data/raw/obis/csv/<selected-run>.csv
+python src/data_preparation/03_stage_obis_csv.py --obis-csv data/raw/obis/csv/<selected-run>.csv
 ```
 
 The path is supplied once at this boundary. The script checks CSV row widths,
@@ -89,7 +107,7 @@ phase directories.
 
 ## OBIS occurrence cleaning
 
-[`clean_obis_occurrences_csv.py`](data_preparation/clean_obis_occurrences_csv.py)
+[`04_clean_obis_occurrences_csv.py`](data_preparation/04_clean_obis_occurrences_csv.py)
 reads the raw CSV identified by the verified source-validation manifest and
 writes the sole OBIS interim output directory,
 `data/interim/obis/cleaning/`. It contains `occurrences_cleaned.csv`,
@@ -98,7 +116,7 @@ writes the sole OBIS interim output directory,
 Run it from the repository root:
 
 ```text
-python src/data_preparation/clean_obis_occurrences_csv.py
+python src/data_preparation/04_clean_obis_occurrences_csv.py
 ```
 
 The configurable column threshold is 10% usable values after field-specific sentinels are excluded. Essential OBIS
@@ -113,11 +131,11 @@ and the [earlier column-screen record](../docs/records/2026-10-10-obis-area-230-
 
 ## Bio-ORACLE environmental source intake
 
-[`bio_oracle_layers.py`](data_collection/bio_oracle_layers.py) is a static,
+[`05_bio_oracle_layers.py`](data_collection/05_bio_oracle_layers.py) is a static,
 single-purpose collector. Run it from the repository root with no options:
 
 ```text
-python src/data_collection/bio_oracle_layers.py
+python src/data_collection/05_bio_oracle_layers.py
 ```
 
 It uses the rectangle formed from the Marine Regions Sri Lankan EEZ v12
@@ -167,12 +185,12 @@ record](../docs/records/2026-10-09-decision-bio-oracle-sri-lanka-bbox.md) and
 
 ## Bio-ORACLE raw-to-interim handoff
 
-[`stage_bio_oracle_layers.py`](data_preparation/stage_bio_oracle_layers.py)
+[`06_stage_bio_oracle_layers.py`](data_preparation/06_stage_bio_oracle_layers.py)
 accepts the selected catalogue run manifest once. Run it from the repository
 root and select a complete manifest under `data/raw/bio_oracle/_runs/`:
 
 ```text
-python src/data_preparation/stage_bio_oracle_layers.py --run-manifest data/raw/bio_oracle/_runs/<complete-run>_bio_oracle_catalog.json
+python src/data_preparation/06_stage_bio_oracle_layers.py --run-manifest data/raw/bio_oracle/_runs/<complete-run>_bio_oracle_catalog.json
 ```
 
 The script accepts only a complete D-047 catalogue run with the D-048 Sri Lanka
@@ -186,7 +204,7 @@ interim stage already exists, the script also verifies its recorded payload
 hashes before reporting whether that stage can safely be replaced:
 
 ```text
-python src/data_preparation/stage_bio_oracle_layers.py --run-manifest data/raw/bio_oracle/_runs/<complete-run>_bio_oracle_catalog.json --dry-run
+python src/data_preparation/06_stage_bio_oracle_layers.py --run-manifest data/raw/bio_oracle/_runs/<complete-run>_bio_oracle_catalog.json --dry-run
 ```
 
 The script writes all layer files and unchanged receipts beneath
@@ -214,7 +232,7 @@ receipts.
 
 ## Bio-ORACLE environmental cleaning
 
-[`clean_bio_oracle_layers.py`](data_preparation/clean_bio_oracle_layers.py)
+[`07_clean_bio_oracle_layers.py`](data_preparation/07_clean_bio_oracle_layers.py)
 scans all products referenced by the current Bio-ORACLE manifest and publishes
 the validated byte-for-byte NetCDF products under
 `data/interim/bio_oracle/cleaning/<dataset-id>/`, alongside `manifest.json`
@@ -226,8 +244,8 @@ is made. Raw publisher files remain unchanged. Run staging, then cleaning,
 from the repository root:
 
 ```text
-python src/data_preparation/stage_bio_oracle_layers.py --run-manifest data/raw/bio_oracle/_runs/<catalog-run>.json
-python src/data_preparation/clean_bio_oracle_layers.py
+python src/data_preparation/06_stage_bio_oracle_layers.py --run-manifest data/raw/bio_oracle/_runs/<catalog-run>.json
+python src/data_preparation/07_clean_bio_oracle_layers.py
 ```
 
 The standard-library reader inspects every NetCDF header and array, then checks
@@ -253,6 +271,35 @@ not treat that pattern as an authoritative marine mask. See the [cleaning
 record](../docs/records/2026-10-11-bio-oracle-cleaning.md) for the complete
 evidence and limits.
 
+## OBIS–Bio-ORACLE spatiotemporal integration
+
+Run the two scripts in the existing WSL OCEAVERA Python 3.14 environment:
+
+```bash
+python src/data_preparation/08_integrate_spatiotemporal_data.py
+python src/data_preparation/09_filter_and_grid_data.py
+```
+
+Script 08 inventories 356 products and reads 106 selected baseline/SSP245/static products. It preserves all 23,371 cleaned OBIS observations and 112 original fields, adds 382 environmental feature columns and writes the full GeoParquet. Actual NetCDF coordinates establish time and grid choices; automatic masking/scaling is applied once.
+
+Original baseline absolute tas metadata conflicts with decoded values, while original tas_range and clt_sd have unresolved semantics. Their affected period values are quarantined as null, with columns and source metadata preserved. SSP245 absolute Celsius temperatures stay unchanged. Counts of expected usable features exclude these quarantines. Numeric OBIS date_start/date_mid/date_end always use milliseconds; year/date_year use years. There are 22 true ambiguous-date records and 9,681 temporal rows.
+
+Script 09 independently reads the completed full GeoParquet and saved grid axes. It never imports Script 08 or reads environmental arrays. Ordinary execution finds data/interim/geography/sri_lanka_marine_water.gpkg and its tracked source provenance. When absent but the documented local GSHHG archive exists, it prepares that reference once; routine runs do not download sources.
+
+The full-resolution GSHHG water mask uses the established collection rectangle without EEZ clipping. Script 09 applies Policy B: valid JSON flags without exact `ON_LAND` or `MARINE_UNSURE`, and a point strictly inside GSHHG marine water. Known uncertainty footprints crossing land/coast (1,025) or extending beyond reference coverage (29) are retained and flagged; 709 known footprints are fully within water and 590 uncertainties are unknown. The current output has 2,353 marine water-centre candidates, the same 2,353 individual grid records, 2,009 identifier-bearing species-rank records, 362 occupied cells and 1,389 species/cell/period summaries. The strict D-053 policy yielded 1,299 marine rows by excluding those 1,054 known crossing/outside footprints; its evidence is archived as historical.
+
+All five output tables are interim GeoParquet 1.1.0, EPSG:4326, ZSTD under data/interim/integrated/. Source records and point geometries are preserved. Grid polygons use persisted coordinate-centre midpoints and stable cell IDs. No minimum species/cell thresholds, targets or model preprocessing are applied.
+
+See the [D-054 Policy B decision](../docs/records/2026-10-16-decision-policy-b-marine-water-centre.md), [execution report](../docs/records/2026-10-16-policy-b-execution-report.md), [D-053 historical report](../docs/records/2026-10-16-integration-final-technical-report.md), [manifest](../docs/records/2026-10-16-integration-manifest.json), [catalogue](../docs/records/2026-10-16-integration-variable-catalog.json), [independent source comparison](../docs/records/2026-10-16-independent-environmental-verification.md) and [current spatial report](../docs/records/2026-10-16-spatial-grid-report.md).
+
+Progress and concise results are printed to the console. Detailed machine-readable evidence stays in docs/records/. Optional path overrides and Script 08's read-only preflight remain available:
+
+```bash
+python src/data_preparation/08_integrate_spatiotemporal_data.py --help
+python src/data_preparation/08_integrate_spatiotemporal_data.py --dry-run
+python src/data_preparation/09_filter_and_grid_data.py --help
+```
+
 The three OBIS commands print readable status, progress and completion details
 in the console. Their machine-readable provenance remains in the JSON manifests
 saved alongside the raw or interim data; the converter does not print the full
@@ -263,12 +310,13 @@ page hashes, response-body bytes and CSV fingerprint are recorded in the
 [Area 230 source record](../docs/records/2026-10-08-source-obis-area-230-api-csv.md).
 The failed AWS/GeoParquet attempt remains historical under [D-035](../docs/records/2026-10-07-decision-obis-area-230-geoparquet.md);
 [D-036](../docs/records/2026-10-08-decision-obis-area-230-api-csv.md) selects
-the current API/CSV method. The workflow does not clean, deduplicate, select
-species, integrate environmental data, construct targets or model observations.
+the current API/CSV method. These acquisition scripts do not select species,
+construct targets or model observations; spatial integration is implemented
+in the two scripts above.
 
-Place future preparation, spatial integration, modelling or evaluation logic
-here only as those stages are authorised. Keep notebooks focused on
-explanation and analysis rather than duplicated implementation.
+Place later target construction, modelling or evaluation logic here only as
+those stages are authorised. Keep notebooks focused on explanation and
+analysis rather than duplicated implementation.
 
 ## Member responsibilities
 

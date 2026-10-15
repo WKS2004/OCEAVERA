@@ -169,7 +169,7 @@ def resolve_run(run_path: Path | None) -> tuple[Path, dict[str, object]]:
             return candidate, manifest
     raise ConversionError(
         "No complete Area 230 JSON run was found. Retrieve a run first with "
-        "python src/data_collection/obis_occurrences.py."
+        "python src/data_collection/01_obis_occurrences.py."
     )
 
 
@@ -431,8 +431,8 @@ def main() -> int:
         description="Convert a complete, verified OBIS Area 230 JSON run to CSV.",
         epilog=(
             "Examples:\n"
-            "  python src/data_collection/obis_json_to_csv.py\n"
-            "  python src/data_collection/obis_json_to_csv.py --json-run "
+            "  python src/data_collection/02_obis_json_to_csv.py\n"
+            "  python src/data_collection/02_obis_json_to_csv.py --json-run "
             "data/raw/obis/json/<run-directory>"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -486,7 +486,7 @@ def main() -> int:
         print("  Original JSON pages were not changed.")
         print("\nNext step - stage this CSV for source validation:")
         print(
-            "  python src/data_preparation/stage_obis_csv.py "
+            "  python src/data_preparation/03_stage_obis_csv.py "
             f"--obis-csv {receipt['csv']}"
         )
         return 0

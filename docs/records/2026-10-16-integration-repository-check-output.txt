@@ -1,0 +1,4 @@
+PASS: 8 skills, 10 rules, 12 routing review cases, 532 text files and 1416 local links.
+PASS: local Markdown section links: 121.
+PASS: contributor identities: 4; contribution logs: 4; dated entries: 107.
+Structural checks only; manual cases are not executed agent evaluations and attribution claims need evidence.

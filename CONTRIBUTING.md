@@ -4,7 +4,7 @@ Use this guide for shared project changes, evidence collection and contribution 
 
 ## Working scope
 
-The current authorised work covers shared structure, planning, proposal-based member responsibility documentation and repository automation. Start an analytical technical stage only when requested and the corresponding [workflow gate](docs/ml/ml-workflow-and-evidence-gates.md) is addressed. Keep unresolved species, geography, target, features, methods, ML framework and experiment-environment choices provisional until recorded evidence supports them.
+The shared foundation and member plan are established. The current integration is documented under [D-053](docs/records/2026-10-16-decision-final-integration-completion.md), including executed full/temporal/marine/grid outputs, quarantined source semantics and positional confidence. Earlier integration decisions remain historical. This completes the requested processing implementation; start later analytical stages only when requested and the corresponding [workflow gate](docs/ml/ml-workflow-and-evidence-gates.md) is addressed. Keep unresolved species, geography, target, features, methods, ML framework and experiment-environment choices provisional until recorded evidence supports them.
 
 All members are expected to understand the full pipeline and contribute technically. Use the [responsibility overview](docs/project/member-responsibilities.md) for the group division, the linked member file for complete personal duties and the [common guide](docs/project/member-contributions/shared-responsibilities-and-evidence.md) for shared participation, evidence and handovers. Factual activity logs record performed work; they do not prove fulfilment of an allocation or satisfy a member's assessed learning report. Follow the finalised working allocation and record authorised responsibility changes in the decision register.
 
@@ -81,8 +81,9 @@ package==version
 Do not list Python standard-library modules or add speculative packages for
 unselected future work. Python 3.14 is
 the project baseline in [`.python-version`](.python-version); the current
-intake scripts remain compatible with Python 3.10 or later and need no
-third-party packages. From the repository root, users may install listed
+intake, cleaning and in-memory integration audit remain compatible with Python
+3.10 or later and use no third-party packages. GeoPandas and PyArrow are pinned
+only for final GeoParquet writing and validation. From the repository root, users may install listed
 dependencies with:
 
 ```text
@@ -98,10 +99,10 @@ conda create --name OCEAVERA python=3.14 pip
 conda activate OCEAVERA
 ```
 
-The future ML framework and dependency stack remain open. The manifest pins
-Jupyter Notebook and its Python kernel for notebook use; the OBIS intake scripts
-themselves continue to use the standard library. These notebook tools do not
-select the ML framework or scientific dependency stack.
+The future ML framework and modelling dependency stack remain open. The manifest
+pins Jupyter Notebook and its Python kernel for notebook use, and GeoPandas and
+PyArrow for the integration writer. These packages do not select the ML
+framework or modelling dependency stack.
 
 Environment setup commands below and elsewhere in the repository are for
 user-led setup. An agent must obtain the user's explicit authorisation in the

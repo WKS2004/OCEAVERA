@@ -10,7 +10,7 @@ This record preserves the 10 October experiment. The current OBIS interim datase
 
 - **Source:** OBIS Area 230 CSV retrieved 8 October 2026 under [D-036](2026-10-08-decision-obis-area-230-api-csv.md); 23,934 rows and 230 columns. The raw-source fingerprint and byte-preserving staging evidence are in the [source record](2026-10-08-source-obis-area-230-api-csv.md).
 - **Input path at that time:** `data/interim/obis/source_validation/occurrences.csv`; this validation copy was later removed under D-049.
-- **Generating code:** [`clean_obis_occurrences_csv.py`](../../src/data_preparation/clean_obis_occurrences_csv.py).
+- **Generating code:** [`04_clean_obis_occurrences_csv.py`](../../src/data_preparation/04_clean_obis_occurrences_csv.py).
 - **Rule:** Count a cell as filled when its value is not empty after trimming whitespace. Keep a column when at least 90% of all 23,934 source rows have a filled cell. Exactly 90% qualifies.
 - **Row treatment:** All 23,934 source rows are preserved, including rows marked dropped, absence or non-marine. This stage removes columns only.
 
