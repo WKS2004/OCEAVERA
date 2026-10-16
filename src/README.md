@@ -2,7 +2,8 @@
 
 The project Python baseline is 3.14, recorded in the root
 [`.python-version`](../.python-version). The current scripts remain compatible
-with Python 3.10 or later. Third-party Python packages
+with Python 3.10 or later where their declared dependencies permit. Script 12
+targets the Python 3.14 `OCEAVERA` environment. Third-party Python packages
 used by code or notebooks belong in the root
 [`requirements.txt`](../requirements.txt), with the selected exact version.
 OBIS and Bio-ORACLE intake and cleaning use the standard library. The
@@ -22,12 +23,19 @@ creating, modifying or
 removing an environment or installing, upgrading or removing packages. This
 repository does not store a Python environment.
 
+Script 12 uses scikit-learn and joblib to construct and serialize six
+**unfitted** preprocessing templates. SciPy, Narwhals and threadpoolctl are
+pinned as scikit-learn runtime dependencies. No classifier or project-data
+transformer is fitted in this stage; the future classifier stack remains open.
+
 ## Script run order
 
 The numeric prefixes show the pipeline order through the final candidate
 analysis. EDA follows Script 10 as a read-only stage on the saved candidate; it
-does not rebuild or alter a dataset. The OBIS and Bio-ORACLE collection paths
-can be prepared separately; the integration step needs both cleaned inputs.
+does not rebuild or alter a dataset. Script 12 follows EDA to create a
+provisional modelling view, spatial partitions and unfitted preprocessing
+templates. It does not train classifiers. The OBIS and Bio-ORACLE collection
+paths can be prepared separately; the integration step needs both cleaned inputs.
 
 1. [`01_obis_occurrences.py`](data_collection/01_obis_occurrences.py) — download the OBIS occurrence pages.
 2. [`02_obis_json_to_csv.py`](data_collection/02_obis_json_to_csv.py) — convert a complete OBIS JSON run to CSV.
@@ -40,6 +48,7 @@ can be prepared separately; the integration step needs both cleaned inputs.
 9. [`09_filter_and_grid_data.py`](data_preparation/09_filter_and_grid_data.py) — create temporal/marine outputs and grid summaries using the reusable GSHHG reference and recorded uncertainty policy.
 10. [10_construct_pseudo_absences.py](data_preparation/10_construct_pseudo_absences.py) — preserve every Policy B observation, add a distinct matched marine background row per observation and publish a long-format candidate table.
 11. [11_explore_presence_background_data.py](data_preparation/11_explore_presence_background_data.py) — read-only Sections A–F EDA of the full candidate and preliminary eligible subset.
+12. [12_feature_engineering_and_preprocessing.py](data_preparation/12_feature_engineering_and_preprocessing.py) — create the deduplicated modelling candidate view, 0.5-degree spatial splits, train-only feature screen, engineered variables and unfitted preprocessing templates.
 
 **Current method:** the standard-library [`01_obis_occurrences.py`](data_collection/01_obis_occurrences.py)
 downloads the complete paginated Area 230 response from the OBIS API. It
@@ -309,6 +318,29 @@ python src/data_preparation/11_explore_presence_background_data.py
 ```
 
 The complete evidence is linked from [D-057](../docs/records/2026-10-16-decision-eda-evidence.md) and the [EDA report](../docs/records/2026-10-16-eda-report.md).
+
+### Script 12 — provisional feature preparation
+
+Script 12 reads the frozen D-056 candidate and verifies its SHA-256 before
+preparing a separate modelling view. It retains one positive per taxon, cell
+and period plus the already paired background; assigns deterministic global
+0.5-degree raster-centre spatial blocks; screens optional environmental fields
+on training rows only; and audits source-period quarantines. It proposes three
+numeric feature sets, preserves taxon as a separate categorical condition and
+serializes six unfitted preprocessing templates. It does not fit project-data
+transformers or train models. Label 0 remains sampled background, and
+2020–2026 remains an SSP245 2020 projection assumption. The outputs are
+provisional pending shared scientific review under [D-058](../docs/records/2026-10-16-decision-feature-preparation.md).
+
+Run it from the repository root with no flags:
+
+```text
+python src/data_preparation/12_feature_engineering_and_preprocessing.py
+```
+
+The derived GeoParquet and feature-support tables belong under
+`data/interim/model_preparation/`; the summary, report and feature decision
+log are linked from the [D-058 execution record](../docs/records/2026-10-16-feature-preprocessing-report.md).
 
 Progress and concise results are printed to the console. Detailed machine-readable evidence stays in docs/records/. Optional path overrides and Script 08's read-only preflight remain available:
 
