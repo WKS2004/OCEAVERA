@@ -1,0 +1,589 @@
+{
+  "status": "prepared candidates and UNFITTED pipelines; ecological/model approval pending",
+  "generated_utc": "2026-10-16T04:45:48.520201+00:00",
+  "environment": {
+    "python": "3.14.8",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "geopandas": "1.2.0",
+    "pyarrow": "26.0.0",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1",
+    "joblib": "1.5.3",
+    "narwhals": "2.27.1",
+    "threadpoolctl": "3.7.0"
+  },
+  "input": {
+    "path": "data/interim/pseudo_absence/presence_background_candidates.parquet",
+    "rows": 4706,
+    "columns": 527,
+    "bytes": 9412505,
+    "sha256_before_after": [
+      "234177bf3641856cdd10b425f2da957a27210f876d31092ba715a53cee7a429f",
+      "234177bf3641856cdd10b425f2da957a27210f876d31092ba715a53cee7a429f"
+    ]
+  },
+  "population": {
+    "source_rows": 4706,
+    "eligible_input_rows": 3458,
+    "excluded_rows_before_eligibility": 1248,
+    "excluded_positive_rows_before_eligibility": 624,
+    "excluded_background_rows_before_eligibility": 624,
+    "excluded_distinct_taxa_by_label": {
+      "0": 280,
+      "1": 280
+    },
+    "eligible_distinct_taxa_by_label": {
+      "0": 441,
+      "1": 441
+    },
+    "ineligible_reason_counts_by_label_nonexclusive": {
+      "0": {
+        "unverified_species_rank": 344,
+        "source_cell_centre_not_marine": 324,
+        "missing_core_environment": 271
+      },
+      "1": {
+        "unverified_species_rank": 344,
+        "source_cell_centre_not_marine": 324,
+        "missing_core_environment": 271
+      }
+    },
+    "eligible_source_presences": 1729,
+    "eligible_paired_backgrounds": 1729,
+    "eligible_taxa_before_deduplication": 441,
+    "positive_rows_after_taxon_cell_period_dedup": 1154,
+    "positive_repeats_omitted_from_derived_view": 575,
+    "paired_background_rows_omitted_due_to_positive_dedup": 575,
+    "repeated_taxon_cell_period_groups": 274,
+    "balanced_candidate_rows": 2308,
+    "candidate_presence_rows": 1154,
+    "candidate_background_rows": 1154,
+    "selected_taxon_keys": 441,
+    "distinct_positive_cells": 256
+  },
+  "spatial_split": {
+    "selected_seed": 20261026,
+    "candidate_seed_count": 30,
+    "block_degrees": 0.5,
+    "split_sizes": {
+      "train": {
+        "rows": 1604,
+        "row_fraction": 0.6949740034662045,
+        "presence_rows": 803,
+        "background_rows": 801,
+        "distinct_grid_cells": 957,
+        "distinct_spatial_blocks": 182,
+        "taxon_keys": 423,
+        "positive_taxon_keys": 351,
+        "positive_distinct_cells": 156
+      },
+      "validation": {
+        "rows": 359,
+        "row_fraction": 0.15554592720970536,
+        "presence_rows": 179,
+        "background_rows": 180,
+        "distinct_grid_cells": 223,
+        "distinct_spatial_blocks": 40,
+        "taxon_keys": 201,
+        "positive_taxon_keys": 137,
+        "positive_distinct_cells": 43
+      },
+      "test": {
+        "rows": 345,
+        "row_fraction": 0.1494800693240901,
+        "presence_rows": 172,
+        "background_rows": 173,
+        "distinct_grid_cells": 230,
+        "distinct_spatial_blocks": 40,
+        "taxon_keys": 168,
+        "positive_taxon_keys": 77,
+        "positive_distinct_cells": 57
+      }
+    },
+    "split_class_counts": {
+      "test": {
+        "0": 173,
+        "1": 172
+      },
+      "train": {
+        "0": 801,
+        "1": 803
+      },
+      "validation": {
+        "0": 180,
+        "1": 179
+      }
+    },
+    "positive_rows_for_taxa_unseen_in_training": 103,
+    "positive_taxon_keys_unseen_in_training": 90,
+    "cross_split_cell_overlap": 0,
+    "cross_split_spatial_block_overlap": 0,
+    "paired_background_split_audit": {
+      "verified": true,
+      "pairs": 1154,
+      "same_partition": 607,
+      "cross_partition": 547
+    }
+  },
+  "source_quarantine_audit": {
+    "quarantined_features": 7,
+    "quarantined_feature_periods": 14,
+    "all_quarantined_values_null": true,
+    "checks": [
+      {
+        "feature": "bio_oracle__clt_sd__depthsurf",
+        "source_period": "ssp245_2020",
+        "analysis_periods": [
+          "2020-2026"
+        ],
+        "rows_checked": 2762,
+        "nonnull_values_in_quarantine": 0,
+        "reason": "Original clt_sd exceeds one despite dimensionless cloud-fraction metadata; scale/statistic unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_ltmax__depthsurf",
+        "source_period": "baseline_2000",
+        "analysis_periods": [
+          "2000-2009"
+        ],
+        "rows_checked": 752,
+        "nonnull_values_in_quarantine": 0,
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_ltmax__depthsurf",
+        "source_period": "baseline_2010",
+        "analysis_periods": [
+          "2010-2019"
+        ],
+        "rows_checked": 1192,
+        "nonnull_values_in_quarantine": 0,
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_ltmin__depthsurf",
+        "source_period": "baseline_2000",
+        "analysis_periods": [
+          "2000-2009"
+        ],
+        "rows_checked": 752,
+        "nonnull_values_in_quarantine": 0,
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_ltmin__depthsurf",
+        "source_period": "baseline_2010",
+        "analysis_periods": [
+          "2010-2019"
+        ],
+        "rows_checked": 1192,
+        "nonnull_values_in_quarantine": 0,
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_max__depthsurf",
+        "source_period": "baseline_2000",
+        "analysis_periods": [
+          "2000-2009"
+        ],
+        "rows_checked": 752,
+        "nonnull_values_in_quarantine": 0,
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_max__depthsurf",
+        "source_period": "baseline_2010",
+        "analysis_periods": [
+          "2010-2019"
+        ],
+        "rows_checked": 1192,
+        "nonnull_values_in_quarantine": 0,
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_mean__depthsurf",
+        "source_period": "baseline_2000",
+        "analysis_periods": [
+          "2000-2009"
+        ],
+        "rows_checked": 752,
+        "nonnull_values_in_quarantine": 0,
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_mean__depthsurf",
+        "source_period": "baseline_2010",
+        "analysis_periods": [
+          "2010-2019"
+        ],
+        "rows_checked": 1192,
+        "nonnull_values_in_quarantine": 0,
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_min__depthsurf",
+        "source_period": "baseline_2000",
+        "analysis_periods": [
+          "2000-2009"
+        ],
+        "rows_checked": 752,
+        "nonnull_values_in_quarantine": 0,
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_min__depthsurf",
+        "source_period": "baseline_2010",
+        "analysis_periods": [
+          "2010-2019"
+        ],
+        "rows_checked": 1192,
+        "nonnull_values_in_quarantine": 0,
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_range__depthsurf",
+        "source_period": "baseline_2000",
+        "analysis_periods": [
+          "2000-2009"
+        ],
+        "rows_checked": 752,
+        "nonnull_values_in_quarantine": 0,
+        "reason": "Original tas_range equals max-minus-min minus 273.15; range offset is scientifically unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_range__depthsurf",
+        "source_period": "baseline_2010",
+        "analysis_periods": [
+          "2010-2019"
+        ],
+        "rows_checked": 1192,
+        "nonnull_values_in_quarantine": 0,
+        "reason": "Original tas_range equals max-minus-min minus 273.15; range offset is scientifically unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_range__depthsurf",
+        "source_period": "ssp245_2020",
+        "analysis_periods": [
+          "2020-2026"
+        ],
+        "rows_checked": 2762,
+        "nonnull_values_in_quarantine": 0,
+        "reason": "Original tas_range equals max-minus-min minus 273.15; range offset is scientifically unresolved."
+      }
+    ]
+  },
+  "engineering": {
+    "eng_water_depth_m": "max(0, -bathymetry_mean); do not replace null",
+    "eng_log1p_water_depth": "log1p(eng_water_depth_m)",
+    "eng_temperature_salinity_interaction": "temperature_celsius * salinity_psu; exploratory, not a physical state equation"
+  },
+  "original_environment_features": 382,
+  "training_feature_screen": {
+    "path": "data/interim/model_preparation/feature_screen_train_only.csv",
+    "features_screened": 382,
+    "all_null_in_training": [
+      "bio_oracle__clt_sd__depthsurf",
+      "bio_oracle__tas_range__depthsurf"
+    ],
+    "constant_in_training": [
+      "bio_oracle__clt_sd__depthsurf",
+      "bio_oracle__coastline__benthic",
+      "bio_oracle__landmass__benthic",
+      "bio_oracle__siconc_ltmax__depthsurf",
+      "bio_oracle__siconc_ltmin__depthsurf",
+      "bio_oracle__siconc_max__depthsurf",
+      "bio_oracle__siconc_mean__depthsurf",
+      "bio_oracle__siconc_min__depthsurf",
+      "bio_oracle__siconc_range__depthsurf",
+      "bio_oracle__siconc_sd__depthsurf",
+      "bio_oracle__sithick_ltmax__depthsurf",
+      "bio_oracle__sithick_ltmin__depthsurf",
+      "bio_oracle__sithick_max__depthsurf",
+      "bio_oracle__sithick_mean__depthsurf",
+      "bio_oracle__sithick_min__depthsurf",
+      "bio_oracle__sithick_range__depthsurf",
+      "bio_oracle__sithick_sd__depthsurf",
+      "bio_oracle__tas_range__depthsurf"
+    ],
+    "quarantined_columns": [
+      "bio_oracle__clt_sd__depthsurf",
+      "bio_oracle__tas_ltmax__depthsurf",
+      "bio_oracle__tas_ltmin__depthsurf",
+      "bio_oracle__tas_max__depthsurf",
+      "bio_oracle__tas_mean__depthsurf",
+      "bio_oracle__tas_min__depthsurf",
+      "bio_oracle__tas_range__depthsurf"
+    ]
+  },
+  "feature_sets": {
+    "core_six": [
+      "bio_oracle__thetao_mean__depthsurf",
+      "bio_oracle__so_mean__depthsurf",
+      "bio_oracle__o2_mean__depthsurf",
+      "bio_oracle__chl_mean__depthsurf",
+      "bio_oracle__ph_mean__depthsurf",
+      "bio_oracle__bathymetry_mean__benthic"
+    ],
+    "core_plus_engineered": [
+      "bio_oracle__thetao_mean__depthsurf",
+      "bio_oracle__so_mean__depthsurf",
+      "bio_oracle__o2_mean__depthsurf",
+      "bio_oracle__chl_mean__depthsurf",
+      "bio_oracle__ph_mean__depthsurf",
+      "bio_oracle__bathymetry_mean__benthic",
+      "eng_water_depth_m",
+      "eng_log1p_water_depth",
+      "eng_temperature_salinity_interaction"
+    ],
+    "domain_expanded": [
+      "bio_oracle__thetao_mean__depthsurf",
+      "bio_oracle__so_mean__depthsurf",
+      "bio_oracle__o2_mean__depthsurf",
+      "bio_oracle__chl_mean__depthsurf",
+      "bio_oracle__ph_mean__depthsurf",
+      "bio_oracle__bathymetry_mean__benthic",
+      "eng_water_depth_m",
+      "eng_log1p_water_depth",
+      "eng_temperature_salinity_interaction",
+      "bio_oracle__no3_mean__depthsurf",
+      "bio_oracle__po4_mean__depthsurf",
+      "bio_oracle__slope__benthic",
+      "bio_oracle__mlotst_mean__depthsurf"
+    ]
+  },
+  "feature_set_manifest": "data/interim/model_preparation/feature_set_manifest.json",
+  "feature_screening": {
+    "optional_columns_admitted_from_training_only": [
+      "bio_oracle__no3_mean__depthsurf",
+      "bio_oracle__po4_mean__depthsurf",
+      "bio_oracle__slope__benthic",
+      "bio_oracle__mlotst_mean__depthsurf"
+    ],
+    "optional_columns_rejected": {
+      "bio_oracle__silicate_mean__depthsurf": "source column unavailable",
+      "bio_oracle__sio4_mean__depthsurf": "source column unavailable",
+      "bio_oracle__pp_mean__depthsurf": "source column unavailable"
+    },
+    "optional_min_training_coverage": 0.8,
+    "quarantined_columns_and_periods": {
+      "bio_oracle__clt_sd__depthsurf": [
+        "ssp245_2020"
+      ],
+      "bio_oracle__tas_ltmax__depthsurf": [
+        "baseline_2000",
+        "baseline_2010"
+      ],
+      "bio_oracle__tas_ltmin__depthsurf": [
+        "baseline_2000",
+        "baseline_2010"
+      ],
+      "bio_oracle__tas_max__depthsurf": [
+        "baseline_2000",
+        "baseline_2010"
+      ],
+      "bio_oracle__tas_mean__depthsurf": [
+        "baseline_2000",
+        "baseline_2010"
+      ],
+      "bio_oracle__tas_min__depthsurf": [
+        "baseline_2000",
+        "baseline_2010"
+      ],
+      "bio_oracle__tas_range__depthsurf": [
+        "baseline_2000",
+        "baseline_2010",
+        "ssp245_2020"
+      ]
+    },
+    "excluded_sources": [
+      "sample_id",
+      "integration_source_row",
+      "paired_presence_source_row",
+      "originalOccurrenceID",
+      "eventDate",
+      "geometry",
+      "latitude",
+      "longitude",
+      "raster_cell_center_latitude",
+      "raster_cell_center_longitude",
+      "grid_cell_id",
+      "raster_cell_id",
+      "spatial_block_id",
+      "split",
+      "presence_background_label",
+      "analysis_period",
+      "eligible_species_level_ml",
+      "ml_eligibility_reason",
+      "sample_type",
+      "coordinateUncertaintyInMeters",
+      "environmental_coverage_status"
+    ],
+    "categorical_conditioning_feature": "target_taxon_key",
+    "categorical_feature_role": "Retained separately for the shared multi-species model; not included in numeric feature-set lists."
+  },
+  "candidate_feature_quality": {
+    "bio_oracle__thetao_mean__depthsurf": {
+      "rows": 2308,
+      "missing": 0,
+      "finite_nonmissing": 2308,
+      "zero_values": 0,
+      "minimum": 27.555834509517588,
+      "maximum": 29.602479963979434
+    },
+    "bio_oracle__so_mean__depthsurf": {
+      "rows": 2308,
+      "missing": 0,
+      "finite_nonmissing": 2308,
+      "zero_values": 0,
+      "minimum": 32.53213697983999,
+      "maximum": 34.81164573925927
+    },
+    "bio_oracle__o2_mean__depthsurf": {
+      "rows": 2308,
+      "missing": 0,
+      "finite_nonmissing": 2308,
+      "zero_values": 0,
+      "minimum": 198.2112911199182,
+      "maximum": 204.13532744303834
+    },
+    "bio_oracle__chl_mean__depthsurf": {
+      "rows": 2308,
+      "missing": 0,
+      "finite_nonmissing": 2308,
+      "zero_values": 0,
+      "minimum": 0.11044956397865428,
+      "maximum": 0.9876996713886851
+    },
+    "bio_oracle__ph_mean__depthsurf": {
+      "rows": 2308,
+      "missing": 0,
+      "finite_nonmissing": 2308,
+      "zero_values": 0,
+      "minimum": 8.008260405084942,
+      "maximum": 8.065124749592488
+    },
+    "bio_oracle__bathymetry_mean__benthic": {
+      "rows": 2308,
+      "missing": 0,
+      "finite_nonmissing": 2308,
+      "zero_values": 30,
+      "minimum": -4410.388671875,
+      "maximum": 0.0
+    },
+    "eng_water_depth_m": {
+      "rows": 2308,
+      "missing": 0,
+      "finite_nonmissing": 2308,
+      "zero_values": 30,
+      "minimum": -0.0,
+      "maximum": 4410.388671875
+    },
+    "eng_log1p_water_depth": {
+      "rows": 2308,
+      "missing": 0,
+      "finite_nonmissing": 2308,
+      "zero_values": 30,
+      "minimum": -0.0,
+      "maximum": 8.391944810454575
+    },
+    "eng_temperature_salinity_interaction": {
+      "rows": 2308,
+      "missing": 0,
+      "finite_nonmissing": 2308,
+      "zero_values": 0,
+      "minimum": 934.8561804654713,
+      "maximum": 1019.8322516718964
+    },
+    "bio_oracle__no3_mean__depthsurf": {
+      "rows": 2308,
+      "missing": 0,
+      "finite_nonmissing": 2308,
+      "zero_values": 0,
+      "minimum": 0.0033328266623189433,
+      "maximum": 1.1154235671051138
+    },
+    "bio_oracle__po4_mean__depthsurf": {
+      "rows": 2308,
+      "missing": 0,
+      "finite_nonmissing": 2308,
+      "zero_values": 0,
+      "minimum": 0.00737181385808847,
+      "maximum": 0.21199668840494046
+    },
+    "bio_oracle__slope__benthic": {
+      "rows": 2308,
+      "missing": 0,
+      "finite_nonmissing": 2308,
+      "zero_values": 0,
+      "minimum": 0.002144859064946179,
+      "maximum": 11.22557670685472
+    },
+    "bio_oracle__mlotst_mean__depthsurf": {
+      "rows": 2308,
+      "missing": 0,
+      "finite_nonmissing": 2308,
+      "zero_values": 0,
+      "minimum": 6.843409327364079,
+      "maximum": 24.603948632032335
+    }
+  },
+  "unfitted_transformers": {
+    "core_six_tree": {
+      "path": "data/interim/model_preparation/unfitted_core_six_tree_preprocessor.joblib",
+      "sha256": "3418f04333217e18e114e02ab6d5fe88e5cda8274360166e139c010a3e598461"
+    },
+    "core_six_scaled": {
+      "path": "data/interim/model_preparation/unfitted_core_six_scaled_preprocessor.joblib",
+      "sha256": "4f0a20f2a3b7ca8f7bdd560c472cc987c9b75396f5e3b8b9c9b28ee4093da5ba"
+    },
+    "core_plus_engineered_tree": {
+      "path": "data/interim/model_preparation/unfitted_core_plus_engineered_tree_preprocessor.joblib",
+      "sha256": "95200129b72abfc409e9994da5bc12e5a2637316e48824e5bbf64725498d3cb0"
+    },
+    "core_plus_engineered_scaled": {
+      "path": "data/interim/model_preparation/unfitted_core_plus_engineered_scaled_preprocessor.joblib",
+      "sha256": "068c9488d39d6fe4985da3278bccd40a810756e49be886a1b15165b35fda84d5"
+    },
+    "domain_expanded_tree": {
+      "path": "data/interim/model_preparation/unfitted_domain_expanded_tree_preprocessor.joblib",
+      "sha256": "e017c1ec94acf71b04c66caada9384dd554af4fae0d00f17d5721c3155a5591e"
+    },
+    "domain_expanded_scaled": {
+      "path": "data/interim/model_preparation/unfitted_domain_expanded_scaled_preprocessor.joblib",
+      "sha256": "0d439f0ec52714543a35dbfebbd885aaf84d46b21c4ca21870f9ff21cf027501"
+    }
+  },
+  "taxon_support": {
+    "taxa": 441,
+    "taxa_with_provisional_support_in_all_splits": 10
+  },
+  "output": {
+    "path": "data/interim/model_preparation/ml_candidates.parquet",
+    "rows": 2308,
+    "columns": 26,
+    "bytes": 250215,
+    "sha256": "a7fceef9b925eda28bfc6ca9d3e00ddbe9a554aca2617ee31b1dfe0e3c47c148",
+    "crs": "{\"$schema\": \"https://proj.org/schemas/v0.7/projjson.schema.json\", \"type\": \"GeographicCRS\", \"name\": \"WGS 84\", \"datum_ensemble\": {\"name\": \"World Geodetic System 1984 ensemble\", \"members\": [{\"name\": \"World Geodetic System 1984 (Transit)\"}, {\"name\": \"World Geodetic System 1984 (G730)\"}, {\"name\": \"World Geodetic System 1984 (G873)\"}, {\"name\": \"World Geodetic System 1984 (G1150)\"}, {\"name\": \"World Geodetic System 1984 (G1674)\"}, {\"name\": \"World Geodetic System 1984 (G1762)\"}, {\"name\": \"World Geodetic System 1984 (G2139)\"}, {\"name\": \"World Geodetic System 1984 (G2296)\"}], \"ellipsoid\": {\"name\": \"WGS 84\", \"semi_major_axis\": 6378137, \"inverse_flattening\": 298.257223563}, \"accuracy\": \"2.0\", \"id\": {\"authority\": \"EPSG\", \"code\": 6326}}, \"coordinate_system\": {\"subtype\": \"ellipsoidal\", \"axis\": [{\"name\": \"Geodetic latitude\", \"abbreviation\": \"Lat\", \"direction\": \"north\", \"unit\": \"degree\"}, {\"name\": \"Geodetic longitude\", \"abbreviation\": \"Lon\", \"direction\": \"east\", \"unit\": \"degree\"}]}, \"scope\": \"Horizontal component of 3D system.\", \"area\": \"World.\", \"bbox\": {\"south_latitude\": -90, \"west_longitude\": -180, \"north_latitude\": 90, \"east_longitude\": 180}, \"id\": {\"authority\": \"EPSG\", \"code\": 4326}}",
+    "geometry_types": [
+      "Point"
+    ],
+    "geoparquet_version": "1.1.0",
+    "compression": [
+      "ZSTD"
+    ]
+  },
+  "limitations": [
+    "One-to-one pseudo-backgrounds are NOT confirmed biological absences.",
+    "SSP245 2020 projection is used as an assumption for 2020\u20132026 occurrences.",
+    "Global background sampling is biased toward deep offshore cells; interpret scores carefully.",
+    "Source-cell repeat observations are reduced only in derived modelling candidates.",
+    "Spatial blocks prevent shared-cell leakage but do not fully remove spatial autocorrelation.",
+    "Background/positive pairing links may cross geographic blocks; pair source IDs are never predictors.",
+    "Many rare taxa are not independently supported across all splits; review support CSV.",
+    "Unseen validation/test taxon categories receive all-zero one-hot encoding; do not evaluate unseen taxa as established suitability models.",
+    "One-hot species identity and all environment variables must be supplied consistently at inference.",
+    "No imputers, scalers, encoders, selectors or models have been fitted. Fit training-only inside each validation fold.",
+    "No final ecological feature or species selection and no source data mutation occurred."
+  ]
+}
