@@ -1,0 +1,566 @@
+{
+  "format": "oceavera-all-record-presence-background-long-v1",
+  "decision": "D-056",
+  "generated_at_utc": "2026-10-16T01:43:47.949092+00:00",
+  "status": "Full-population long-format presence/background candidate generated; scientific target and domain approval remain pending",
+  "row_meaning": {
+    "label_1": "An observed Policy B taxon occurrence.",
+    "label_0": "A newly sampled marine environmental background example; not a confirmed species absence.",
+    "row_order": "All original positive observations first, then all sampled background rows.",
+    "background_taxonomy": "Taxonomic fields are copied only as target-conditioning information and do not assert a background occurrence."
+  },
+  "source": {
+    "path": "data/interim/integrated/gridded/grid_observations.parquet",
+    "rows": 2353,
+    "columns": 519,
+    "sha256": "71fa9ff9ad959122811ef01117a2157baf0498fbcc1e93bfb340ba87d94d2fc0",
+    "bytes": 2647502,
+    "distinct_occupied_grid_cells": 362,
+    "period_row_counts": {
+      "2000-2009": 376,
+      "2010-2019": 596,
+      "2020-2026": 1381
+    },
+    "taxonomic_summary": {
+      "source_positive_rows": 2353,
+      "valid_positive_aphiaid_rows": 2353,
+      "distinct_valid_positive_aphia_ids": 614,
+      "explicit_species_rank_positive_rows": 2009,
+      "distinct_species_rank_aphia_ids": 501,
+      "distinct_species_rank_names": 501,
+      "unresolved_target_taxon_keys": 0,
+      "taxon_rank_row_counts": {
+        "species": 1798,
+        "": 287,
+        "Species": 211,
+        "genus": 38,
+        "subspecies": 8,
+        "Genus": 4,
+        "Family": 3,
+        "Order": 3,
+        "Phylum": 1
+      }
+    },
+    "duplicate_species_cell_period_units": {
+      "definition": "Valid AphiaID and explicit species-rank rows grouped by AphiaID, grid cell and analysis period.",
+      "duplicate_combinations": 300,
+      "rows_in_duplicate_combinations": 920,
+      "excess_rows_beyond_one_per_combination": 620,
+      "all_taxa_rows_repeated_in_same_cell_period": 2099
+    }
+  },
+  "output": {
+    "path": "data/interim/pseudo_absence/presence_background_candidates.parquet",
+    "rows": 4706,
+    "columns": 527,
+    "source_columns_preserved": 519,
+    "new_columns": [
+      "presence_background_label",
+      "sample_type",
+      "target_taxon_key",
+      "paired_presence_source_row",
+      "eligible_species_level_ml",
+      "ml_eligibility_reason",
+      "background_sampling_method",
+      "sample_id"
+    ],
+    "positive_rows": 2353,
+    "background_rows": 2353,
+    "class_counts": {
+      "observed_presence": 2353,
+      "sampled_background": 2353
+    },
+    "sha256": "234177bf3641856cdd10b425f2da957a27210f876d31092ba715a53cee7a429f",
+    "bytes": 9412505,
+    "geoparquet": {
+      "rows": 4706,
+      "columns": 527,
+      "geoparquet_version": "1.1.0",
+      "geometry_encoding": "WKB",
+      "geometry_types": [
+        "Point"
+      ],
+      "crs_authority": "EPSG",
+      "crs_code": 4326,
+      "compression": [
+        "ZSTD"
+      ]
+    },
+    "all_382_environment_feature_columns_present": true
+  },
+  "species_level_eligibility": {
+    "species_rank_rows": 2009,
+    "aphia_id_rows": 2353,
+    "original_core_complete_rows": 2082,
+    "source_grid_centres_in_water": 2029,
+    "absence_false_rows": 2353,
+    "marine_true_rows": 2353,
+    "eligible_rows": 1729,
+    "ineligible_positive_rows": 624,
+    "ineligible_reason_counts_nonexclusive": {
+      "missing_core_environment": 271,
+      "source_cell_centre_not_marine": 324,
+      "unverified_species_rank": 344
+    },
+    "reason_values": [
+      "missing_core_environment",
+      "preliminary_species_core_eligible",
+      "source_cell_centre_not_marine",
+      "source_cell_centre_not_marine;missing_core_environment",
+      "unverified_species_rank",
+      "unverified_species_rank;missing_core_environment",
+      "unverified_species_rank;source_cell_centre_not_marine",
+      "unverified_species_rank;source_cell_centre_not_marine;missing_core_environment"
+    ],
+    "flag_is_preliminary_only": true
+  },
+  "sampling": {
+    "seed": 20261016,
+    "method": "Uniform sampling without replacement from GSHHG marine water grid centres with complete core predictors.",
+    "protected_cells": "Every grid cell occupied by any Policy B observation, across taxa and periods.",
+    "protected_occupied_cells": 362,
+    "background_cells_globally_unique": true,
+    "distinct_background_cells": 2353,
+    "positive_background_cell_overlap": 0,
+    "gshhg_water_grid_centres": 24506,
+    "backgrounds_are_confirmed_absences": false,
+    "per_period": [
+      {
+        "analysis_period": "2000-2009",
+        "environment_period": "baseline_2000",
+        "original_observations": 376,
+        "background_samples": 376,
+        "candidate_pool": 24175,
+        "distinct_species_rank_aphia_ids": 77,
+        "positive_environment": {
+          "rows": 376,
+          "feature_positions": 143632,
+          "non_null_values": 104433,
+          "null_values": 39199,
+          "rows_with_all_382_values": 0,
+          "rows_with_all_six_core_values": 313
+        },
+        "background_environment": {
+          "rows": 376,
+          "feature_positions": 143632,
+          "non_null_values": 125215,
+          "null_values": 18417,
+          "rows_with_all_382_values": 0,
+          "rows_with_all_six_core_values": 376
+        }
+      },
+      {
+        "analysis_period": "2010-2019",
+        "environment_period": "baseline_2010",
+        "original_observations": 596,
+        "background_samples": 596,
+        "candidate_pool": 23799,
+        "distinct_species_rank_aphia_ids": 218,
+        "positive_environment": {
+          "rows": 596,
+          "feature_positions": 227672,
+          "non_null_values": 183504,
+          "null_values": 44168,
+          "rows_with_all_382_values": 0,
+          "rows_with_all_six_core_values": 550
+        },
+        "background_environment": {
+          "rows": 596,
+          "feature_positions": 227672,
+          "non_null_values": 198475,
+          "null_values": 29197,
+          "rows_with_all_382_values": 0,
+          "rows_with_all_six_core_values": 596
+        }
+      },
+      {
+        "analysis_period": "2020-2026",
+        "environment_period": "ssp245_2020",
+        "original_observations": 1381,
+        "background_samples": 1381,
+        "candidate_pool": 23203,
+        "distinct_species_rank_aphia_ids": 379,
+        "positive_environment": {
+          "rows": 1381,
+          "feature_positions": 527542,
+          "non_null_values": 426262,
+          "null_values": 101280,
+          "rows_with_all_382_values": 0,
+          "rows_with_all_six_core_values": 1219
+        },
+        "background_environment": {
+          "rows": 1381,
+          "feature_positions": 527542,
+          "non_null_values": 481990,
+          "null_values": 45552,
+          "rows_with_all_382_values": 0,
+          "rows_with_all_six_core_values": 1381
+        }
+      }
+    ]
+  },
+  "environmental_coverage": {
+    "feature_count": 382,
+    "core_features": [
+      "bio_oracle__thetao_mean__depthsurf",
+      "bio_oracle__so_mean__depthsurf",
+      "bio_oracle__o2_mean__depthsurf",
+      "bio_oracle__chl_mean__depthsurf",
+      "bio_oracle__ph_mean__depthsurf",
+      "bio_oracle__bathymetry_mean__benthic"
+    ],
+    "observed_positive_rows": {
+      "rows": 2353,
+      "feature_positions": 898846,
+      "non_null_values": 714199,
+      "null_values": 184647,
+      "rows_with_all_382_values": 0,
+      "rows_with_all_six_core_values": 2082
+    },
+    "sampled_background_rows": {
+      "rows": 2353,
+      "feature_positions": 898846,
+      "non_null_values": 805680,
+      "null_values": 93166,
+      "rows_with_all_382_values": 0,
+      "rows_with_all_six_core_values": 2353
+    },
+    "all_backgrounds_have_complete_core_values": true,
+    "quarantines": [
+      {
+        "feature": "bio_oracle__clt_sd__depthsurf",
+        "period": "ssp245_2020",
+        "reason": "Original clt_sd exceeds one despite dimensionless cloud-fraction metadata; scale/statistic unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_ltmax__depthsurf",
+        "period": "baseline_2000",
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_ltmax__depthsurf",
+        "period": "baseline_2010",
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_ltmin__depthsurf",
+        "period": "baseline_2000",
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_ltmin__depthsurf",
+        "period": "baseline_2010",
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_max__depthsurf",
+        "period": "baseline_2000",
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_max__depthsurf",
+        "period": "baseline_2010",
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_mean__depthsurf",
+        "period": "baseline_2000",
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_mean__depthsurf",
+        "period": "baseline_2010",
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_min__depthsurf",
+        "period": "baseline_2000",
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_min__depthsurf",
+        "period": "baseline_2010",
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_range__depthsurf",
+        "period": "baseline_2000",
+        "reason": "Original tas_range equals max-minus-min minus 273.15; range offset is scientifically unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_range__depthsurf",
+        "period": "baseline_2010",
+        "reason": "Original tas_range equals max-minus-min minus 273.15; range offset is scientifically unresolved."
+      },
+      {
+        "feature": "bio_oracle__tas_range__depthsurf",
+        "period": "ssp245_2020",
+        "reason": "Original tas_range equals max-minus-min minus 273.15; range offset is scientifically unresolved."
+      }
+    ],
+    "quarantined_source_values_remain_null": true,
+    "null_feature_values_are_not_imputed": true
+  },
+  "source_environment_verification": {
+    "method": "Source NetCDF arrays were read using the validated catalogue mapping, decoded source metadata and actual time coordinate; the written background values were compared after GeoParquet read-back.",
+    "netcdf_products_verified": 106,
+    "source_variable_mappings_checked": 1012,
+    "background_positions_checked": 898846,
+    "numerical_mismatches": 0,
+    "null_fill_discrepancies": 0,
+    "maximum_absolute_difference": 0.0,
+    "by_period": [
+      {
+        "analysis_period": "2000-2009",
+        "environment_period": "baseline_2000",
+        "positions_checked": 143632,
+        "numerical_mismatches": 0,
+        "null_fill_discrepancies": 0,
+        "maximum_absolute_difference": 0.0
+      },
+      {
+        "analysis_period": "2010-2019",
+        "environment_period": "baseline_2010",
+        "positions_checked": 227672,
+        "numerical_mismatches": 0,
+        "null_fill_discrepancies": 0,
+        "maximum_absolute_difference": 0.0
+      },
+      {
+        "analysis_period": "2020-2026",
+        "environment_period": "ssp245_2020",
+        "positions_checked": 527542,
+        "numerical_mismatches": 0,
+        "null_fill_discrepancies": 0,
+        "maximum_absolute_difference": 0.0
+      }
+    ]
+  },
+  "spatial_validation": {
+    "source_grid_checks": {
+      "rows_checked": 2353,
+      "raster_index_discrepancies": 0,
+      "raster_centre_discrepancies": 0,
+      "duplicate_source_row_ids": 0
+    },
+    "gshhg_reference": {
+      "features": 1,
+      "geometry_type": "Polygon",
+      "crs": "EPSG:4326",
+      "all_source_geometries_valid": true,
+      "prepared_sha256": "ef21fe8791b16e314a441480781f9e5e8cb2a47bf3e9030f57e6b2bc0f02ce8e"
+    },
+    "background_axis_index_discrepancies": 0,
+    "background_geometry_discrepancies": 0,
+    "background_centres_inside_gshhg_water": 2353,
+    "geographic_and_depth_comparison": {
+      "coordinate_reference": "EPSG:4326",
+      "longitude": {
+        "observed_positive": {
+          "count": 2353,
+          "minimum": 77.5,
+          "p05": 79.6991895405,
+          "median": 80.2900334539,
+          "p95": 81.5314103456,
+          "maximum": 85.06
+        },
+        "sampled_background": {
+          "count": 2353,
+          "minimum": 77.0250015258789,
+          "p05": 77.5250015258789,
+          "median": 81.92500305175781,
+          "p95": 84.875,
+          "maximum": 85.2249984741211
+        }
+      },
+      "latitude": {
+        "observed_positive": {
+          "count": 2353,
+          "minimum": 3.5,
+          "p05": 5.84475579038,
+          "median": 7.1117578338,
+          "p95": 9.7014354692,
+          "maximum": 11.31666667
+        },
+        "sampled_background": {
+          "count": 2353,
+          "minimum": 2.575000047683716,
+          "p05": 2.924999952316284,
+          "median": 6.375,
+          "p95": 10.875,
+          "maximum": 11.425000190734863
+        }
+      },
+      "bathymetry_feature": "bio_oracle__bathymetry_mean__benthic",
+      "bathymetry_source_units": "m",
+      "bathymetry": {
+        "observed_positive": {
+          "count": 2082,
+          "minimum": -4370.33349609375,
+          "p05": -3219.238940429686,
+          "median": -15.88888931274414,
+          "p95": 0.0,
+          "maximum": 0.0
+        },
+        "sampled_background": {
+          "count": 2353,
+          "minimum": -4451.861328125,
+          "p05": -4327.06669921875,
+          "median": -3771.611083984375,
+          "p95": -38.46111068725583,
+          "maximum": -0.02777777798473835
+        }
+      },
+      "interpretation": "Uniform water-cell sampling and recorded OBIS locations may have different geographic and depth distributions; the summary describes this output and does not correct observation effort."
+    }
+  },
+  "row_preservation_and_safeguards": {
+    "all_source_rows_preserved_once_in_order": true,
+    "all_519_source_values_preserved_in_positive_rows": true,
+    "original_positive_geometries_preserved": true,
+    "all_source_row_ids_preserved": true,
+    "background_integration_source_ids_null": true,
+    "background_occurrence_and_event_date_fields_null": true,
+    "background_absence_field_null": true,
+    "background_taxonomy_is_conditioning_only": true,
+    "incomplete_and_non_species_rows_retained": true,
+    "random_seed_reproducibility_setting": 20261016,
+    "nullable_source_fields_for_synthetic_rows": {
+      "integration_source_row": "Int64",
+      "marine_uncertainty_verified": "boolean"
+    }
+  },
+  "source_preservation": {
+    "all_five_integration_datasets_byte_identical": true,
+    "before": {
+      "full": {
+        "path": "data/interim/integrated/full/integrated_observations.parquet",
+        "bytes": 7866289,
+        "sha256": "34e756d9fa0d5478da14b6a2d627c16076c486d8e43317363d387d69a661ee34"
+      },
+      "temporal": {
+        "path": "data/interim/integrated/temporal/observations_2000_2026.parquet",
+        "bytes": 5344561,
+        "sha256": "6669327ec1aba406bf8aa8346dc743d1ab721a1237c0266705119881cc21479a"
+      },
+      "marine": {
+        "path": "data/interim/integrated/marine/marine_observations.parquet",
+        "bytes": 2643608,
+        "sha256": "76a2812ae4d031bc9515d15931a2a97221d584b2b24cfad7e1e2fb5e77ba1d49"
+      },
+      "grid": {
+        "path": "data/interim/integrated/gridded/grid_observations.parquet",
+        "bytes": 2647502,
+        "sha256": "71fa9ff9ad959122811ef01117a2157baf0498fbcc1e93bfb340ba87d94d2fc0"
+      },
+      "species_cell_period_summary": {
+        "path": "data/interim/integrated/gridded/species_cell_period_summary.parquet",
+        "bytes": 1646016,
+        "sha256": "eb14bebd83f993894672f143f16a452470cdd1c924c390c3c061b580b8c77433"
+      }
+    },
+    "after": {
+      "full": {
+        "path": "data/interim/integrated/full/integrated_observations.parquet",
+        "bytes": 7866289,
+        "sha256": "34e756d9fa0d5478da14b6a2d627c16076c486d8e43317363d387d69a661ee34"
+      },
+      "temporal": {
+        "path": "data/interim/integrated/temporal/observations_2000_2026.parquet",
+        "bytes": 5344561,
+        "sha256": "6669327ec1aba406bf8aa8346dc743d1ab721a1237c0266705119881cc21479a"
+      },
+      "marine": {
+        "path": "data/interim/integrated/marine/marine_observations.parquet",
+        "bytes": 2643608,
+        "sha256": "76a2812ae4d031bc9515d15931a2a97221d584b2b24cfad7e1e2fb5e77ba1d49"
+      },
+      "grid": {
+        "path": "data/interim/integrated/gridded/grid_observations.parquet",
+        "bytes": 2647502,
+        "sha256": "71fa9ff9ad959122811ef01117a2157baf0498fbcc1e93bfb340ba87d94d2fc0"
+      },
+      "species_cell_period_summary": {
+        "path": "data/interim/integrated/gridded/species_cell_period_summary.parquet",
+        "bytes": 1646016,
+        "sha256": "eb14bebd83f993894672f143f16a452470cdd1c924c390c3c061b580b8c77433"
+      }
+    }
+  },
+  "historical_archives": {
+    "d055_three_species": {
+      "manifest": "docs/records/2026-10-16-presence-background-archive-manifest.json",
+      "format": "oceavera-presence-background-archive-v1",
+      "files_verified": 4,
+      "files": [
+        {
+          "path": "data/interim/pseudo_absence/archive/d055_three_species/presence_background_candidates.parquet",
+          "bytes": 1150844,
+          "sha256": "525bcea91f224420de23a0a1540c045616fe4d1b6e93a316ab9601877d44d1d6"
+        },
+        {
+          "path": "data/interim/pseudo_absence/archive/d055_three_species/2026-10-16-presence-background-construction.json",
+          "bytes": 90361,
+          "sha256": "6d9a12ca36fe5971d9edab669dac67c268fcf89f07000e8ca18bdbbf6961e8d4"
+        },
+        {
+          "path": "data/interim/pseudo_absence/archive/d055_three_species/2026-10-16-presence-background-construction.md.archive",
+          "bytes": 5108,
+          "sha256": "4adde605d5513bd07e05f206dd4e44a22489812201a48954c2867156edcb9357"
+        },
+        {
+          "path": "data/interim/pseudo_absence/archive/d055_three_species/2026-10-16-presence-background-evaluation-plan.md.archive",
+          "bytes": 5868,
+          "sha256": "427cc63b023a82687ea0aeca8b80bc01199d9d931fa9f2be3611efc7733345e9"
+        }
+      ]
+    },
+    "superseded_d056_nested_columns": {
+      "manifest": "docs/records/2026-10-16-nested-paired-background-archive-manifest.json",
+      "format": "oceavera-d056-nested-paired-archive-v1",
+      "files_verified": 6,
+      "files": [
+        {
+          "path": "data/interim/pseudo_absence/archive/d056_nested_columns/presence_background_candidates.parquet",
+          "bytes": 12854706,
+          "sha256": "637e35bb4ac4c2a7a722715f3a1ab12424ca7a1421b1c16db352d4f124f26832"
+        },
+        {
+          "path": "data/interim/pseudo_absence/archive/d056_nested_columns/2026-10-16-decision-paired-presence-background.md.archive",
+          "bytes": 4727,
+          "sha256": "86264affc86aea2e3c9fac7db31acd5e2e6701c68ce9f3223f289df43e2b3644"
+        },
+        {
+          "path": "data/interim/pseudo_absence/archive/d056_nested_columns/2026-10-16-paired-presence-background-construction.json",
+          "bytes": 39367,
+          "sha256": "5bfc6ac229c19d66e8216dc2d0c96097ca3a5fbf11e120551658a8be6c9feb62"
+        },
+        {
+          "path": "data/interim/pseudo_absence/archive/d056_nested_columns/2026-10-16-paired-presence-background-construction.md.archive",
+          "bytes": 4284,
+          "sha256": "c7bfa656d993d0481ffcab896e7ef5121a486aed0fb868942c965a23415e440d"
+        },
+        {
+          "path": "data/interim/pseudo_absence/archive/d056_nested_columns/2026-10-16-paired-presence-background-data-dictionary.md.archive",
+          "bytes": 3499,
+          "sha256": "781e38bfa29faa20e04cf2fcf77517ff213d58d44cb0f5e15ff168d219d28dfc"
+        },
+        {
+          "path": "data/interim/pseudo_absence/archive/d056_nested_columns/2026-10-16-paired-presence-background-evaluation-plan.md.archive",
+          "bytes": 3536,
+          "sha256": "236bf13071553d1c08ec2258eadb4d50e076e4a6a3b8591b04ed1cf6267ad7ff"
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Background label 0 does not represent confirmed species absence.",
+    "Non-species and incomplete-taxon rows are retained but are not eligible species-level records.",
+    "The 1:1 sample ratio does not represent natural species prevalence.",
+    "Broad uniform marine sampling may differ geographically and by depth from recorded OBIS locations, and may exaggerate apparent classification performance.",
+    "Repeated observed species/cell/period rows are reported and must not be treated as independent samples.",
+    "2020-2026 backgrounds use the SSP245 2020 environmental slice.",
+    "Future spatial evaluation must group shared grid cells across species and periods to prevent leakage.",
+    "This candidate dataset is not a deduplicated or spatially validated training table; feature selection, imputation, model training and evaluation were not performed."
+  ]
+}
