@@ -1,0 +1,528 @@
+column,dtype,role,non_null_count,null_count
+AphiaID,str,taxonomic identity/conditioning,4706,0
+absence,str,source/quality metadata (not automatically a predictor),2353,2353
+aphiaID,str,source/quality metadata (not automatically a predictor),4706,0
+basisOfRecord,str,source/quality metadata (not automatically a predictor),2353,2353
+bathymetry,str,source/quality metadata (not automatically a predictor),2353,2353
+brackish,str,source/quality metadata (not automatically a predictor),2353,2353
+catalogNumber,str,source/quality metadata (not automatically a predictor),2353,2353
+class,str,source/quality metadata (not automatically a predictor),2353,2353
+classid,str,source/quality metadata (not automatically a predictor),2353,2353
+collectionCode,str,source/quality metadata (not automatically a predictor),2353,2353
+collectionID,str,source/quality metadata (not automatically a predictor),2353,2353
+coordinateUncertaintyInMeters,str,source/quality metadata (not automatically a predictor),2353,2353
+country,str,source/quality metadata (not automatically a predictor),2353,2353
+countryCode,str,source/quality metadata (not automatically a predictor),2353,2353
+datasetID,str,source/quality metadata (not automatically a predictor),2353,2353
+datasetName,str,source/quality metadata (not automatically a predictor),2353,2353
+dataset_id,str,source/quality metadata (not automatically a predictor),2353,2353
+dateIdentified,str,source/quality metadata (not automatically a predictor),2353,2353
+date_end,str,source/quality metadata (not automatically a predictor),2353,2353
+date_mid,str,source/quality metadata (not automatically a predictor),2353,2353
+date_start,str,source/quality metadata (not automatically a predictor),2353,2353
+date_year,str,source/quality metadata (not automatically a predictor),2353,2353
+day,str,source/quality metadata (not automatically a predictor),2353,2353
+decimalLatitude,str,source/quality metadata (not automatically a predictor),2353,2353
+decimalLongitude,str,source/quality metadata (not automatically a predictor),2353,2353
+depth,str,source/quality metadata (not automatically a predictor),2353,2353
+dropped,str,source/quality metadata (not automatically a predictor),2353,2353
+dynamicProperties,str,source/quality metadata (not automatically a predictor),2353,2353
+eventDate,str,source/quality metadata (not automatically a predictor),2353,2353
+eventID,str,source/quality metadata (not automatically a predictor),2353,2353
+eventTime,str,source/quality metadata (not automatically a predictor),2353,2353
+family,str,source/quality metadata (not automatically a predictor),2353,2353
+familyid,str,source/quality metadata (not automatically a predictor),2353,2353
+fieldNumber,str,source/quality metadata (not automatically a predictor),2353,2353
+flags,str,source/quality metadata (not automatically a predictor),2353,2353
+genus,str,source/quality metadata (not automatically a predictor),2353,2353
+genusid,str,source/quality metadata (not automatically a predictor),2353,2353
+geodeticDatum,str,source/quality metadata (not automatically a predictor),2353,2353
+gigaclass,str,source/quality metadata (not automatically a predictor),2353,2353
+gigaclassid,str,source/quality metadata (not automatically a predictor),2353,2353
+habitat,str,source/quality metadata (not automatically a predictor),2353,2353
+id,str,source/quality metadata (not automatically a predictor),2353,2353
+identificationID,str,source/quality metadata (not automatically a predictor),2353,2353
+identifiedBy,str,source/quality metadata (not automatically a predictor),2353,2353
+individualCount,str,source/quality metadata (not automatically a predictor),2353,2353
+infraphylum,str,source/quality metadata (not automatically a predictor),2353,2353
+infraphylumid,str,source/quality metadata (not automatically a predictor),2353,2353
+institutionCode,str,source/quality metadata (not automatically a predictor),2353,2353
+kingdom,str,source/quality metadata (not automatically a predictor),2353,2353
+kingdomid,str,source/quality metadata (not automatically a predictor),2353,2353
+license,str,source/quality metadata (not automatically a predictor),2353,2353
+locality,str,source/quality metadata (not automatically a predictor),2353,2353
+marine,str,source/quality metadata (not automatically a predictor),2353,2353
+maximumDepthInMeters,str,source/quality metadata (not automatically a predictor),2353,2353
+megaclass,str,source/quality metadata (not automatically a predictor),2353,2353
+megaclassid,str,source/quality metadata (not automatically a predictor),2353,2353
+minimumDepthInMeters,str,source/quality metadata (not automatically a predictor),2353,2353
+modified,str,source/quality metadata (not automatically a predictor),2353,2353
+month,str,source/quality metadata (not automatically a predictor),2353,2353
+node_id,str,source/quality metadata (not automatically a predictor),2353,2353
+occurrenceID,str,provenance/identity (exclude from predictors),2353,2353
+occurrenceRemarks,str,source/quality metadata (not automatically a predictor),2353,2353
+occurrenceStatus,str,source/quality metadata (not automatically a predictor),2353,2353
+order,str,source/quality metadata (not automatically a predictor),2353,2353
+orderid,str,source/quality metadata (not automatically a predictor),2353,2353
+originalScientificName,str,source/quality metadata (not automatically a predictor),2353,2353
+ownerInstitutionCode,str,source/quality metadata (not automatically a predictor),2353,2353
+parvphylum,str,source/quality metadata (not automatically a predictor),2353,2353
+parvphylumid,str,source/quality metadata (not automatically a predictor),2353,2353
+phylum,str,source/quality metadata (not automatically a predictor),2353,2353
+phylumid,str,source/quality metadata (not automatically a predictor),2353,2353
+recordedBy,str,source/quality metadata (not automatically a predictor),2353,2353
+references,str,source/quality metadata (not automatically a predictor),2353,2353
+rightsHolder,str,source/quality metadata (not automatically a predictor),2353,2353
+samplingEffort,str,source/quality metadata (not automatically a predictor),2353,2353
+samplingProtocol,str,source/quality metadata (not automatically a predictor),2353,2353
+scientificName,str,taxonomic identity/conditioning,4706,0
+scientificNameAuthorship,str,source/quality metadata (not automatically a predictor),2353,2353
+scientificNameID,str,source/quality metadata (not automatically a predictor),4706,0
+shoredistance,str,source/quality metadata (not automatically a predictor),2353,2353
+species,str,taxonomic identity/conditioning,4706,0
+speciesid,str,taxonomic identity/conditioning,4706,0
+specificEpithet,str,source/quality metadata (not automatically a predictor),2353,2353
+sss,str,source/quality metadata (not automatically a predictor),2353,2353
+sst,str,source/quality metadata (not automatically a predictor),2353,2353
+stateProvince,str,source/quality metadata (not automatically a predictor),2353,2353
+subclass,str,source/quality metadata (not automatically a predictor),2353,2353
+subclassid,str,source/quality metadata (not automatically a predictor),2353,2353
+subfamily,str,source/quality metadata (not automatically a predictor),2353,2353
+subfamilyid,str,source/quality metadata (not automatically a predictor),2353,2353
+subkingdom,str,source/quality metadata (not automatically a predictor),2353,2353
+subkingdomid,str,source/quality metadata (not automatically a predictor),2353,2353
+suborder,str,source/quality metadata (not automatically a predictor),2353,2353
+suborderid,str,source/quality metadata (not automatically a predictor),2353,2353
+subphylum,str,source/quality metadata (not automatically a predictor),2353,2353
+subphylumid,str,source/quality metadata (not automatically a predictor),2353,2353
+superclass,str,source/quality metadata (not automatically a predictor),2353,2353
+superclassid,str,source/quality metadata (not automatically a predictor),2353,2353
+superdomain,str,source/quality metadata (not automatically a predictor),2353,2353
+superdomainid,str,source/quality metadata (not automatically a predictor),2353,2353
+superfamily,str,source/quality metadata (not automatically a predictor),2353,2353
+superfamilyid,str,source/quality metadata (not automatically a predictor),2353,2353
+superorder,str,source/quality metadata (not automatically a predictor),2353,2353
+superorderid,str,source/quality metadata (not automatically a predictor),2353,2353
+taxonID,str,source/quality metadata (not automatically a predictor),4706,0
+taxonRank,str,taxonomic identity/conditioning,4706,0
+type,str,source/quality metadata (not automatically a predictor),2353,2353
+unaccepted,str,source/quality metadata (not automatically a predictor),2353,2353
+verbatimEventDate,str,source/quality metadata (not automatically a predictor),2353,2353
+verbatimLocality,str,source/quality metadata (not automatically a predictor),2353,2353
+wrims,str,source/quality metadata (not automatically a predictor),2353,2353
+year,str,source/quality metadata (not automatically a predictor),2353,2353
+integration_source_row,Int64,provenance/identity (exclude from predictors),2353,2353
+resolved_event_year,Int64,source/quality metadata (not automatically a predictor),2353,2353
+resolved_event_year_source,str,source/quality metadata (not automatically a predictor),2353,2353
+temporal_resolution_status,str,source/quality metadata (not automatically a predictor),2353,2353
+temporal_eligibility,str,source/quality metadata (not automatically a predictor),2353,2353
+date_interval_start_year,Int64,source/quality metadata (not automatically a predictor),2222,2484
+date_interval_end_year,Int64,source/quality metadata (not automatically a predictor),2222,2484
+environment_period,str,spatial/temporal metadata (leakage review needed),4706,0
+raster_row,Int64,spatial/temporal metadata (leakage review needed),4706,0
+raster_column,Int64,spatial/temporal metadata (leakage review needed),4706,0
+raster_cell_id,Int64,spatial/temporal metadata (leakage review needed),4706,0
+raster_match_status,str,spatial/temporal metadata (leakage review needed),4706,0
+raster_cell_center_longitude,float64,spatial/temporal metadata (leakage review needed),4706,0
+raster_cell_center_latitude,float64,spatial/temporal metadata (leakage review needed),4706,0
+raster_cell_distance_km,float64,spatial/temporal metadata (leakage review needed),4706,0
+bio_oracle__tas_ltmax__depthsurf,float64,environmental predictor candidate,2600,2106
+bio_oracle__tas_ltmin__depthsurf,float64,environmental predictor candidate,2600,2106
+bio_oracle__tas_max__depthsurf,float64,environmental predictor candidate,2600,2106
+bio_oracle__tas_mean__depthsurf,float64,environmental predictor candidate,2600,2106
+bio_oracle__tas_min__depthsurf,float64,environmental predictor candidate,2600,2106
+bio_oracle__tas_range__depthsurf,float64,environmental predictor candidate,0,4706
+bio_oracle__tas_sd__depthsurf,float64,environmental predictor candidate,2600,2106
+bio_oracle__chl_ltmax__depthmax,float64,environmental predictor candidate,1835,2871
+bio_oracle__chl_ltmin__depthmax,float64,environmental predictor candidate,1835,2871
+bio_oracle__chl_max__depthmax,float64,environmental predictor candidate,1835,2871
+bio_oracle__chl_mean__depthmax,float64,environmental predictor candidate,1835,2871
+bio_oracle__chl_min__depthmax,float64,environmental predictor candidate,1835,2871
+bio_oracle__chl_range__depthmax,float64,environmental predictor candidate,1835,2871
+bio_oracle__chl_ltmax__depthmean,float64,environmental predictor candidate,1835,2871
+bio_oracle__chl_ltmin__depthmean,float64,environmental predictor candidate,1835,2871
+bio_oracle__chl_max__depthmean,float64,environmental predictor candidate,1835,2871
+bio_oracle__chl_mean__depthmean,float64,environmental predictor candidate,1835,2871
+bio_oracle__chl_min__depthmean,float64,environmental predictor candidate,1835,2871
+bio_oracle__chl_range__depthmean,float64,environmental predictor candidate,1835,2871
+bio_oracle__chl_ltmax__depthmin,float64,environmental predictor candidate,1835,2871
+bio_oracle__chl_ltmin__depthmin,float64,environmental predictor candidate,1835,2871
+bio_oracle__chl_max__depthmin,float64,environmental predictor candidate,1835,2871
+bio_oracle__chl_mean__depthmin,float64,environmental predictor candidate,1835,2871
+bio_oracle__chl_min__depthmin,float64,environmental predictor candidate,1835,2871
+bio_oracle__chl_range__depthmin,float64,environmental predictor candidate,1835,2871
+bio_oracle__chl_ltmax__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__chl_ltmin__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__chl_max__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__chl_mean__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__chl_min__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__chl_range__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__chl_sd__depthsurf,float64,environmental predictor candidate,2600,2106
+bio_oracle__kdpar_mean_ltmax__depthsurf,float64,environmental predictor candidate,1835,2871
+bio_oracle__kdpar_mean_ltmin__depthsurf,float64,environmental predictor candidate,1835,2871
+bio_oracle__kdpar_mean_max__depthsurf,float64,environmental predictor candidate,1835,2871
+bio_oracle__kdpar_mean_mean__depthsurf,float64,environmental predictor candidate,1835,2871
+bio_oracle__kdpar_mean_min__depthsurf,float64,environmental predictor candidate,1835,2871
+bio_oracle__kdpar_mean_range__depthsurf,float64,environmental predictor candidate,1835,2871
+bio_oracle__dfe_ltmax__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_ltmin__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_max__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_mean__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_min__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_range__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_sd__depthmax,float64,environmental predictor candidate,2600,2106
+bio_oracle__dfe_ltmax__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_ltmin__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_max__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_mean__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_min__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_range__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_sd__depthmean,float64,environmental predictor candidate,2600,2106
+bio_oracle__dfe_ltmax__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_ltmin__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_max__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_mean__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_min__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_range__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_sd__depthmin,float64,environmental predictor candidate,2600,2106
+bio_oracle__dfe_ltmax__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_ltmin__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_max__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_mean__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_min__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_range__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__dfe_sd__depthsurf,float64,environmental predictor candidate,2600,2106
+bio_oracle__o2_ltmax__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_ltmin__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_max__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_mean__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_min__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_range__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_sd__depthmax,float64,environmental predictor candidate,2600,2106
+bio_oracle__o2_ltmax__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_ltmin__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_max__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_mean__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_min__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_range__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_sd__depthmean,float64,environmental predictor candidate,2600,2106
+bio_oracle__o2_ltmax__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_ltmin__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_max__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_mean__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_min__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_range__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_sd__depthmin,float64,environmental predictor candidate,2600,2106
+bio_oracle__o2_ltmax__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_ltmin__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_max__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_mean__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_min__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_range__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__o2_sd__depthsurf,float64,environmental predictor candidate,2600,2106
+bio_oracle__mlotst_ltmax__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__mlotst_ltmin__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__mlotst_max__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__mlotst_mean__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__mlotst_min__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__mlotst_range__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__mlotst_sd__depthsurf,float64,environmental predictor candidate,2600,2106
+bio_oracle__no3_ltmax__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_ltmin__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_max__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_mean__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_min__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_range__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_sd__depthmax,float64,environmental predictor candidate,2600,2106
+bio_oracle__no3_ltmax__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_ltmin__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_max__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_mean__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_min__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_range__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_sd__depthmean,float64,environmental predictor candidate,2600,2106
+bio_oracle__no3_ltmax__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_ltmin__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_max__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_mean__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_min__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_range__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_sd__depthmin,float64,environmental predictor candidate,2600,2106
+bio_oracle__no3_ltmax__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_ltmin__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_max__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_mean__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_min__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_range__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__no3_sd__depthsurf,float64,environmental predictor candidate,2600,2106
+bio_oracle__thetao_ltmax__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_ltmin__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_max__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_mean__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_min__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_range__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_sd__depthmax,float64,environmental predictor candidate,2600,2106
+bio_oracle__thetao_ltmax__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_ltmin__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_max__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_mean__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_min__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_range__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_sd__depthmean,float64,environmental predictor candidate,2600,2106
+bio_oracle__thetao_ltmax__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_ltmin__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_max__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_mean__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_min__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_range__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_sd__depthmin,float64,environmental predictor candidate,2600,2106
+bio_oracle__thetao_ltmax__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_ltmin__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_max__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_mean__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_min__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_range__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__thetao_sd__depthsurf,float64,environmental predictor candidate,2600,2106
+bio_oracle__ph_ltmax__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_ltmin__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_max__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_mean__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_min__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_range__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_sd__depthmax,float64,environmental predictor candidate,2600,2106
+bio_oracle__ph_ltmax__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_ltmin__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_max__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_mean__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_min__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_range__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_sd__depthmean,float64,environmental predictor candidate,2600,2106
+bio_oracle__ph_ltmax__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_ltmin__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_max__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_mean__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_min__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_range__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_sd__depthmin,float64,environmental predictor candidate,2600,2106
+bio_oracle__ph_ltmax__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_ltmin__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_max__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_mean__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_min__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_range__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__ph_sd__depthsurf,float64,environmental predictor candidate,2600,2106
+bio_oracle__po4_ltmax__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_ltmin__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_max__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_mean__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_min__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_range__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_sd__depthmax,float64,environmental predictor candidate,2600,2106
+bio_oracle__po4_ltmax__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_ltmin__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_max__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_mean__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_min__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_range__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_sd__depthmean,float64,environmental predictor candidate,2600,2106
+bio_oracle__po4_ltmax__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_ltmin__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_max__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_mean__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_min__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_range__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_sd__depthmin,float64,environmental predictor candidate,2600,2106
+bio_oracle__po4_ltmax__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_ltmin__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_max__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_mean__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_min__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_range__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__po4_sd__depthsurf,float64,environmental predictor candidate,2600,2106
+bio_oracle__par_mean_ltmax__depthsurf,float64,environmental predictor candidate,1835,2871
+bio_oracle__par_mean_ltmin__depthsurf,float64,environmental predictor candidate,1835,2871
+bio_oracle__par_mean_max__depthsurf,float64,environmental predictor candidate,1835,2871
+bio_oracle__par_mean_mean__depthsurf,float64,environmental predictor candidate,1835,2871
+bio_oracle__par_mean_min__depthsurf,float64,environmental predictor candidate,1835,2871
+bio_oracle__par_mean_range__depthsurf,float64,environmental predictor candidate,1835,2871
+bio_oracle__so_ltmax__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__so_ltmin__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__so_max__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__so_mean__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__so_min__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__so_range__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__so_sd__depthmax,float64,environmental predictor candidate,2600,2106
+bio_oracle__so_ltmax__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__so_ltmin__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__so_max__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__so_mean__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__so_min__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__so_range__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__so_sd__depthmean,float64,environmental predictor candidate,2600,2106
+bio_oracle__so_ltmax__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__so_ltmin__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__so_max__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__so_mean__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__so_min__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__so_range__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__so_sd__depthmin,float64,environmental predictor candidate,2600,2106
+bio_oracle__so_ltmax__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__so_ltmin__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__so_max__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__so_mean__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__so_min__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__so_range__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__so_sd__depthsurf,float64,environmental predictor candidate,2600,2106
+bio_oracle__siconc_ltmax__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__siconc_ltmin__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__siconc_max__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__siconc_mean__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__siconc_min__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__siconc_range__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__siconc_sd__depthsurf,float64,environmental predictor candidate,2600,2106
+bio_oracle__sithick_ltmax__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__sithick_ltmin__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__sithick_max__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__sithick_mean__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__sithick_min__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__sithick_range__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__sithick_sd__depthsurf,float64,environmental predictor candidate,2600,2106
+bio_oracle__swd_ltmax__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_ltmin__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_max__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_mean__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_min__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_range__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_ltmax__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_ltmin__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_max__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_mean__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_min__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_range__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_ltmax__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_ltmin__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_max__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_mean__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_min__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_range__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_ltmax__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_ltmin__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_max__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_mean__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_min__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__swd_range__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_ltmax__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_ltmin__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_max__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_mean__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_min__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_range__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_ltmax__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_ltmin__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_max__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_mean__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_min__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_range__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_ltmax__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_ltmin__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_max__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_mean__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_min__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_range__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_ltmax__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_ltmin__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_max__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_mean__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_min__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__sws_range__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__si_ltmax__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__si_ltmin__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__si_max__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__si_mean__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__si_min__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__si_range__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__si_sd__depthmax,float64,environmental predictor candidate,2600,2106
+bio_oracle__si_ltmax__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__si_ltmin__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__si_max__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__si_mean__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__si_min__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__si_range__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__si_sd__depthmean,float64,environmental predictor candidate,2600,2106
+bio_oracle__si_ltmax__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__si_ltmin__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__si_max__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__si_mean__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__si_min__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__si_range__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__si_sd__depthmin,float64,environmental predictor candidate,2600,2106
+bio_oracle__si_ltmax__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__si_ltmin__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__si_max__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__si_mean__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__si_min__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__si_range__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__si_sd__depthsurf,float64,environmental predictor candidate,2600,2106
+bio_oracle__area__benthic,float64,environmental predictor candidate,4435,271
+bio_oracle__aspect__benthic,float64,environmental predictor candidate,4435,271
+bio_oracle__bathymetry_max__benthic,float64,environmental predictor candidate,4435,271
+bio_oracle__bathymetry_mean__benthic,float64,environmental predictor candidate,4435,271
+bio_oracle__bathymetry_min__benthic,float64,environmental predictor candidate,4435,271
+bio_oracle__coastline__benthic,float64,environmental predictor candidate,1424,3282
+bio_oracle__landmass__benthic,float64,environmental predictor candidate,4435,271
+bio_oracle__slope__benthic,float64,environmental predictor candidate,4435,271
+bio_oracle__terrain_ruggedness_index__benthic,float64,environmental predictor candidate,4435,271
+bio_oracle__topographic_position_index__benthic,float64,environmental predictor candidate,4435,271
+bio_oracle__clt_ltmax__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__clt_ltmin__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__clt_max__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__clt_mean__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__clt_min__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__clt_range__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__clt_sd__depthsurf,float64,environmental predictor candidate,0,4706
+bio_oracle__phyc_ltmax__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_ltmin__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_max__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_mean__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_min__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_range__depthmax,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_sd__depthmax,float64,environmental predictor candidate,2600,2106
+bio_oracle__phyc_ltmax__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_ltmin__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_max__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_mean__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_min__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_range__depthmean,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_sd__depthmean,float64,environmental predictor candidate,2600,2106
+bio_oracle__phyc_ltmax__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_ltmin__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_max__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_mean__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_min__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_range__depthmin,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_sd__depthmin,float64,environmental predictor candidate,2600,2106
+bio_oracle__phyc_ltmax__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_ltmin__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_max__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_mean__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_min__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_range__depthsurf,float64,environmental predictor candidate,4435,271
+bio_oracle__phyc_sd__depthsurf,float64,environmental predictor candidate,2600,2106
+expected_environment_feature_count,int64,source/quality metadata (not automatically a predictor),4706,0
+present_environment_feature_count,int64,source/quality metadata (not automatically a predictor),4706,0
+environmental_coverage_status,str,source/quality metadata (not automatically a predictor),4706,0
+geometry,geometry,spatial geometry (not a predictor by default),4706,0
+analysis_period,str,spatial/temporal metadata (leakage review needed),4706,0
+marine_point_verified,bool,source/quality metadata (not automatically a predictor),4706,0
+marine_position_confidence,str,source/quality metadata (not automatically a predictor),4706,0
+marine_uncertainty_verified,boolean,source/quality metadata (not automatically a predictor),2353,2353
+marine_filter_reason,str,source/quality metadata (not automatically a predictor),4706,0
+grid_cell_id,Int64,source/quality metadata (not automatically a predictor),4706,0
+presence_background_label,int8,constructed supervised target,4706,0
+sample_type,string,source/quality metadata (not automatically a predictor),4706,0
+target_taxon_key,string,taxonomic identity/conditioning,4706,0
+paired_presence_source_row,int64,provenance/identity (exclude from predictors),4706,0
+eligible_species_level_ml,bool,source/quality metadata (not automatically a predictor),4706,0
+ml_eligibility_reason,string,source/quality metadata (not automatically a predictor),4706,0
+background_sampling_method,string,source/quality metadata (not automatically a predictor),2353,2353
+sample_id,string,provenance/identity (exclude from predictors),4706,0

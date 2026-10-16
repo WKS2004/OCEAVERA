@@ -24,9 +24,10 @@ repository does not store a Python environment.
 
 ## Script run order
 
-The numeric prefixes show the full pipeline order when rebuilding the derived
-outputs. The OBIS and Bio-ORACLE collection paths can be prepared separately;
-the integration step needs both cleaned inputs.
+The numeric prefixes show the pipeline order through the final candidate
+analysis. EDA follows Script 10 as a read-only stage on the saved candidate; it
+does not rebuild or alter a dataset. The OBIS and Bio-ORACLE collection paths
+can be prepared separately; the integration step needs both cleaned inputs.
 
 1. [`01_obis_occurrences.py`](data_collection/01_obis_occurrences.py) — download the OBIS occurrence pages.
 2. [`02_obis_json_to_csv.py`](data_collection/02_obis_json_to_csv.py) — convert a complete OBIS JSON run to CSV.
@@ -38,6 +39,7 @@ the integration step needs both cleaned inputs.
 8. [`08_integrate_spatiotemporal_data.py`](data_preparation/08_integrate_spatiotemporal_data.py) — join the cleaned occurrences to the selected environmental products.
 9. [`09_filter_and_grid_data.py`](data_preparation/09_filter_and_grid_data.py) — create temporal/marine outputs and grid summaries using the reusable GSHHG reference and recorded uncertainty policy.
 10. [10_construct_pseudo_absences.py](data_preparation/10_construct_pseudo_absences.py) — preserve every Policy B observation, add a distinct matched marine background row per observation and publish a long-format candidate table.
+11. [11_explore_presence_background_data.py](data_preparation/11_explore_presence_background_data.py) — read-only Sections A–F EDA of the full candidate and preliminary eligible subset.
 
 **Current method:** the standard-library [`01_obis_occurrences.py`](data_collection/01_obis_occurrences.py)
 downloads the complete paginated Area 230 response from the OBIS API. It
@@ -297,6 +299,16 @@ See the [D-054 Policy B decision](../docs/records/2026-10-16-decision-policy-b-m
 ### Script 10 — full-population presence/background table
 
 Script 10 reads the current gridded Policy B GeoParquet, the validated D-054 GSHHG-water reference, the integration manifest/catalogue and selected Bio-ORACLE NetCDF products. It preserves all 2,353 source rows and their 519 columns in original order, then appends eight fields to form a 4,706 × 527 GeoParquet with 2,353 observed-presence rows and 2,353 separate sampled-background rows. Each row has one label: 1 for an observed presence and 0 for sampled background; 0 is not confirmed absence. Background cells are globally unique, source-period matched, inside GSHHG marine water and complete for six core features. All 382 catalogue features remain regular columns with source missingness and quarantines null. The script validates source axes and actual time coordinates, original-row values and geometries, field layout, global cell uniqueness, water eligibility, GeoParquet metadata, archive checksums and all five integration fingerprints. It does not select features, impute, partition or train models. The technical species-level eligibility flag does not verify taxonomy or approve modelling. Scientific review remains pending under [D-056](../docs/records/2026-10-16-decision-paired-presence-background.md); see the [construction report](../docs/records/2026-10-16-full-population-presence-background-construction.md), [dictionary](../docs/records/2026-10-16-full-population-presence-background-data-dictionary.md), [evaluation plan](../docs/records/2026-10-16-full-population-presence-background-evaluation-plan.md), [D-055 archive manifest](../docs/records/2026-10-16-presence-background-archive-manifest.json) and [superseded nested D-056 archive manifest](../docs/records/2026-10-16-nested-paired-background-archive-manifest.json).
+
+### Script 11 — descriptive EDA
+
+Script 11 reads the D-056 candidate, integration catalogue and local GSHHG reference without modifying source data. It analyzes the complete population and preliminary species-level eligible subset, then writes sixteen CSV tables, eight figures, a JSON summary, a Markdown report and an insight log to `reports/eda/` and `docs/records/`. It verifies the candidate fingerprint before and after execution. It does not regenerate the candidate, alter Scripts 08–10, remove features, impute, scale, split data or train models. Run it from the repository root with no flags:
+
+```text
+python src/data_preparation/11_explore_presence_background_data.py
+```
+
+The complete evidence is linked from [D-057](../docs/records/2026-10-16-decision-eda-evidence.md) and the [EDA report](../docs/records/2026-10-16-eda-report.md).
 
 Progress and concise results are printed to the console. Detailed machine-readable evidence stays in docs/records/. Optional path overrides and Script 08's read-only preflight remain available:
 

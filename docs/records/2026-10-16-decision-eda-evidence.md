@@ -1,0 +1,14 @@
+# D-057 — Descriptive EDA Evidence and Follow-up Gate
+
+- **ID:** D-057
+- **Date:** 16 October 2026
+- **Question:** How should the completed exploratory analysis of the D-056 presence/background candidate inform subsequent OCEAVERA work?
+- **Context:** The 4,706-row candidate contains repeated occurrence records, sampled background cells, 382 environmental feature columns and an eligible subset. EDA was authorized across Sections A–F for both the complete population and preliminary eligible subset. The request explicitly prohibited feature deletion, imputation, scaling, partitioning, training, dataset regeneration and changes to the candidate.
+- **Options considered:** (1) Treat descriptive patterns as automatic species, target or feature decisions; (2) preserve them as descriptive evidence for shared review before any downstream decision.
+- **Evidence and source references:** The [A–F EDA report](2026-10-16-eda-report.md), [machine-readable summary](2026-10-16-eda-summary.json), [insight log](2026-10-16-eda-insight-log.md), [Notebook 07](../../notebooks/branch_work/07_pipeline_exploratory_data_analysis.ipynb), Script 11, the frozen D-056 candidate and its [evaluation plan](2026-10-16-full-population-presence-background-evaluation-plan.md).
+- **Decision:** Proposed: retain the EDA products as descriptive evidence and review the candidate species, accessible domain, feature redundancy and spatial sampling contrasts with the group. No species, target, predictor set, feature removal, transformation, split or model is approved by this analysis.
+- **Rationale:** The EDA describes the supplied candidate and makes dependence and sampling limits visible. Repeated occurrence records are not independent spatial samples; label 0 denotes sampled background rather than confirmed absence; the 2020–2026 environmental assignment uses the SSP245 2020 projection assumption. Class, depth, coast-distance, completeness and period contrasts may reflect construction or observation design as well as ecology.
+- **Consequences and limitations:** Keep all source feature columns and the D-056 candidate intact. Use distinct occupied cells when reviewing taxa and spatial evaluation. Resolve scientific scope, target, accessible background area and leakage controls before design-informed preprocessing or modelling. Exploratory maps are not suitability predictions.
+- **Status:** proposed
+- **Affected documents and artefacts:** [Decision register](../project/decision-register.md), [ML workflow](../ml/ml-workflow-and-evidence-gates.md), [readiness review](../project/repository-readiness-and-alignment.md), [EDA report](2026-10-16-eda-report.md), [insight log](2026-10-16-eda-insight-log.md), [Notebook 07](../../notebooks/branch_work/07_pipeline_exploratory_data_analysis.ipynb).
+- **Supersedes / superseded by, if applicable:** None.

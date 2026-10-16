@@ -1,0 +1,13 @@
+analysis_period,presence_background_label,eligible_species_level_ml,rows
+2000-2009,0,False,215
+2000-2009,0,True,161
+2000-2009,1,False,215
+2000-2009,1,True,161
+2010-2019,0,False,153
+2010-2019,0,True,443
+2010-2019,1,False,153
+2010-2019,1,True,443
+2020-2026,0,False,256
+2020-2026,0,True,1125
+2020-2026,1,False,256
+2020-2026,1,True,1125

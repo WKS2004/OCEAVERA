@@ -1,0 +1,476 @@
+{
+  "status": "All EDA sections A–F executed; downstream ML decisions remain open",
+  "utc_generated_at": "2026-10-16T03:37:07.823290+00:00",
+  "environment": {
+    "python": "3.14.8",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "geopandas": "1.2.0",
+    "pyarrow": "26.0.0",
+    "matplotlib": "3.11.2",
+    "seaborn": "0.13.2"
+  },
+  "source": {
+    "path": "data/interim/pseudo_absence/presence_background_candidates.parquet",
+    "sha256_before": "234177bf3641856cdd10b425f2da957a27210f876d31092ba715a53cee7a429f",
+    "sha256_after": "234177bf3641856cdd10b425f2da957a27210f876d31092ba715a53cee7a429f",
+    "bytes": 9412505,
+    "shape": [
+      4706,
+      527
+    ],
+    "crs": "EPSG:4326",
+    "geometry_type": [
+      "Point"
+    ],
+    "environment_features": 382
+  },
+  "protected_sha256_before": {
+    "data/interim/pseudo_absence/presence_background_candidates.parquet": "234177bf3641856cdd10b425f2da957a27210f876d31092ba715a53cee7a429f",
+    "data/interim/integrated/full/integrated_observations.parquet": "34e756d9fa0d5478da14b6a2d627c16076c486d8e43317363d387d69a661ee34",
+    "data/interim/integrated/temporal/observations_2000_2026.parquet": "6669327ec1aba406bf8aa8346dc743d1ab721a1237c0266705119881cc21479a",
+    "data/interim/integrated/marine/marine_observations.parquet": "76a2812ae4d031bc9515d15931a2a97221d584b2b24cfad7e1e2fb5e77ba1d49",
+    "data/interim/integrated/gridded/grid_observations.parquet": "71fa9ff9ad959122811ef01117a2157baf0498fbcc1e93bfb340ba87d94d2fc0",
+    "data/interim/integrated/gridded/species_cell_period_summary.parquet": "eb14bebd83f993894672f143f16a452470cdd1c924c390c3c061b580b8c77433",
+    "src/data_preparation/08_integrate_spatiotemporal_data.py": "2e32fa62316269f876e33fb00d4320bac72d902ac71b97e2013b3a3ea444c154",
+    "src/data_preparation/09_filter_and_grid_data.py": "00ba641c0ff430267825740756c3d86295b04ab651caa0cfe0aa5c3640881f10",
+    "src/data_preparation/10_construct_pseudo_absences.py": "3ec6ba32d9f0dd8f615c6a0fe0be3aa42d2c9c09e5cd5fa405f08461e40a0429",
+    "data/interim/geography/sri_lanka_marine_water.gpkg": "ef21fe8791b16e314a441480781f9e5e8cb2a47bf3e9030f57e6b2bc0f02ce8e",
+    "data/raw/geography/gshhg/gshhg-shp-2.3.7.zip": "8dbbe7e071e77e9e75f2d639239099ebca8d5c16d6a07df8169729d49f15cf41"
+  },
+  "protected_sha256_after": {
+    "data/interim/pseudo_absence/presence_background_candidates.parquet": "234177bf3641856cdd10b425f2da957a27210f876d31092ba715a53cee7a429f",
+    "data/interim/integrated/full/integrated_observations.parquet": "34e756d9fa0d5478da14b6a2d627c16076c486d8e43317363d387d69a661ee34",
+    "data/interim/integrated/temporal/observations_2000_2026.parquet": "6669327ec1aba406bf8aa8346dc743d1ab721a1237c0266705119881cc21479a",
+    "data/interim/integrated/marine/marine_observations.parquet": "76a2812ae4d031bc9515d15931a2a97221d584b2b24cfad7e1e2fb5e77ba1d49",
+    "data/interim/integrated/gridded/grid_observations.parquet": "71fa9ff9ad959122811ef01117a2157baf0498fbcc1e93bfb340ba87d94d2fc0",
+    "data/interim/integrated/gridded/species_cell_period_summary.parquet": "eb14bebd83f993894672f143f16a452470cdd1c924c390c3c061b580b8c77433",
+    "src/data_preparation/08_integrate_spatiotemporal_data.py": "2e32fa62316269f876e33fb00d4320bac72d902ac71b97e2013b3a3ea444c154",
+    "src/data_preparation/09_filter_and_grid_data.py": "00ba641c0ff430267825740756c3d86295b04ab651caa0cfe0aa5c3640881f10",
+    "src/data_preparation/10_construct_pseudo_absences.py": "3ec6ba32d9f0dd8f615c6a0fe0be3aa42d2c9c09e5cd5fa405f08461e40a0429",
+    "data/interim/geography/sri_lanka_marine_water.gpkg": "ef21fe8791b16e314a441480781f9e5e8cb2a47bf3e9030f57e6b2bc0f02ce8e",
+    "data/raw/geography/gshhg/gshhg-shp-2.3.7.zip": "8dbbe7e071e77e9e75f2d639239099ebca8d5c16d6a07df8169729d49f15cf41"
+  },
+  "all_protected_inputs_unchanged": true,
+  "source_validation": {
+    "rows": 4706,
+    "columns": 527,
+    "class_counts": {
+      "1": 2353,
+      "0": 2353
+    },
+    "taxon_keys": 614,
+    "occupied_positive_cells": 362,
+    "distinct_background_cells": 2353,
+    "background_cells_unique": true,
+    "positive_background_cell_overlap": 0,
+    "source_paired_records": 2353
+  },
+  "complete_population_rows": 4706,
+  "eligible_species_subset_rows": 3458,
+  "environmental_features": 382,
+  "catalogue_quarantines": {
+    "bio_oracle__tas_ltmax__depthsurf": [
+      "baseline_2000",
+      "baseline_2010"
+    ],
+    "bio_oracle__tas_ltmin__depthsurf": [
+      "baseline_2000",
+      "baseline_2010"
+    ],
+    "bio_oracle__tas_max__depthsurf": [
+      "baseline_2000",
+      "baseline_2010"
+    ],
+    "bio_oracle__tas_mean__depthsurf": [
+      "baseline_2000",
+      "baseline_2010"
+    ],
+    "bio_oracle__tas_min__depthsurf": [
+      "baseline_2000",
+      "baseline_2010"
+    ],
+    "bio_oracle__tas_range__depthsurf": [
+      "baseline_2000",
+      "baseline_2010",
+      "ssp245_2020"
+    ],
+    "bio_oracle__clt_sd__depthsurf": [
+      "ssp245_2020"
+    ]
+  },
+  "catalogue_feature_coverage_by_period": {
+    "baseline_2000": 334,
+    "baseline_2010": 334,
+    "ssp245_2020": 350
+  },
+  "sections": {
+    "A": {
+      "total_rows": 4706,
+      "columns": 527,
+      "environment_columns": 382,
+      "eligible_rows": 3458,
+      "eligible_positive_rows": 1729,
+      "eligible_background_rows": 1729,
+      "full_unique_taxa": 614,
+      "eligible_unique_taxa": 441,
+      "period_class_counts_csv": "A_class_counts_by_period.csv",
+      "files": [
+        "A_data_dictionary.csv",
+        "A_class_counts_by_period.csv"
+      ]
+    },
+    "B": {
+      "environment_fully_nonmissing_features": 0,
+      "environment_all_missing_features": 2,
+      "eligible_fully_nonmissing_features": 303,
+      "eligible_all_missing_features": 2,
+      "positive_infinity_positions": 0,
+      "negative_infinity_positions": 0,
+      "repeated_positive_taxon_cell_period_groups_full": 331,
+      "positive_rows_in_repeated_groups_full": 1107,
+      "extra_records_beyond_one_per_repeated_group_full": 776,
+      "repeated_positive_taxon_cell_period_groups_eligible": 274,
+      "positive_rows_in_repeated_groups_eligible": 849,
+      "extra_records_beyond_one_per_repeated_group_eligible": 575,
+      "blank_string_columns": 92,
+      "blank_string_values": 99424
+    },
+    "C": {
+      "taxon_keys": 614,
+      "eligible_positive_records": 1729,
+      "ineligible_positive_records": 624,
+      "taxa_with_eligible_records": 441,
+      "distinct_positive_cells_full": 362,
+      "distinct_positive_cells_eligible": 256,
+      "distinct_positive_cell_periods_full": 480,
+      "distinct_positive_cell_periods_eligible": 344,
+      "top_taxon_key_by_eligible_records": "AphiaID:343936"
+    },
+    "D": {
+      "core_count": 6,
+      "complete_six_core_rows": {
+        "complete_population": 4435,
+        "eligible_species_subset": 3458
+      },
+      "six_core_completeness_by_class": {
+        "complete_population": {
+          "1": {
+            "rows": 2353,
+            "all_six_nonmissing": 2082,
+            "one_or_more_missing": 271
+          },
+          "0": {
+            "rows": 2353,
+            "all_six_nonmissing": 2353,
+            "one_or_more_missing": 0
+          }
+        },
+        "eligible_species_subset": {
+          "1": {
+            "rows": 1729,
+            "all_six_nonmissing": 1729,
+            "one_or_more_missing": 0
+          },
+          "0": {
+            "rows": 1729,
+            "all_six_nonmissing": 1729,
+            "one_or_more_missing": 0
+          }
+        }
+      },
+      "bathymetry_median_by_period_and_class": {
+        "complete_population": {
+          "2000-2009|label_0": {
+            "n": 376,
+            "median_m": -3806.1527099609375,
+            "q25_m": -4146.84716796875,
+            "q75_m": -3413.8611450195312
+          },
+          "2000-2009|label_1": {
+            "n": 313,
+            "median_m": -7.0,
+            "q25_m": -1413.4166259765625,
+            "q75_m": -7.0
+          },
+          "2010-2019|label_0": {
+            "n": 596,
+            "median_m": -3766.625,
+            "q25_m": -4161.9029541015625,
+            "q75_m": -3176.25
+          },
+          "2010-2019|label_1": {
+            "n": 550,
+            "median_m": -15.88888931274414,
+            "q25_m": -68.11111450195312,
+            "q75_m": -2.9166667461395264
+          },
+          "2020-2026|label_0": {
+            "n": 1381,
+            "median_m": -3761.25,
+            "q25_m": -4140.83349609375,
+            "q75_m": -3105.333251953125
+          },
+          "2020-2026|label_1": {
+            "n": 1219,
+            "median_m": -15.88888931274414,
+            "q25_m": -60.16666793823242,
+            "q75_m": -12.152777671813965
+          }
+        },
+        "eligible_species_subset": {
+          "2000-2009|label_0": {
+            "n": 161,
+            "median_m": -3861.97216796875,
+            "q25_m": -4169.138671875,
+            "q75_m": -3500.52783203125
+          },
+          "2000-2009|label_1": {
+            "n": 161,
+            "median_m": -7.0,
+            "q25_m": -7.0,
+            "q75_m": -7.0
+          },
+          "2010-2019|label_0": {
+            "n": 443,
+            "median_m": -3761.888916015625,
+            "q25_m": -4175.25,
+            "q75_m": -3173.8333740234375
+          },
+          "2010-2019|label_1": {
+            "n": 443,
+            "median_m": -16.55555534362793,
+            "q25_m": -87.88888549804688,
+            "q75_m": -8.222222328186035
+          },
+          "2020-2026|label_0": {
+            "n": 1125,
+            "median_m": -3766.916748046875,
+            "q25_m": -4152.6943359375,
+            "q75_m": -3158.25
+          },
+          "2020-2026|label_1": {
+            "n": 1125,
+            "median_m": -15.916666984558105,
+            "q25_m": -56.38888931274414,
+            "q75_m": -12.80555534362793
+          }
+        }
+      },
+      "interpretation": "Differences describe this constructed sample and do not establish a biological effect."
+    },
+    "E": {
+      "unique_cell_period_profiles": {
+        "complete_population": 2833,
+        "eligible_species_subset": 2073
+      },
+      "environmental_definitions_screened": 382,
+      "constant_or_empty_feature_counts": {
+        "complete_population": 18,
+        "eligible_species_subset": 18
+      },
+      "features_with_quarantined_periods_in_manifest": 7,
+      "quarantined_period_definition_count": 14,
+      "high_correlation_pair_rows_at_abs_rho_ge_0_95": 3602,
+      "note": "Pair screens use distinct cells within period. They are exploratory flags; no feature was removed."
+    },
+    "F": {
+      "gshhg_reference_bounds": [
+        77.02333333333333,
+        2.5665,
+        85.23291666666667,
+        11.44883333333333
+      ],
+      "distance_crs": "EPSG:32644",
+      "nearshore_offshore_summary_by_period_class": [
+        {
+          "population": "complete_population",
+          "period": "2000-2009",
+          "label": 0,
+          "unique_cells": 376,
+          "median_distance_to_coast_km": 239.14889755144753,
+          "q25_distance_to_coast_km": 112.16469441008411,
+          "q75_distance_to_coast_km": 354.5549829593482,
+          "p90_distance_to_coast_km": 417.4857022795891,
+          "median_bathymetry_m": -3806.1527099609375
+        },
+        {
+          "population": "complete_population",
+          "period": "2000-2009",
+          "label": 1,
+          "unique_cells": 70,
+          "median_distance_to_coast_km": 51.56287823157003,
+          "q25_distance_to_coast_km": 14.4138513127279,
+          "q75_distance_to_coast_km": 148.10317321787207,
+          "p90_distance_to_coast_km": 260.7639808440351,
+          "median_bathymetry_m": -2345.77783203125
+        },
+        {
+          "population": "complete_population",
+          "period": "2010-2019",
+          "label": 0,
+          "unique_cells": 596,
+          "median_distance_to_coast_km": 225.18972878321108,
+          "q25_distance_to_coast_km": 114.1310772967258,
+          "q75_distance_to_coast_km": 332.28541715755927,
+          "p90_distance_to_coast_km": 399.30052933010563,
+          "median_bathymetry_m": -3766.625
+        },
+        {
+          "population": "complete_population",
+          "period": "2010-2019",
+          "label": 1,
+          "unique_cells": 171,
+          "median_distance_to_coast_km": 7.596845606401737,
+          "q25_distance_to_coast_km": 1.9610942810537246,
+          "q75_distance_to_coast_km": 29.670191426609996,
+          "p90_distance_to_coast_km": 178.1828488808001,
+          "median_bathymetry_m": -59.95833206176758
+        },
+        {
+          "population": "complete_population",
+          "period": "2020-2026",
+          "label": 0,
+          "unique_cells": 1381,
+          "median_distance_to_coast_km": 225.89970661478486,
+          "q25_distance_to_coast_km": 112.49404311454786,
+          "q75_distance_to_coast_km": 332.31855718146056,
+          "p90_distance_to_coast_km": 404.6894162948543,
+          "median_bathymetry_m": -3761.25
+        },
+        {
+          "population": "complete_population",
+          "period": "2020-2026",
+          "label": 1,
+          "unique_cells": 239,
+          "median_distance_to_coast_km": 3.4226993897961724,
+          "q25_distance_to_coast_km": 1.0792654283054965,
+          "q75_distance_to_coast_km": 10.061392702003015,
+          "p90_distance_to_coast_km": 18.188594429486628,
+          "median_bathymetry_m": -26.33333396911621
+        },
+        {
+          "population": "eligible_species_subset",
+          "period": "2000-2009",
+          "label": 0,
+          "unique_cells": 161,
+          "median_distance_to_coast_km": 260.5901457041961,
+          "q25_distance_to_coast_km": 116.98018583766351,
+          "q75_distance_to_coast_km": 360.7944509086777,
+          "p90_distance_to_coast_km": 416.2529796875284,
+          "median_bathymetry_m": -3861.97216796875
+        },
+        {
+          "population": "eligible_species_subset",
+          "period": "2000-2009",
+          "label": 1,
+          "unique_cells": 21,
+          "median_distance_to_coast_km": 80.68342551740531,
+          "q25_distance_to_coast_km": 8.57050962698823,
+          "q75_distance_to_coast_km": 209.57314972146898,
+          "p90_distance_to_coast_km": 341.27012844130815,
+          "median_bathymetry_m": -3633.0
+        },
+        {
+          "population": "eligible_species_subset",
+          "period": "2010-2019",
+          "label": 0,
+          "unique_cells": 443,
+          "median_distance_to_coast_km": 212.63406765344004,
+          "q25_distance_to_coast_km": 110.44673889893178,
+          "q75_distance_to_coast_km": 332.59234476047664,
+          "p90_distance_to_coast_km": 387.3026514504671,
+          "median_bathymetry_m": -3761.888916015625
+        },
+        {
+          "population": "eligible_species_subset",
+          "period": "2010-2019",
+          "label": 1,
+          "unique_cells": 134,
+          "median_distance_to_coast_km": 8.40580480343257,
+          "q25_distance_to_coast_km": 2.959358722425618,
+          "q75_distance_to_coast_km": 19.97088990758187,
+          "p90_distance_to_coast_km": 191.3673042990509,
+          "median_bathymetry_m": -57.31944465637207
+        },
+        {
+          "population": "eligible_species_subset",
+          "period": "2020-2026",
+          "label": 0,
+          "unique_cells": 1125,
+          "median_distance_to_coast_km": 226.04852006254436,
+          "q25_distance_to_coast_km": 113.71566319698707,
+          "q75_distance_to_coast_km": 334.07104085770317,
+          "p90_distance_to_coast_km": 410.12460710386455,
+          "median_bathymetry_m": -3766.916748046875
+        },
+        {
+          "population": "eligible_species_subset",
+          "period": "2020-2026",
+          "label": 1,
+          "unique_cells": 189,
+          "median_distance_to_coast_km": 5.766224408881186,
+          "q25_distance_to_coast_km": 1.7882738616684772,
+          "q75_distance_to_coast_km": 11.07877065297166,
+          "p90_distance_to_coast_km": 18.188594429486628,
+          "median_bathymetry_m": -26.33333396911621
+        }
+      ],
+      "background_nearest_same_taxon_period_presence_km": {
+        "n": 2353,
+        "median": 334.20434118403773,
+        "p90": 574.0060506945721
+      },
+      "positive_cell_reuse": {
+        "distinct_cells": 362,
+        "cells_with_multiple_source_records": 199,
+        "cells_shared_by_multiple_taxa": 171,
+        "cells_used_in_multiple_periods": 107
+      },
+      "max_source_records_per_taxon_cell_period": 36,
+      "interpretation": "Distances use persisted raster-cell centres and the 2017 GSHHG coastline; these are geographic diagnostics, not survey-effort or habitat-suitability estimates."
+    }
+  },
+  "artifacts": {
+    "tables": [
+      "reports/eda/tables/A_data_dictionary.csv",
+      "reports/eda/tables/A_class_counts_by_period.csv",
+      "reports/eda/tables/B_environmental_missingness.csv",
+      "reports/eda/tables/B_missingness_by_period_class.csv",
+      "reports/eda/tables/B_blank_strings.csv",
+      "reports/eda/tables/B_repeated_positive_taxon_cell_period.csv",
+      "reports/eda/tables/C_taxon_counts_distinct_cells.csv",
+      "reports/eda/tables/C_eligibility_reasons.csv",
+      "reports/eda/tables/C_period_class_eligibility.csv",
+      "reports/eda/tables/D_core_by_period_class_stats.csv",
+      "reports/eda/tables/D_core_overall_class_stats.csv",
+      "reports/eda/tables/D_core_IQR_flags.csv",
+      "reports/eda/tables/E_feature_profile_screen.csv",
+      "reports/eda/tables/E_redundant_feature_pairs_by_period.csv",
+      "reports/eda/tables/F_background_distance_to_same_taxon_presence.csv",
+      "reports/eda/tables/F_observation_records_per_grid_cell_period.csv"
+    ],
+    "figures": [
+      "reports/eda/figures/A_target_by_period.png",
+      "reports/eda/figures/B_environment_missingness.png",
+      "reports/eda/figures/C_top_taxa_cells.png",
+      "reports/eda/figures/D_core_distributions_by_class.png",
+      "reports/eda/figures/D_core_distributions_by_period.png",
+      "reports/eda/figures/E_core_spearman_by_period.png",
+      "reports/eda/figures/F_spatial_presence_background.png",
+      "reports/eda/figures/F_nearest_presence_distances.png"
+    ],
+    "report_json": "docs/records/2026-10-16-eda-summary.json",
+    "report_markdown": "docs/records/2026-10-16-eda-report.md",
+    "insight_log": "docs/records/2026-10-16-eda-insight-log.md"
+  },
+  "warnings": [
+    "Label 1 is an OBIS record; label 0 is an artificial sampled background, not a confirmed biological absence.",
+    "Repeated occurrence records in a raster cell are not independent environmental samples.",
+    "The 2020–2026 environmental assignment uses the Bio-ORACLE SSP245 2020 projected slice; it is not annual observation data.",
+    "Presence/background bathymetry and coastline-distance contrasts may reflect sampling design and the broad accessible domain.",
+    "GSHHG 2.3.7 is a 2017 coastline reference; shoreline distance is a descriptive grid-centre metric, not current metre-accuracy truth.",
+    "Identifier, quality, lineage, geometry and target-construction fields can leak information if treated as predictors.",
+    "Feature and species recommendations are exploratory only; no feature deletion, imputation, scaling, split or model fit was performed."
+  ]
+}
