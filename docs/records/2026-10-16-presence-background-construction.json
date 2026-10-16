@@ -1,0 +1,2049 @@
+{
+  "format": "oceavera-presence-background-construction-report-v1",
+  "generated_at_utc": "2026-10-15T23:48:20Z",
+  "status": "candidate dataset generated; scientific design and species/domain acceptance remain provisional",
+  "decision_status": "implementation configuration executed; shared scientific review pending",
+  "method": "Species-specific presence/background examples on actual Bio-ORACLE grid centres.",
+  "target_interpretation": {
+    "label_1": "A recorded, verified focal-species presence aggregated to one species/cell/period row.",
+    "label_0": "A sampled marine environmental grid cell with no recorded presence of that same AphiaID in any input period; it is background, not confirmed biological absence.",
+    "probability_claim": "Classifier scores against these constructed labels are not automatically calibrated occurrence probabilities."
+  },
+  "sampling": {
+    "seed": 20261016,
+    "ratio": "1:1",
+    "sampling": "Uniform without replacement from eligible GSHHG-water Bio-ORACLE raster centres.",
+    "minimum_species_cells": 10,
+    "protected_presence_policy": "Protect every absence=false input cell for the focal AphiaID across all periods, even when a row is excluded from positive labels for incomplete taxonRank or other eligibility fields.",
+    "sampling_domain": "Intersection of the verified GSHHG marine-water geometry and actual Bio-ORACLE grid centres with all six core environmental values; no EEZ clipping or effort-matching weights are applied.",
+    "core_features": [
+      "bio_oracle__thetao_mean__depthsurf",
+      "bio_oracle__so_mean__depthsurf",
+      "bio_oracle__o2_mean__depthsurf",
+      "bio_oracle__chl_mean__depthsurf",
+      "bio_oracle__ph_mean__depthsurf",
+      "bio_oracle__bathymetry_mean__benthic"
+    ],
+    "environmental_feature_definitions_retained": 382,
+    "feature_selection_imputation_normalization": "Not performed."
+  },
+  "inputs": {
+    "policy_b_grid_observations": {
+      "path": "data/interim/integrated/gridded/grid_observations.parquet",
+      "rows": 2353,
+      "columns": 519,
+      "sha256": "71fa9ff9ad959122811ef01117a2157baf0498fbcc1e93bfb340ba87d94d2fc0"
+    },
+    "integration_manifest": {
+      "path": "docs/records/2026-10-16-integration-manifest.json",
+      "sha256": "d38557d9bbb2ba746a13cfe950d12cc26f08059579a244e80108400f0931bdcd"
+    },
+    "environmental_variable_catalogue": {
+      "path": "docs/records/2026-10-16-integration-variable-catalog.json",
+      "sha256": "fad948b89fa6db1560ea532fec5decf702daefaac799941579962605f16af838"
+    },
+    "marine_water_reference": {
+      "path": "data/interim/geography/sri_lanka_marine_water.gpkg",
+      "features": 1,
+      "geometry_type": "Polygon",
+      "crs": "EPSG:4326",
+      "all_source_geometries_valid": true,
+      "prepared_sha256": "ef21fe8791b16e314a441480781f9e5e8cb2a47bf3e9030f57e6b2bc0f02ce8e",
+      "water_grid_centres": 24506,
+      "grid_centres_total": 29370,
+      "provenance_status": "validated"
+    },
+    "integration_full_table_sha256": "34e756d9fa0d5478da14b6a2d627c16076c486d8e43317363d387d69a661ee34"
+  },
+  "source_grid_verification": {
+    "rows_checked": 2353,
+    "raster_index_discrepancies": 0,
+    "raster_centre_discrepancies": 0,
+    "duplicate_source_row_ids": 0,
+    "policy_b_occurrence_points_checked": 2353,
+    "policy_b_occurrence_points_outside_water": 0
+  },
+  "environmental_sources": {
+    "selected_products": 106,
+    "verified_products": 106,
+    "source_variable_mappings_checked": 1012,
+    "mapping_checks_by_period": {
+      "baseline_2000": 330,
+      "baseline_2010": 330,
+      "ssp245_2020": 342,
+      "static": 10
+    },
+    "time_coordinate_checks_by_period": {
+      "baseline_2000": 330,
+      "baseline_2010": 330,
+      "ssp245_2020": 342
+    },
+    "products": [
+      {
+        "dataset_id": "chl_baseline_2000_2018_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/chl_baseline_2000_2018_depthmax/20261009T163631Z_all-variables.nc",
+        "bytes": 2828368,
+        "sha256": "b6866b34e332517d2cf366d2b88afeea5db43eae073909b2d8d14d18218db14e",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "chl_baseline_2000_2018_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/chl_baseline_2000_2018_depthmean/20261009T163634Z_all-variables.nc",
+        "bytes": 2828368,
+        "sha256": "768f8a0fe65c767351244df9e075657e9f8e9e7fae15eba505e8a53aa7e46168",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "chl_baseline_2000_2018_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/chl_baseline_2000_2018_depthmin/20261009T163636Z_all-variables.nc",
+        "bytes": 2828368,
+        "sha256": "72a38d86c3d98a2f9993036d87f7c0edb005ec69c197a8adfd98c9e421e22195",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "chl_baseline_2000_2018_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/chl_baseline_2000_2018_depthsurf/20261009T163636Z_all-variables.nc",
+        "bytes": 2828368,
+        "sha256": "add1d73e317ff7038ab32bbcc33251000d313cedba25b5085e12a00c15a37a1e",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "chl_ssp245_2020_2100_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/chl_ssp245_2020_2100_depthsurf/20261009T163640Z_all-variables.nc",
+        "bytes": 13167096,
+        "sha256": "4c19b958613d23db046bfb16c2c833cfd90b7324a2ac3f2eb31716e0836fd7a2",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "clt_baseline_2000_2020_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/clt_baseline_2000_2020_depthsurf/20261009T164652Z_all-variables.nc",
+        "bytes": 2828064,
+        "sha256": "f88a6e82ffb122bd29c81a626004e9ece702de8b206dd60e99add698cff86b87",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "clt_ssp245_2020_2100_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/clt_ssp245_2020_2100_depthsurf/20261009T164657Z_all-variables.nc",
+        "bytes": 13166768,
+        "sha256": "f04aae4327aa3e280d482da04c73d9a1d209f5141d6a0bc0f44582af00f7f5ad",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "dfe_baseline_2000_2018_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/dfe_baseline_2000_2018_depthmax/20261009T163648Z_all-variables.nc",
+        "bytes": 2827092,
+        "sha256": "928a1cbe3d382ef8305e81f80708785ada319933b2802c0734531a217803d47b",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "dfe_baseline_2000_2018_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/dfe_baseline_2000_2018_depthmean/20261009T163701Z_all-variables.nc",
+        "bytes": 2827092,
+        "sha256": "210482d9e864bb7846151eef4c4c9739e65cb16a9dd7fee65b0ba2ad6228fe32",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "dfe_baseline_2000_2018_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/dfe_baseline_2000_2018_depthmin/20261009T163716Z_all-variables.nc",
+        "bytes": 2827092,
+        "sha256": "b5855311178768ec2e38ce0aba642b4483a4c5ac6eeec6bb48c6fb7db0518936",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "dfe_baseline_2000_2018_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/dfe_baseline_2000_2018_depthsurf/20261009T163731Z_all-variables.nc",
+        "bytes": 2827092,
+        "sha256": "af9a83e3441c7eb38a51738004cd8cce6ee08a8b32892d30494dee2437f4323b",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "dfe_ssp245_2020_2100_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/dfe_ssp245_2020_2100_depthmax/20261009T163653Z_all-variables.nc",
+        "bytes": 13165812,
+        "sha256": "adf8c058e0dd79cd54de7a22b09a9ab16045d1d2a0b412364a2a05e34be55e1c",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "dfe_ssp245_2020_2100_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/dfe_ssp245_2020_2100_depthmean/20261009T163707Z_all-variables.nc",
+        "bytes": 13165816,
+        "sha256": "4893cd24feb1d48be1607e0671d805bbb7ebfc207bc70d176c8a7af91f416bf0",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "dfe_ssp245_2020_2100_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/dfe_ssp245_2020_2100_depthmin/20261009T163722Z_all-variables.nc",
+        "bytes": 13165812,
+        "sha256": "fe464c3695b1c3178ea1a6095e4c0ea2985494dfaa5b859f6735d7762e6973b6",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "dfe_ssp245_2020_2100_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/dfe_ssp245_2020_2100_depthsurf/20261009T163736Z_all-variables.nc",
+        "bytes": 13165816,
+        "sha256": "c5fec6c901573cba399de32f1ef523c1c678b987541c76816607b6f0ee038182",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "kdpar_mean_baseline_2000_2020_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/kdpar_mean_baseline_2000_2020_depthsurf/20261009T163648Z_all-variables.nc",
+        "bytes": 2828172,
+        "sha256": "fe0bd71029f56fd8b5a95fccf04beae5477e2d35cef7497a19d77e2c54c25f8a",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "mlotst_baseline_2000_2019_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/mlotst_baseline_2000_2019_depthsurf/20261009T163842Z_all-variables.nc",
+        "bytes": 2827088,
+        "sha256": "8e6b87c28bd61f68dbf5aef577fadac0e875318bc1c6c158518eaf58f96f818d",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "mlotst_ssp245_2020_2100_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/mlotst_ssp245_2020_2100_depthsurf/20261009T163847Z_all-variables.nc",
+        "bytes": 13165812,
+        "sha256": "02ecdbe9d31c212d01759b66a5ab7c8f1383fd8a71d32b7e81d86069869d63b8",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "no3_baseline_2000_2018_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/no3_baseline_2000_2018_depthmax/20261009T163854Z_all-variables.nc",
+        "bytes": 2828248,
+        "sha256": "ddda194d519cd95da19c1885aa141e09a5b565093d87a57ab3ac77969ab81381",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "no3_baseline_2000_2018_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/no3_baseline_2000_2018_depthmean/20261009T163908Z_all-variables.nc",
+        "bytes": 2828248,
+        "sha256": "d2de6b265702bca6448f0dcd0ee6926573e52780fd4a97cbad9f74fdc8f942d2",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "no3_baseline_2000_2018_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/no3_baseline_2000_2018_depthmin/20261009T163921Z_all-variables.nc",
+        "bytes": 2828248,
+        "sha256": "d2cb4f04893212a302ac7ac8cc671fa6ba2b4040413d3d9e008e948f66372059",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "no3_baseline_2000_2018_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/no3_baseline_2000_2018_depthsurf/20261009T163932Z_all-variables.nc",
+        "bytes": 2828248,
+        "sha256": "ff2fba27b606877f38ff3d30bd3e921bec73420f013c498eb0d4b3d7d40d64e5",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "no3_ssp245_2020_2100_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/no3_ssp245_2020_2100_depthmax/20261009T163900Z_all-variables.nc",
+        "bytes": 13166972,
+        "sha256": "396dc99f4bbda0bf93873a937bbb34636ef4b42eb1cc2abb048a1b1c09d3bf49",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "no3_ssp245_2020_2100_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/no3_ssp245_2020_2100_depthmean/20261009T163913Z_all-variables.nc",
+        "bytes": 13166976,
+        "sha256": "a687da51bc74e88fdcf0b59cf17582e0d3fe74c23262c051ab3018703c80a079",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "no3_ssp245_2020_2100_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/no3_ssp245_2020_2100_depthmin/20261009T163925Z_all-variables.nc",
+        "bytes": 13166972,
+        "sha256": "62d3579657702101c40601f493a9fe1935b39599aff18c01f102bd1253c12244",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "no3_ssp245_2020_2100_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/no3_ssp245_2020_2100_depthsurf/20261009T163935Z_all-variables.nc",
+        "bytes": 13166976,
+        "sha256": "946cfd376ac2a4d4c871b8182555ea125cafc13fdb583864d492f8757592ed66",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "o2_baseline_2000_2018_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/o2_baseline_2000_2018_depthmax/20261009T163745Z_all-variables.nc",
+        "bytes": 2827208,
+        "sha256": "a2c23578a13a2ea12322e6537e16b0f7e5cea240415707d6f0e215aa3b3f723b",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "o2_baseline_2000_2018_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/o2_baseline_2000_2018_depthmean/20261009T163801Z_all-variables.nc",
+        "bytes": 2827208,
+        "sha256": "b12ecbaef1843c6da554b953ca03d4ba09d19d7a5c77934655a9902eead1beb3",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "o2_baseline_2000_2018_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/o2_baseline_2000_2018_depthmin/20261009T163814Z_all-variables.nc",
+        "bytes": 2827208,
+        "sha256": "2bf14bec9e755fb08dc31f3ab239c1dfb7edc923323003a1e962b0bd1f330534",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "o2_baseline_2000_2018_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/o2_baseline_2000_2018_depthsurf/20261009T163829Z_all-variables.nc",
+        "bytes": 2827208,
+        "sha256": "65cfe2e879be2ea195305796356ce818bd600d11f2cf28a05f73fa2890e12dac",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "o2_ssp245_2020_2100_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/o2_ssp245_2020_2100_depthmax/20261009T163752Z_all-variables.nc",
+        "bytes": 13165948,
+        "sha256": "0ddf7fdb369bb86888b6b1380c5086f842ae70e1dcbd3625086201ae56b66161",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "o2_ssp245_2020_2100_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/o2_ssp245_2020_2100_depthmean/20261009T163805Z_all-variables.nc",
+        "bytes": 13165952,
+        "sha256": "1143c7d2dac2f341e1df7d7aa0bdb20a987c69ed80931b86c1235daadc2aa463",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "o2_ssp245_2020_2100_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/o2_ssp245_2020_2100_depthmin/20261009T163821Z_all-variables.nc",
+        "bytes": 13165948,
+        "sha256": "c2e2328bfbc04f08b60f395de9ea998e1b74b6c6ba2d500440b3028772f01dee",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "o2_ssp245_2020_2100_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/o2_ssp245_2020_2100_depthsurf/20261009T163834Z_all-variables.nc",
+        "bytes": 13165952,
+        "sha256": "8c378b20397440c6042757a17711804f9913f07b9365002ccbbcf463ef91bcd9",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "par_mean_baseline_2000_2020_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/par_mean_baseline_2000_2020_depthsurf/20261009T164211Z_all-variables.nc",
+        "bytes": 2827852,
+        "sha256": "8d2dd33451e255167b2ff6368d94202f4c16fdaf0052c76fe06c0146c09dbfa2",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "ph_baseline_2000_2018_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/ph_baseline_2000_2018_depthmax/20261009T164030Z_all-variables.nc",
+        "bytes": 2826896,
+        "sha256": "e9a8fe2ab5fde37e0ccacf4b6cf6802c44668bfd45ebdc0aa0d84d1b94ea1ccf",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "ph_baseline_2000_2018_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/ph_baseline_2000_2018_depthmean/20261009T164045Z_all-variables.nc",
+        "bytes": 2826904,
+        "sha256": "0989adae302c76461183ac7de2b76f7ea6c663748ba36ebcd73f77c20e8b2ec1",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "ph_baseline_2000_2018_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/ph_baseline_2000_2018_depthmin/20261009T164056Z_all-variables.nc",
+        "bytes": 2826896,
+        "sha256": "d77089563e69ac6b0507649f68de52437905a75a73f03e5182bb2e56009b9ba8",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "ph_baseline_2000_2018_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/ph_baseline_2000_2018_depthsurf/20261009T164111Z_all-variables.nc",
+        "bytes": 2826904,
+        "sha256": "ce5d3553db60123d6ff7d0f6e334b516f373281358dd57e046e3bc20edde211e",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "ph_ssp245_2020_2100_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/ph_ssp245_2020_2100_depthmax/20261009T164036Z_all-variables.nc",
+        "bytes": 13165612,
+        "sha256": "a690e73f2c4183a07eb4533c7f5a8ad1a53275bcb6a7fd4399bac9dc6c61c60a",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "ph_ssp245_2020_2100_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/ph_ssp245_2020_2100_depthmean/20261009T164050Z_all-variables.nc",
+        "bytes": 13165616,
+        "sha256": "d0b5d43f95c2a2654a8e3101568437ee9a1bbd4c9c52f8b6499abf68cedcf0dc",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "ph_ssp245_2020_2100_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/ph_ssp245_2020_2100_depthmin/20261009T164101Z_all-variables.nc",
+        "bytes": 13165612,
+        "sha256": "08f69d079c47eb24be4c8cde40fdd1f5066b7257ca6644bd01dfb264fca889b5",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "ph_ssp245_2020_2100_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/ph_ssp245_2020_2100_depthsurf/20261009T164114Z_all-variables.nc",
+        "bytes": 13165616,
+        "sha256": "da9eec2059003343ef9f5a7d3743c89bb2e9e1760d1fe9e87faa936eb3e91353",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "phyc_baseline_2000_2020_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/phyc_baseline_2000_2020_depthmax/20261009T164705Z_all-variables.nc",
+        "bytes": 2827284,
+        "sha256": "1569b72b00f8698d8ad07cdf814282bd29d8881b014c228b4455fac723df1309",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "phyc_baseline_2000_2020_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/phyc_baseline_2000_2020_depthmean/20261009T164716Z_all-variables.nc",
+        "bytes": 2827292,
+        "sha256": "ebc72549b9d4c5793df9545cdb57a3f7c9cda847659d2b47c382901be4be0d2c",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "phyc_baseline_2000_2020_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/phyc_baseline_2000_2020_depthmin/20261009T164729Z_all-variables.nc",
+        "bytes": 2827284,
+        "sha256": "1c014d64604afd6c29d06311c2390439cbfc358111eeb604d1ec26f199ed8a02",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "phyc_baseline_2000_2020_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/phyc_baseline_2000_2020_depthsurf/20261009T164742Z_all-variables.nc",
+        "bytes": 2827292,
+        "sha256": "df6dbaefa12415c836936ce133c1ee3200ebd17ce12219ef10a3f7eb5b82915b",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "phyc_ssp245_2020_2100_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/phyc_ssp245_2020_2100_depthmax/20261009T164708Z_all-variables.nc",
+        "bytes": 13166028,
+        "sha256": "8133ff3fa69ca3e4f808b942cfde240ebb809b4e775397729947756466baea12",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "phyc_ssp245_2020_2100_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/phyc_ssp245_2020_2100_depthmean/20261009T164720Z_all-variables.nc",
+        "bytes": 13166028,
+        "sha256": "168529fc5f57fdab5e5b82918de9d327d7a707c9736738448a444ada4614055c",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "phyc_ssp245_2020_2100_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/phyc_ssp245_2020_2100_depthmin/20261009T164733Z_all-variables.nc",
+        "bytes": 13166028,
+        "sha256": "57fbb32ecc79ef0f9164f6b13b98d5cb1da41ccfbca692d674b3b1e0b9edc0f0",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "phyc_ssp245_2020_2100_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/phyc_ssp245_2020_2100_depthsurf/20261009T164744Z_all-variables.nc",
+        "bytes": 13166028,
+        "sha256": "0482e738e5fe0b5618dc6a29e22935010a122cad85ecbd8715f96e6202532443",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "po4_baseline_2000_2018_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/po4_baseline_2000_2018_depthmax/20261009T164121Z_all-variables.nc",
+        "bytes": 2828260,
+        "sha256": "e575a8db237f9e9703b982ca049ab06691da954987c1bcc0341ebe5697fc4350",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "po4_baseline_2000_2018_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/po4_baseline_2000_2018_depthmean/20261009T164134Z_all-variables.nc",
+        "bytes": 2828264,
+        "sha256": "9bdd21a91e5375f4e31a078201d5b2ffb07d96e214c8d5084b19612b52a881d7",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "po4_baseline_2000_2018_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/po4_baseline_2000_2018_depthmin/20261009T164145Z_all-variables.nc",
+        "bytes": 2828260,
+        "sha256": "d9e897bb17aaf72b61387c734bb85c337e3a585241c7e57d9a2998bb605adf3f",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "po4_baseline_2000_2018_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/po4_baseline_2000_2018_depthsurf/20261009T164158Z_all-variables.nc",
+        "bytes": 2828264,
+        "sha256": "002c2302f8bc040db8e3c65fed3839e1a98bb6d387ea33aca99327c5211ac615",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "po4_ssp245_2020_2100_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/po4_ssp245_2020_2100_depthmax/20261009T164125Z_all-variables.nc",
+        "bytes": 13166992,
+        "sha256": "73cf1d226393129a952cb4b30cd2bfd32d101d56fe9fa0ff8359b2e9f3b69cf2",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "po4_ssp245_2020_2100_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/po4_ssp245_2020_2100_depthmean/20261009T164138Z_all-variables.nc",
+        "bytes": 13166992,
+        "sha256": "093cf24bf605b9b3dc65c16e5ef97bff1af1fadcd872a3eb23066df910d8c1f2",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "po4_ssp245_2020_2100_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/po4_ssp245_2020_2100_depthmin/20261009T164150Z_all-variables.nc",
+        "bytes": 13166992,
+        "sha256": "10df0d050592ad18599579976e80810f06536f08192cdeec404c10c5ff3f10f3",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "po4_ssp245_2020_2100_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/po4_ssp245_2020_2100_depthsurf/20261009T164203Z_all-variables.nc",
+        "bytes": 13166992,
+        "sha256": "4b3219d69978e43baf7350844032329ad789bfaf23aee034ac60eb4209a52e26",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "si_baseline_2000_2018_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/si_baseline_2000_2018_depthmax/20261009T164600Z_all-variables.nc",
+        "bytes": 2828216,
+        "sha256": "88dd0b4401d60632479cddbb227bfceb30c1e6ca276979126168a000686915a9",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "si_baseline_2000_2018_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/si_baseline_2000_2018_depthmean/20261009T164613Z_all-variables.nc",
+        "bytes": 2828216,
+        "sha256": "2d073524a5da713074bbea844c95050a147a6539311a0f3fb764a943eca43aca",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "si_baseline_2000_2018_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/si_baseline_2000_2018_depthmin/20261009T164625Z_all-variables.nc",
+        "bytes": 2828216,
+        "sha256": "47c5552b556056601fa0db53c35a3ce2524746ad8adf9359f5e565dc6b50b4e9",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "si_baseline_2000_2018_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/si_baseline_2000_2018_depthsurf/20261009T164640Z_all-variables.nc",
+        "bytes": 2828216,
+        "sha256": "ef2c999e3a6e6ed7a97cf2f5a63951137795b287499673e40f4baf8c22af9084",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "si_ssp245_2020_2100_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/si_ssp245_2020_2100_depthmax/20261009T164607Z_all-variables.nc",
+        "bytes": 13166940,
+        "sha256": "24b1c80c8891dfecef72dccc2ca6c267a30a6e36b36222411f95ade42d7c0801",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "si_ssp245_2020_2100_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/si_ssp245_2020_2100_depthmean/20261009T164618Z_all-variables.nc",
+        "bytes": 13166944,
+        "sha256": "e8622dc4a38582e456db7c80dee1b73ad34e653c366675353bf47cec93297d0b",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "si_ssp245_2020_2100_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/si_ssp245_2020_2100_depthmin/20261009T164630Z_all-variables.nc",
+        "bytes": 13166940,
+        "sha256": "a949e27dc424015adb45bce9433ce6166c697b6a3f22370a483343b2fffb81d3",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "si_ssp245_2020_2100_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/si_ssp245_2020_2100_depthsurf/20261009T164644Z_all-variables.nc",
+        "bytes": 13166944,
+        "sha256": "730e7e4525634e93ddadb4ccf3685ba319568c25d10455046595742a0c2c12f8",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "siconc_baseline_2000_2020_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/siconc_baseline_2000_2020_depthsurf/20261009T164322Z_all-variables.nc",
+        "bytes": 2827052,
+        "sha256": "f0c04fa8478421cd2c8c411bd40572f881f0c8876317dd84b29ed89b4794a4d1",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "siconc_ssp245_2020_2100_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/siconc_ssp245_2020_2100_depthsurf/20261009T164326Z_all-variables.nc",
+        "bytes": 13165772,
+        "sha256": "e7de214c39ff69a28960dc8c0cf8ca0bd610c02519d8fcc95a07b95c75509bf7",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "sithick_baseline_2000_2020_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/sithick_baseline_2000_2020_depthsurf/20261009T164333Z_all-variables.nc",
+        "bytes": 2827108,
+        "sha256": "007e6ea0433bd39f98531298d3d420bb747c163abc7afde8c62e6deee86de7e9",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "sithick_ssp245_2020_2100_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/sithick_ssp245_2020_2100_depthsurf/20261009T164336Z_all-variables.nc",
+        "bytes": 13165832,
+        "sha256": "8ecb1a6f9030d120a430376e0a92a125ad74026e10fb81e79b0d8b420da4cee8",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "so_baseline_2000_2019_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/so_baseline_2000_2019_depthmax/20261009T164230Z_all-variables.nc",
+        "bytes": 2827908,
+        "sha256": "cabe1b159287c77f74b3926f96fcdd5eaf28bc0dcc0b7ed1da00a715500681cb",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "so_baseline_2000_2019_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/so_baseline_2000_2019_depthmean/20261009T164245Z_all-variables.nc",
+        "bytes": 2827908,
+        "sha256": "d3e7748dc0665ca5432298ef91a69d76ef39ef1c4686dce8b837f213b9a24718",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "so_baseline_2000_2019_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/so_baseline_2000_2019_depthmin/20261009T164255Z_all-variables.nc",
+        "bytes": 2827908,
+        "sha256": "7daa0e3d7bd7320de4575d86f2ac8687241f72c98b339ac50f3d3187f8e513db",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "so_baseline_2000_2019_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/so_baseline_2000_2019_depthsurf/20261009T164312Z_all-variables.nc",
+        "bytes": 2827908,
+        "sha256": "a6a90a6dd0aae84ac9bc11657c4a59cf8a54ee822adbf6c87a29fc101044f348",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "so_ssp245_2020_2100_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/so_ssp245_2020_2100_depthmax/20261009T164235Z_all-variables.nc",
+        "bytes": 13166624,
+        "sha256": "50dc33a11b4d49a27bd8356a10de1f9ef504548592f2da4a7ada7c8001050b3f",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "so_ssp245_2020_2100_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/so_ssp245_2020_2100_depthmean/20261009T164249Z_all-variables.nc",
+        "bytes": 13166628,
+        "sha256": "c14de9d7889fd6cc2e28d887e1bac5a802774507ec899732219cabd5dd183acf",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "so_ssp245_2020_2100_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/so_ssp245_2020_2100_depthmin/20261009T164303Z_all-variables.nc",
+        "bytes": 13166624,
+        "sha256": "c99019e181201832f356bae00f02902217c2211e058ffe89d2d831b44d4f8e28",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "so_ssp245_2020_2100_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/so_ssp245_2020_2100_depthsurf/20261009T164315Z_all-variables.nc",
+        "bytes": 13166628,
+        "sha256": "d5613f874bf73ecb29137c6e0ca1a095f803471a92990d4c72fca95fd8b98503",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "swd_baseline_2000_2019_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/swd_baseline_2000_2019_depthmax/20261009T164343Z_all-variables.nc",
+        "bytes": 2827760,
+        "sha256": "3e9a2847b5535c84e25b2f09fc333304269d8cc70e344fd681a3a30ea954a6b6",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "swd_baseline_2000_2019_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/swd_baseline_2000_2019_depthmean/20261009T164358Z_all-variables.nc",
+        "bytes": 2827764,
+        "sha256": "ce49793153209a45d9394dbf5cc40971e4ab255bb04e58740f17699c198f3bb5",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "swd_baseline_2000_2019_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/swd_baseline_2000_2019_depthmin/20261009T164419Z_all-variables.nc",
+        "bytes": 2827760,
+        "sha256": "f31d340a7e705fcd40843111577af3a3927e3830cc2bc71a524f046f6fc8a531",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "swd_baseline_2000_2019_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/swd_baseline_2000_2019_depthsurf/20261009T164433Z_all-variables.nc",
+        "bytes": 2827764,
+        "sha256": "c655dd05dcee399bd652cb816e928cfb9c9c80c22031d42a6715665c4f4fe10f",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "swd_ssp245_2020_2100_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/swd_ssp245_2020_2100_depthmax/20261009T164347Z_all-variables.nc",
+        "bytes": 11286360,
+        "sha256": "a0a084c25a11e70a98e37ff5625a71f07ab6db6872ad9896c04f5ad8ff543bfd",
+        "variable_mappings_checked": 6
+      },
+      {
+        "dataset_id": "swd_ssp245_2020_2100_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/swd_ssp245_2020_2100_depthmean/20261009T164408Z_all-variables.nc",
+        "bytes": 11286368,
+        "sha256": "0f034bc1767c135ce3130341b63ae1cab4212293fc50c211b2c2711aeaab1095",
+        "variable_mappings_checked": 6
+      },
+      {
+        "dataset_id": "swd_ssp245_2020_2100_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/swd_ssp245_2020_2100_depthmin/20261009T164422Z_all-variables.nc",
+        "bytes": 11286360,
+        "sha256": "e332be89c54a9bbf50b0305f664053c8fb971b432edd834c366eb500c0bdbe65",
+        "variable_mappings_checked": 6
+      },
+      {
+        "dataset_id": "swd_ssp245_2020_2100_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/swd_ssp245_2020_2100_depthsurf/20261009T164441Z_all-variables.nc",
+        "bytes": 11286368,
+        "sha256": "6f9bbef301bdc467774fccc880aae40454cdad8c65eff72103056913c408ba38",
+        "variable_mappings_checked": 6
+      },
+      {
+        "dataset_id": "sws_baseline_2000_2019_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/sws_baseline_2000_2019_depthmax/20261009T164451Z_all-variables.nc",
+        "bytes": 2827280,
+        "sha256": "d7c37e91706fa947367ff4b2692c8e7f1a1f3420eb96d1126b13cea00841d458",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "sws_baseline_2000_2019_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/sws_baseline_2000_2019_depthmean/20261009T164509Z_all-variables.nc",
+        "bytes": 2827284,
+        "sha256": "8bc62f8c9f75302ada03722078d266f0c1b6098a2119bd26b989b278a00cf5f0",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "sws_baseline_2000_2019_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/sws_baseline_2000_2019_depthmin/20261009T164524Z_all-variables.nc",
+        "bytes": 2827280,
+        "sha256": "0373648bd8e977c7cc4fced72c07d4194bad982a661d744ae71ba17addeb5ba2",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "sws_baseline_2000_2019_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/sws_baseline_2000_2019_depthsurf/20261009T164545Z_all-variables.nc",
+        "bytes": 2827284,
+        "sha256": "af9d3b7e8f7f88110f74eeac4c48853d87e0b6afb2d9dc79eadd57d13ed70de2",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "sws_ssp245_2020_2100_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/sws_ssp245_2020_2100_depthmax/20261009T164458Z_all-variables.nc",
+        "bytes": 11285880,
+        "sha256": "900f9cb400d4a3a59eeeb9744bd6ec73ec09aeaee83fd93581e48b2ca4f20a21",
+        "variable_mappings_checked": 6
+      },
+      {
+        "dataset_id": "sws_ssp245_2020_2100_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/sws_ssp245_2020_2100_depthmean/20261009T164514Z_all-variables.nc",
+        "bytes": 11285888,
+        "sha256": "355cf1be142cf836f1bb71057142f19792025286ca6403dc26004bf45d92f24d",
+        "variable_mappings_checked": 6
+      },
+      {
+        "dataset_id": "sws_ssp245_2020_2100_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/sws_ssp245_2020_2100_depthmin/20261009T164533Z_all-variables.nc",
+        "bytes": 11285880,
+        "sha256": "52f9172c53dfa9d8db58417b7a2edacb4bd04c7a377564a043907bdb2508518e",
+        "variable_mappings_checked": 6
+      },
+      {
+        "dataset_id": "sws_ssp245_2020_2100_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/sws_ssp245_2020_2100_depthsurf/20261009T164549Z_all-variables.nc",
+        "bytes": 11285888,
+        "sha256": "7b3a63107eda8c1558d393e643a70d9d4aefdeb1720588659ff83d6feb4c6c33",
+        "variable_mappings_checked": 6
+      },
+      {
+        "dataset_id": "tas_baseline_2000_2020_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/tas_baseline_2000_2020_depthsurf/20261009T163625Z_all-variables.nc",
+        "bytes": 2827468,
+        "sha256": "4aa37420dc8b1fa0510868b2c4cc83f49549be1682919d73e950a2e27c49f86a",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "tas_ssp245_2020_2100_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/tas_ssp245_2020_2100_depthsurf/20261009T163625Z_all-variables.nc",
+        "bytes": 13166220,
+        "sha256": "91621acfb7cddd7f3394351714b07db95eff1765fc10f57e1f9a8b38160611eb",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "terrain_characteristics",
+        "path": "data/interim/bio_oracle/cleaning/terrain_characteristics/20261009T164652Z_all-variables.nc",
+        "bytes": 2359132,
+        "sha256": "4f656ca36e3b7dd65fede5dfa3607f02e9793965088b93c201c7fc50f37e7d24",
+        "variable_mappings_checked": 10
+      },
+      {
+        "dataset_id": "thetao_baseline_2000_2019_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/thetao_baseline_2000_2019_depthmax/20261009T163943Z_all-variables.nc",
+        "bytes": 2827564,
+        "sha256": "d1427904343ccc74b795ef6f299b7ccb6709de35a9c0e2b28f38dbb163c582b0",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "thetao_baseline_2000_2019_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/thetao_baseline_2000_2019_depthmean/20261009T163956Z_all-variables.nc",
+        "bytes": 2827564,
+        "sha256": "62dbe504546c1914cf28b8561ed34b3357a61a557da6a32a9bc5e3e25a6abe2d",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "thetao_baseline_2000_2019_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/thetao_baseline_2000_2019_depthmin/20261009T164007Z_all-variables.nc",
+        "bytes": 2827564,
+        "sha256": "1e020146a7b76a2fec6fd769add4c5d91d84598c0456b69319767cc9173d9a3f",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "thetao_baseline_2000_2019_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/thetao_baseline_2000_2019_depthsurf/20261009T164018Z_all-variables.nc",
+        "bytes": 2827564,
+        "sha256": "77ddfefa27951a0bb04842772794577dac796fea23653dd6357d930b8ab5b36c",
+        "variable_mappings_checked": 12
+      },
+      {
+        "dataset_id": "thetao_ssp245_2020_2100_depthmax",
+        "path": "data/interim/bio_oracle/cleaning/thetao_ssp245_2020_2100_depthmax/20261009T163949Z_all-variables.nc",
+        "bytes": 13166304,
+        "sha256": "8d0c90e970a95bea41faa58d7c62458ec73fc2ee1385080ceb7f87c1ded8e5e4",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "thetao_ssp245_2020_2100_depthmean",
+        "path": "data/interim/bio_oracle/cleaning/thetao_ssp245_2020_2100_depthmean/20261009T163959Z_all-variables.nc",
+        "bytes": 13166308,
+        "sha256": "9abb486ed7d2cf3ee2202f7f72a07bb887519565ff76e4d1377640574c5248b0",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "thetao_ssp245_2020_2100_depthmin",
+        "path": "data/interim/bio_oracle/cleaning/thetao_ssp245_2020_2100_depthmin/20261009T164010Z_all-variables.nc",
+        "bytes": 13166304,
+        "sha256": "9074aa66f206e1b48c92d8b4ccc5b9d2d3a6add6e4a8837adeb8a2712c6fdd5d",
+        "variable_mappings_checked": 7
+      },
+      {
+        "dataset_id": "thetao_ssp245_2020_2100_depthsurf",
+        "path": "data/interim/bio_oracle/cleaning/thetao_ssp245_2020_2100_depthsurf/20261009T164022Z_all-variables.nc",
+        "bytes": 13166308,
+        "sha256": "c4b6f8d5d7b8da5f11b9bc6d22bff4a3c14c2ead3a3dba80c0d587ddc2bec2d2",
+        "variable_mappings_checked": 7
+      }
+    ]
+  },
+  "source_metadata_issues": [
+    "2020-2026 samples use Bio-ORACLE SSP245 2020 values as a projection-based temporal assumption, not annual observed conditions.",
+    "Baseline products are decadal summaries; exact averaging windows remain unresolved for some products in the existing integration record.",
+    "Integration-catalogue quarantines remain null; no missing or quarantined measurement is replaced with zero or an invented value."
+  ],
+  "focal_species": [
+    {
+      "species_id": 137109,
+      "scientific_name": "Stenella longirostris",
+      "source_name_values": [
+        "Stenella longirostris"
+      ],
+      "focal_aphiaid_rows": 82,
+      "verified_species_rank_presence_rows": 79,
+      "verified_species_rank_presence_cells": 29,
+      "protected_recorded_presence_cells_all_periods": 32,
+      "minimum_occupied_cell_gate": 10,
+      "status": "candidate_eligible"
+    },
+    {
+      "species_id": 220293,
+      "scientific_name": "Lepidochelys olivacea",
+      "source_name_values": [
+        "Lepidochelys olivacea"
+      ],
+      "focal_aphiaid_rows": 83,
+      "verified_species_rank_presence_rows": 83,
+      "verified_species_rank_presence_cells": 62,
+      "protected_recorded_presence_cells_all_periods": 62,
+      "minimum_occupied_cell_gate": 10,
+      "status": "candidate_eligible"
+    },
+    {
+      "species_id": 137206,
+      "scientific_name": "Chelonia mydas",
+      "source_name_values": [
+        "Chelonia mydas"
+      ],
+      "focal_aphiaid_rows": 114,
+      "verified_species_rank_presence_rows": 114,
+      "verified_species_rank_presence_cells": 65,
+      "protected_recorded_presence_cells_all_periods": 65,
+      "minimum_occupied_cell_gate": 10,
+      "status": "candidate_eligible"
+    }
+  ],
+  "per_species_period": [
+    {
+      "species": "Stenella longirostris",
+      "species_id": 137109,
+      "period": "2000-2009",
+      "environment_period": "baseline_2000",
+      "status": "no_eligible_positive_cells",
+      "original_focal_id_observations": 2,
+      "original_occupied_cells": 2,
+      "verified_species_rank_presence_observations": 0,
+      "verified_species_rank_presence_cells": 0,
+      "cells_excluded_centre_not_gshhg_water": 0,
+      "observations_in_cells_excluded_centre_not_gshhg_water": 0,
+      "cells_excluded_missing_core_environment": 0,
+      "observations_in_cells_excluded_missing_core_environment": 0,
+      "eligible_positive_cells": 0,
+      "positive_observation_records_represented": 0,
+      "unique_source_rows_represented": 0,
+      "positional_confidence_counts_for_positive_source_rows": {},
+      "core_features_required": 6,
+      "core_complete_positive_cells": 0,
+      "background_candidate_pool": 24455,
+      "background_requested": 0,
+      "background_generated": 0,
+      "sampling_shortfall": 0,
+      "achieved_background_to_positive_ratio": null
+    },
+    {
+      "species": "Stenella longirostris",
+      "species_id": 137109,
+      "period": "2010-2019",
+      "environment_period": "baseline_2010",
+      "status": "generated",
+      "original_focal_id_observations": 19,
+      "original_occupied_cells": 11,
+      "verified_species_rank_presence_observations": 19,
+      "verified_species_rank_presence_cells": 11,
+      "cells_excluded_centre_not_gshhg_water": 0,
+      "observations_in_cells_excluded_centre_not_gshhg_water": 0,
+      "cells_excluded_missing_core_environment": 0,
+      "observations_in_cells_excluded_missing_core_environment": 0,
+      "eligible_positive_cells": 11,
+      "positive_observation_records_represented": 19,
+      "unique_source_rows_represented": 19,
+      "positional_confidence_counts_for_positive_source_rows": {
+        "known_footprint_crosses_coast_or_land": 10,
+        "known_footprint_marine": 6,
+        "unknown_uncertainty": 3
+      },
+      "core_features_required": 6,
+      "core_complete_positive_cells": 11,
+      "background_candidate_pool": 24455,
+      "background_requested": 11,
+      "background_generated": 11,
+      "sampling_shortfall": 0,
+      "achieved_background_to_positive_ratio": 1.0
+    },
+    {
+      "species": "Stenella longirostris",
+      "species_id": 137109,
+      "period": "2020-2026",
+      "environment_period": "ssp245_2020",
+      "status": "generated",
+      "original_focal_id_observations": 61,
+      "original_occupied_cells": 25,
+      "verified_species_rank_presence_observations": 60,
+      "verified_species_rank_presence_cells": 24,
+      "cells_excluded_centre_not_gshhg_water": 0,
+      "observations_in_cells_excluded_centre_not_gshhg_water": 0,
+      "cells_excluded_missing_core_environment": 0,
+      "observations_in_cells_excluded_missing_core_environment": 0,
+      "eligible_positive_cells": 24,
+      "positive_observation_records_represented": 60,
+      "unique_source_rows_represented": 60,
+      "positional_confidence_counts_for_positive_source_rows": {
+        "known_footprint_crosses_coast_or_land": 23,
+        "known_footprint_marine": 27,
+        "unknown_uncertainty": 10
+      },
+      "core_features_required": 6,
+      "core_complete_positive_cells": 24,
+      "background_candidate_pool": 24455,
+      "background_requested": 24,
+      "background_generated": 24,
+      "sampling_shortfall": 0,
+      "achieved_background_to_positive_ratio": 1.0
+    },
+    {
+      "species": "Lepidochelys olivacea",
+      "species_id": 220293,
+      "period": "2000-2009",
+      "environment_period": "baseline_2000",
+      "status": "no_eligible_positive_cells",
+      "original_focal_id_observations": 0,
+      "original_occupied_cells": 0,
+      "verified_species_rank_presence_observations": 0,
+      "verified_species_rank_presence_cells": 0,
+      "cells_excluded_centre_not_gshhg_water": 0,
+      "observations_in_cells_excluded_centre_not_gshhg_water": 0,
+      "cells_excluded_missing_core_environment": 0,
+      "observations_in_cells_excluded_missing_core_environment": 0,
+      "eligible_positive_cells": 0,
+      "positive_observation_records_represented": 0,
+      "unique_source_rows_represented": 0,
+      "positional_confidence_counts_for_positive_source_rows": {},
+      "core_features_required": 6,
+      "core_complete_positive_cells": 0,
+      "background_candidate_pool": 24428,
+      "background_requested": 0,
+      "background_generated": 0,
+      "sampling_shortfall": 0,
+      "achieved_background_to_positive_ratio": null
+    },
+    {
+      "species": "Lepidochelys olivacea",
+      "species_id": 220293,
+      "period": "2010-2019",
+      "environment_period": "baseline_2010",
+      "status": "generated",
+      "original_focal_id_observations": 41,
+      "original_occupied_cells": 35,
+      "verified_species_rank_presence_observations": 41,
+      "verified_species_rank_presence_cells": 35,
+      "cells_excluded_centre_not_gshhg_water": 0,
+      "observations_in_cells_excluded_centre_not_gshhg_water": 0,
+      "cells_excluded_missing_core_environment": 0,
+      "observations_in_cells_excluded_missing_core_environment": 0,
+      "eligible_positive_cells": 35,
+      "positive_observation_records_represented": 41,
+      "unique_source_rows_represented": 41,
+      "positional_confidence_counts_for_positive_source_rows": {
+        "known_footprint_crosses_coast_or_land": 18,
+        "known_footprint_marine": 14,
+        "known_footprint_outside_reference_extent": 9
+      },
+      "core_features_required": 6,
+      "core_complete_positive_cells": 35,
+      "background_candidate_pool": 24428,
+      "background_requested": 35,
+      "background_generated": 35,
+      "sampling_shortfall": 0,
+      "achieved_background_to_positive_ratio": 1.0
+    },
+    {
+      "species": "Lepidochelys olivacea",
+      "species_id": 220293,
+      "period": "2020-2026",
+      "environment_period": "ssp245_2020",
+      "status": "generated",
+      "original_focal_id_observations": 42,
+      "original_occupied_cells": 31,
+      "verified_species_rank_presence_observations": 42,
+      "verified_species_rank_presence_cells": 31,
+      "cells_excluded_centre_not_gshhg_water": 3,
+      "observations_in_cells_excluded_centre_not_gshhg_water": 3,
+      "cells_excluded_missing_core_environment": 0,
+      "observations_in_cells_excluded_missing_core_environment": 0,
+      "eligible_positive_cells": 28,
+      "positive_observation_records_represented": 39,
+      "unique_source_rows_represented": 39,
+      "positional_confidence_counts_for_positive_source_rows": {
+        "known_footprint_crosses_coast_or_land": 38,
+        "known_footprint_outside_reference_extent": 1
+      },
+      "core_features_required": 6,
+      "core_complete_positive_cells": 28,
+      "background_candidate_pool": 24428,
+      "background_requested": 28,
+      "background_generated": 28,
+      "sampling_shortfall": 0,
+      "achieved_background_to_positive_ratio": 1.0
+    },
+    {
+      "species": "Chelonia mydas",
+      "species_id": 137206,
+      "period": "2000-2009",
+      "environment_period": "baseline_2000",
+      "status": "generated",
+      "original_focal_id_observations": 13,
+      "original_occupied_cells": 13,
+      "verified_species_rank_presence_observations": 13,
+      "verified_species_rank_presence_cells": 13,
+      "cells_excluded_centre_not_gshhg_water": 0,
+      "observations_in_cells_excluded_centre_not_gshhg_water": 0,
+      "cells_excluded_missing_core_environment": 0,
+      "observations_in_cells_excluded_missing_core_environment": 0,
+      "eligible_positive_cells": 13,
+      "positive_observation_records_represented": 13,
+      "unique_source_rows_represented": 13,
+      "positional_confidence_counts_for_positive_source_rows": {
+        "known_footprint_crosses_coast_or_land": 5,
+        "known_footprint_marine": 4,
+        "known_footprint_outside_reference_extent": 4
+      },
+      "core_features_required": 6,
+      "core_complete_positive_cells": 13,
+      "background_candidate_pool": 24426,
+      "background_requested": 13,
+      "background_generated": 13,
+      "sampling_shortfall": 0,
+      "achieved_background_to_positive_ratio": 1.0
+    },
+    {
+      "species": "Chelonia mydas",
+      "species_id": 137206,
+      "period": "2010-2019",
+      "environment_period": "baseline_2010",
+      "status": "generated",
+      "original_focal_id_observations": 24,
+      "original_occupied_cells": 20,
+      "verified_species_rank_presence_observations": 24,
+      "verified_species_rank_presence_cells": 20,
+      "cells_excluded_centre_not_gshhg_water": 2,
+      "observations_in_cells_excluded_centre_not_gshhg_water": 2,
+      "cells_excluded_missing_core_environment": 0,
+      "observations_in_cells_excluded_missing_core_environment": 0,
+      "eligible_positive_cells": 18,
+      "positive_observation_records_represented": 22,
+      "unique_source_rows_represented": 22,
+      "positional_confidence_counts_for_positive_source_rows": {
+        "known_footprint_crosses_coast_or_land": 22
+      },
+      "core_features_required": 6,
+      "core_complete_positive_cells": 18,
+      "background_candidate_pool": 24426,
+      "background_requested": 18,
+      "background_generated": 18,
+      "sampling_shortfall": 0,
+      "achieved_background_to_positive_ratio": 1.0
+    },
+    {
+      "species": "Chelonia mydas",
+      "species_id": 137206,
+      "period": "2020-2026",
+      "environment_period": "ssp245_2020",
+      "status": "generated",
+      "original_focal_id_observations": 77,
+      "original_occupied_cells": 42,
+      "verified_species_rank_presence_observations": 77,
+      "verified_species_rank_presence_cells": 42,
+      "cells_excluded_centre_not_gshhg_water": 2,
+      "observations_in_cells_excluded_centre_not_gshhg_water": 2,
+      "cells_excluded_missing_core_environment": 0,
+      "observations_in_cells_excluded_missing_core_environment": 0,
+      "eligible_positive_cells": 40,
+      "positive_observation_records_represented": 75,
+      "unique_source_rows_represented": 75,
+      "positional_confidence_counts_for_positive_source_rows": {
+        "known_footprint_crosses_coast_or_land": 75
+      },
+      "core_features_required": 6,
+      "core_complete_positive_cells": 40,
+      "background_candidate_pool": 24426,
+      "background_requested": 40,
+      "background_generated": 40,
+      "sampling_shortfall": 0,
+      "achieved_background_to_positive_ratio": 1.0
+    }
+  ],
+  "output": {
+    "path": "data/interim/pseudo_absence/presence_background_candidates.parquet",
+    "sha256": "525bcea91f224420de23a0a1540c045616fe4d1b6e93a316ab9601877d44d1d6",
+    "content_sha256": "9500583eff23247317085cd88e9a8da14f588a7d29f5152d1b749e5aa826fed6",
+    "bytes": 1150844,
+    "rows": 338,
+    "columns": 397,
+    "positives": 169,
+    "background": 169,
+    "class_balance": {
+      "positive_rows": 169,
+      "background_rows": 169,
+      "background_to_positive_ratio_actual": 1.0
+    },
+    "species_count": 3,
+    "period_count": 3,
+    "unique_grid_cells_overall": 274,
+    "unique_species_cells": 318,
+    "unique_species_cell_period_keys": 338,
+    "species_cells_represented_in_multiple_periods": 20,
+    "environmental_feature_count": 382,
+    "by_species": [
+      {
+        "species_id": 137109,
+        "scientific_name": "Stenella longirostris",
+        "rows": 70,
+        "positive_cells": 35,
+        "background_cells": 35,
+        "distinct_cells": 64
+      },
+      {
+        "species_id": 137206,
+        "scientific_name": "Chelonia mydas",
+        "rows": 142,
+        "positive_cells": 71,
+        "background_cells": 71,
+        "distinct_cells": 132
+      },
+      {
+        "species_id": 220293,
+        "scientific_name": "Lepidochelys olivacea",
+        "rows": 126,
+        "positive_cells": 63,
+        "background_cells": 63,
+        "distinct_cells": 122
+      }
+    ],
+    "environmental_completeness": [
+      {
+        "label": 0,
+        "sample_type": "sampled_background",
+        "period": "2000-2009",
+        "rows": 13,
+        "environmental_positions": 4966,
+        "non_null_environmental_positions": 4329,
+        "null_environmental_positions": 637,
+        "mean_non_null_features_per_row": 333.0,
+        "minimum_non_null_features_per_row": 333,
+        "maximum_non_null_features_per_row": 333,
+        "rows_complete_for_six_core_features": 13
+      },
+      {
+        "label": 0,
+        "sample_type": "sampled_background",
+        "period": "2010-2019",
+        "rows": 64,
+        "environmental_positions": 24448,
+        "non_null_environmental_positions": 21315,
+        "null_environmental_positions": 3133,
+        "mean_non_null_features_per_row": 333.046875,
+        "minimum_non_null_features_per_row": 333,
+        "maximum_non_null_features_per_row": 334,
+        "rows_complete_for_six_core_features": 64
+      },
+      {
+        "label": 0,
+        "sample_type": "sampled_background",
+        "period": "2020-2026",
+        "rows": 92,
+        "environmental_positions": 35144,
+        "non_null_environmental_positions": 32112,
+        "null_environmental_positions": 3032,
+        "mean_non_null_features_per_row": 349.04347826086956,
+        "minimum_non_null_features_per_row": 349,
+        "maximum_non_null_features_per_row": 350,
+        "rows_complete_for_six_core_features": 92
+      },
+      {
+        "label": 1,
+        "sample_type": "observed_presence",
+        "period": "2000-2009",
+        "rows": 13,
+        "environmental_positions": 4966,
+        "non_null_environmental_positions": 4329,
+        "null_environmental_positions": 637,
+        "mean_non_null_features_per_row": 333.0,
+        "minimum_non_null_features_per_row": 333,
+        "maximum_non_null_features_per_row": 333,
+        "rows_complete_for_six_core_features": 13
+      },
+      {
+        "label": 1,
+        "sample_type": "observed_presence",
+        "period": "2010-2019",
+        "rows": 64,
+        "environmental_positions": 24448,
+        "non_null_environmental_positions": 21330,
+        "null_environmental_positions": 3118,
+        "mean_non_null_features_per_row": 333.28125,
+        "minimum_non_null_features_per_row": 333,
+        "maximum_non_null_features_per_row": 334,
+        "rows_complete_for_six_core_features": 64
+      },
+      {
+        "label": 1,
+        "sample_type": "observed_presence",
+        "period": "2020-2026",
+        "rows": 92,
+        "environmental_positions": 35144,
+        "non_null_environmental_positions": 32140,
+        "null_environmental_positions": 3004,
+        "mean_non_null_features_per_row": 349.3478260869565,
+        "minimum_non_null_features_per_row": 349,
+        "maximum_non_null_features_per_row": 350,
+        "rows_complete_for_six_core_features": 92
+      }
+    ],
+    "quarantined_feature_period_checks": [
+      {
+        "feature": "bio_oracle__clt_sd__depthsurf",
+        "period": "ssp245_2020",
+        "reason": "Original clt_sd exceeds one despite dimensionless cloud-fraction metadata; scale/statistic unresolved.",
+        "output_rows_checked": 184,
+        "finite_output_values": 0
+      },
+      {
+        "feature": "bio_oracle__tas_ltmax__depthsurf",
+        "period": "baseline_2000",
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved.",
+        "output_rows_checked": 26,
+        "finite_output_values": 0
+      },
+      {
+        "feature": "bio_oracle__tas_ltmax__depthsurf",
+        "period": "baseline_2010",
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved.",
+        "output_rows_checked": 128,
+        "finite_output_values": 0
+      },
+      {
+        "feature": "bio_oracle__tas_ltmin__depthsurf",
+        "period": "baseline_2000",
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved.",
+        "output_rows_checked": 26,
+        "finite_output_values": 0
+      },
+      {
+        "feature": "bio_oracle__tas_ltmin__depthsurf",
+        "period": "baseline_2010",
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved.",
+        "output_rows_checked": 128,
+        "finite_output_values": 0
+      },
+      {
+        "feature": "bio_oracle__tas_max__depthsurf",
+        "period": "baseline_2000",
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved.",
+        "output_rows_checked": 26,
+        "finite_output_values": 0
+      },
+      {
+        "feature": "bio_oracle__tas_max__depthsurf",
+        "period": "baseline_2010",
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved.",
+        "output_rows_checked": 128,
+        "finite_output_values": 0
+      },
+      {
+        "feature": "bio_oracle__tas_mean__depthsurf",
+        "period": "baseline_2000",
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved.",
+        "output_rows_checked": 26,
+        "finite_output_values": 0
+      },
+      {
+        "feature": "bio_oracle__tas_mean__depthsurf",
+        "period": "baseline_2010",
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved.",
+        "output_rows_checked": 128,
+        "finite_output_values": 0
+      },
+      {
+        "feature": "bio_oracle__tas_min__depthsurf",
+        "period": "baseline_2000",
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved.",
+        "output_rows_checked": 26,
+        "finite_output_values": 0
+      },
+      {
+        "feature": "bio_oracle__tas_min__depthsurf",
+        "period": "baseline_2010",
+        "reason": "Original baseline tas payload is Celsius-like but declares Kelvin; publisher interpretation unresolved.",
+        "output_rows_checked": 128,
+        "finite_output_values": 0
+      },
+      {
+        "feature": "bio_oracle__tas_range__depthsurf",
+        "period": "baseline_2000",
+        "reason": "Original tas_range equals max-minus-min minus 273.15; range offset is scientifically unresolved.",
+        "output_rows_checked": 26,
+        "finite_output_values": 0
+      },
+      {
+        "feature": "bio_oracle__tas_range__depthsurf",
+        "period": "baseline_2010",
+        "reason": "Original tas_range equals max-minus-min minus 273.15; range offset is scientifically unresolved.",
+        "output_rows_checked": 128,
+        "finite_output_values": 0
+      },
+      {
+        "feature": "bio_oracle__tas_range__depthsurf",
+        "period": "ssp245_2020",
+        "reason": "Original tas_range equals max-minus-min minus 273.15; range offset is scientifically unresolved.",
+        "output_rows_checked": 184,
+        "finite_output_values": 0
+      }
+    ],
+    "geoparquet": {
+      "rows": 338,
+      "columns": 397,
+      "geoparquet_version": "1.1.0",
+      "geometry_encoding": "WKB",
+      "geometry_types": [
+        "Point"
+      ],
+      "crs_authority": "EPSG",
+      "crs_code": 4326,
+      "compression": [
+        "ZSTD"
+      ]
+    },
+    "all_geometries_are_valid_points": true
+  },
+  "environmental_value_checks": {
+    "positive_source_rows_checked_against_netcdf": 269,
+    "positive_source_positions_checked": 102758,
+    "output_rows_checked_against_netcdf_slices": 338,
+    "output_positions_checked": 129116,
+    "numerical_mismatches": 0,
+    "null_fill_discrepancies": 0,
+    "maximum_absolute_difference": 0.0,
+    "scale_offset_handling": "netCDF4 automatic masking/scaling is enabled for source reads; Script 08's harmonizer operates on already-decoded values; no scale_factor or add_offset is applied again."
+  },
+  "background_checks": {
+    "background_centres_in_gshhg_water": 169,
+    "background_centres_outside_gshhg_water": 0,
+    "background_cells_overlapping_any_same_species_recorded_presence_across_periods": 0,
+    "background_rows_with_all_six_core_features": 169,
+    "candidate_pools_and_shortfalls_reported_per_species_period": true,
+    "spatial_separation_by_species_period": [
+      {
+        "species": "Stenella longirostris",
+        "species_id": 137109,
+        "period": "2010-2019",
+        "background_cells_with_nearest_presence_distance": 11,
+        "nearest_presence_distance_km_min": 161.83225307899946,
+        "nearest_presence_distance_km_median": 275.80435277003,
+        "nearest_presence_distance_km_max": 651.2123250947039
+      },
+      {
+        "species": "Stenella longirostris",
+        "species_id": 137109,
+        "period": "2020-2026",
+        "background_cells_with_nearest_presence_distance": 24,
+        "nearest_presence_distance_km_min": 23.45741613451201,
+        "nearest_presence_distance_km_median": 246.71481290635688,
+        "nearest_presence_distance_km_max": 447.7295298116201
+      },
+      {
+        "species": "Lepidochelys olivacea",
+        "species_id": 220293,
+        "period": "2010-2019",
+        "background_cells_with_nearest_presence_distance": 35,
+        "nearest_presence_distance_km_min": 11.119497418964087,
+        "nearest_presence_distance_km_median": 56.68572682272254,
+        "nearest_presence_distance_km_max": 286.00722130669186
+      },
+      {
+        "species": "Lepidochelys olivacea",
+        "species_id": 220293,
+        "period": "2020-2026",
+        "background_cells_with_nearest_presence_distance": 28,
+        "nearest_presence_distance_km_min": 62.13767961184792,
+        "nearest_presence_distance_km_median": 218.44961436311343,
+        "nearest_presence_distance_km_max": 447.90687591227396
+      },
+      {
+        "species": "Chelonia mydas",
+        "species_id": 137206,
+        "period": "2000-2009",
+        "background_cells_with_nearest_presence_distance": 13,
+        "nearest_presence_distance_km_min": 32.34359802973794,
+        "nearest_presence_distance_km_median": 166.64252594964722,
+        "nearest_presence_distance_km_max": 360.0961591388634
+      },
+      {
+        "species": "Chelonia mydas",
+        "species_id": 137206,
+        "period": "2010-2019",
+        "background_cells_with_nearest_presence_distance": 18,
+        "nearest_presence_distance_km_min": 46.9439748434644,
+        "nearest_presence_distance_km_median": 257.55940911995185,
+        "nearest_presence_distance_km_max": 570.8286223281301
+      },
+      {
+        "species": "Chelonia mydas",
+        "species_id": 137206,
+        "period": "2020-2026",
+        "background_cells_with_nearest_presence_distance": 40,
+        "nearest_presence_distance_km_min": 66.75509357908857,
+        "nearest_presence_distance_km_median": 299.28144746118056,
+        "nearest_presence_distance_km_max": 446.5811166055345
+      }
+    ],
+    "spatial_separation_and_core_feature_profiles": [
+      {
+        "species": "Stenella longirostris",
+        "species_id": 137109,
+        "period": "2010-2019",
+        "feature": "bio_oracle__thetao_mean__depthsurf",
+        "positive_mean": 28.33410817697135,
+        "positive_median": 28.34627546309384,
+        "background_mean": 28.888443461627688,
+        "background_median": 28.93798064778744,
+        "mean_difference_background_minus_positive": 0.5543352846563394
+      },
+      {
+        "species": "Stenella longirostris",
+        "species_id": 137109,
+        "period": "2010-2019",
+        "feature": "bio_oracle__so_mean__depthsurf",
+        "positive_mean": 33.84006009166304,
+        "positive_median": 33.83614810165622,
+        "background_mean": 33.794991190935974,
+        "background_median": 33.741965496713,
+        "mean_difference_background_minus_positive": -0.04506890072706682
+      },
+      {
+        "species": "Stenella longirostris",
+        "species_id": 137109,
+        "period": "2010-2019",
+        "feature": "bio_oracle__o2_mean__depthsurf",
+        "positive_mean": 202.8062328585038,
+        "positive_median": 202.78417884982267,
+        "background_mean": 201.4898842740954,
+        "background_median": 201.74231405762117,
+        "mean_difference_background_minus_positive": -1.316348584408388
+      },
+      {
+        "species": "Stenella longirostris",
+        "species_id": 137109,
+        "period": "2010-2019",
+        "feature": "bio_oracle__chl_mean__depthsurf",
+        "positive_mean": 0.27351725838435054,
+        "positive_median": 0.27347114799171773,
+        "background_mean": 0.15274863125854668,
+        "background_median": 0.14546128691070656,
+        "mean_difference_background_minus_positive": -0.12076862712580386
+      },
+      {
+        "species": "Stenella longirostris",
+        "species_id": 137109,
+        "period": "2010-2019",
+        "feature": "bio_oracle__ph_mean__depthsurf",
+        "positive_mean": 8.040620140228617,
+        "positive_median": 8.040644945575352,
+        "background_mean": 8.042946402211212,
+        "background_median": 8.04303789138794,
+        "mean_difference_background_minus_positive": 0.0023262619825956676
+      },
+      {
+        "species": "Stenella longirostris",
+        "species_id": 137109,
+        "period": "2010-2019",
+        "feature": "bio_oracle__bathymetry_mean__benthic",
+        "positive_mean": -365.6868645061146,
+        "positive_median": -87.88888549804688,
+        "background_mean": -3287.63633034446,
+        "background_median": -3471.25,
+        "mean_difference_background_minus_positive": -2921.9494658383455
+      },
+      {
+        "species": "Stenella longirostris",
+        "species_id": 137109,
+        "period": "2020-2026",
+        "feature": "bio_oracle__thetao_mean__depthsurf",
+        "positive_mean": 28.846227007542733,
+        "positive_median": 28.735469667602047,
+        "background_mean": 29.17648405867217,
+        "background_median": 29.169676812414224,
+        "mean_difference_background_minus_positive": 0.33025705112943626
+      },
+      {
+        "species": "Stenella longirostris",
+        "species_id": 137109,
+        "period": "2020-2026",
+        "feature": "bio_oracle__so_mean__depthsurf",
+        "positive_mean": 33.64212891579334,
+        "positive_median": 33.85222388460336,
+        "background_mean": 34.008398977191824,
+        "background_median": 34.12385707511426,
+        "mean_difference_background_minus_positive": 0.36627006139848106
+      },
+      {
+        "species": "Stenella longirostris",
+        "species_id": 137109,
+        "period": "2020-2026",
+        "feature": "bio_oracle__o2_mean__depthsurf",
+        "positive_mean": 201.75045084067654,
+        "positive_median": 202.0485830998358,
+        "background_mean": 200.22598199931076,
+        "background_median": 200.01600951451303,
+        "mean_difference_background_minus_positive": -1.524468841365774
+      },
+      {
+        "species": "Stenella longirostris",
+        "species_id": 137109,
+        "period": "2020-2026",
+        "feature": "bio_oracle__chl_mean__depthsurf",
+        "positive_mean": 0.23454170036076713,
+        "positive_median": 0.26625419796737876,
+        "background_mean": 0.15715505105135272,
+        "background_median": 0.13645695485337078,
+        "mean_difference_background_minus_positive": -0.07738664930941441
+      },
+      {
+        "species": "Stenella longirostris",
+        "species_id": 137109,
+        "period": "2020-2026",
+        "feature": "bio_oracle__ph_mean__depthsurf",
+        "positive_mean": 8.028467598774535,
+        "positive_median": 8.02688475540774,
+        "background_mean": 8.027195206391417,
+        "background_median": 8.026566096489006,
+        "mean_difference_background_minus_positive": -0.0012723923831181594
+      },
+      {
+        "species": "Stenella longirostris",
+        "species_id": 137109,
+        "period": "2020-2026",
+        "feature": "bio_oracle__bathymetry_mean__benthic",
+        "positive_mean": -601.8298590183258,
+        "positive_median": -141.11111450195312,
+        "background_mean": -3116.530070821444,
+        "background_median": -3567.0277099609375,
+        "mean_difference_background_minus_positive": -2514.7002118031182
+      },
+      {
+        "species": "Lepidochelys olivacea",
+        "species_id": 220293,
+        "period": "2010-2019",
+        "feature": "bio_oracle__thetao_mean__depthsurf",
+        "positive_mean": 28.789314225958762,
+        "positive_median": 28.907010157459823,
+        "background_mean": 28.928407028842898,
+        "background_median": 28.954332947530876,
+        "mean_difference_background_minus_positive": 0.13909280288413584
+      },
+      {
+        "species": "Lepidochelys olivacea",
+        "species_id": 220293,
+        "period": "2010-2019",
+        "feature": "bio_oracle__so_mean__depthsurf",
+        "positive_mean": 33.909632461721095,
+        "positive_median": 33.84554498719082,
+        "background_mean": 33.82314607377311,
+        "background_median": 33.75812715132269,
+        "mean_difference_background_minus_positive": -0.08648638794798558
+      },
+      {
+        "species": "Lepidochelys olivacea",
+        "species_id": 220293,
+        "period": "2010-2019",
+        "feature": "bio_oracle__o2_mean__depthsurf",
+        "positive_mean": 201.62102512880125,
+        "positive_median": 201.52844971846955,
+        "background_mean": 201.2157394269569,
+        "background_median": 201.05981878489254,
+        "mean_difference_background_minus_positive": -0.405285701844349
+      },
+      {
+        "species": "Lepidochelys olivacea",
+        "species_id": 220293,
+        "period": "2010-2019",
+        "feature": "bio_oracle__chl_mean__depthsurf",
+        "positive_mean": 0.18204610768498916,
+        "positive_median": 0.148269398829894,
+        "background_mean": 0.15935725830962405,
+        "background_median": 0.13708427326670886,
+        "mean_difference_background_minus_positive": -0.02268884937536511
+      },
+      {
+        "species": "Lepidochelys olivacea",
+        "species_id": 220293,
+        "period": "2010-2019",
+        "feature": "bio_oracle__ph_mean__depthsurf",
+        "positive_mean": 8.041560494162065,
+        "positive_median": 8.040935892304077,
+        "background_mean": 8.042366976005832,
+        "background_median": 8.04203572678814,
+        "mean_difference_background_minus_positive": 0.0008064818437674148
+      },
+      {
+        "species": "Lepidochelys olivacea",
+        "species_id": 220293,
+        "period": "2010-2019",
+        "feature": "bio_oracle__bathymetry_mean__benthic",
+        "positive_mean": -2994.189683205741,
+        "positive_median": -3724.4443359375,
+        "background_mean": -3245.330964115688,
+        "background_median": -3714.02783203125,
+        "mean_difference_background_minus_positive": -251.141280909947
+      },
+      {
+        "species": "Lepidochelys olivacea",
+        "species_id": 220293,
+        "period": "2020-2026",
+        "feature": "bio_oracle__thetao_mean__depthsurf",
+        "positive_mean": 28.822871684683374,
+        "positive_median": 28.683267971293645,
+        "background_mean": 29.135639542890413,
+        "background_median": 29.17824015924011,
+        "mean_difference_background_minus_positive": 0.3127678582070388
+      },
+      {
+        "species": "Lepidochelys olivacea",
+        "species_id": 220293,
+        "period": "2020-2026",
+        "feature": "bio_oracle__so_mean__depthsurf",
+        "positive_mean": 33.858921299071675,
+        "positive_median": 33.86190348054137,
+        "background_mean": 34.102712944134346,
+        "background_median": 34.2823723855514,
+        "mean_difference_background_minus_positive": 0.2437916450626716
+      },
+      {
+        "species": "Lepidochelys olivacea",
+        "species_id": 220293,
+        "period": "2020-2026",
+        "feature": "bio_oracle__o2_mean__depthsurf",
+        "positive_mean": 201.80312299920953,
+        "positive_median": 202.0869302077216,
+        "background_mean": 200.23152380722303,
+        "background_median": 200.19420008311639,
+        "mean_difference_background_minus_positive": -1.5715991919865075
+      },
+      {
+        "species": "Lepidochelys olivacea",
+        "species_id": 220293,
+        "period": "2020-2026",
+        "feature": "bio_oracle__chl_mean__depthsurf",
+        "positive_mean": 0.2700277466480547,
+        "positive_median": 0.2708368605133015,
+        "background_mean": 0.17453972695415604,
+        "background_median": 0.13904358118924368,
+        "mean_difference_background_minus_positive": -0.09548801969389864
+      },
+      {
+        "species": "Lepidochelys olivacea",
+        "species_id": 220293,
+        "period": "2020-2026",
+        "feature": "bio_oracle__ph_mean__depthsurf",
+        "positive_mean": 8.026346311125183,
+        "positive_median": 8.026810115195735,
+        "background_mean": 8.026518758367967,
+        "background_median": 8.026902583492069,
+        "mean_difference_background_minus_positive": 0.00017244724278420165
+      },
+      {
+        "species": "Lepidochelys olivacea",
+        "species_id": 220293,
+        "period": "2020-2026",
+        "feature": "bio_oracle__bathymetry_mean__benthic",
+        "positive_mean": -381.9980159146445,
+        "positive_median": -71.6944465637207,
+        "background_mean": -3586.654768160411,
+        "background_median": -3993.0416259765625,
+        "mean_difference_background_minus_positive": -3204.6567522457667
+      },
+      {
+        "species": "Chelonia mydas",
+        "species_id": 137206,
+        "period": "2000-2009",
+        "feature": "bio_oracle__thetao_mean__depthsurf",
+        "positive_mean": 28.7003640141072,
+        "positive_median": 28.763618871726038,
+        "background_mean": 28.75049821123072,
+        "background_median": 28.818115320422443,
+        "mean_difference_background_minus_positive": 0.050134197123519186
+      },
+      {
+        "species": "Chelonia mydas",
+        "species_id": 137206,
+        "period": "2000-2009",
+        "feature": "bio_oracle__so_mean__depthsurf",
+        "positive_mean": 34.0855584365346,
+        "positive_median": 34.02668654709397,
+        "background_mean": 34.2188138709792,
+        "background_median": 34.28770933986375,
+        "mean_difference_background_minus_positive": 0.13325543444459953
+      },
+      {
+        "species": "Chelonia mydas",
+        "species_id": 137206,
+        "period": "2000-2009",
+        "feature": "bio_oracle__o2_mean__depthsurf",
+        "positive_mean": 201.55543453500087,
+        "positive_median": 201.4553243815541,
+        "background_mean": 201.45537535466553,
+        "background_median": 201.10703666559135,
+        "mean_difference_background_minus_positive": -0.1000591803353359
+      },
+      {
+        "species": "Chelonia mydas",
+        "species_id": 137206,
+        "period": "2000-2009",
+        "feature": "bio_oracle__chl_mean__depthsurf",
+        "positive_mean": 0.16437837431110652,
+        "positive_median": 0.1449368728061635,
+        "background_mean": 0.1799958628119973,
+        "background_median": 0.14720265299097038,
+        "mean_difference_background_minus_positive": 0.015617488500890786
+      },
+      {
+        "species": "Chelonia mydas",
+        "species_id": 137206,
+        "period": "2000-2009",
+        "feature": "bio_oracle__ph_mean__depthsurf",
+        "positive_mean": 8.058310038277215,
+        "positive_median": 8.058737106323587,
+        "background_mean": 8.054374462256842,
+        "background_median": 8.053558863387725,
+        "mean_difference_background_minus_positive": -0.003935576020372977
+      },
+      {
+        "species": "Chelonia mydas",
+        "species_id": 137206,
+        "period": "2000-2009",
+        "feature": "bio_oracle__bathymetry_mean__benthic",
+        "positive_mean": -3843.974346454327,
+        "positive_median": -3819.6943359375,
+        "background_mean": -3317.5533874951875,
+        "background_median": -3729.666748046875,
+        "mean_difference_background_minus_positive": 526.4209589591396
+      },
+      {
+        "species": "Chelonia mydas",
+        "species_id": 137206,
+        "period": "2010-2019",
+        "feature": "bio_oracle__thetao_mean__depthsurf",
+        "positive_mean": 28.63870627222642,
+        "positive_median": 28.647811992854397,
+        "background_mean": 28.96099365850093,
+        "background_median": 28.97934860873702,
+        "mean_difference_background_minus_positive": 0.32228738627451037
+      },
+      {
+        "species": "Chelonia mydas",
+        "species_id": 137206,
+        "period": "2010-2019",
+        "feature": "bio_oracle__so_mean__depthsurf",
+        "positive_mean": 33.76619571551801,
+        "positive_median": 33.843926487949666,
+        "background_mean": 33.848463249050646,
+        "background_median": 33.65159083041678,
+        "mean_difference_background_minus_positive": 0.0822675335326366
+      },
+      {
+        "species": "Chelonia mydas",
+        "species_id": 137206,
+        "period": "2010-2019",
+        "feature": "bio_oracle__o2_mean__depthsurf",
+        "positive_mean": 202.59946738109866,
+        "positive_median": 202.94903460230233,
+        "background_mean": 201.02489392405255,
+        "background_median": 200.90556822742502,
+        "mean_difference_background_minus_positive": -1.5745734570461138
+      },
+      {
+        "species": "Chelonia mydas",
+        "species_id": 137206,
+        "period": "2010-2019",
+        "feature": "bio_oracle__chl_mean__depthsurf",
+        "positive_mean": 0.28370417927732683,
+        "positive_median": 0.28611425138654256,
+        "background_mean": 0.15634509534059166,
+        "background_median": 0.13517360590583333,
+        "mean_difference_background_minus_positive": -0.12735908393673517
+      },
+      {
+        "species": "Chelonia mydas",
+        "species_id": 137206,
+        "period": "2010-2019",
+        "feature": "bio_oracle__ph_mean__depthsurf",
+        "positive_mean": 8.039955852789419,
+        "positive_median": 8.040290788120537,
+        "background_mean": 8.042205899644992,
+        "background_median": 8.0424641994157,
+        "mean_difference_background_minus_positive": 0.0022500468555737285
+      },
+      {
+        "species": "Chelonia mydas",
+        "species_id": 137206,
+        "period": "2010-2019",
+        "feature": "bio_oracle__bathymetry_mean__benthic",
+        "positive_mean": -134.12191579076978,
+        "positive_median": -39.27777671813965,
+        "background_mean": -3181.5787085957,
+        "background_median": -3640.125,
+        "mean_difference_background_minus_positive": -3047.45679280493
+      },
+      {
+        "species": "Chelonia mydas",
+        "species_id": 137206,
+        "period": "2020-2026",
+        "feature": "bio_oracle__thetao_mean__depthsurf",
+        "positive_mean": 28.67952675162403,
+        "positive_median": 28.640728266895266,
+        "background_mean": 29.14920512472562,
+        "background_median": 29.157081176486148,
+        "mean_difference_background_minus_positive": 0.469678373101587
+      },
+      {
+        "species": "Chelonia mydas",
+        "species_id": 137206,
+        "period": "2020-2026",
+        "feature": "bio_oracle__so_mean__depthsurf",
+        "positive_mean": 33.820682691778686,
+        "positive_median": 33.85841528347995,
+        "background_mean": 34.08340464657129,
+        "background_median": 34.17134095086083,
+        "mean_difference_background_minus_positive": 0.2627219547926032
+      },
+      {
+        "species": "Chelonia mydas",
+        "species_id": 137206,
+        "period": "2020-2026",
+        "feature": "bio_oracle__o2_mean__depthsurf",
+        "positive_mean": 202.16187248534902,
+        "positive_median": 202.1294379344103,
+        "background_mean": 200.20296038209085,
+        "background_median": 199.99428432384497,
+        "mean_difference_background_minus_positive": -1.9589121032581716
+      },
+      {
+        "species": "Chelonia mydas",
+        "species_id": 137206,
+        "period": "2020-2026",
+        "feature": "bio_oracle__chl_mean__depthsurf",
+        "positive_mean": 0.2704576422986765,
+        "positive_median": 0.2724344199794929,
+        "background_mean": 0.16841711542275134,
+        "background_median": 0.13773150836435843,
+        "mean_difference_background_minus_positive": -0.10204052687592519
+      },
+      {
+        "species": "Chelonia mydas",
+        "species_id": 137206,
+        "period": "2020-2026",
+        "feature": "bio_oracle__ph_mean__depthsurf",
+        "positive_mean": 8.027209838083,
+        "positive_median": 8.026843899401985,
+        "background_mean": 8.026444665976035,
+        "background_median": 8.026795320861583,
+        "mean_difference_background_minus_positive": -0.0007651721069645845
+      },
+      {
+        "species": "Chelonia mydas",
+        "species_id": 137206,
+        "period": "2020-2026",
+        "feature": "bio_oracle__bathymetry_mean__benthic",
+        "positive_mean": -271.8729153633118,
+        "positive_median": -61.26388931274414,
+        "background_mean": -3630.339585387707,
+        "background_median": -3922.47216796875,
+        "mean_difference_background_minus_positive": -3358.466670024395
+      }
+    ]
+  },
+  "source_preservation": {
+    "all_five_integration_datasets_unchanged": true,
+    "integration_datasets_before": {
+      "full": {
+        "path": "data/interim/integrated/full/integrated_observations.parquet",
+        "bytes": 7866289,
+        "sha256": "34e756d9fa0d5478da14b6a2d627c16076c486d8e43317363d387d69a661ee34"
+      },
+      "temporal": {
+        "path": "data/interim/integrated/temporal/observations_2000_2026.parquet",
+        "bytes": 5344561,
+        "sha256": "6669327ec1aba406bf8aa8346dc743d1ab721a1237c0266705119881cc21479a"
+      },
+      "marine": {
+        "path": "data/interim/integrated/marine/marine_observations.parquet",
+        "bytes": 2643608,
+        "sha256": "76a2812ae4d031bc9515d15931a2a97221d584b2b24cfad7e1e2fb5e77ba1d49"
+      },
+      "grid": {
+        "path": "data/interim/integrated/gridded/grid_observations.parquet",
+        "bytes": 2647502,
+        "sha256": "71fa9ff9ad959122811ef01117a2157baf0498fbcc1e93bfb340ba87d94d2fc0"
+      },
+      "species_cell_period_summary": {
+        "path": "data/interim/integrated/gridded/species_cell_period_summary.parquet",
+        "bytes": 1646016,
+        "sha256": "eb14bebd83f993894672f143f16a452470cdd1c924c390c3c061b580b8c77433"
+      }
+    },
+    "integration_datasets_after": {
+      "full": {
+        "path": "data/interim/integrated/full/integrated_observations.parquet",
+        "bytes": 7866289,
+        "sha256": "34e756d9fa0d5478da14b6a2d627c16076c486d8e43317363d387d69a661ee34"
+      },
+      "temporal": {
+        "path": "data/interim/integrated/temporal/observations_2000_2026.parquet",
+        "bytes": 5344561,
+        "sha256": "6669327ec1aba406bf8aa8346dc743d1ab721a1237c0266705119881cc21479a"
+      },
+      "marine": {
+        "path": "data/interim/integrated/marine/marine_observations.parquet",
+        "bytes": 2643608,
+        "sha256": "76a2812ae4d031bc9515d15931a2a97221d584b2b24cfad7e1e2fb5e77ba1d49"
+      },
+      "grid": {
+        "path": "data/interim/integrated/gridded/grid_observations.parquet",
+        "bytes": 2647502,
+        "sha256": "71fa9ff9ad959122811ef01117a2157baf0498fbcc1e93bfb340ba87d94d2fc0"
+      },
+      "species_cell_period_summary": {
+        "path": "data/interim/integrated/gridded/species_cell_period_summary.parquet",
+        "bytes": 1646016,
+        "sha256": "eb14bebd83f993894672f143f16a452470cdd1c924c390c3c061b580b8c77433"
+      }
+    },
+    "source_metadata_unchanged": true,
+    "metadata_files_before": {
+      "marine_mask": {
+        "path": "data/interim/geography/sri_lanka_marine_water.gpkg",
+        "bytes": 442368,
+        "sha256": "ef21fe8791b16e314a441480781f9e5e8cb2a47bf3e9030f57e6b2bc0f02ce8e"
+      },
+      "marine_mask_provenance": {
+        "path": "docs/records/2026-10-16-gshhg-marine-reference.json",
+        "bytes": 4021,
+        "sha256": "1d33d45e4f203002648bfca5a1603afff1252a6d5a5473c2ccad16a40a1ce7bf"
+      },
+      "integration_manifest": {
+        "path": "docs/records/2026-10-16-integration-manifest.json",
+        "bytes": 359919,
+        "sha256": "d38557d9bbb2ba746a13cfe950d12cc26f08059579a244e80108400f0931bdcd"
+      },
+      "variable_catalogue": {
+        "path": "docs/records/2026-10-16-integration-variable-catalog.json",
+        "bytes": 772883,
+        "sha256": "fad948b89fa6db1560ea532fec5decf702daefaac799941579962605f16af838"
+      }
+    },
+    "metadata_files_after": {
+      "marine_mask": {
+        "path": "data/interim/geography/sri_lanka_marine_water.gpkg",
+        "bytes": 442368,
+        "sha256": "ef21fe8791b16e314a441480781f9e5e8cb2a47bf3e9030f57e6b2bc0f02ce8e"
+      },
+      "marine_mask_provenance": {
+        "path": "docs/records/2026-10-16-gshhg-marine-reference.json",
+        "bytes": 4021,
+        "sha256": "1d33d45e4f203002648bfca5a1603afff1252a6d5a5473c2ccad16a40a1ce7bf"
+      },
+      "integration_manifest": {
+        "path": "docs/records/2026-10-16-integration-manifest.json",
+        "bytes": 359919,
+        "sha256": "d38557d9bbb2ba746a13cfe950d12cc26f08059579a244e80108400f0931bdcd"
+      },
+      "variable_catalogue": {
+        "path": "docs/records/2026-10-16-integration-variable-catalog.json",
+        "bytes": 772883,
+        "sha256": "fad948b89fa6db1560ea532fec5decf702daefaac799941579962605f16af838"
+      }
+    },
+    "bio_oracle_product_hashes_rechecked": 106,
+    "bio_oracle_product_hash_changes": [],
+    "all_new_data_is_interim": true
+  },
+  "reproducibility": {
+    "previous_output_content_sha256": "9500583eff23247317085cd88e9a8da14f588a7d29f5152d1b749e5aa826fed6",
+    "previous_output_file_sha256": "525bcea91f224420de23a0a1540c045616fe4d1b6e93a316ab9601877d44d1d6",
+    "identical_to_previous_output_content": true,
+    "content_hash_method": "pandas row-content hash over all output columns plus WKB geometry; excludes Parquet file metadata."
+  },
+  "limitations": [
+    "OBIS presence locations reflect uneven reporting and sampling effort; this construction does not correct that bias.",
+    "Uniform background sampling does not model species-specific accessible area or OBIS effort and may create geographic/environmental separation from observed presences.",
+    "The water domain is GSHHG marine water intersected with the Bio-ORACLE collection grid, not a final Sri Lankan EEZ or species-specific accessible-area boundary.",
+    "Policy B retained points despite some known coordinate-uncertainty footprints crossing coast/land or extending beyond reference coverage; source uncertainty categories remain attached to contributing records.",
+    "Repeated records are collapsed within species/cell/period, but the same cell can occur in different periods. Future splits must group shared cells and assess temporal leakage.",
+    "Only six core features are required for candidate eligibility. The remaining 376 feature definitions may be missing or quarantined; no imputation is performed.",
+    "SSP245 2020 is used for 2020-2026 as a projection-based assumption; baseline time-window metadata remains imperfect.",
+    "Some sampled background cells may contain unrecorded true presences. Label 0 is not a confirmed absence.",
+    "The ten-cell gate is only a construction eligibility check and does not establish enough independent locations for reliable spatial evaluation; Stenella longirostris is especially sparse.",
+    "Future model evaluation requires spatially isolated folds that prevent shared-cell leakage; no partition, feature selection, imputation, normalization or model fit is included.",
+    "The three focal taxa are initial candidates only; the output does not establish that all 501 observed species are modelable or that these are final group-selected species."
+  ],
+  "readiness": {
+    "descriptive_eda": "Ready, subject to the limits above and retained quarantine/missingness fields.",
+    "supervised_preprocessing_input": "Ready as a candidate input for a later agreed and leakage-aware preprocessing stage; all 382 features still require review and missing-value handling.",
+    "model_training": "Not approved by this output alone; shared target/domain review, feature selection, preprocessing and spatial validation design remain required."
+  }
+}

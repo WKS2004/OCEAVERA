@@ -37,6 +37,7 @@ the integration step needs both cleaned inputs.
 7. [`07_clean_bio_oracle_layers.py`](data_preparation/07_clean_bio_oracle_layers.py) — verify and publish the current cleaned product bundle.
 8. [`08_integrate_spatiotemporal_data.py`](data_preparation/08_integrate_spatiotemporal_data.py) — join the cleaned occurrences to the selected environmental products.
 9. [`09_filter_and_grid_data.py`](data_preparation/09_filter_and_grid_data.py) — create temporal/marine outputs and grid summaries using the reusable GSHHG reference and recorded uncertainty policy.
+10. [10_construct_pseudo_absences.py](data_preparation/10_construct_pseudo_absences.py) — preserve every Policy B observation, add a distinct matched marine background row per observation and publish a long-format candidate table.
 
 **Current method:** the standard-library [`01_obis_occurrences.py`](data_collection/01_obis_occurrences.py)
 downloads the complete paginated Area 230 response from the OBIS API. It
@@ -273,11 +274,12 @@ evidence and limits.
 
 ## OBIS–Bio-ORACLE spatiotemporal integration
 
-Run the two scripts in the existing WSL OCEAVERA Python 3.14 environment:
+Run Scripts 08–10 in order in the existing WSL OCEAVERA Python 3.14 environment:
 
 ```bash
 python src/data_preparation/08_integrate_spatiotemporal_data.py
 python src/data_preparation/09_filter_and_grid_data.py
+python src/data_preparation/10_construct_pseudo_absences.py
 ```
 
 Script 08 inventories 356 products and reads 106 selected baseline/SSP245/static products. It preserves all 23,371 cleaned OBIS observations and 112 original fields, adds 382 environmental feature columns and writes the full GeoParquet. Actual NetCDF coordinates establish time and grid choices; automatic masking/scaling is applied once.
@@ -291,6 +293,10 @@ The full-resolution GSHHG water mask uses the established collection rectangle w
 All five output tables are interim GeoParquet 1.1.0, EPSG:4326, ZSTD under data/interim/integrated/. Source records and point geometries are preserved. Grid polygons use persisted coordinate-centre midpoints and stable cell IDs. No minimum species/cell thresholds, targets or model preprocessing are applied.
 
 See the [D-054 Policy B decision](../docs/records/2026-10-16-decision-policy-b-marine-water-centre.md), [execution report](../docs/records/2026-10-16-policy-b-execution-report.md), [D-053 historical report](../docs/records/2026-10-16-integration-final-technical-report.md), [manifest](../docs/records/2026-10-16-integration-manifest.json), [catalogue](../docs/records/2026-10-16-integration-variable-catalog.json), [independent source comparison](../docs/records/2026-10-16-independent-environmental-verification.md) and [current spatial report](../docs/records/2026-10-16-spatial-grid-report.md).
+
+### Script 10 — full-population presence/background table
+
+Script 10 reads the current gridded Policy B GeoParquet, the validated D-054 GSHHG-water reference, the integration manifest/catalogue and selected Bio-ORACLE NetCDF products. It preserves all 2,353 source rows and their 519 columns in original order, then appends eight fields to form a 4,706 × 527 GeoParquet with 2,353 observed-presence rows and 2,353 separate sampled-background rows. Each row has one label: 1 for an observed presence and 0 for sampled background; 0 is not confirmed absence. Background cells are globally unique, source-period matched, inside GSHHG marine water and complete for six core features. All 382 catalogue features remain regular columns with source missingness and quarantines null. The script validates source axes and actual time coordinates, original-row values and geometries, field layout, global cell uniqueness, water eligibility, GeoParquet metadata, archive checksums and all five integration fingerprints. It does not select features, impute, partition or train models. The technical species-level eligibility flag does not verify taxonomy or approve modelling. Scientific review remains pending under [D-056](../docs/records/2026-10-16-decision-paired-presence-background.md); see the [construction report](../docs/records/2026-10-16-full-population-presence-background-construction.md), [dictionary](../docs/records/2026-10-16-full-population-presence-background-data-dictionary.md), [evaluation plan](../docs/records/2026-10-16-full-population-presence-background-evaluation-plan.md), [D-055 archive manifest](../docs/records/2026-10-16-presence-background-archive-manifest.json) and [superseded nested D-056 archive manifest](../docs/records/2026-10-16-nested-paired-background-archive-manifest.json).
 
 Progress and concise results are printed to the console. Detailed machine-readable evidence stays in docs/records/. Optional path overrides and Script 08's read-only preflight remain available:
 
@@ -310,13 +316,13 @@ page hashes, response-body bytes and CSV fingerprint are recorded in the
 [Area 230 source record](../docs/records/2026-10-08-source-obis-area-230-api-csv.md).
 The failed AWS/GeoParquet attempt remains historical under [D-035](../docs/records/2026-10-07-decision-obis-area-230-geoparquet.md);
 [D-036](../docs/records/2026-10-08-decision-obis-area-230-api-csv.md) selects
-the current API/CSV method. These acquisition scripts do not select species,
-construct targets or model observations; spatial integration is implemented
-in the two scripts above.
+the current API/CSV method. The acquisition scripts do not select species,
+construct targets or model observations. Scripts 08–09 integrate and screen spatial records; Script 10 preserves every Policy B row and adds one source-matched sampled-background row per observation in a long-format table.
 
-Place later target construction, modelling or evaluation logic here only as
-those stages are authorised. Keep notebooks focused on explanation and
-analysis rather than duplicated implementation.
+Keep later modelling, feature preparation and evaluation logic here only as
+those stages are authorised. The Script 10 candidate is for later scientific review, not an approved target or ready-to-train table.
+Keep notebooks focused on explanation and analysis rather than duplicated
+implementation.
 
 ## Member responsibilities
 

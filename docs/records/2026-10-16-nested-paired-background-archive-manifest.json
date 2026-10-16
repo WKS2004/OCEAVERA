@@ -1,0 +1,42 @@
+{
+  "format": "oceavera-d056-nested-paired-archive-v1",
+  "purpose": "Byte-preserving archive of the superseded nested-column D-056 artifact set",
+  "files": [
+    {
+      "original_path": "data/interim/pseudo_absence/presence_background_candidates.parquet",
+      "archive_path": "data/interim/pseudo_absence/archive/d056_nested_columns/presence_background_candidates.parquet",
+      "bytes": 12854706,
+      "sha256": "637e35bb4ac4c2a7a722715f3a1ab12424ca7a1421b1c16db352d4f124f26832"
+    },
+    {
+      "original_path": "docs/records/2026-10-16-decision-paired-presence-background.md",
+      "archive_path": "data/interim/pseudo_absence/archive/d056_nested_columns/2026-10-16-decision-paired-presence-background.md.archive",
+      "bytes": 4727,
+      "sha256": "86264affc86aea2e3c9fac7db31acd5e2e6701c68ce9f3223f289df43e2b3644"
+    },
+    {
+      "original_path": "docs/records/2026-10-16-paired-presence-background-construction.json",
+      "archive_path": "data/interim/pseudo_absence/archive/d056_nested_columns/2026-10-16-paired-presence-background-construction.json",
+      "bytes": 39367,
+      "sha256": "5bfc6ac229c19d66e8216dc2d0c96097ca3a5fbf11e120551658a8be6c9feb62"
+    },
+    {
+      "original_path": "docs/records/2026-10-16-paired-presence-background-construction.md",
+      "archive_path": "data/interim/pseudo_absence/archive/d056_nested_columns/2026-10-16-paired-presence-background-construction.md.archive",
+      "bytes": 4284,
+      "sha256": "c7bfa656d993d0481ffcab896e7ef5121a486aed0fb868942c965a23415e440d"
+    },
+    {
+      "original_path": "docs/records/2026-10-16-paired-presence-background-data-dictionary.md",
+      "archive_path": "data/interim/pseudo_absence/archive/d056_nested_columns/2026-10-16-paired-presence-background-data-dictionary.md.archive",
+      "bytes": 3499,
+      "sha256": "781e38bfa29faa20e04cf2fcf77517ff213d58d44cb0f5e15ff168d219d28dfc"
+    },
+    {
+      "original_path": "docs/records/2026-10-16-paired-presence-background-evaluation-plan.md",
+      "archive_path": "data/interim/pseudo_absence/archive/d056_nested_columns/2026-10-16-paired-presence-background-evaluation-plan.md.archive",
+      "bytes": 3536,
+      "sha256": "236bf13071553d1c08ec2258eadb4d50e076e4a6a3b8591b04ed1cf6267ad7ff"
+    }
+  ]
+}
