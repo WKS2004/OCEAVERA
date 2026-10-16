@@ -1,0 +1,17 @@
+presence_background_label,ml_eligibility_reason,rows
+0,missing_core_environment,27
+0,preliminary_species_core_eligible,1729
+0,source_cell_centre_not_marine,80
+0,source_cell_centre_not_marine;missing_core_environment,173
+0,unverified_species_rank,267
+0,unverified_species_rank;missing_core_environment,6
+0,unverified_species_rank;source_cell_centre_not_marine,6
+0,unverified_species_rank;source_cell_centre_not_marine;missing_core_environment,65
+1,missing_core_environment,27
+1,preliminary_species_core_eligible,1729
+1,source_cell_centre_not_marine,80
+1,source_cell_centre_not_marine;missing_core_environment,173
+1,unverified_species_rank,267
+1,unverified_species_rank;missing_core_environment,6
+1,unverified_species_rank;source_cell_centre_not_marine,6
+1,unverified_species_rank;source_cell_centre_not_marine;missing_core_environment,65

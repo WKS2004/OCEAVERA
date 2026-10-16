@@ -29,7 +29,7 @@ The [readiness review](docs/project/repository-readiness-and-alignment.md) recor
 
 **Pending**
 
-Group review of species/domain/background choices, EDA, feature work, model implementation and model results. Paired-profile construction is technically complete but does not constitute final target approval or authorization to train.
+Group review of species/domain/background choices, EDA findings, feature work, model implementation and model results. Descriptive Sections A–F EDA is complete in [Notebook 07](notebooks/branch_work/07_pipeline_exploratory_data_analysis.ipynb) and the [EDA report](docs/records/2026-10-16-eda-report.md); recommendations are not approvals. Paired-profile construction is technically complete but does not constitute final target approval or authorization to train.
 
 **Open choices and evidence**
 

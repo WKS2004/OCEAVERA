@@ -1,0 +1,13 @@
+population,analysis_period,presence_background_label,rows
+complete_population,2000-2009,0,376
+complete_population,2000-2009,1,376
+complete_population,2010-2019,0,596
+complete_population,2010-2019,1,596
+complete_population,2020-2026,0,1381
+complete_population,2020-2026,1,1381
+eligible_species_subset,2000-2009,0,161
+eligible_species_subset,2000-2009,1,161
+eligible_species_subset,2010-2019,0,443
+eligible_species_subset,2010-2019,1,443
+eligible_species_subset,2020-2026,0,1125
+eligible_species_subset,2020-2026,1,1125
